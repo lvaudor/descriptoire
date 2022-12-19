@@ -1,0 +1,82 @@
+
+
+
+### Utilisation
+
+
+La documentation de l'API inclut un exemple d'enregistrement court en anglais. Je l'ai téléchargé à l'emplacement décrit par `filepath` ci-après. Voici comment en obtenir la transcription:
+
+
+```{r}
+authorization=paste0("Basic ",
+                     jsonlite::base64_enc(paste0("apikey:",Sys.getenv("APIKEY_IBM"))))
+anc_url_api="https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/d7c31d03-fe8a-4220-a28d-f028a839c1b7/v1/recognize"
+url_api="wss://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/d7c31d03-fe8a-4220-a28d-f028a839c1b7/v1/recognize"
+```
+
+```{bash}
+curl -k -X POST -u "apikey:wk7XCWYBKloXIaxWRVq8GdFh_hJL1cdLPONR-IRLaYwJ" \
+--include \
+"https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/d7c31d03-fe8a-4220-a28d-f028a839c1b7/v1/recognize"
+```
+
+
+```{r, eval=FALSE}
+filepath="/home/lvaudor/Documents/Pedagogie/FORMATIONS/DESCRIPTOIRE_TEXTE/docs/audio_samples/audio-file.flac"
+
+result= POST(url=url_api,
+             add_headers(`Content-Type`="audio/flac",
+                         "Authorization"=authorization),
+             body=list(file=httr::upload_file(filepath, type="audio/flac")))
+result
+transcription=content(result)
+transcription$results[[1]]$alternatives[[1]]$transcript
+```
+
+
+```{r, eval=FALSE}
+filepath="/home/lvaudor/Documents/Pedagogie/FORMATIONS/DESCRIPTOIRE_TEXTE/docs/audio_samples/sample.wav"
+authorization=paste0("Basic ",
+                     jsonlite::base64_enc(paste0("apikey:",Sys.getenv("APIKEY_IBM"))))
+result= POST(url="https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/v1/recognize?model=fr-FR_BroadbandModel",
+             add_headers(`Content-Type`="application/octet-stream",
+                         "Authorization"=authorization),
+             body=list(file=httr::upload_file(filepath)))
+result
+transcription=content(result)
+transcription$results[[1]]$alternatives[[1]]$transcript
+```
+
+Considérons en outre cet [**enregistrement audio, en français**](http://www.voiptroubleshooter.com/open_speech/french.html) (téléchargé depuis [ce site](http://www.voiptroubleshooter.com/open_speech/french.html)):
+
+```{r, echo=FALSE, result=FALSE}
+file_url <- "http://www.voiptroubleshooter.com/open_speech/french/OSR_fr_000_0041_8k.wav"
+file_localpath=paste0("docs/",basename(file_url))
+print(file_localpath)
+download.file(file_url,
+              destfile = file_localpath,
+              mode = "wb")
+``` 
+
+Pour obtenir la transcription de cet enregistrement, je vais devoir préciser dans ma requête que le modèle linguistique est autre que le modèle par défaut (qui fonctionne pour de l'anglais).
+
+
+
+
+```{r, eval=FALSE}
+filepath="/home/lvaudor/Documents/Pedagogie/FORMATIONS/DESCRIPTOIRE_TEXTE/docs/audio_samples/audio-file.flac"
+result= POST(url=url_fr,
+             add_headers(`Content-Type`="audio/flac",
+                         "Authorization"=authorization,
+                         model="en-US_NarrowbandModel"),
+             body=list(file=httr::upload_file(filepath),
+                       type="audio/flac"))
+transcription
+transcription=content(result)
+transcription$results[[1]]$alternatives[[1]]$transcript
+```
+
+
+(https://towardsdatascience.com/how-to-use-google-speech-to-text-api-to-transcribe-long-audio-files-1c886f4eb3e9)
+
+

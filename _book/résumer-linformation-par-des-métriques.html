@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 4 Résumer l’information par des métriques | Le Descriptoire: Recueil et analyse de texte avec R </title>
+  <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 4 Résumer l’information par des métriques | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 4 Résumer l’information par des métriques | Le Descriptoire: Recueil et analyse de texte avec R " />
+  
+  <meta name="twitter:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+<meta name="author" content=" Lise Vaudor" />
+
+
+<meta name="date" content="2022-11-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="langage-naturel.html"/>
+<link rel="next" href="résumer-linformation-par-des-graphiques.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> le Descriptoire </a></li>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128646266-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128646266-2');
+  </script>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>1</b> Extraction de données textuelles</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping"><i class="fa fa-check"></i><b>1.1</b> Depuis des pages web: web-scraping</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#langage-html"><i class="fa fa-check"></i><b>1.1.1</b> Langage html</a></li>
+<li class="chapter" data-level="1.1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#lire-une-page-html"><i class="fa fa-check"></i><b>1.1.2</b> Lire une page html</a></li>
+<li class="chapter" data-level="1.1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html"><i class="fa fa-check"></i><b>1.1.3</b> Extraire certains éléments d’une page html</a></li>
+<li class="chapter" data-level="1.1.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction"><i class="fa fa-check"></i><b>1.1.4</b> Passage au format rectangulaire, et mise en fonction</a></li>
+<li class="chapter" data-level="1.1.5" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#itération"><i class="fa fa-check"></i><b>1.1.5</b> Itération</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation"><i class="fa fa-check"></i><b>1.2</b> Depuis des images ou des documents pdf: OCRisation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract"><i class="fa fa-check"></i><b>1.2.1</b> Utilisation du package <code>tesseract</code></a></li>
+<li class="chapter" data-level="1.2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf"><i class="fa fa-check"></i><b>1.2.2</b> Et pour OCRiser depuis un pdf??</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription"><i class="fa fa-check"></i><b>1.3</b> Depuis des enregistrements audio: transcription</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#présentation-de-lexemple"><i class="fa fa-check"></i><b>1.3.1</b> Présentation de l’exemple</a></li>
+<li class="chapter" data-level="1.3.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#prétraitements-éventuels"><i class="fa fa-check"></i><b>1.3.2</b> Prétraitements éventuels</a></li>
+<li class="chapter" data-level="1.3.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager"><i class="fa fa-check"></i><b>1.3.3</b> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
+<li class="chapter" data-level="1.3.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm"><i class="fa fa-check"></i><b>1.3.4</b> API Watson Speech-to-text d’IBM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>2</b> Manipuler des strings: package stringr</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>2.1</b> Strings</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>2.1.1</b> détection, remplacement</a></li>
+<li class="chapter" data-level="2.1.2" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>2.1.2</b> division, correspondance</a></li>
+<li class="chapter" data-level="2.1.3" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>2.1.3</b> extraction</a></li>
+<li class="chapter" data-level="2.1.4" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>2.1.4</b> comptage, subset</a></li>
+<li class="chapter" data-level="2.1.5" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>2.1.5</b> longueur, sous-partie</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>2.2</b> Expressions régulières</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="strings.html"><a href="strings.html#classes-de-caractères-et-groupes"><i class="fa fa-check"></i><b>2.2.1</b> classes de caractères et groupes</a></li>
+<li class="chapter" data-level="2.2.2" data-path="strings.html"><a href="strings.html#caractères-spéciaux"><i class="fa fa-check"></i><b>2.2.2</b> caractères spéciaux</a></li>
+<li class="chapter" data-level="2.2.3" data-path="strings.html"><a href="strings.html#caractères-exclus-gammes-de-caractères"><i class="fa fa-check"></i><b>2.2.3</b> caractères exclus, gammes de caractères</a></li>
+<li class="chapter" data-level="2.2.4" data-path="strings.html"><a href="strings.html#classes-prédéfinies"><i class="fa fa-check"></i><b>2.2.4</b> classes prédéfinies</a></li>
+<li class="chapter" data-level="2.2.5" data-path="strings.html"><a href="strings.html#quelques-exemples-pour-bien-comprendre"><i class="fa fa-check"></i><b>2.2.5</b> quelques exemples pour bien comprendre</a></li>
+<li class="chapter" data-level="2.2.6" data-path="strings.html"><a href="strings.html#groupes-et-références-arrières"><i class="fa fa-check"></i><b>2.2.6</b> groupes et références arrières</a></li>
+<li class="chapter" data-level="2.2.7" data-path="strings.html"><a href="strings.html#quantificateurs"><i class="fa fa-check"></i><b>2.2.7</b> quantificateurs</a></li>
+<li class="chapter" data-level="2.2.8" data-path="strings.html"><a href="strings.html#ancres-et-assertions-avant-arrière"><i class="fa fa-check"></i><b>2.2.8</b> ancres et assertions avant-arrière</a></li>
+<li class="chapter" data-level="2.2.9" data-path="strings.html"><a href="strings.html#assertions-avant-arrière"><i class="fa fa-check"></i><b>2.2.9</b> assertions avant-arrière</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="langage-naturel.html"><a href="langage-naturel.html"><i class="fa fa-check"></i><b>3</b> Langage naturel</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="langage-naturel.html"><a href="langage-naturel.html#tokenization"><i class="fa fa-check"></i><b>3.1</b> Tokenization</a></li>
+<li class="chapter" data-level="3.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table"><i class="fa fa-check"></i><b>3.2</b> Nettoyage de la table</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides"><i class="fa fa-check"></i><b>3.2.1</b> Nettoyage de la table par suppression des mots vides</a></li>
+<li class="chapter" data-level="3.2.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming"><i class="fa fa-check"></i><b>3.2.2</b> Nettoyage de la table par racinisation (stemming)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation"><i class="fa fa-check"></i><b>3.2.3</b> Nettoyage de la table par lemmatisation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html"><i class="fa fa-check"></i><b>4</b> Résumer l’information par des métriques</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>4.1</b> Fréquences d’occurrence</a></li>
+<li class="chapter" data-level="4.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>4.2</b> Co-occurrences, corrélations</a></li>
+<li class="chapter" data-level="4.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spécificités"><i class="fa fa-check"></i><b>4.3</b> Spécificités</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>5</b> Résumer l’information par des graphiques</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>5.1</b> Nuage de mots</a></li>
+<li class="chapter" data-level="5.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>5.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
+<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>5.3</b> Graphes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>6</b> Rechercher des thèmes (topic modelling)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations"><i class="fa fa-check"></i><b>6.1</b> Principe, notations</a></li>
+<li class="chapter" data-level="6.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta"><i class="fa fa-check"></i><b>6.2</b> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
+<li class="chapter" data-level="6.3" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#frex"><i class="fa fa-check"></i><b>6.3</b> FREX</a></li>
+<li class="chapter" data-level="6.4" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm"><i class="fa fa-check"></i><b>6.4</b> étapes du STM</a></li>
+<li class="chapter" data-level="6.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#communiqués-de-presse-du-ministère-de-lécologie"><i class="fa fa-check"></i><b>6.5</b> Communiqués de presse du ministère de l’écologie</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Le Descriptoire:
+Recueil et analyse de texte avec R </img></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="résumer-linformation-par-des-métriques" class="section level1" number="4">
+<h1><span class="header-section-number">Chapitre 4</span> Résumer l’information par des métriques</h1>
+<p>Avant de réaliser quelques graphiques pour montrer le contenu lexical de nos textes il faudra la plupart du temps quelques calculs basiques sur nos données (par exemple <strong>agréger</strong> les données pour obtenir les <strong>fréquences d’occurrence</strong> des termes).</p>
+<p>Pour réaliser ces quelques transformations on peut généralement utiliser les fonctions de <code>dplyr</code><img src='images/logo_dplyr.jpg' width='50'>.</p>
+<p>Ici, on repart du tableau suivant</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="résumer-linformation-par-des-métriques.html#cb1-1" aria-hidden="true" tabindex="-1"></a>tib_mots_nonvides <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/tib_mots_nonvides.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="résumer-linformation-par-des-métriques.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb1-3"><a href="résumer-linformation-par-des-métriques.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tib_mots_nonvides)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##   doc                      auteur                mot     lemma   type 
+##   &lt;chr&gt;                    &lt;chr&gt;                 &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;
+## 1 data/blog_de_ginette.htm Emma, 22 ans, Limoges poule   poule   nom  
+## 2 data/blog_de_ginette.htm Emma, 22 ans, Limoges mur     mur     nom  
+## 3 data/blog_de_ginette.htm Emma, 22 ans, Limoges pain    pain    nom  
+## 4 data/blog_de_ginette.htm Emma, 22 ans, Limoges dur     dur     adj  
+## 5 data/blog_de_ginette.htm Emma, 22 ans, Limoges nourrir nourrir ver  
+## 6 data/blog_de_ginette.htm Emma, 22 ans, Limoges petits  petit   adj</code></pre>
+<p>On pourrait être amené à</p>
+<ul>
+<li>calculer la fréquence des mots</li>
+<li>calculer la fréquence des mots pour différentes parties du corpus</li>
+<li>ne garder que les <span class="math inline">\(n\)</span> mots les plus fréquents</li>
+<li>etc.</li>
+</ul>
+<div id="fréquences-doccurrence" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Fréquences d’occurrence</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="résumer-linformation-par-des-métriques.html#cb3-1" aria-hidden="true" tabindex="-1"></a>freq_mots <span class="ot">&lt;-</span> tib_mots_nonvides <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="résumer-linformation-par-des-métriques.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lemma) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="résumer-linformation-par-des-métriques.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="résumer-linformation-par-des-métriques.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(freq)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="résumer-linformation-par-des-métriques.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb3-6"><a href="résumer-linformation-par-des-métriques.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(freq_mots)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 2
+##   lemma   freq
+##   &lt;chr&gt;  &lt;int&gt;
+## 1 canard     5
+## 2 thon       5
+## 3 cochon     4
+## 4 petit      4
+## 5 chat       3
+## 6 danser     3</code></pre>
+<p>Ici, je n’en ai pas besoin (mon jeu de données est tout petit) mais je pourrais également filtrer les données pour ne garder qu’une fréquence minimale, ou ne garder que les <span class="math inline">\(n\)</span> mots les plus fréquents…</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="résumer-linformation-par-des-métriques.html#cb5-1" aria-hidden="true" tabindex="-1"></a>freq_mots <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="résumer-linformation-par-des-métriques.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(freq<span class="sc">&gt;=</span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   lemma   freq
+##   &lt;chr&gt;  &lt;int&gt;
+## 1 canard     5
+## 2 thon       5</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="résumer-linformation-par-des-métriques.html#cb7-1" aria-hidden="true" tabindex="-1"></a>freq_mots <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">3</span>,freq)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##   lemma   freq
+##   &lt;chr&gt;  &lt;int&gt;
+## 1 canard     5
+## 2 thon       5
+## 3 cochon     4
+## 4 petit      4</code></pre>
+<p>Pour faciliter ce processus que l’on est amené à réaliser fréquemment pour analyser des données textuelles, j’ai créé une fonction tidy_frequencies (package <code>mixr</code>) qui regroupe l’ensemble des étapes:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="résumer-linformation-par-des-métriques.html#cb9-1" aria-hidden="true" tabindex="-1"></a>mixr<span class="sc">::</span><span class="fu">tidy_frequencies</span>(tib_mots_nonvides,lemma,<span class="at">top_freq=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 12 × 2
+##    lemma     freq
+##    &lt;chr&gt;    &lt;int&gt;
+##  1 canard       5
+##  2 thon         5
+##  3 cochon       4
+##  4 petit        4
+##  5 chat         3
+##  6 danser       3
+##  7 poule        3
+##  8 chose        2
+##  9 écrire       2
+## 10 gaiement     2
+## 11 grain        2
+## 12 préférer     2</code></pre>
+</div>
+<div id="co-occurrences-corrélations" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Co-occurrences, corrélations</h2>
+<p>Si l’on s’intéresse non plus seulement à la fréquence individuelle des termes mais qu’on cherche à caractériser les termes qui sont souvent employés ensemble (au sein d’un même commentaire par exemple) on peut utiliser les fonctions du package <code>widyr</code>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="résumer-linformation-par-des-métriques.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(widyr)</span>
+<span id="cb11-2"><a href="résumer-linformation-par-des-métriques.html#cb11-2" aria-hidden="true" tabindex="-1"></a>mots_cooc <span class="ot">&lt;-</span> tib_mots_nonvides <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="résumer-linformation-par-des-métriques.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise_count</span>(lemma,<span class="at">feature=</span>auteur,<span class="at">sort=</span><span class="cn">TRUE</span>) </span>
+<span id="cb11-4"><a href="résumer-linformation-par-des-métriques.html#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="résumer-linformation-par-des-métriques.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mots_cooc)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   item1  item2      n
+##   &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;
+## 1 cochon petit      3
+## 2 petit  cochon     3
+## 3 petit  poule      2
+## 4 cochon poule      2
+## 5 canard poule      2
+## 6 poule  petit      2</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center">motA:T</th>
+<th align="center">motA:F</th>
+<th align="center">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">motB:T</td>
+<td align="center"><span class="math inline">\(N_{TT}\)</span></td>
+<td align="center"><span class="math inline">\(N_{TF}\)</span></td>
+<td align="center"><span class="math inline">\(N_{T.}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">motB:F</td>
+<td align="center"><span class="math inline">\(N_{FT}\)</span></td>
+<td align="center"><span class="math inline">\(N_{FF}\)</span></td>
+<td align="center"><span class="math inline">\(N_{F.}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center"><span class="math inline">\(N_{.T}\)</span></td>
+<td align="center"><span class="math inline">\(N_{.F}\)</span></td>
+<td align="center">N</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[Cor=\frac{N_{TT}N_{FF}-N_{TF}N_{FT}}{\sqrt{N_{T.}N_{F.}N_{.F}N_{.T}}}\]</span></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="résumer-linformation-par-des-métriques.html#cb13-1" aria-hidden="true" tabindex="-1"></a>mots_cors <span class="ot">&lt;-</span> tib_mots_nonvides <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="résumer-linformation-par-des-métriques.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise_cor</span>(lemma,auteur,<span class="at">sort=</span><span class="cn">TRUE</span>)</span>
+<span id="cb13-3"><a href="résumer-linformation-par-des-métriques.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mots_cors)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   item1   item2 correlation
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;
+## 1 pain    mur             1
+## 2 dur     mur             1
+## 3 nourrir mur             1
+## 4 mur     pain            1
+## 5 dur     pain            1
+## 6 nourrir pain            1</code></pre>
+<p>Pour la suite on va joindre les tableaux <code>mots_cooc</code> et <code>mot_cors</code></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="résumer-linformation-par-des-métriques.html#cb15-1" aria-hidden="true" tabindex="-1"></a>mots_cooc <span class="ot">&lt;-</span> <span class="fu">left_join</span>(mots_cooc,</span>
+<span id="cb15-2"><a href="résumer-linformation-par-des-métriques.html#cb15-2" aria-hidden="true" tabindex="-1"></a>                       mots_cors,</span>
+<span id="cb15-3"><a href="résumer-linformation-par-des-métriques.html#cb15-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;item1&quot;</span>,<span class="st">&quot;item2&quot;</span>))</span></code></pre></div>
+</div>
+<div id="spécificités" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Spécificités</h2>
+<p>Le package <code>textometry</code> (réalisé par l’équipe TXM) comprend une fonction qui permet de calculer des scores de spécificité. Pour plus de compatibilité avec le tidyverse j’ai écrit une fonction <code>tidy_specificities()</code> qui reprend cette fonction et renvoie un résultat tabulaire conforme à la logique “tidyverse”.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="résumer-linformation-par-des-métriques.html#cb16-1" aria-hidden="true" tabindex="-1"></a>mixr<span class="sc">::</span><span class="fu">tidy_specificities</span>(tib_mots_nonvides,lemma, doc)</span></code></pre></div>
+<pre><code>## # A tibble: 144 × 4
+##    lemma         doc                           spec     n
+##    &lt;chr&gt;         &lt;chr&gt;                        &lt;dbl&gt; &lt;int&gt;
+##  1 &quot;thon       &quot; &quot;data/blog_de_jean-marc.htm&quot; 1.87     NA
+##  2 &quot;cochon     &quot; &quot;data/blog_de_ginette.htm  &quot; 1.16     NA
+##  3 &quot;danser     &quot; &quot;data/blog_de_norbert.htm  &quot; 0.744    NA
+##  4 &quot;gaiement   &quot; &quot;data/blog_de_jean-marc.htm&quot; 0.724    NA
+##  5 &quot;préférer   &quot; &quot;data/blog_de_jean-marc.htm&quot; 0.724    NA
+##  6 &quot;poule      &quot; &quot;data/blog_de_ginette.htm  &quot; 0.706    NA
+##  7 &quot;aimer      &quot; &quot;data/blog_de_norbert.htm  &quot; 0.562    NA
+##  8 &quot;bec        &quot; &quot;data/blog_de_norbert.htm  &quot; 0.562    NA
+##  9 &quot;cancaner   &quot; &quot;data/blog_de_norbert.htm  &quot; 0.562    NA
+## 10 &quot;claquer    &quot; &quot;data/blog_de_norbert.htm  &quot; 0.562    NA
+## # … with 134 more rows</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="langage-naturel.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="résumer-linformation-par-des-graphiques.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/lvaudor/Descriptoire/edit/master/05-analyse_metriques.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

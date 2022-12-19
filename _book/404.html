@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Page not found | Le Descriptoire: Recueil et analyse de texte avec R </title>
+  <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Page not found | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Page not found | Le Descriptoire: Recueil et analyse de texte avec R " />
+  
+  <meta name="twitter:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+<meta name="author" content=" Lise Vaudor" />
+
+
+<meta name="date" content="2022-12-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> le Descriptoire </a></li>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128646266-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128646266-2');
+  </script>
+
+<li class="divider"></li>
+<li><a href="extraction-de-données-textuelles.html#extraction-de-données-textuelles" id="toc-extraction-de-données-textuelles"><span class="toc-section-number">1</span> Extraction de données textuelles</a>
+<ul>
+<li><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping" id="toc-depuis-des-pages-web-web-scraping"><span class="toc-section-number">1.1</span> Depuis des pages web: web-scraping</a>
+<ul>
+<li><a href="extraction-de-données-textuelles.html#langage-html" id="toc-langage-html"><span class="toc-section-number">1.1.1</span> Langage html</a></li>
+<li><a href="extraction-de-données-textuelles.html#lire-une-page-html" id="toc-lire-une-page-html"><span class="toc-section-number">1.1.2</span> Lire une page html</a></li>
+<li><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html" id="toc-extraire-certains-éléments-dune-page-html"><span class="toc-section-number">1.1.3</span> Extraire certains éléments d’une page html</a></li>
+<li><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction" id="toc-passage-au-format-rectangulaire-et-mise-en-fonction"><span class="toc-section-number">1.1.4</span> Passage au format rectangulaire, et mise en fonction</a></li>
+<li><a href="extraction-de-données-textuelles.html#itération" id="toc-itération"><span class="toc-section-number">1.1.5</span> Itération</a></li>
+</ul></li>
+<li><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation" id="toc-depuis-des-images-ou-des-documents-pdf-ocrisation"><span class="toc-section-number">1.2</span> Depuis des images ou des documents pdf: OCRisation</a>
+<ul>
+<li><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract" id="toc-utilisation-du-package-tesseract"><span class="toc-section-number">1.2.1</span> Utilisation du package <code>tesseract</code></a></li>
+<li><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf" id="toc-et-pour-ocriser-depuis-un-pdf"><span class="toc-section-number">1.2.2</span> Et pour OCRiser depuis un pdf??</a></li>
+</ul></li>
+<li><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription" id="toc-depuis-des-enregistrements-audio-transcription"><span class="toc-section-number">1.3</span> Depuis des enregistrements audio: transcription</a>
+<ul>
+<li><a href="extraction-de-données-textuelles.html#présentation-de-lexemple" id="toc-présentation-de-lexemple"><span class="toc-section-number">1.3.1</span> Présentation de l’exemple</a></li>
+<li><a href="extraction-de-données-textuelles.html#prétraitements-éventuels" id="toc-prétraitements-éventuels"><span class="toc-section-number">1.3.2</span> Prétraitements éventuels</a></li>
+<li><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager" id="toc-api-speech-to-text-google-package-googlelanguager"><span class="toc-section-number">1.3.3</span> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
+<li><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm" id="toc-api-watson-speech-to-text-dibm"><span class="toc-section-number">1.3.4</span> API Watson Speech-to-text d’IBM</a></li>
+</ul></li>
+</ul></li>
+<li><a href="strings.html#strings" id="toc-strings"><span class="toc-section-number">2</span> Manipuler des strings: package stringr</a>
+<ul>
+<li><a href="strings.html#strings-1" id="toc-strings-1"><span class="toc-section-number">2.1</span> Strings</a>
+<ul>
+<li><a href="strings.html#détection-remplacement" id="toc-détection-remplacement"><span class="toc-section-number">2.1.1</span> détection, remplacement</a></li>
+<li><a href="strings.html#division-correspondance" id="toc-division-correspondance"><span class="toc-section-number">2.1.2</span> division, correspondance</a></li>
+<li><a href="strings.html#extraction" id="toc-extraction"><span class="toc-section-number">2.1.3</span> extraction</a></li>
+<li><a href="strings.html#comptage-subset" id="toc-comptage-subset"><span class="toc-section-number">2.1.4</span> comptage, subset</a></li>
+<li><a href="strings.html#longueur-sous-partie" id="toc-longueur-sous-partie"><span class="toc-section-number">2.1.5</span> longueur, sous-partie</a></li>
+</ul></li>
+<li><a href="strings.html#expressions-régulières" id="toc-expressions-régulières"><span class="toc-section-number">2.2</span> Expressions régulières</a>
+<ul>
+<li><a href="strings.html#classes-de-caractères-et-groupes" id="toc-classes-de-caractères-et-groupes"><span class="toc-section-number">2.2.1</span> classes de caractères et groupes</a></li>
+<li><a href="strings.html#caractères-spéciaux" id="toc-caractères-spéciaux"><span class="toc-section-number">2.2.2</span> caractères spéciaux</a></li>
+<li><a href="strings.html#caractères-exclus-gammes-de-caractères" id="toc-caractères-exclus-gammes-de-caractères"><span class="toc-section-number">2.2.3</span> caractères exclus, gammes de caractères</a></li>
+<li><a href="strings.html#classes-prédéfinies" id="toc-classes-prédéfinies"><span class="toc-section-number">2.2.4</span> classes prédéfinies</a></li>
+<li><a href="strings.html#quelques-exemples-pour-bien-comprendre" id="toc-quelques-exemples-pour-bien-comprendre"><span class="toc-section-number">2.2.5</span> quelques exemples pour bien comprendre</a></li>
+<li><a href="strings.html#groupes-et-références-arrières" id="toc-groupes-et-références-arrières"><span class="toc-section-number">2.2.6</span> groupes et références arrières</a></li>
+<li><a href="strings.html#quantificateurs" id="toc-quantificateurs"><span class="toc-section-number">2.2.7</span> quantificateurs</a></li>
+<li><a href="strings.html#ancres-et-assertions-avant-arrière" id="toc-ancres-et-assertions-avant-arrière"><span class="toc-section-number">2.2.8</span> ancres et assertions avant-arrière</a></li>
+<li><a href="strings.html#assertions-avant-arrière" id="toc-assertions-avant-arrière"><span class="toc-section-number">2.2.9</span> assertions avant-arrière</a></li>
+</ul></li>
+</ul></li>
+<li><a href="langage-naturel.html#langage-naturel" id="toc-langage-naturel"><span class="toc-section-number">3</span> Langage naturel</a>
+<ul>
+<li><a href="langage-naturel.html#tokenization" id="toc-tokenization"><span class="toc-section-number">3.1</span> Tokenization</a></li>
+<li><a href="langage-naturel.html#nettoyage-de-la-table" id="toc-nettoyage-de-la-table"><span class="toc-section-number">3.2</span> Nettoyage de la table</a>
+<ul>
+<li><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides" id="toc-nettoyage-de-la-table-par-suppression-des-mots-vides"><span class="toc-section-number">3.2.1</span> Nettoyage de la table par suppression des mots vides</a></li>
+<li><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming" id="toc-nettoyage-de-la-table-par-racinisation-stemming"><span class="toc-section-number">3.2.2</span> Nettoyage de la table par racinisation (stemming)</a></li>
+<li><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation" id="toc-nettoyage-de-la-table-par-lemmatisation"><span class="toc-section-number">3.2.3</span> Nettoyage de la table par lemmatisation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="résumer-linformation-par-des-métriques.html#résumer-linformation-par-des-métriques" id="toc-résumer-linformation-par-des-métriques"><span class="toc-section-number">4</span> Résumer l’information par des métriques</a>
+<ul>
+<li><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence" id="toc-fréquences-doccurrence"><span class="toc-section-number">4.1</span> Fréquences d’occurrence</a></li>
+<li><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations" id="toc-co-occurrences-corrélations"><span class="toc-section-number">4.2</span> Co-occurrences, corrélations</a></li>
+<li><a href="résumer-linformation-par-des-métriques.html#tf-idf" id="toc-tf-idf"><span class="toc-section-number">4.3</span> TF-IDF</a></li>
+<li><a href="résumer-linformation-par-des-métriques.html#spécificités" id="toc-spécificités"><span class="toc-section-number">4.4</span> Spécificités</a></li>
+</ul></li>
+<li><a href="résumer-linformation-par-des-graphiques.html#résumer-linformation-par-des-graphiques" id="toc-résumer-linformation-par-des-graphiques"><span class="toc-section-number">5</span> Résumer l’information par des graphiques</a>
+<ul>
+<li><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots" id="toc-nuage-de-mots"><span class="toc-section-number">5.1</span> Nuage de mots</a></li>
+<li><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités" id="toc-diagramme-en-bâtons-occurrences-spécificités"><span class="toc-section-number">5.2</span> Diagramme en bâtons: occurrences, spécificités</a></li>
+<li><a href="résumer-linformation-par-des-graphiques.html#graphes" id="toc-graphes"><span class="toc-section-number">5.3</span> Graphes</a></li>
+</ul></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#rechercher-des-thèmes-topic-modelling" id="toc-rechercher-des-thèmes-topic-modelling"><span class="toc-section-number">6</span> Rechercher des thèmes (topic modelling)</a>
+<ul>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations" id="toc-principe-notations"><span class="toc-section-number">6.1</span> Principe, notations</a></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta" id="toc-scores-beta-beta"><span class="toc-section-number">6.2</span> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#frex" id="toc-frex"><span class="toc-section-number">6.3</span> FREX</a></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm" id="toc-étapes-du-stm"><span class="toc-section-number">6.4</span> étapes du STM</a></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#communiqués-de-presse-du-ministère-de-lécologie" id="toc-communiqués-de-presse-du-ministère-de-lécologie"><span class="toc-section-number">6.5</span> Communiqués de presse du ministère de l’écologie</a>
+<ul>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme" id="toc-mise-en-forme"><span class="toc-section-number">6.5.1</span> Mise en forme</a></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle" id="toc-calcul-du-modèle"><span class="toc-section-number">6.5.2</span> Calcul du modèle</a></li>
+</ul></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents" id="toc-assignation-dun-thème-aux-documents"><span class="toc-section-number">6.6</span> Assignation d’un thème aux documents</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Le Descriptoire:
+Recueil et analyse de texte avec R </img></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/lvaudor/Descriptoire/edit/master/%s",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

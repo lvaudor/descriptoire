@@ -1,0 +1,854 @@
+        {
+   "result_index": 0,
+   "results": [
+      {
+         "final": true,
+         "alternatives": [
+            {
+               "transcript": "mettre rambo sur un arbre perche tenait dans son et un fromage mettre renard à l'odeur aller chez lui tend à peu près seule engage et bonjour monsieur du corps ou que vous êtes joli que vous me semble impôts sans mentir si votre amage rapporte à votre plumage vous êtes le phoenix des côtes de ce mois à six mois le coran ne sont plus de joie et pour montrer sa belle voix il ouvre un large public l'est baissa pour le renard sont saisies il dit mon bon monsieur apprenez que tout flatteur vite au départ de celui qui écoute c'est le son de vos biens à fromage ",
+               "confidence": 0.7
+            },
+            {
+               "transcript": "mettre rambo sur un arbre perche tenait dans son et un fromage mettre renard à l'odeur aller chez lui tend à peu près seule engage et bonjour monsieur du corps ou que vous êtes joli que vous me semble impôts sans mentir si votre amage rapporte à votre plumage vous êtes le phoenix des côtes de ce mois à six mois le coran ne sont plus de joie et pour montrer sa belle voix il ouvre un large public l'est baissa pour le renard sont saisies il dit mon bon monsieur apprenez que tout flatteurs vite au départ de celui qui écoute c'est le son de vos biens à fromage "
+            }
+         ],
+         "word_alternatives": [
+            {
+               "start_time": 0.91,
+               "end_time": 1.27,
+               "alternatives": [
+                  {
+                     "word": "mettre",
+                     "confidence": 0.99
+                  }
+               ]
+            },
+            {
+               "start_time": 1.65,
+               "end_time": 1.88,
+               "alternatives": [
+                  {
+                     "word": "sur",
+                     "confidence": 0.76
+                  }
+               ]
+            },
+            {
+               "start_time": 1.88,
+               "end_time": 2.01,
+               "alternatives": [
+                  {
+                     "word": "un",
+                     "confidence": 0.78
+                  }
+               ]
+            },
+            {
+               "start_time": 2.01,
+               "end_time": 2.25,
+               "alternatives": [
+                  {
+                     "word": "arbre",
+                     "confidence": 0.86
+                  }
+               ]
+            },
+            {
+               "start_time": 2.25,
+               "end_time": 2.57,
+               "alternatives": [
+                  {
+                     "word": "perche",
+                     "confidence": 0.93
+                  }
+               ]
+            },
+            {
+               "start_time": 2.57,
+               "end_time": 2.86,
+               "alternatives": [
+                  {
+                     "word": "tenait",
+                     "confidence": 0.5
+                  }
+               ]
+            },
+            {
+               "start_time": 2.86,
+               "end_time": 2.95,
+               "alternatives": [
+                  {
+                     "word": "dans",
+                     "confidence": 0.69
+                  }
+               ]
+            },
+            {
+               "start_time": 2.95,
+               "end_time": 3.18,
+               "alternatives": [
+                  {
+                     "word": "son",
+                     "confidence": 0.55
+                  }
+               ]
+            },
+            {
+               "start_time": 3.4,
+               "end_time": 4.08,
+               "alternatives": [
+                  {
+                     "word": "fromage",
+                     "confidence": 0.69
+                  }
+               ]
+            },
+            {
+               "start_time": 6.23,
+               "end_time": 6.27,
+               "alternatives": [
+                  {
+                     "word": "à",
+                     "confidence": 0.6
+                  }
+               ]
+            },
+            {
+               "start_time": 6.27,
+               "end_time": 6.4,
+               "alternatives": [
+                  {
+                     "word": "peu",
+                     "confidence": 0.71
+                  }
+               ]
+            },
+            {
+               "start_time": 6.4,
+               "end_time": 6.6,
+               "alternatives": [
+                  {
+                     "word": "près",
+                     "confidence": 0.75
+                  }
+               ]
+            },
+            {
+               "start_time": 9.39,
+               "end_time": 9.52,
+               "alternatives": [
+                  {
+                     "word": "du",
+                     "confidence": 0.74
+                  }
+               ]
+            },
+            {
+               "start_time": 9.52,
+               "end_time": 9.79,
+               "alternatives": [
+                  {
+                     "word": "corps",
+                     "confidence": 0.55
+                  }
+               ]
+            },
+            {
+               "start_time": 10.22,
+               "end_time": 10.38,
+               "alternatives": [
+                  {
+                     "word": "que",
+                     "confidence": 0.71
+                  }
+               ]
+            },
+            {
+               "start_time": 12.12,
+               "end_time": 12.4,
+               "alternatives": [
+                  {
+                     "word": "me",
+                     "confidence": 0.71
+                  }
+               ]
+            },
+            {
+               "start_time": 12.4,
+               "end_time": 12.75,
+               "alternatives": [
+                  {
+                     "word": "semble",
+                     "confidence": 0.62
+                  }
+               ]
+            },
+            {
+               "start_time": 13.56,
+               "end_time": 13.81,
+               "alternatives": [
+                  {
+                     "word": "sans",
+                     "confidence": 0.75
+                  }
+               ]
+            },
+            {
+               "start_time": 13.81,
+               "end_time": 14.36,
+               "alternatives": [
+                  {
+                     "word": "mentir",
+                     "confidence": 0.72
+                  }
+               ]
+            },
+            {
+               "start_time": 14.39,
+               "end_time": 14.61,
+               "alternatives": [
+                  {
+                     "word": "si",
+                     "confidence": 0.93
+                  }
+               ]
+            },
+            {
+               "start_time": 14.61,
+               "end_time": 15.09,
+               "alternatives": [
+                  {
+                     "word": "votre",
+                     "confidence": 0.98
+                  }
+               ]
+            },
+            {
+               "start_time": 16.59,
+               "end_time": 16.64,
+               "alternatives": [
+                  {
+                     "word": "à",
+                     "confidence": 0.52
+                  }
+               ]
+            },
+            {
+               "start_time": 16.64,
+               "end_time": 16.95,
+               "alternatives": [
+                  {
+                     "word": "votre",
+                     "confidence": 0.74
+                  }
+               ]
+            },
+            {
+               "start_time": 16.95,
+               "end_time": 17.75,
+               "alternatives": [
+                  {
+                     "word": "plumage",
+                     "confidence": 0.89
+                  }
+               ]
+            },
+            {
+               "start_time": 18.31,
+               "end_time": 18.55,
+               "alternatives": [
+                  {
+                     "word": "vous",
+                     "confidence": 0.93
+                  }
+               ]
+            },
+            {
+               "start_time": 18.55,
+               "end_time": 18.74,
+               "alternatives": [
+                  {
+                     "word": "êtes",
+                     "confidence": 0.92
+                  }
+               ]
+            },
+            {
+               "start_time": 18.74,
+               "end_time": 18.89,
+               "alternatives": [
+                  {
+                     "word": "le",
+                     "confidence": 0.6
+                  }
+               ]
+            },
+            {
+               "start_time": 18.89,
+               "end_time": 19.47,
+               "alternatives": [
+                  {
+                     "word": "phoenix",
+                     "confidence": 0.76
+                  }
+               ]
+            },
+            {
+               "start_time": 19.47,
+               "end_time": 19.78,
+               "alternatives": [
+                  {
+                     "word": "des",
+                     "confidence": 0.6
+                  }
+               ]
+            },
+            {
+               "start_time": 20.26,
+               "end_time": 20.39,
+               "alternatives": [
+                  {
+                     "word": "de",
+                     "confidence": 0.67
+                  }
+               ]
+            },
+            {
+               "start_time": 22.12,
+               "end_time": 22.21,
+               "alternatives": [
+                  {
+                     "word": "le",
+                     "confidence": 0.81
+                  }
+               ]
+            },
+            {
+               "start_time": 22.57,
+               "end_time": 22.64,
+               "alternatives": [
+                  {
+                     "word": "ne",
+                     "confidence": 0.58
+                  }
+               ]
+            },
+            {
+               "start_time": 22.64,
+               "end_time": 22.94,
+               "alternatives": [
+                  {
+                     "word": "sont",
+                     "confidence": 0.85
+                  }
+               ]
+            },
+            {
+               "start_time": 22.94,
+               "end_time": 23.15,
+               "alternatives": [
+                  {
+                     "word": "plus",
+                     "confidence": 0.94
+                  }
+               ]
+            },
+            {
+               "start_time": 23.15,
+               "end_time": 23.3,
+               "alternatives": [
+                  {
+                     "word": "de",
+                     "confidence": 0.95
+                  }
+               ]
+            },
+            {
+               "start_time": 23.3,
+               "end_time": 23.63,
+               "alternatives": [
+                  {
+                     "word": "joie",
+                     "confidence": 0.9
+                  }
+               ]
+            },
+            {
+               "start_time": 23.82,
+               "end_time": 23.91,
+               "alternatives": [
+                  {
+                     "word": "et",
+                     "confidence": 0.54
+                  }
+               ]
+            },
+            {
+               "start_time": 23.91,
+               "end_time": 24.11,
+               "alternatives": [
+                  {
+                     "word": "pour",
+                     "confidence": 0.69
+                  }
+               ]
+            },
+            {
+               "start_time": 24.11,
+               "end_time": 24.46,
+               "alternatives": [
+                  {
+                     "word": "montrer",
+                     "confidence": 0.69
+                  }
+               ]
+            },
+            {
+               "start_time": 24.46,
+               "end_time": 24.63,
+               "alternatives": [
+                  {
+                     "word": "sa",
+                     "confidence": 0.77
+                  }
+               ]
+            },
+            {
+               "start_time": 24.63,
+               "end_time": 24.82,
+               "alternatives": [
+                  {
+                     "word": "belle",
+                     "confidence": 1.0
+                  }
+               ]
+            },
+            {
+               "start_time": 24.82,
+               "end_time": 25.14,
+               "alternatives": [
+                  {
+                     "word": "voix",
+                     "confidence": 0.94
+                  }
+               ]
+            },
+            {
+               "start_time": 25.17,
+               "end_time": 25.32,
+               "alternatives": [
+                  {
+                     "word": "il",
+                     "confidence": 0.83
+                  }
+               ]
+            },
+            {
+               "start_time": 25.32,
+               "end_time": 25.54,
+               "alternatives": [
+                  {
+                     "word": "ouvre",
+                     "confidence": 0.62
+                  }
+               ]
+            },
+            {
+               "start_time": 25.54,
+               "end_time": 25.61,
+               "alternatives": [
+                  {
+                     "word": "un",
+                     "confidence": 0.62
+                  }
+               ]
+            },
+            {
+               "start_time": 25.61,
+               "end_time": 25.9,
+               "alternatives": [
+                  {
+                     "word": "large",
+                     "confidence": 0.83
+                  }
+               ]
+            },
+            {
+               "start_time": 25.9,
+               "end_time": 26.35,
+               "alternatives": [
+                  {
+                     "word": "public",
+                     "confidence": 0.73
+                  }
+               ]
+            },
+            {
+               "start_time": 27.88,
+               "end_time": 28.03,
+               "alternatives": [
+                  {
+                     "word": "le",
+                     "confidence": 0.63
+                  }
+               ]
+            },
+            {
+               "start_time": 28.03,
+               "end_time": 28.4,
+               "alternatives": [
+                  {
+                     "word": "renard",
+                     "confidence": 0.92
+                  }
+               ]
+            },
+            {
+               "start_time": 28.4,
+               "end_time": 28.55,
+               "alternatives": [
+                  {
+                     "word": "sont",
+                     "confidence": 0.58
+                  }
+               ]
+            },
+            {
+               "start_time": 30.67,
+               "end_time": 31.22,
+               "alternatives": [
+                  {
+                     "word": "monsieur",
+                     "confidence": 0.84
+                  }
+               ]
+            },
+            {
+               "start_time": 31.71,
+               "end_time": 32.16,
+               "alternatives": [
+                  {
+                     "word": "apprenez",
+                     "confidence": 0.99
+                  }
+               ]
+            },
+            {
+               "start_time": 32.16,
+               "end_time": 32.34,
+               "alternatives": [
+                  {
+                     "word": "que",
+                     "confidence": 0.99
+                  }
+               ]
+            },
+            {
+               "start_time": 32.34,
+               "end_time": 32.5,
+               "alternatives": [
+                  {
+                     "word": "tout",
+                     "confidence": 0.63
+                  }
+               ]
+            },
+            {
+               "start_time": 33.12,
+               "end_time": 33.38,
+               "alternatives": [
+                  {
+                     "word": "vite",
+                     "confidence": 0.54
+                  }
+               ]
+            },
+            {
+               "start_time": 33.44,
+               "end_time": 33.59,
+               "alternatives": [
+                  {
+                     "word": "au",
+                     "confidence": 0.51
+                  }
+               ]
+            },
+            {
+               "start_time": 34.1,
+               "end_time": 34.22,
+               "alternatives": [
+                  {
+                     "word": "de",
+                     "confidence": 0.57
+                  }
+               ]
+            },
+            {
+               "start_time": 34.22,
+               "end_time": 34.56,
+               "alternatives": [
+                  {
+                     "word": "celui",
+                     "confidence": 0.85
+                  }
+               ]
+            },
+            {
+               "start_time": 34.56,
+               "end_time": 34.77,
+               "alternatives": [
+                  {
+                     "word": "qui",
+                     "confidence": 0.88
+                  }
+               ]
+            },
+            {
+               "start_time": 34.77,
+               "end_time": 35.38,
+               "alternatives": [
+                  {
+                     "word": "écoute",
+                     "confidence": 0.93
+                  }
+               ]
+            },
+            {
+               "start_time": 35.7,
+               "end_time": 35.97,
+               "alternatives": [
+                  {
+                     "word": "c'est",
+                     "confidence": 0.99
+                  }
+               ]
+            },
+            {
+               "start_time": 35.97,
+               "end_time": 36.08,
+               "alternatives": [
+                  {
+                     "word": "le",
+                     "confidence": 0.98
+                  }
+               ]
+            },
+            {
+               "start_time": 36.08,
+               "end_time": 36.3,
+               "alternatives": [
+                  {
+                     "word": "son",
+                     "confidence": 0.74
+                  }
+               ]
+            },
+            {
+               "start_time": 36.3,
+               "end_time": 36.33,
+               "alternatives": [
+                  {
+                     "word": "de",
+                     "confidence": 0.83
+                  }
+               ]
+            },
+            {
+               "start_time": 36.33,
+               "end_time": 36.56,
+               "alternatives": [
+                  {
+                     "word": "vos",
+                     "confidence": 0.69
+                  }
+               ]
+            },
+            {
+               "start_time": 36.56,
+               "end_time": 36.87,
+               "alternatives": [
+                  {
+                     "word": "biens",
+                     "confidence": 0.68
+                  }
+               ]
+            },
+            {
+               "start_time": 36.87,
+               "end_time": 37.01,
+               "alternatives": [
+                  {
+                     "word": "à",
+                     "confidence": 0.87
+                  }
+               ]
+            },
+            {
+               "start_time": 37.01,
+               "end_time": 37.64,
+               "alternatives": [
+                  {
+                     "word": "fromage",
+                     "confidence": 0.76
+                  }
+               ]
+            }
+         ],
+         "keywords_result": {}
+      },
+      {
+         "final": true,
+         "alternatives": [
+            {
+               "transcript": "le cordon honteux et confus du roi mais un peu plus tard on le prend et plus ",
+               "confidence": 0.73
+            }
+         ],
+         "word_alternatives": [
+            {
+               "start_time": 38.65,
+               "end_time": 38.79,
+               "alternatives": [
+                  {
+                     "word": "le",
+                     "confidence": 1.0
+                  }
+               ]
+            },
+            {
+               "start_time": 38.79,
+               "end_time": 39.27,
+               "alternatives": [
+                  {
+                     "word": "cordon",
+                     "confidence": 0.81
+                  }
+               ]
+            },
+            {
+               "start_time": 39.34,
+               "end_time": 39.76,
+               "alternatives": [
+                  {
+                     "word": "honteux",
+                     "confidence": 0.56
+                  }
+               ]
+            },
+            {
+               "start_time": 39.79,
+               "end_time": 40.33,
+               "alternatives": [
+                  {
+                     "word": "confus",
+                     "confidence": 0.73
+                  }
+               ]
+            },
+            {
+               "start_time": 40.36,
+               "end_time": 40.63,
+               "alternatives": [
+                  {
+                     "word": "du",
+                     "confidence": 0.86
+                  }
+               ]
+            },
+            {
+               "start_time": 40.63,
+               "end_time": 40.91,
+               "alternatives": [
+                  {
+                     "word": "roi",
+                     "confidence": 0.53
+                  }
+               ]
+            },
+            {
+               "start_time": 40.97,
+               "end_time": 41.13,
+               "alternatives": [
+                  {
+                     "word": "mais",
+                     "confidence": 0.53
+                  }
+               ]
+            },
+            {
+               "start_time": 41.13,
+               "end_time": 41.21,
+               "alternatives": [
+                  {
+                     "word": "un",
+                     "confidence": 0.89
+                  }
+               ]
+            },
+            {
+               "start_time": 41.21,
+               "end_time": 41.35,
+               "alternatives": [
+                  {
+                     "word": "peu",
+                     "confidence": 0.95
+                  }
+               ]
+            },
+            {
+               "start_time": 41.35,
+               "end_time": 41.54,
+               "alternatives": [
+                  {
+                     "word": "plus",
+                     "confidence": 1.0
+                  }
+               ]
+            },
+            {
+               "start_time": 41.54,
+               "end_time": 41.93,
+               "alternatives": [
+                  {
+                     "word": "tard",
+                     "confidence": 0.99
+                  }
+               ]
+            },
+            {
+               "start_time": 42.03,
+               "end_time": 42.21,
+               "alternatives": [
+                  {
+                     "word": "on",
+                     "confidence": 0.69
+                  }
+               ]
+            }
+         ],
+         "keywords_result": {}
+      },
+      {
+         "final": true,
+         "alternatives": [
+            {
+               "transcript": "ce ",
+               "confidence": 0.55
+            }
+         ],
+         "word_alternatives": [
+            {
+               "start_time": 44.06,
+               "end_time": 44.22,
+               "alternatives": [
+                  {
+                     "word": "ce",
+                     "confidence": 0.66
+                  }
+               ]
+            }
+         ],
+         "keywords_result": {}
+      }
+   ]
+}

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 6 Rechercher des thèmes (topic modelling) | Le Descriptoire: Recueil et analyse de texte avec R </title>
+  <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 6 Rechercher des thèmes (topic modelling) | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 6 Rechercher des thèmes (topic modelling) | Le Descriptoire: Recueil et analyse de texte avec R " />
+  
+  <meta name="twitter:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+<meta name="author" content=" Lise Vaudor" />
+
+
+<meta name="date" content="2022-12-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="résumer-linformation-par-des-graphiques.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> le Descriptoire </a></li>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128646266-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128646266-2');
+  </script>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>1</b> Extraction de données textuelles</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping"><i class="fa fa-check"></i><b>1.1</b> Depuis des pages web: web-scraping</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#langage-html"><i class="fa fa-check"></i><b>1.1.1</b> Langage html</a></li>
+<li class="chapter" data-level="1.1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#lire-une-page-html"><i class="fa fa-check"></i><b>1.1.2</b> Lire une page html</a></li>
+<li class="chapter" data-level="1.1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html"><i class="fa fa-check"></i><b>1.1.3</b> Extraire certains éléments d’une page html</a></li>
+<li class="chapter" data-level="1.1.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction"><i class="fa fa-check"></i><b>1.1.4</b> Passage au format rectangulaire, et mise en fonction</a></li>
+<li class="chapter" data-level="1.1.5" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#itération"><i class="fa fa-check"></i><b>1.1.5</b> Itération</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation"><i class="fa fa-check"></i><b>1.2</b> Depuis des images ou des documents pdf: OCRisation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract"><i class="fa fa-check"></i><b>1.2.1</b> Utilisation du package <code>tesseract</code></a></li>
+<li class="chapter" data-level="1.2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf"><i class="fa fa-check"></i><b>1.2.2</b> Et pour OCRiser depuis un pdf??</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription"><i class="fa fa-check"></i><b>1.3</b> Depuis des enregistrements audio: transcription</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#présentation-de-lexemple"><i class="fa fa-check"></i><b>1.3.1</b> Présentation de l’exemple</a></li>
+<li class="chapter" data-level="1.3.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#prétraitements-éventuels"><i class="fa fa-check"></i><b>1.3.2</b> Prétraitements éventuels</a></li>
+<li class="chapter" data-level="1.3.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager"><i class="fa fa-check"></i><b>1.3.3</b> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
+<li class="chapter" data-level="1.3.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm"><i class="fa fa-check"></i><b>1.3.4</b> API Watson Speech-to-text d’IBM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>2</b> Manipuler des strings: package stringr</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>2.1</b> Strings</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>2.1.1</b> détection, remplacement</a></li>
+<li class="chapter" data-level="2.1.2" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>2.1.2</b> division, correspondance</a></li>
+<li class="chapter" data-level="2.1.3" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>2.1.3</b> extraction</a></li>
+<li class="chapter" data-level="2.1.4" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>2.1.4</b> comptage, subset</a></li>
+<li class="chapter" data-level="2.1.5" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>2.1.5</b> longueur, sous-partie</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>2.2</b> Expressions régulières</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="strings.html"><a href="strings.html#classes-de-caractères-et-groupes"><i class="fa fa-check"></i><b>2.2.1</b> classes de caractères et groupes</a></li>
+<li class="chapter" data-level="2.2.2" data-path="strings.html"><a href="strings.html#caractères-spéciaux"><i class="fa fa-check"></i><b>2.2.2</b> caractères spéciaux</a></li>
+<li class="chapter" data-level="2.2.3" data-path="strings.html"><a href="strings.html#caractères-exclus-gammes-de-caractères"><i class="fa fa-check"></i><b>2.2.3</b> caractères exclus, gammes de caractères</a></li>
+<li class="chapter" data-level="2.2.4" data-path="strings.html"><a href="strings.html#classes-prédéfinies"><i class="fa fa-check"></i><b>2.2.4</b> classes prédéfinies</a></li>
+<li class="chapter" data-level="2.2.5" data-path="strings.html"><a href="strings.html#quelques-exemples-pour-bien-comprendre"><i class="fa fa-check"></i><b>2.2.5</b> quelques exemples pour bien comprendre</a></li>
+<li class="chapter" data-level="2.2.6" data-path="strings.html"><a href="strings.html#groupes-et-références-arrières"><i class="fa fa-check"></i><b>2.2.6</b> groupes et références arrières</a></li>
+<li class="chapter" data-level="2.2.7" data-path="strings.html"><a href="strings.html#quantificateurs"><i class="fa fa-check"></i><b>2.2.7</b> quantificateurs</a></li>
+<li class="chapter" data-level="2.2.8" data-path="strings.html"><a href="strings.html#ancres-et-assertions-avant-arrière"><i class="fa fa-check"></i><b>2.2.8</b> ancres et assertions avant-arrière</a></li>
+<li class="chapter" data-level="2.2.9" data-path="strings.html"><a href="strings.html#assertions-avant-arrière"><i class="fa fa-check"></i><b>2.2.9</b> assertions avant-arrière</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="langage-naturel.html"><a href="langage-naturel.html"><i class="fa fa-check"></i><b>3</b> Langage naturel</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="langage-naturel.html"><a href="langage-naturel.html#tokenization"><i class="fa fa-check"></i><b>3.1</b> Tokenization</a></li>
+<li class="chapter" data-level="3.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table"><i class="fa fa-check"></i><b>3.2</b> Nettoyage de la table</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides"><i class="fa fa-check"></i><b>3.2.1</b> Nettoyage de la table par suppression des mots vides</a></li>
+<li class="chapter" data-level="3.2.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming"><i class="fa fa-check"></i><b>3.2.2</b> Nettoyage de la table par racinisation (stemming)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation"><i class="fa fa-check"></i><b>3.2.3</b> Nettoyage de la table par lemmatisation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html"><i class="fa fa-check"></i><b>4</b> Résumer l’information par des métriques</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>4.1</b> Fréquences d’occurrence</a></li>
+<li class="chapter" data-level="4.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>4.2</b> Co-occurrences, corrélations</a></li>
+<li class="chapter" data-level="4.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>4.3</b> TF-IDF</a></li>
+<li class="chapter" data-level="4.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spécificités"><i class="fa fa-check"></i><b>4.4</b> Spécificités</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>5</b> Résumer l’information par des graphiques</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>5.1</b> Nuage de mots</a></li>
+<li class="chapter" data-level="5.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>5.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
+<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>5.3</b> Graphes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>6</b> Rechercher des thèmes (topic modelling)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations"><i class="fa fa-check"></i><b>6.1</b> Principe, notations</a></li>
+<li class="chapter" data-level="6.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta"><i class="fa fa-check"></i><b>6.2</b> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
+<li class="chapter" data-level="6.3" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#frex"><i class="fa fa-check"></i><b>6.3</b> FREX</a></li>
+<li class="chapter" data-level="6.4" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm"><i class="fa fa-check"></i><b>6.4</b> étapes du STM</a></li>
+<li class="chapter" data-level="6.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#communiqués-de-presse-du-ministère-de-lécologie"><i class="fa fa-check"></i><b>6.5</b> Communiqués de presse du ministère de l’écologie</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme"><i class="fa fa-check"></i><b>6.5.1</b> Mise en forme</a></li>
+<li class="chapter" data-level="6.5.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle"><i class="fa fa-check"></i><b>6.5.2</b> Calcul du modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents"><i class="fa fa-check"></i><b>6.6</b> Assignation d’un thème aux documents</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Le Descriptoire:
+Recueil et analyse de texte avec R </img></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="rechercher-des-thèmes-topic-modelling" class="section level1" number="6">
+<h1><span class="header-section-number">Chapitre 6</span> Rechercher des thèmes (topic modelling)</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span></code></pre></div>
+<p>La <strong>recherche de thèmes</strong> dans un corpus de textes (plus connu en tant que “topic modelling” en anglais) consiste à identifier un certain nombre de thématiques ou sujets sous-jacents, reflétés dans les textes par l’utilisation privilégiée de certains mots. En d’autres termes, les thèmes (ou topics) sont définis et désignés comme des <strong>listes de mots</strong>.</p>
+<p>Il existe plusieurs méthodes et plusieurs algorithmes pour réaliser une recherche de thèmes, mais dans cette partie je me focaliserai sur le <em>Structural Topic Modelling</em> (STM) et sur sa mise en oeuvre à l’aide du package R {stm}.</p>
+<p>La vignette de ce package, qui détaille la méthode (algorithme) et sa mise en oeuvre sous R peut être consultée <a href="https://cran.r-project.org/web/packages/stm/vignettes/stmVignette.pdf">ici</a></p>
+<div id="principe-notations" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Principe, notations</h2>
+<p>On note</p>
+<ul>
+<li><span class="math inline">\(K\)</span> le nombre total de thèmes</li>
+<li><span class="math inline">\(p\)</span> le nombre total de mots</li>
+<li><span class="math inline">\(N\)</span> le nombre total de documents</li>
+</ul>
+</div>
+<div id="scores-beta-beta" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> scores <span class="math inline">\(\beta\)</span> (beta)</h2>
+<p>On note <span class="math inline">\(\beta_{k,v}\)</span> la probabilité conditionnelle d’un mot <span class="math inline">\(v\)</span> pour un thème <span class="math inline">\(k\)</span></p>
+<p>On peut ainsi représenter les scores <span class="math inline">\(\beta_{k,v}\)</span> comme une matrice (ou un tableau) <span class="math inline">\(K*p\)</span> (thèmes x mots distincts dans le corpus).</p>
+<p>Ainsi, pour faire simple, on peut noter ces coefficients <span class="math inline">\(\beta_{k,v}\)</span>, mais si vous voulez “visualiser” ces coefficients pour comprendre la suite gardez à l’esprit qu’ils se présentent en fait comme suit:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right"></th>
+<th align="center"><span class="math inline">\(w_1\)</span></th>
+<th align="center">…</th>
+<th align="center"><span class="math inline">\(w_v\)</span></th>
+<th align="center">…</th>
+<th align="center"><span class="math inline">\(w_p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(T_1\)</span></td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr class="even">
+<td align="right">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr class="odd">
+<td align="right"><span class="math inline">\(T_k\)</span></td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center"><span class="math inline">\(\beta_{k,v}\)</span></td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr class="even">
+<td align="right">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr class="odd">
+<td align="right"><span class="math inline">\(T_K\)</span></td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="frex" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> FREX</h2>
+<p><span class="math inline">\(FREX\)</span> FRequence and Exclusivité</p>
+<p>Le score <span class="math inline">\(FREX_{k,v}\)</span> d’un mot <span class="math inline">\(v\)</span> pour un thème <span class="math inline">\(k\)</span> est:</p>
+<p><span class="math display">\[FREX_{k,v}=\left(\frac{w}{F}+\frac{1-w}{E}\right)^{-1}\]</span></p>
+<ul>
+<li><span class="math inline">\(w\)</span> est un poids (choisi entre 0 et 1) qui détermine la part du score <span class="math inline">\(FREX\)</span> qui correspond à la fréquence (<span class="math inline">\(F\)</span>) et la part correspondant à l’exclusivité (<span class="math inline">\(E\)</span>)</li>
+<li><span class="math inline">\(F\)</span> est le score correspondant à la <strong>fréquence</strong>, et correspond à la fonction de distribution empirique du mot conditionnellement au thème <span class="math inline">\(k\)</span></li>
+<li><span class="math inline">\(E\)</span> est le score correspondant à l’<strong>exclusivité</strong> et est obtenu ********</li>
+</ul>
+</div>
+<div id="étapes-du-stm" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> étapes du STM</h2>
+<ol style="list-style-type: decimal">
+<li>on tire au hasard une distribution des thèmes pour chaque document, autour d’une moyenne liée à la valeur des métadonnées pour le document <span class="math inline">\(X_d\gamma\)</span></li>
+<li>on calcule pour chaque document les valeurs <span class="math inline">\(\beta_{k,v}\)</span> (donc on a N matrices à calculer)</li>
+<li>pour chaque mot dans chaque document,
+<ol style="list-style-type: lower-alpha">
+<li>on l’associe à un thème <span class="math inline">\(k\)</span> en fonction de la distribution calculée à l’étape 1</li>
+<li>en se basant sur ce thème <span class="math inline">\(k\)</span> on tire au hasard un mot à l’aide des valeurs <span class="math inline">\(\beta_{k,v}\)</span></li>
+</ol></li>
+</ol>
+</div>
+<div id="communiqués-de-presse-du-ministère-de-lécologie" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Communiqués de presse du ministère de l’écologie</h2>
+<p>Considérons la table suivante, qui résulte d’un travail de récupération, nettoyage, tokenisation, lemmatisation d’un ensemble de communiqués de presse du Ministère de la Transition écologique et de la Cohésion des territoires:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-1" aria-hidden="true" tabindex="-1"></a>tib_docs<span class="ot">=</span><span class="fu">readRDS</span>(<span class="st">&quot;data/tib_docs_ministereco.RDS&quot;</span>)</span>
+<span id="cb2-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-2" aria-hidden="true" tabindex="-1"></a>tib_lemmes<span class="ot">=</span><span class="fu">readRDS</span>(<span class="st">&quot;data/tib_lemmes_ministereco.RDS&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(doc,date,lemma,ministre)</span>
+<span id="cb2-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tib_lemmes)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+##   doc   date       lemma    ministre       
+##   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;          
+## 1 doc1  2022-01-14 amont    Barbara Pompili
+## 2 doc1  2022-01-14 réunion  Barbara Pompili
+## 3 doc1  2022-01-14 informel Barbara Pompili
+## 4 doc1  2022-01-14 ministre Barbara Pompili
+## 5 doc1  2022-01-14 tenir    Barbara Pompili
+## 6 doc1  2022-01-14 janvier  Barbara Pompili</code></pre>
+<div id="mise-en-forme" class="section level3" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Mise en forme</h3>
+<p>Considérons une autre manière de représenter l’information textuelle contenue par la table <code>tib_lemmes</code>. Nous allons compter <strong>le nombre d’occurences de chaque lemme (<code>lemma</code>) dans chaque document (<code>doc</code>)</strong> et mettre cette information sous forme de matrice <span class="math inline">\(N*p\)</span> (le nombre de documents * le nombre total de lemmes distincts). Nous allons néanmoins exercer un tri préliminaire en retirant les mots qui sont rares à l’échelle du corpus (ici, on ne garde que ceux pour lesquels n&gt;20).</p>
+<p>La matrice résultante est dite <strong>“sparse”</strong> car beaucoup de ses cases ont pour valeur 0 (i.e. beaucoup de mots ne se trouvent que dans quelques documents).</p>
+<p>La fonction <code>cast_sparse()</code> du package <code>tidytext</code> permet d’effectuer ce reformatage très facilement:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-1" aria-hidden="true" tabindex="-1"></a>tib_sparse<span class="ot">=</span>tib_lemmes <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lemma) <span class="sc">%&gt;%</span> <span class="co"># compte pour chaque lemme...</span></span>
+<span id="cb4-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># ...son nombre d&#39;occurrences puis</span></span>
+<span id="cb4-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">20</span>) <span class="sc">%&gt;%</span>  <span class="co"># retire ceux représentés moins de 20 fois dans le corpus</span></span>
+<span id="cb4-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cast_sparse</span>(<span class="at">row=</span>doc, <span class="at">column=</span>lemma, <span class="at">value=</span>n)</span>
+<span id="cb4-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tib_sparse)</span></code></pre></div>
+<pre><code>## [1] 2868 2496</code></pre>
+<p><code>tib_sparse</code> est bien une matrice de N=2868 lignes (le nombre de documents) et de p=2496 colonnes (le nombre de lemmes dont la fréquence dans le corpus est &gt;20)</p>
+</div>
+<div id="calcul-du-modèle" class="section level3" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> Calcul du modèle</h3>
+<p>Chargeons le package <code>stm</code> et faisons tourner l’algorithme STM sur notre table, en demandant une quinzaine de thèmes distincts (cela peut sembler beaucoup mais les thèmes abordés par notre corpus sont de fait assez divers):</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stm)</span>
+<span id="cb6-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb6-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb6-4" aria-hidden="true" tabindex="-1"></a>topic_model<span class="ot">&lt;-</span><span class="fu">stm</span>(tib_sparse,<span class="at">K=</span><span class="dv">15</span>, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Le calcul du STM se fait de manière <strong>itérative</strong>. Ici, il a fallu un certain nombre d’itérations (ici une centaine) pour que <strong>le modèle converge</strong>. Pour donner un ordre de grandeur, il a fallu quelques minutes sur ma machine pour obtenir le résultat.</p>
+<p>Les objets <code>stm</code> sont associés à une méthode <code>summary()</code> qui permet de visualiser les thèmes identifiés:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(topic_model)</span></code></pre></div>
+<pre><code>## A topic model with 15 topics, 2868 documents and a 2496 word dictionary.</code></pre>
+<pre><code>## Topic 1 Top Words:
+##       Highest Prob: faire, grand, service, territoire, pouvoir, objectif, acteur 
+##       FREX: besoin, partager, savoir, vouloir, quotidien, concitoyen, construire 
+##       Lift: mot, sentiment, foi, télécharger, handicap, inventer, monsieur 
+##       Score: faire, territoire, objectif, mobilité, service, besoin, pouvoir 
+## Topic 2 Top Words:
+##       Highest Prob: travail, public, permettre, européen, cadre, niveau, prendre 
+##       FREX: européen, décision, membre, donnée, étude, travail, public 
+##       Lift: consulter, substance, directive, règlement, anse, européen, réglementation 
+##       Score: européen, consulter, public, permettre, travail, niveau, objectif 
+## Topic 3 Top Words:
+##       Highest Prob: presse, accréditer, rendre, auprès, carte, cadre, programme 
+##       FREX: presse, accréditer, numéro, carte, dossier, prévisionnel, indiquer 
+##       Lift: presse, numéro, dossier, hall, mail, accréditer, carte 
+##       Score: presse, accréditer, dossier, numéro, carte, auprès, communication 
+## Topic 4 Top Words:
+##       Highest Prob: national, plan, action, public, niveau, présenter, ensemble 
+##       FREX: national, stratégie, député, plan, rapport, débat, concertation 
+##       Lift: député, national, loup, perturbateur, endocrinien, capture, stratégie 
+##       Score: national, député, niveau, action, public, plan, stratégie 
+## Topic 5 Top Words:
+##       Highest Prob: faire, condition, sanitaire, charger, raison, occasion, rendre 
+##       FREX: faire, sanitaire, respect, règle, geste, raison, condition 
+##       Lift: strict, distanciation, intégralité, physique, geste, barrière, masque 
+##       Score: faire, sanitaire, distanciation, condition, raison, barrière, geste 
+## Topic 6 Top Words:
+##       Highest Prob: énergie, transition, objectif, énergétique, climatique, mettre, permettre 
+##       FREX: émission, énergie, carbone, gaz, climat, énergétique, électricité 
+##       Lift: neutralité, to, carbone, gaz, émission, fossile, électricité 
+##       Score: énergie, énergétique, transition, émission, climatique, carbone, objectif 
+## Topic 7 Top Words:
+##       Highest Prob: écologique, territoire, mettre, biodiversité, action, eau, climatique 
+##       FREX: biodiversité, eau, protection, nature, préservation, protéger, mer 
+##       Lift: oiseau, sécheresse, faux, récif, corallien, trait, biodiversité 
+##       Score: écologique, biodiversité, solidaire, climatique, territoire, eau, protection 
+## Topic 8 Top Words:
+##       Highest Prob: projet, territoire, mettre, permettre, appel, développement, local 
+##       FREX: projet, appel, lauréat, territoire, candidature, actif, lancer 
+##       Lift: lauréat, actif, projet, sélectionner, jury, candidature, appel 
+##       Score: projet, actif, territoire, appel, mettre, développement, lauréat 
+## Topic 9 Top Words:
+##       Highest Prob: territoire, permettre, public, euro, million, travail, collectivité 
+##       FREX: euro, logement, rénovation, million, bâtiment, aider, territorial 
+##       Lift: cérémonie, rénovation, logement, pouce, bailleur, précarité, bénéficiaire 
+##       Score: logement, rénovation, territoire, énergétique, euro, million, permettre 
+## Topic 10 Top Words:
+##       Highest Prob: ministre, écologique, solidaire, auprès, secrétaire, transition, rendre 
+##       FREX: écologique, solidaire, ministre, secrétaire, auprès, brun, président 
+##       Lift: fédéral, solidaire, écologique, ministre, secrétaire, brun, auprès 
+##       Score: ministre, écologique, solidaire, auprès, secrétaire, transition, brun 
+## Topic 11 Top Words:
+##       Highest Prob: entreprise, développement, transition, acteur, action, durable, économique 
+##       FREX: durable, entreprise, économique, développement, innovation, filière, transition 
+##       Lift: instrument, investisseur, synergie, durable, alliance, paix, promotion 
+##       Score: entreprise, transition, développement, économie, action, durable, acteur 
+## Topic 12 Top Words:
+##       Highest Prob: loi, mettre, économie, mesure, permettre, objectif, déchet 
+##       FREX: loi, plastique, déchet, produit, circulaire, gaspillage, recyclage 
+##       Lift: poubelle, gaspillage, synthèse, végétarien, loi, recyclable, plastique 
+##       Score: loi, économie, circulaire, plastique, déchet, mesure, produit 
+## Topic 13 Top Words:
+##       Highest Prob: mettre, mesure, permettre, service, place, ensemble, prendre 
+##       FREX: situation, mesure, crise, assurer, place, mettre, continuer 
+##       Lift: allocataire, cabotage, remboursement, partiel, expulsion, impayé, paiement 
+##       Score: mettre, mesure, permettre, service, place, sanitaire, prendre 
+## Topic 14 Top Words:
+##       Highest Prob: grand, national, niveau, route, ensemble, mettre, circulation 
+##       FREX: circulation, autoroute, classer, départ, heure, dimanche, samedi 
+##       Lift: décrue, orange, classer, autoroute, bouchon, min, regagner 
+##       Score: autoroute, national, circulation, niveau, classer, routier, éviter 
+## Topic 15 Top Words:
+##       Highest Prob: ministre, charger, transport, travail, mobilité, entreprise, secteur 
+##       FREX: transport, baptiste, charger, mobilité, ferroviaire, jean, délégué 
+##       Lift: cheminot, baptiste, automatiser, détachement, métro, jean, transport 
+##       Score: ministre, transport, charger, baptiste, mobilité, délégué, ferroviaire</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-1" aria-hidden="true" tabindex="-1"></a>td_topicterms<span class="ot">=</span><span class="fu">tidy</span>(topic_model, <span class="at">matrix=</span><span class="st">&quot;beta&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(beta,<span class="at">n=</span><span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic,<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank=</span><span class="fu">row_number</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-7"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>beta) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-8"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span><span class="st">&quot;topic&quot;</span>,</span>
+<span id="cb10-9"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from=</span><span class="st">&quot;term&quot;</span>)</span>
+<span id="cb10-10"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-10" aria-hidden="true" tabindex="-1"></a>td_topicterms</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 16
+##     rank `1`   `2`   `3`   `4`   `5`   `6`   `7`   `8`   `9`   `10`  `11`  `12` 
+##    &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+##  1     1 faire trav… pres… nati… faire éner… écol… proj… terr… mini… entr… loi  
+##  2     2 grand publ… accr… plan  cond… tran… terr… terr… perm… écol… déve… mett…
+##  3     3 serv… perm… rend… acti… sani… obje… mett… mett… publ… soli… tran… écon…
+##  4     4 terr… euro… aupr… publ… char… éner… biod… perm… euro  aupr… acte… mesu…
+##  5     5 pouv… cadre carte nive… rais… clim… acti… appel mill… secr… acti… perm…
+##  6     6 obje… nive… cadre prés… occa… mett… eau   déve… trav… tran… dura… obje…
+##  7     7 acte… pren… prog… ense… rend… perm… clim… local coll… rend… écon… déch…
+##  8     8 publ… fran… comm… trav… resp… émis… obje… coll… loge… mini… écon… prod…
+##  9     9 an    obje… indi… acte… règle déve… soli… serv… local occa… enga… an   
+## 10    10 solu… égal… acte… stra… cadre fran… mini… égal… éner… cadre fili… circ…
+## 11    11 venir prés… numé… cadre geste écol… grand lanc… cadre prés… obje… place
+## 12    12 ense… pouv… dépl… poli… évén… clim… prot… place obje… prés… ense… année
+## 13    13 plan  envi… secr… rapp… égal… nive… envi… cadre réno… juil… enga… pren…
+## 14    14 année mati… serv… proc… plan  carb… mer   site  aupr… nove… soci… grand
+## 15    15 enga… enga… place année exce… égal… année ense… acco… solu… sect… prév…
+## # … with 3 more variables: `13` &lt;chr&gt;, `14` &lt;chr&gt;, `15` &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div id="assignation-dun-thème-aux-documents" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> Assignation d’un thème aux documents</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb12-1" aria-hidden="true" tabindex="-1"></a>tib_gamma <span class="ot">&lt;-</span> <span class="fu">tidy</span>(topic_model, <span class="at">matrix =</span> <span class="st">&quot;gamma&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(document) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">n=</span><span class="dv">1</span>,gamma) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">doc=</span><span class="fu">paste0</span>(<span class="st">&quot;doc&quot;</span>,document)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>document)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-1" aria-hidden="true" tabindex="-1"></a>tib_docs<span class="ot">=</span>tib_docs <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tib_gamma)</span>
+<span id="cb13-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-4" aria-hidden="true" tabindex="-1"></a>tib_docs <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>doc,<span class="sc">-</span>document,<span class="sc">-</span>lien) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-7"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-8"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 7
+##    titre                        date       texte month      ministre topic gamma
+##    &lt;chr&gt;                        &lt;date&gt;     &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
+##  1 &quot;Déplacement de _Barbara_Po… 2020-08-10 &quot; Da… 2020-08-01 Barbara…     3 0.427
+##  2 &quot;Réunion des _Ministres_ de… 2017-12-04 &quot; Ro… 2017-12-01 Nicolas…     7 0.291
+##  3 &quot;Varenne agricole de l’eau … 2021-10-22 &quot; A … 2021-10-01 Barbara…     7 0.236
+##  4 &quot;Lutte contre le gaspillage… 2021-12-10 &quot; Ba… 2021-12-01 Barbara…    12 0.424
+##  5 &quot;Note aux rédactions : _Emm… 2020-06-30 &quot; Em… 2020-06-01 Élisabe…    13 0.583
+##  6 &quot;Sortie du confinement : le… 2020-04-30 &quot; Da… 2020-04-01 Élisabe…    13 0.448
+##  7 &quot;Brune _Poirson_ participer… 2019-03-27 &quot; Br… 2019-03-01 Françoi…    14 0.965
+##  8 &quot;Lancement des expérimentat… 2018-02-21 &quot; Ni… 2018-02-01 Nicolas…    14 0.217
+##  9 &quot;REMISE _DU_PROGRAMME_DE_TR… 2018-03-15 &quot;  _… 2018-03-01 Nicolas…    14 0.956
+## 10 &quot;Conseil européen des minis… 2019-10-04 &quot; Br… 2019-10-01 Élisabe…    15 0.362</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="résumer-linformation-par-des-graphiques.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/lvaudor/Descriptoire/edit/master/07-recherche_themes.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

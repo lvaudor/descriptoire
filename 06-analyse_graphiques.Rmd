@@ -1,0 +1,84 @@
+# Résumer l'information par des graphiques
+
+## Nuage de mots
+
+Le **nuage de mots** constitue sans doute l'une des représentations les plus classiques pour ce genre de table lexicale...
+
+On le réalise ici avec le package `wordcloud` (et sa fonction `wordcloud()`)
+
+```{r}
+wordcloud::wordcloud(freq_mots$lemma,
+                     freq_mots$freq,
+                     min.freq=1)
+```
+
+
+## Diagramme en bâtons: occurrences, spécificités
+
+```{r diag_batons, fig.width=5, fig.height=4}
+ggplot2::ggplot(dplyr::filter(freq_mots,freq>1),
+                ggplot2::aes(x=forcats::fct_reorder(lemma,freq), y=freq)) +
+  ggplot2::geom_bar(stat="identity", fill="skyblue")+
+  ggplot2::coord_flip()
+```
+
+```{r freq_mots}
+freq_mots <- tib_mots_nonvides %>%
+  dplyr::group_by(doc,lemma) %>% 
+  dplyr::summarise(freq=n()) %>% 
+  dplyr::arrange(desc(freq)) %>% 
+  na.omit()
+head(freq_mots)
+```
+
+```{r plot_spec_1}
+df_spec <- mixr::tidy_specificities(tib_mots_nonvides,
+                                    lemma,
+                                    doc,
+                                    top_spec=10)
+mixr::plot_specificities(df_spec,lemma,doc)
+```
+
+```{r plot_spec_2}
+df_spec <- mixr::tidy_specificities(tib_mots_nonvides,
+                                    lemma,
+                                    auteur,
+                                    top_spec=2)
+mixr::plot_specificities(df_spec,lemma,auteur)
+```
+
+## Graphes
+
+On souhaite maintenant représenter les **relations entre les mots** par un graphe (le lien est défini par la **co-occurrence** des mots dans un même commentaire). On va pour ce faire créer un graphe à partir du tableau `mots_cooc`.
+
+```{r table_to_graph}
+mots_graph <- igraph::graph_from_data_frame(mots_cooc)
+class(mots_graph)
+```
+
+
+Un graphe se caractérise par
+
+- des **noeuds** (dans notre cas les lemmes)
+- des **liens** (dans notre cas la cooccurence de deux lemmes dans un même commentaire)
+- des **attributs** (par exemple dans notre cas la fréquence de cooccurrence n et la corrélation cor font partie des attributs qui permettent de décrire les liens) 
+
+Maintenant que l'objet de classe "graph" est créé, on va le représenter. Il faut pour cela calculer un "layout" des différents noeuds du graphe puis spécifier ce qu'on veut faire apparaître graphiquement à travers les commandes du package `ggraph` dont la logique est proche de celle de `ggplot2`.
+
+```{r}
+library(ggraph)
+my_graph <- mots_graph %>%
+   ggraph::ggraph(layout = "fr") +
+   ggraph::geom_edge_link(edge_colour="steelblue") +
+   ggraph::geom_node_point(color = "khaki1", size = 5) +
+   ggraph::geom_node_text(aes(label = name), repel = TRUE) +
+   ggplot2::theme_void()
+```
+
+
+```{r,fig.width=6,fig.height=5}
+plot(my_graph)
+```
+
+
+

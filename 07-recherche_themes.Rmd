@@ -1,0 +1,149 @@
+# Rechercher des thèmes (topic modelling)
+
+```{r}
+knitr::opts_chunk$set(cache=TRUE)
+library(tidyverse)
+library(tidytext)
+```
+
+La **recherche de thèmes** dans un corpus de textes (plus connu en tant que "topic modelling" en anglais) consiste à identifier un certain nombre de thématiques ou sujets sous-jacents, reflétés dans les textes par l'utilisation privilégiée de certains mots. En d'autres termes, les thèmes (ou topics) sont définis et désignés comme des **listes de mots**.
+
+Il existe plusieurs méthodes et plusieurs algorithmes pour réaliser une recherche de thèmes, mais dans cette partie je me focaliserai sur le *Structural Topic Modelling* (STM) et sur sa mise en oeuvre à l'aide du package R \{stm}.
+
+La vignette de ce package, qui détaille la méthode (algorithme) et sa mise en oeuvre sous R peut être consultée [ici](https://cran.r-project.org/web/packages/stm/vignettes/stmVignette.pdf)
+
+## Principe, notations
+
+On note 
+
+- $K$ le nombre total de thèmes
+- $p$ le nombre total de mots
+- $N$ le nombre total de documents
+
+## scores $\beta$ (beta)
+
+On note $\beta_{k,v}$ la probabilité conditionnelle d'un mot $v$ pour un thème $k$
+
+On peut ainsi représenter les scores $\beta_{k,v}$ comme une matrice (ou un tableau) $K*p$ (thèmes x mots distincts dans le corpus).
+
+Ainsi, pour faire simple, on peut noter ces coefficients $\beta_{k,v}$, mais si vous voulez "visualiser" ces coefficients pour comprendre la suite gardez à l'esprit qu'ils se présentent en fait comme suit:
+
+
+|     |$w_1$|...  |$w_v$        |...  |$w_p$|
+|----:|:---:|:---:|:-----------:|:---:|:---:|
+|$T_1$|...  |...  |...          |...  |...  |
+|...  |...  |...  |...          |...  |...  |
+|$T_k$|...  |...  |$\beta_{k,v}$|...  |...  |
+|...  |...  |...  |...          |...  |...  |
+|$T_K$|...  |...  |...          |...  |...  |
+
+
+## FREX
+
+$FREX$ FRequence and Exclusivité
+
+Le score $FREX_{k,v}$ d'un mot $v$ pour un thème $k$ est: 
+
+$$FREX_{k,v}=\left(\frac{w}{F}+\frac{1-w}{E}\right)^{-1}$$
+
+- $w$ est un poids (choisi entre 0 et 1) qui détermine la part du score $FREX$ qui correspond à la fréquence ($F$) et la part correspondant à l'exclusivité ($E$)
+- $F$ est le score correspondant à la **fréquence**, et correspond à la fonction de distribution empirique du mot conditionnellement au thème $k$
+- $E$ est le score correspondant à l'**exclusivité** et est obtenu ********
+
+
+## étapes du STM
+
+1. on tire au hasard une distribution des thèmes pour chaque document, autour d'une moyenne liée à la valeur des métadonnées pour le document $X_d\gamma$
+2. on calcule pour chaque document les valeurs $\beta_{k,v}$ (donc on a N matrices à calculer)
+3. pour chaque mot dans chaque document, 
+    a. on l'associe à un thème $k$ en fonction de la distribution calculée à l'étape 1 
+    b. en se basant sur ce thème $k$ on tire au hasard un mot à l'aide des valeurs $\beta_{k,v}$ 
+
+
+## Communiqués de presse du ministère de l'écologie
+
+Considérons la table suivante, qui résulte d'un travail de récupération, nettoyage, tokenisation, lemmatisation d'un ensemble de communiqués de presse du Ministère de la Transition écologique et de la Cohésion des territoires:
+
+```{r data_ministereco}
+tib_docs=readRDS("data/ministereco_tib_docs.RDS")
+tib_lemmes=readRDS("data/ministereco_tib_lemmes.RDS") %>% 
+  select(doc,date,lemma,ministre)
+
+head(tib_lemmes)
+```
+
+### Mise en forme
+
+Considérons une autre manière de représenter l'information textuelle contenue par la table `tib_lemmes`. Nous allons compter **le nombre d'occurences de chaque lemme (`lemma`) dans chaque document (`doc`)** et mettre cette information sous forme de matrice $N*p$ (le nombre de documents * le nombre total de lemmes distincts). Nous allons néanmoins exercer un tri préliminaire en retirant les mots qui sont rares à l'échelle du corpus (ici, on ne garde que ceux pour lesquels la fréquence>20).
+
+La matrice résultante est dite **"sparse"** car beaucoup de ses cases ont pour valeur 0 (i.e. beaucoup de mots ne se trouvent que dans quelques documents).
+
+La fonction `cast_sparse()` du package `tidytext` permet d'effectuer ce reformatage très facilement: 
+
+```{r cast_sparse}
+tib_sparse=tib_lemmes %>% 
+  group_by(lemma) %>% # compte pour chaque lemme...
+  mutate(freq=n()) %>% # ...son nombre d'occurrences puis
+  filter(freq>20) %>%  # retire ceux représentés moins de 20 fois dans le corpus
+  cast_sparse(row=doc, column=lemma, value=n)
+
+dim(tib_sparse)
+```
+
+`tib_sparse` est bien une matrice de N=2868 lignes (le nombre de documents) et de p=2496 colonnes (le nombre de lemmes dont la fréquence dans le corpus est >20)
+
+### Calcul du modèle
+
+Chargeons le package `stm` et faisons tourner l'algorithme STM sur notre table, en demandant une quinzaine de thèmes distincts (cela peut sembler beaucoup mais les thèmes abordés par notre corpus sont de fait assez divers):
+
+```{r run_stm}
+library(stm)
+set.seed(123)
+
+topic_model<-stm(tib_sparse,K=15, verbose=FALSE)
+```
+
+Le calcul du STM se fait de manière **itérative**. Ici, il a fallu un certain nombre d'itérations (ici une centaine) pour que **le modèle converge**. Pour donner un ordre de grandeur, il a fallu quelques minutes sur ma machine pour obtenir le résultat.
+
+Les objets `stm` sont associés à une méthode `summary()` qui permet de visualiser les thèmes identifiés:
+
+```{r summary_model}
+summary(topic_model)
+```
+
+
+```{r get_topicterms}
+td_topicterms=tidy(topic_model, matrix="beta") %>% 
+  group_by(topic) %>% 
+  slice_max(beta,n=15) %>% 
+  arrange(topic,desc(beta)) %>% 
+  mutate(rank=row_number()) %>% 
+  ungroup() %>% 
+  select(-beta) %>% 
+  pivot_wider(names_from="topic",
+              values_from="term")
+td_topicterms
+```
+
+## Assignation d'un thème aux documents 
+
+```{r tib_gamma}
+tib_gamma <- tidy(topic_model, matrix = "gamma") %>% 
+  group_by(document) %>% 
+  slice_max(n=1,gamma) %>% 
+  mutate(doc=paste0("doc",document)) %>%
+  select(-document)
+```
+
+```{r tib_docs_topics}
+tib_docs=tib_docs %>% 
+  left_join(tib_gamma)
+
+tib_docs %>%
+  select(-doc,-document,-lien) %>% 
+  sample_n(10) %>% 
+  arrange(topic) %>% 
+  head(n=10)
+```
+
+
