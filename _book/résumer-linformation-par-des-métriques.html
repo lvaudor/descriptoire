@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 4 Résumer l’information par des métriques | Le Descriptoire: Recueil et analyse de texte avec R </title>
   <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 4 Résumer l’information par des métriques | Le Descriptoire: Recueil et analyse de texte avec R " />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
   
@@ -24,7 +23,7 @@
 <meta name="author" content=" Lise Vaudor" />
 
 
-<meta name="date" content="2022-11-29" />
+<meta name="date" content="2023-01-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="langage-naturel.html"/>
 <link rel="next" href="résumer-linformation-par-des-graphiques.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -206,7 +205,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>4.1</b> Fréquences d’occurrence</a></li>
 <li class="chapter" data-level="4.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>4.2</b> Co-occurrences, corrélations</a></li>
-<li class="chapter" data-level="4.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spécificités"><i class="fa fa-check"></i><b>4.3</b> Spécificités</a></li>
+<li class="chapter" data-level="4.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>4.3</b> TF-IDF</a></li>
+<li class="chapter" data-level="4.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spécificités"><i class="fa fa-check"></i><b>4.4</b> Spécificités</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>5</b> Résumer l’information par des graphiques</a>
 <ul>
@@ -220,7 +220,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta"><i class="fa fa-check"></i><b>6.2</b> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
 <li class="chapter" data-level="6.3" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#frex"><i class="fa fa-check"></i><b>6.3</b> FREX</a></li>
 <li class="chapter" data-level="6.4" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm"><i class="fa fa-check"></i><b>6.4</b> étapes du STM</a></li>
-<li class="chapter" data-level="6.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#communiqués-de-presse-du-ministère-de-lécologie"><i class="fa fa-check"></i><b>6.5</b> Communiqués de presse du ministère de l’écologie</a></li>
+<li class="chapter" data-level="6.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#communiqués-de-presse-du-ministère-de-lécologie"><i class="fa fa-check"></i><b>6.5</b> Communiqués de presse du ministère de l’écologie</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme"><i class="fa fa-check"></i><b>6.5.1</b> Mise en forme</a></li>
+<li class="chapter" data-level="6.5.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle"><i class="fa fa-check"></i><b>6.5.2</b> Calcul du modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents"><i class="fa fa-check"></i><b>6.6</b> Assignation d’un thème aux documents</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -243,23 +248,23 @@ Recueil et analyse de texte avec R </img></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="résumer-linformation-par-des-métriques" class="section level1" number="4">
-<h1><span class="header-section-number">Chapitre 4</span> Résumer l’information par des métriques</h1>
+<div id="résumer-linformation-par-des-métriques" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapitre 4</span> Résumer l’information par des métriques<a href="résumer-linformation-par-des-métriques.html#résumer-linformation-par-des-métriques" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Avant de réaliser quelques graphiques pour montrer le contenu lexical de nos textes il faudra la plupart du temps quelques calculs basiques sur nos données (par exemple <strong>agréger</strong> les données pour obtenir les <strong>fréquences d’occurrence</strong> des termes).</p>
 <p>Pour réaliser ces quelques transformations on peut généralement utiliser les fonctions de <code>dplyr</code><img src='images/logo_dplyr.jpg' width='50'>.</p>
 <p>Ici, on repart du tableau suivant</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="résumer-linformation-par-des-métriques.html#cb1-1" aria-hidden="true" tabindex="-1"></a>tib_mots_nonvides <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/tib_mots_nonvides.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="résumer-linformation-par-des-métriques.html#cb1-1" aria-hidden="true" tabindex="-1"></a>tib_lemmes <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">&quot;data/ministereco_tib_lemmes.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-2"><a href="résumer-linformation-par-des-métriques.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
-<span id="cb1-3"><a href="résumer-linformation-par-des-métriques.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tib_mots_nonvides)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 5
-##   doc                      auteur                mot     lemma   type 
-##   &lt;chr&gt;                    &lt;chr&gt;                 &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;
-## 1 data/blog_de_ginette.htm Emma, 22 ans, Limoges poule   poule   nom  
-## 2 data/blog_de_ginette.htm Emma, 22 ans, Limoges mur     mur     nom  
-## 3 data/blog_de_ginette.htm Emma, 22 ans, Limoges pain    pain    nom  
-## 4 data/blog_de_ginette.htm Emma, 22 ans, Limoges dur     dur     adj  
-## 5 data/blog_de_ginette.htm Emma, 22 ans, Limoges nourrir nourrir ver  
-## 6 data/blog_de_ginette.htm Emma, 22 ans, Limoges petits  petit   adj</code></pre>
+<span id="cb1-3"><a href="résumer-linformation-par-des-métriques.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tib_lemmes)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+##   doc   word        lemma    type 
+##   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;
+## 1 doc1  amont       amont    nom  
+## 2 doc1  réunions    réunion  nom  
+## 3 doc1  informelles informel adj  
+## 4 doc1  ministres   ministre nom  
+## 5 doc1  tiendront   tenir    ver  
+## 6 doc1  janvier     janvier  nom</code></pre>
 <p>On pourrait être amené à</p>
 <ul>
 <li>calculer la fréquence des mots</li>
@@ -267,74 +272,80 @@ Recueil et analyse de texte avec R </img></a>
 <li>ne garder que les <span class="math inline">\(n\)</span> mots les plus fréquents</li>
 <li>etc.</li>
 </ul>
-<div id="fréquences-doccurrence" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Fréquences d’occurrence</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="résumer-linformation-par-des-métriques.html#cb3-1" aria-hidden="true" tabindex="-1"></a>freq_mots <span class="ot">&lt;-</span> tib_mots_nonvides <span class="sc">%&gt;%</span></span>
+<div id="fréquences-doccurrence" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Fréquences d’occurrence<a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="résumer-linformation-par-des-métriques.html#cb3-1" aria-hidden="true" tabindex="-1"></a>freq_lemmes <span class="ot">&lt;-</span> tib_lemmes <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="résumer-linformation-par-des-métriques.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lemma) <span class="sc">%&gt;%</span> </span>
 <span id="cb3-3"><a href="résumer-linformation-par-des-métriques.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
 <span id="cb3-4"><a href="résumer-linformation-par-des-métriques.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(freq)) <span class="sc">%&gt;%</span> </span>
 <span id="cb3-5"><a href="résumer-linformation-par-des-métriques.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
-<span id="cb3-6"><a href="résumer-linformation-par-des-métriques.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(freq_mots)</span></code></pre></div>
+<span id="cb3-6"><a href="résumer-linformation-par-des-métriques.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(freq_lemmes)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
-##   lemma   freq
-##   &lt;chr&gt;  &lt;int&gt;
-## 1 canard     5
-## 2 thon       5
-## 3 cochon     4
-## 4 petit      4
-## 5 chat       3
-## 6 danser     3</code></pre>
+##   lemma       freq
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 ministre    5946
+## 2 transition  4254
+## 3 écologique  4007
+## 4 projet      3896
+## 5 mettre      3157
+## 6 presse      3129</code></pre>
 <p>Ici, je n’en ai pas besoin (mon jeu de données est tout petit) mais je pourrais également filtrer les données pour ne garder qu’une fréquence minimale, ou ne garder que les <span class="math inline">\(n\)</span> mots les plus fréquents…</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="résumer-linformation-par-des-métriques.html#cb5-1" aria-hidden="true" tabindex="-1"></a>freq_mots <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="résumer-linformation-par-des-métriques.html#cb5-1" aria-hidden="true" tabindex="-1"></a>freq_lemmes <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="résumer-linformation-par-des-métriques.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(freq<span class="sc">&gt;=</span><span class="dv">5</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 2
-##   lemma   freq
-##   &lt;chr&gt;  &lt;int&gt;
-## 1 canard     5
-## 2 thon       5</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="résumer-linformation-par-des-métriques.html#cb7-1" aria-hidden="true" tabindex="-1"></a>freq_mots <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">3</span>,freq)</span></code></pre></div>
-<pre><code>## # A tibble: 4 × 2
-##   lemma   freq
-##   &lt;chr&gt;  &lt;int&gt;
-## 1 canard     5
-## 2 thon       5
-## 3 cochon     4
-## 4 petit      4</code></pre>
+<pre><code>## # A tibble: 4,469 × 2
+##    lemma       freq
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 ministre    5946
+##  2 transition  4254
+##  3 écologique  4007
+##  4 projet      3896
+##  5 mettre      3157
+##  6 presse      3129
+##  7 permettre   2896
+##  8 national    2831
+##  9 territoire  2823
+## 10 transport   2646
+## # … with 4,459 more rows</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="résumer-linformation-par-des-métriques.html#cb7-1" aria-hidden="true" tabindex="-1"></a>freq_lemmes <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">3</span>,freq)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   lemma       freq
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 ministre    5946
+## 2 transition  4254
+## 3 écologique  4007</code></pre>
 <p>Pour faciliter ce processus que l’on est amené à réaliser fréquemment pour analyser des données textuelles, j’ai créé une fonction tidy_frequencies (package <code>mixr</code>) qui regroupe l’ensemble des étapes:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="résumer-linformation-par-des-métriques.html#cb9-1" aria-hidden="true" tabindex="-1"></a>mixr<span class="sc">::</span><span class="fu">tidy_frequencies</span>(tib_mots_nonvides,lemma,<span class="at">top_freq=</span><span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 12 × 2
-##    lemma     freq
-##    &lt;chr&gt;    &lt;int&gt;
-##  1 canard       5
-##  2 thon         5
-##  3 cochon       4
-##  4 petit        4
-##  5 chat         3
-##  6 danser       3
-##  7 poule        3
-##  8 chose        2
-##  9 écrire       2
-## 10 gaiement     2
-## 11 grain        2
-## 12 préférer     2</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="résumer-linformation-par-des-métriques.html#cb9-1" aria-hidden="true" tabindex="-1"></a>mixr<span class="sc">::</span><span class="fu">tidy_frequencies</span>(tib_lemmes,lemma,<span class="at">top_freq=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 2
+##    lemma       freq
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 ministre    5946
+##  2 transition  4254
+##  3 écologique  4007
+##  4 projet      3896
+##  5 mettre      3157
+##  6 presse      3129
+##  7 permettre   2896
+##  8 national    2831
+##  9 territoire  2823
+## 10 transport   2646</code></pre>
 </div>
-<div id="co-occurrences-corrélations" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Co-occurrences, corrélations</h2>
+<div id="co-occurrences-corrélations" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Co-occurrences, corrélations<a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Si l’on s’intéresse non plus seulement à la fréquence individuelle des termes mais qu’on cherche à caractériser les termes qui sont souvent employés ensemble (au sein d’un même commentaire par exemple) on peut utiliser les fonctions du package <code>widyr</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="résumer-linformation-par-des-métriques.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(widyr)</span>
-<span id="cb11-2"><a href="résumer-linformation-par-des-métriques.html#cb11-2" aria-hidden="true" tabindex="-1"></a>mots_cooc <span class="ot">&lt;-</span> tib_mots_nonvides <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="résumer-linformation-par-des-métriques.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise_count</span>(lemma,<span class="at">feature=</span>auteur,<span class="at">sort=</span><span class="cn">TRUE</span>) </span>
+<span id="cb11-2"><a href="résumer-linformation-par-des-métriques.html#cb11-2" aria-hidden="true" tabindex="-1"></a>mots_cooc <span class="ot">&lt;-</span> tib_lemmes <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="résumer-linformation-par-des-métriques.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise_count</span>(lemma,<span class="at">feature=</span>doc,<span class="at">sort=</span><span class="cn">TRUE</span>) </span>
 <span id="cb11-4"><a href="résumer-linformation-par-des-métriques.html#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-5"><a href="résumer-linformation-par-des-métriques.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mots_cooc)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
-##   item1  item2      n
-##   &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;
-## 1 cochon petit      3
-## 2 petit  cochon     3
-## 3 petit  poule      2
-## 4 cochon poule      2
-## 5 canard poule      2
-## 6 poule  petit      2</code></pre>
+##   item1      item2          n
+##   &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
+## 1 écologique transition  1679
+## 2 transition écologique  1679
+## 3 transition ministre    1511
+## 4 ministre   transition  1511
+## 5 écologique ministre    1484
+## 6 ministre   écologique  1484</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -383,24 +394,59 @@ Recueil et analyse de texte avec R </img></a>
 <span id="cb15-2"><a href="résumer-linformation-par-des-métriques.html#cb15-2" aria-hidden="true" tabindex="-1"></a>                       mots_cors,</span>
 <span id="cb15-3"><a href="résumer-linformation-par-des-métriques.html#cb15-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;item1&quot;</span>,<span class="st">&quot;item2&quot;</span>))</span></code></pre></div>
 </div>
-<div id="spécificités" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Spécificités</h2>
-<p>Le package <code>textometry</code> (réalisé par l’équipe TXM) comprend une fonction qui permet de calculer des scores de spécificité. Pour plus de compatibilité avec le tidyverse j’ai écrit une fonction <code>tidy_specificities()</code> qui reprend cette fonction et renvoie un résultat tabulaire conforme à la logique “tidyverse”.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="résumer-linformation-par-des-métriques.html#cb16-1" aria-hidden="true" tabindex="-1"></a>mixr<span class="sc">::</span><span class="fu">tidy_specificities</span>(tib_mots_nonvides,lemma, doc)</span></code></pre></div>
-<pre><code>## # A tibble: 144 × 4
-##    lemma         doc                           spec     n
-##    &lt;chr&gt;         &lt;chr&gt;                        &lt;dbl&gt; &lt;int&gt;
-##  1 &quot;thon       &quot; &quot;data/blog_de_jean-marc.htm&quot; 1.87     NA
-##  2 &quot;cochon     &quot; &quot;data/blog_de_ginette.htm  &quot; 1.16     NA
-##  3 &quot;danser     &quot; &quot;data/blog_de_norbert.htm  &quot; 0.744    NA
-##  4 &quot;gaiement   &quot; &quot;data/blog_de_jean-marc.htm&quot; 0.724    NA
-##  5 &quot;préférer   &quot; &quot;data/blog_de_jean-marc.htm&quot; 0.724    NA
-##  6 &quot;poule      &quot; &quot;data/blog_de_ginette.htm  &quot; 0.706    NA
-##  7 &quot;aimer      &quot; &quot;data/blog_de_norbert.htm  &quot; 0.562    NA
-##  8 &quot;bec        &quot; &quot;data/blog_de_norbert.htm  &quot; 0.562    NA
-##  9 &quot;cancaner   &quot; &quot;data/blog_de_norbert.htm  &quot; 0.562    NA
-## 10 &quot;claquer    &quot; &quot;data/blog_de_norbert.htm  &quot; 0.562    NA
-## # … with 134 more rows</code></pre>
+<div id="tf-idf" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> TF-IDF<a href="résumer-linformation-par-des-métriques.html#tf-idf" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le <span class="math inline">\(TF-IDF\)</span> (pour “<strong>t</strong>erm <strong>f</strong>requency-<strong>i</strong>nverse <strong>d</strong>ocument <strong>f</strong>requency”) est une métrique qui reflète l’importance relative d’un mot dans un document.</p>
+<ul>
+<li>TF{d,w} est la fréquence (ou nombre d’occurrences) du terme <span class="math inline">\(w\)</span> dans le document <span class="math inline">\(d\)</span>. Elle mesure l’importance du terme dans le document.</li>
+<li>IDF{d,w} est la fréquence inverse de document. Elle mesure l’importance du terme dans le corpus. Elle se calcule comme suit, où <span class="math inline">\(D\)</span> est le nombre total de documents et <span class="math inline">\(\{d_j: w_i \in d_j\}\)</span> est le nombre de documents qui contiennent le terme <span class="math inline">\(w_i\)</span>:</li>
+</ul>
+<p><span class="math display">\[ IDF_{w}=log\left(\frac{D}{\{d_j: w_i \in d_j\}}\right)\]</span>
+Le <span class="math inline">\(TF-IDF\)</span> se calcule comme le produit <span class="math inline">\(TF*IDF\)</span>. La multiplication par <span class="math inline">\(IDF\)</span> sert notamment à minimiser la valeur de <span class="math inline">\(TF-IDF\)</span> pour les termes les plus fréquents, qu’on suppose peu discriminants.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="résumer-linformation-par-des-métriques.html#cb16-1" aria-hidden="true" tabindex="-1"></a>tib_tfidf <span class="ot">&lt;-</span> tib_lemmes <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="résumer-linformation-par-des-métriques.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(doc,lemma) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="résumer-linformation-par-des-métriques.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_tf_idf</span>(lemma,doc,n) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="résumer-linformation-par-des-métriques.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf))</span>
+<span id="cb16-5"><a href="résumer-linformation-par-des-métriques.html#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="résumer-linformation-par-des-métriques.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tib_tfidf, <span class="at">n=</span><span class="dv">15</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 6
+##    doc     lemma              n    tf   idf tf_idf
+##    &lt;chr&gt;   &lt;chr&gt;          &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 doc2162 ficher             1 0.5    5.19  2.59 
+##  2 doc2000 french             1 0.5    4.20  2.10 
+##  3 doc2162 télécharger        1 0.5    4.20  2.10 
+##  4 doc2574 télécharger        1 0.5    4.20  2.10 
+##  5 doc2237 gille              1 0.333  5.32  1.77 
+##  6 doc2574 consulter          1 0.5    3.22  1.61 
+##  7 doc2660 transformation     1 0.5    2.51  1.26 
+##  8 doc874  traversier         4 0.154  7.96  1.22 
+##  9 doc2558 joint              1 0.2    5.48  1.10 
+## 10 doc1356 mirepoix           4 0.154  6.86  1.06 
+## 11 doc324  décryptage         1 0.143  7.27  1.04 
+## 12 doc2237 député             1 0.333  3.06  1.02 
+## 13 doc2710 pack               1 0.125  7.27  0.909
+## 14 doc2558 pièce              1 0.2    4.53  0.905
+## 15 doc443  américain          1 0.167  5.40  0.899</code></pre>
+</div>
+<div id="spécificités" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Spécificités<a href="résumer-linformation-par-des-métriques.html#spécificités" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le package <code>textometry</code> (réalisé par l’équipe TXM) comprend une fonction qui permet de calculer des scores de spécificité. Le but de ce score est (comme pour le TF-IDF) d’<strong>identifier les termes spécifiques à une partie du corpus</strong>. Pour plus de compatibilité avec le tidyverse on peut utiliser la fonction <code>tidy_specificities()</code> qui reformatte la sortie de cette fonction pour renvoyer un résultat tabulaire conforme à la logique “tidyverse”.</p>
+<p>Par convention, on interprète un terme comme étant spécifique à une partie du corpus quand son <strong>score est supérieur à 2</strong>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="résumer-linformation-par-des-métriques.html#cb18-1" aria-hidden="true" tabindex="-1"></a>mixr<span class="sc">::</span><span class="fu">tidy_specificities</span>(tib_lemmes,lemma, doc)</span></code></pre></div>
+<pre><code>## # A tibble: 24,243,204 × 4
+##    lemma                  doc        spec     n
+##    &lt;chr&gt;                  &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;
+##  1 &quot;communauté          &quot; &quot;doc1804&quot;  91.8    NA
+##  2 &quot;éviter              &quot; &quot;doc1574&quot;  73.5    NA
+##  3 &quot;fashion             &quot; &quot;doc1560&quot;  71.8    NA
+##  4 &quot;éviter              &quot; &quot;doc337 &quot;  64.1    NA
+##  5 &quot;allocataire         &quot; &quot;doc356 &quot;  62.3    NA
+##  6 &quot;éviter              &quot; &quot;doc327 &quot;  60.8    NA
+##  7 &quot;heure               &quot; &quot;doc2901&quot;  60.2    NA
+##  8 &quot;sol                 &quot; &quot;doc73  &quot;  59.6    NA
+##  9 &quot;commun              &quot; &quot;doc1804&quot;  58.9    NA
+## 10 &quot;chantilly           &quot; &quot;doc257 &quot;  58.9    NA
+## # … with 24,243,194 more rows</code></pre>
 
 </div>
 </div>
@@ -470,7 +516,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

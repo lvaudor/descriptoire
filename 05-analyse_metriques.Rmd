@@ -7,9 +7,9 @@ Pour réaliser ces quelques transformations on peut généralement utiliser les 
 Ici, on repart du tableau suivant
 
 ```{r}
-tib_mots_nonvides <- read_csv("data/tib_mots_nonvides.csv") %>% 
+tib_lemmes <- read_csv2("data/ministereco_tib_lemmes.csv") %>% 
   na.omit()
-head(tib_mots_nonvides)
+head(tib_lemmes)
 ```
 
 On pourrait être amené à
@@ -23,27 +23,27 @@ On pourrait être amené à
 
 
 ```{r freqmots}
-freq_mots <- tib_mots_nonvides %>%
+freq_lemmes <- tib_lemmes %>%
   group_by(lemma) %>% 
   summarise(freq=n()) %>% 
   arrange(desc(freq)) %>% 
   na.omit()
-head(freq_mots)
+head(freq_lemmes)
 ```
 
 Ici, je n'en ai pas besoin (mon jeu de données est tout petit) mais je pourrais également filtrer les données pour ne garder qu'une fréquence minimale, ou ne garder que les $n$ mots les plus fréquents...
 
 ```{r}
-freq_mots %>%
+freq_lemmes %>%
   filter(freq>=5)
 
-freq_mots %>% top_n(3,freq)
+freq_lemmes %>% top_n(3,freq)
 ```
 
 Pour faciliter ce processus que l'on est amené à réaliser fréquemment pour analyser des données textuelles, j'ai créé une fonction tidy_frequencies (package `mixr`) qui regroupe l'ensemble des étapes: 
 
 ```{r}
-mixr::tidy_frequencies(tib_mots_nonvides,lemma,top_freq=10)
+mixr::tidy_frequencies(tib_lemmes,lemma,top_freq=10)
 ```
 
 
@@ -53,8 +53,8 @@ Si l'on s'intéresse non plus seulement à la fréquence individuelle des termes
 
 ```{r coocurrences}
 library(widyr)
-mots_cooc <- tib_mots_nonvides %>%
-  pairwise_count(lemma,feature=auteur,sort=TRUE) 
+mots_cooc <- tib_lemmes %>%
+  pairwise_count(lemma,feature=doc,sort=TRUE) 
 
 head(mots_cooc)
 ```
@@ -118,7 +118,7 @@ Le package `textometry` (réalisé par l'équipe TXM) comprend une fonction qui 
 Par convention, on interprète un terme comme étant spécifique à une partie du corpus quand son **score est supérieur à 2**.
 
 ```{r}
-mixr::tidy_specificities(tib_mots_nonvides,lemma, doc)
+mixr::tidy_specificities(tib_lemmes,lemma, doc)
 ```
 
 
