@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 3 Langage naturel | Le Descriptoire: Recueil et analyse de texte avec R </title>
+  <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 3 Langage naturel | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 3 Langage naturel | Le Descriptoire: Recueil et analyse de texte avec R " />
+  
+  <meta name="twitter:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+<meta name="author" content=" Lise Vaudor" />
+
+
+<meta name="date" content="2022-12-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="strings.html"/>
+<link rel="next" href="résumer-linformation-par-des-métriques.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> le Descriptoire </a></li>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128646266-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128646266-2');
+  </script>
+
+<li class="divider"></li>
+<li><a href="extraction-de-données-textuelles.html#extraction-de-données-textuelles" id="toc-extraction-de-données-textuelles"><span class="toc-section-number">1</span> Extraction de données textuelles</a>
+<ul>
+<li><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping" id="toc-depuis-des-pages-web-web-scraping"><span class="toc-section-number">1.1</span> Depuis des pages web: web-scraping</a>
+<ul>
+<li><a href="extraction-de-données-textuelles.html#langage-html" id="toc-langage-html"><span class="toc-section-number">1.1.1</span> Langage html</a></li>
+<li><a href="extraction-de-données-textuelles.html#lire-une-page-html" id="toc-lire-une-page-html"><span class="toc-section-number">1.1.2</span> Lire une page html</a></li>
+<li><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html" id="toc-extraire-certains-éléments-dune-page-html"><span class="toc-section-number">1.1.3</span> Extraire certains éléments d’une page html</a></li>
+<li><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction" id="toc-passage-au-format-rectangulaire-et-mise-en-fonction"><span class="toc-section-number">1.1.4</span> Passage au format rectangulaire, et mise en fonction</a></li>
+<li><a href="extraction-de-données-textuelles.html#itération" id="toc-itération"><span class="toc-section-number">1.1.5</span> Itération</a></li>
+</ul></li>
+<li><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation" id="toc-depuis-des-images-ou-des-documents-pdf-ocrisation"><span class="toc-section-number">1.2</span> Depuis des images ou des documents pdf: OCRisation</a>
+<ul>
+<li><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract" id="toc-utilisation-du-package-tesseract"><span class="toc-section-number">1.2.1</span> Utilisation du package <code>tesseract</code></a></li>
+<li><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf" id="toc-et-pour-ocriser-depuis-un-pdf"><span class="toc-section-number">1.2.2</span> Et pour OCRiser depuis un pdf??</a></li>
+</ul></li>
+<li><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription" id="toc-depuis-des-enregistrements-audio-transcription"><span class="toc-section-number">1.3</span> Depuis des enregistrements audio: transcription</a>
+<ul>
+<li><a href="extraction-de-données-textuelles.html#présentation-de-lexemple" id="toc-présentation-de-lexemple"><span class="toc-section-number">1.3.1</span> Présentation de l’exemple</a></li>
+<li><a href="extraction-de-données-textuelles.html#prétraitements-éventuels" id="toc-prétraitements-éventuels"><span class="toc-section-number">1.3.2</span> Prétraitements éventuels</a></li>
+<li><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager" id="toc-api-speech-to-text-google-package-googlelanguager"><span class="toc-section-number">1.3.3</span> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
+<li><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm" id="toc-api-watson-speech-to-text-dibm"><span class="toc-section-number">1.3.4</span> API Watson Speech-to-text d’IBM</a></li>
+</ul></li>
+</ul></li>
+<li><a href="strings.html#strings" id="toc-strings"><span class="toc-section-number">2</span> Manipuler des strings: package stringr</a>
+<ul>
+<li><a href="strings.html#strings-1" id="toc-strings-1"><span class="toc-section-number">2.1</span> Strings</a>
+<ul>
+<li><a href="strings.html#détection-remplacement" id="toc-détection-remplacement"><span class="toc-section-number">2.1.1</span> détection, remplacement</a></li>
+<li><a href="strings.html#division-correspondance" id="toc-division-correspondance"><span class="toc-section-number">2.1.2</span> division, correspondance</a></li>
+<li><a href="strings.html#extraction" id="toc-extraction"><span class="toc-section-number">2.1.3</span> extraction</a></li>
+<li><a href="strings.html#comptage-subset" id="toc-comptage-subset"><span class="toc-section-number">2.1.4</span> comptage, subset</a></li>
+<li><a href="strings.html#longueur-sous-partie" id="toc-longueur-sous-partie"><span class="toc-section-number">2.1.5</span> longueur, sous-partie</a></li>
+</ul></li>
+<li><a href="strings.html#expressions-régulières" id="toc-expressions-régulières"><span class="toc-section-number">2.2</span> Expressions régulières</a>
+<ul>
+<li><a href="strings.html#classes-de-caractères-et-groupes" id="toc-classes-de-caractères-et-groupes"><span class="toc-section-number">2.2.1</span> classes de caractères et groupes</a></li>
+<li><a href="strings.html#caractères-spéciaux" id="toc-caractères-spéciaux"><span class="toc-section-number">2.2.2</span> caractères spéciaux</a></li>
+<li><a href="strings.html#caractères-exclus-gammes-de-caractères" id="toc-caractères-exclus-gammes-de-caractères"><span class="toc-section-number">2.2.3</span> caractères exclus, gammes de caractères</a></li>
+<li><a href="strings.html#classes-prédéfinies" id="toc-classes-prédéfinies"><span class="toc-section-number">2.2.4</span> classes prédéfinies</a></li>
+<li><a href="strings.html#quelques-exemples-pour-bien-comprendre" id="toc-quelques-exemples-pour-bien-comprendre"><span class="toc-section-number">2.2.5</span> quelques exemples pour bien comprendre</a></li>
+<li><a href="strings.html#groupes-et-références-arrières" id="toc-groupes-et-références-arrières"><span class="toc-section-number">2.2.6</span> groupes et références arrières</a></li>
+<li><a href="strings.html#quantificateurs" id="toc-quantificateurs"><span class="toc-section-number">2.2.7</span> quantificateurs</a></li>
+<li><a href="strings.html#ancres-et-assertions-avant-arrière" id="toc-ancres-et-assertions-avant-arrière"><span class="toc-section-number">2.2.8</span> ancres et assertions avant-arrière</a></li>
+<li><a href="strings.html#assertions-avant-arrière" id="toc-assertions-avant-arrière"><span class="toc-section-number">2.2.9</span> assertions avant-arrière</a></li>
+</ul></li>
+</ul></li>
+<li><a href="langage-naturel.html#langage-naturel" id="toc-langage-naturel"><span class="toc-section-number">3</span> Langage naturel</a>
+<ul>
+<li><a href="langage-naturel.html#tokenization" id="toc-tokenization"><span class="toc-section-number">3.1</span> Tokenization</a></li>
+<li><a href="langage-naturel.html#nettoyage-de-la-table" id="toc-nettoyage-de-la-table"><span class="toc-section-number">3.2</span> Nettoyage de la table</a>
+<ul>
+<li><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides" id="toc-nettoyage-de-la-table-par-suppression-des-mots-vides"><span class="toc-section-number">3.2.1</span> Nettoyage de la table par suppression des mots vides</a></li>
+<li><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming" id="toc-nettoyage-de-la-table-par-racinisation-stemming"><span class="toc-section-number">3.2.2</span> Nettoyage de la table par racinisation (stemming)</a></li>
+<li><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation" id="toc-nettoyage-de-la-table-par-lemmatisation"><span class="toc-section-number">3.2.3</span> Nettoyage de la table par lemmatisation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="résumer-linformation-par-des-métriques.html#résumer-linformation-par-des-métriques" id="toc-résumer-linformation-par-des-métriques"><span class="toc-section-number">4</span> Résumer l’information par des métriques</a>
+<ul>
+<li><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence" id="toc-fréquences-doccurrence"><span class="toc-section-number">4.1</span> Fréquences d’occurrence</a></li>
+<li><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations" id="toc-co-occurrences-corrélations"><span class="toc-section-number">4.2</span> Co-occurrences, corrélations</a></li>
+<li><a href="résumer-linformation-par-des-métriques.html#tf-idf" id="toc-tf-idf"><span class="toc-section-number">4.3</span> TF-IDF</a></li>
+<li><a href="résumer-linformation-par-des-métriques.html#spécificités" id="toc-spécificités"><span class="toc-section-number">4.4</span> Spécificités</a></li>
+</ul></li>
+<li><a href="résumer-linformation-par-des-graphiques.html#résumer-linformation-par-des-graphiques" id="toc-résumer-linformation-par-des-graphiques"><span class="toc-section-number">5</span> Résumer l’information par des graphiques</a>
+<ul>
+<li><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots" id="toc-nuage-de-mots"><span class="toc-section-number">5.1</span> Nuage de mots</a></li>
+<li><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités" id="toc-diagramme-en-bâtons-occurrences-spécificités"><span class="toc-section-number">5.2</span> Diagramme en bâtons: occurrences, spécificités</a></li>
+<li><a href="résumer-linformation-par-des-graphiques.html#graphes" id="toc-graphes"><span class="toc-section-number">5.3</span> Graphes</a></li>
+</ul></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#rechercher-des-thèmes-topic-modelling" id="toc-rechercher-des-thèmes-topic-modelling"><span class="toc-section-number">6</span> Rechercher des thèmes (topic modelling)</a>
+<ul>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations" id="toc-principe-notations"><span class="toc-section-number">6.1</span> Principe, notations</a></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta" id="toc-scores-beta-beta"><span class="toc-section-number">6.2</span> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#frex" id="toc-frex"><span class="toc-section-number">6.3</span> FREX</a></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm" id="toc-étapes-du-stm"><span class="toc-section-number">6.4</span> étapes du STM</a></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#communiqués-de-presse-du-ministère-de-lécologie" id="toc-communiqués-de-presse-du-ministère-de-lécologie"><span class="toc-section-number">6.5</span> Communiqués de presse du ministère de l’écologie</a>
+<ul>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme" id="toc-mise-en-forme"><span class="toc-section-number">6.5.1</span> Mise en forme</a></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle" id="toc-calcul-du-modèle"><span class="toc-section-number">6.5.2</span> Calcul du modèle</a></li>
+</ul></li>
+<li><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents" id="toc-assignation-dun-thème-aux-documents"><span class="toc-section-number">6.6</span> Assignation d’un thème aux documents</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Le Descriptoire:
+Recueil et analyse de texte avec R </img></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="langage-naturel" class="section level1" number="3">
+<h1><span class="header-section-number">Chapitre 3</span> Langage naturel</h1>
+<p>Reprenons pour cette partie la <strong>table des commentaires</strong> du blog fictif “Ma vie à la ferme” (présenté dans le chapitre 2). Cette table est accessible depuis <a href="https://perso.ens-lyon.fr/lise.vaudor/Descriptoire/data/tibtot_commentaires.csv">cette adresse</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="langage-naturel.html#cb1-1" aria-hidden="true" tabindex="-1"></a>tibtot_commentaires <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;data/tibtot_commentaires.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="langage-naturel.html#cb1-2" aria-hidden="true" tabindex="-1"></a>tibtot_commentaires</span></code></pre></div>
+<pre><code>## # A tibble: 12 × 3
+##    doc                        texte                                       auteur
+##    &lt;chr&gt;                      &lt;chr&gt;                                       &lt;chr&gt; 
+##  1 data/blog_de_ginette.htm   Et pour une poule sur un mur qui picoterai… Emma,…
+##  2 data/blog_de_ginette.htm   Je vois que vous êtes, telle la petite pou… Miche…
+##  3 data/blog_de_jean-marc.htm Les thons, avec un t comme crocodile? ou l… Eddie…
+##  4 data/blog_de_jean-marc.htm Pourquoi ces thons ne préféraient-ils pas … Yves,…
+##  5 data/blog_de_jean-marc.htm Tout ça me fait penser au blog de Ginette … Rober…
+##  6 data/blog_de_jean-marc.htm Je préfère la chanson qui parle de canards… Eduar…
+##  7 data/blog_de_jean-marc.htm On ne comprend pas trop cette passion pour… Lise,…
+##  8 data/blog_de_jean-marc.htm Et pendant ce temps-là, le roi des thons, … Nadia…
+##  9 data/blog_de_norbert.htm   A quel moment faut-il claquer du bec, si l… Jonas…
+## 10 data/blog_de_norbert.htm   Norbert, mon petit chat, ça fait bien long… Julie…
+## 11 data/blog_de_norbert.htm   L&#39;ambiance doit être sympa quand les poule… Micka…
+## 12 data/blog_de_norbert.htm   Vous devez avoir un grain pour écrire des … Vivia…</code></pre>
+<div id="tokenization" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Tokenization</h2>
+<p><img src="images/step3_process.png" /></p>
+<p>On va maintenant passer à l’étape de <strong>tokenisation</strong> de nos textes.</p>
+<p>Tokeniser, ça revient à définir de quelle manière on <strong>découpe nos textes</strong> pour les analyses ultérieures.</p>
+<p>Par exemple, on peut décider que l’unité d’analyse (l’individu) pour nos analyses textuelles seront un des éléments suivants:</p>
+<ul>
+<li>la <strong>phrase</strong></li>
+<li>le <strong>n-gram</strong></li>
+<li>le <strong>mot</strong></li>
+<li>etc.</li>
+</ul>
+<p>Pour réaliser cette tokenisation nous allons utiliser le package <code>tidytext</code>
+<img src='images/logo_tidytext.png' width='50'> et notamment sa fonction <code>unnest_tokens()</code>.</p>
+<p><img src="images/step3_process.png" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="langage-naturel.html#cb3-1" aria-hidden="true" tabindex="-1"></a>tibtot_commentaires <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="langage-naturel.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  tidytext<span class="sc">::</span><span class="fu">unnest_tokens</span>(<span class="at">output=</span><span class="st">&quot;bigramme&quot;</span>,</span>
+<span id="cb3-3"><a href="langage-naturel.html#cb3-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">input=</span>texte,</span>
+<span id="cb3-4"><a href="langage-naturel.html#cb3-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">token=</span><span class="st">&quot;ngrams&quot;</span>,</span>
+<span id="cb3-5"><a href="langage-naturel.html#cb3-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n=</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 207 × 3
+##    doc                      auteur                bigramme      
+##    &lt;chr&gt;                    &lt;chr&gt;                 &lt;chr&gt;         
+##  1 data/blog_de_ginette.htm Emma, 22 ans, Limoges et pour       
+##  2 data/blog_de_ginette.htm Emma, 22 ans, Limoges pour une      
+##  3 data/blog_de_ginette.htm Emma, 22 ans, Limoges une poule     
+##  4 data/blog_de_ginette.htm Emma, 22 ans, Limoges poule sur     
+##  5 data/blog_de_ginette.htm Emma, 22 ans, Limoges sur un        
+##  6 data/blog_de_ginette.htm Emma, 22 ans, Limoges un mur        
+##  7 data/blog_de_ginette.htm Emma, 22 ans, Limoges mur qui       
+##  8 data/blog_de_ginette.htm Emma, 22 ans, Limoges qui picoterait
+##  9 data/blog_de_ginette.htm Emma, 22 ans, Limoges picoterait du 
+## 10 data/blog_de_ginette.htm Emma, 22 ans, Limoges du pain       
+## # … with 197 more rows</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="langage-naturel.html#cb5-1" aria-hidden="true" tabindex="-1"></a>tib_mots<span class="ot">=</span>tibtot_commentaires <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="langage-naturel.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  tidytext<span class="sc">::</span><span class="fu">unnest_tokens</span>(<span class="at">output=</span><span class="st">&quot;mot&quot;</span>,</span>
+<span id="cb5-3"><a href="langage-naturel.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">input=</span>texte,</span>
+<span id="cb5-4"><a href="langage-naturel.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">token=</span><span class="st">&quot;words&quot;</span>)</span>
+<span id="cb5-5"><a href="langage-naturel.html#cb5-5" aria-hidden="true" tabindex="-1"></a>tib_mots</span></code></pre></div>
+<pre><code>## # A tibble: 219 × 3
+##    doc                      auteur                mot       
+##    &lt;chr&gt;                    &lt;chr&gt;                 &lt;chr&gt;     
+##  1 data/blog_de_ginette.htm Emma, 22 ans, Limoges et        
+##  2 data/blog_de_ginette.htm Emma, 22 ans, Limoges pour      
+##  3 data/blog_de_ginette.htm Emma, 22 ans, Limoges une       
+##  4 data/blog_de_ginette.htm Emma, 22 ans, Limoges poule     
+##  5 data/blog_de_ginette.htm Emma, 22 ans, Limoges sur       
+##  6 data/blog_de_ginette.htm Emma, 22 ans, Limoges un        
+##  7 data/blog_de_ginette.htm Emma, 22 ans, Limoges mur       
+##  8 data/blog_de_ginette.htm Emma, 22 ans, Limoges qui       
+##  9 data/blog_de_ginette.htm Emma, 22 ans, Limoges picoterait
+## 10 data/blog_de_ginette.htm Emma, 22 ans, Limoges du        
+## # … with 209 more rows</code></pre>
+</div>
+<div id="nettoyage-de-la-table" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Nettoyage de la table</h2>
+<p><img src="images/step4_process.png" /></p>
+<ul>
+<li>retirer les <strong>mots vides</strong></li>
+<li>extraire la <strong>racine</strong> des mots ou le <strong>lemme</strong> (<strong>stemming</strong>, <strong>lemmatisation</strong>)</li>
+<li>retirer la <strong>ponctuation</strong></li>
+<li>retirer certains <strong>mots</strong> ou <strong>expressions</strong></li>
+<li>changer la <strong>casse</strong> (passer majuscules en minuscules)</li>
+<li>retirer les liens, les “hashtags”, les emojis, etc.</li>
+<li>etc.</li>
+</ul>
+<div id="nettoyage-de-la-table-par-suppression-des-mots-vides" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Nettoyage de la table par suppression des mots vides</h3>
+<p>Pour des textes en anglais, <code>tidytext</code> comprend une liste de <strong>mots vides</strong> (“stopwords”)</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="langage-naturel.html#cb7-1" aria-hidden="true" tabindex="-1"></a>tidytext<span class="sc">::</span>stop_words</span></code></pre></div>
+<pre><code>## # A tibble: 1,149 × 2
+##    word        lexicon
+##    &lt;chr&gt;       &lt;chr&gt;  
+##  1 a           SMART  
+##  2 a&#39;s         SMART  
+##  3 able        SMART  
+##  4 about       SMART  
+##  5 above       SMART  
+##  6 according   SMART  
+##  7 accordingly SMART  
+##  8 across      SMART  
+##  9 actually    SMART  
+## 10 after       SMART  
+## # … with 1,139 more rows</code></pre>
+<p>Pour un texte en français, on peut avoir recours au package <code>proustr</code><img src='images/logo_proustr.png' width='50'> <a href="http://proustr.colinfay.me/">lien ici</a></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="langage-naturel.html#cb9-1" aria-hidden="true" tabindex="-1"></a>proustr<span class="sc">::</span><span class="fu">proust_stopwords</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 689 × 1
+##    word      
+##    &lt;chr&gt;     
+##  1 a         
+##  2 abord     
+##  3 absolument
+##  4 afin      
+##  5 ah        
+##  6 ai        
+##  7 aie       
+##  8 aient     
+##  9 aies      
+## 10 ailleurs  
+## # … with 679 more rows</code></pre>
+<p>Pour ne garder <strong>que les mots signifiants</strong>, on peut ainsi faire une anti-jointure entre notre table et la table renvoyée par <code>proust_stopwords()</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="langage-naturel.html#cb11-1" aria-hidden="true" tabindex="-1"></a>tib_mots_nonvides <span class="ot">&lt;-</span> tib_mots <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="langage-naturel.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(proustr<span class="sc">::</span><span class="fu">proust_stopwords</span>(),<span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;mot&quot;</span><span class="ot">=</span><span class="st">&quot;word&quot;</span>))</span>
+<span id="cb11-3"><a href="langage-naturel.html#cb11-3" aria-hidden="true" tabindex="-1"></a>tib_mots_nonvides</span></code></pre></div>
+<pre><code>## # A tibble: 88 × 3
+##    doc                      auteur                mot       
+##    &lt;chr&gt;                    &lt;chr&gt;                 &lt;chr&gt;     
+##  1 data/blog_de_ginette.htm Emma, 22 ans, Limoges poule     
+##  2 data/blog_de_ginette.htm Emma, 22 ans, Limoges mur       
+##  3 data/blog_de_ginette.htm Emma, 22 ans, Limoges picoterait
+##  4 data/blog_de_ginette.htm Emma, 22 ans, Limoges pain      
+##  5 data/blog_de_ginette.htm Emma, 22 ans, Limoges dur       
+##  6 data/blog_de_ginette.htm Emma, 22 ans, Limoges c&#39;est     
+##  7 data/blog_de_ginette.htm Emma, 22 ans, Limoges nourrir   
+##  8 data/blog_de_ginette.htm Emma, 22 ans, Limoges petits    
+##  9 data/blog_de_ginette.htm Emma, 22 ans, Limoges cochons   
+## 10 data/blog_de_ginette.htm Emma, 22 ans, Limoges qu&#39;en     
+## # … with 78 more rows</code></pre>
+</div>
+<div id="nettoyage-de-la-table-par-racinisation-stemming" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Nettoyage de la table par racinisation (stemming)</h3>
+<p>La <strong>racinisation</strong> (ou désuffixation, ou stemming en anglais) consiste (comme son nom l’indique) à extraire la racine d’un mot. Souvent, cette racine ne correspond pas à un “vrai mot”…</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="langage-naturel.html#cb13-1" aria-hidden="true" tabindex="-1"></a>proustr<span class="sc">::</span><span class="fu">pr_stem_words</span>(tib_mots_nonvides,mot)</span></code></pre></div>
+<pre><code>## # A tibble: 88 × 3
+##    doc                      auteur                mot   
+##  * &lt;chr&gt;                    &lt;chr&gt;                 &lt;chr&gt; 
+##  1 data/blog_de_ginette.htm Emma, 22 ans, Limoges poul  
+##  2 data/blog_de_ginette.htm Emma, 22 ans, Limoges mur   
+##  3 data/blog_de_ginette.htm Emma, 22 ans, Limoges picot 
+##  4 data/blog_de_ginette.htm Emma, 22 ans, Limoges pain  
+##  5 data/blog_de_ginette.htm Emma, 22 ans, Limoges dur   
+##  6 data/blog_de_ginette.htm Emma, 22 ans, Limoges c&#39;est 
+##  7 data/blog_de_ginette.htm Emma, 22 ans, Limoges nourr 
+##  8 data/blog_de_ginette.htm Emma, 22 ans, Limoges petit 
+##  9 data/blog_de_ginette.htm Emma, 22 ans, Limoges cochon
+## 10 data/blog_de_ginette.htm Emma, 22 ans, Limoges qu&#39;en 
+## # … with 78 more rows</code></pre>
+</div>
+<div id="nettoyage-de-la-table-par-lemmatisation" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Nettoyage de la table par lemmatisation</h3>
+<p>La <strong>lemmatisation</strong> consiste faire correspondre à un mot (ou <strong>forme</strong>) la forme neutre (ou <strong>lemme</strong>) que ce mot aurait par exemple par défaut dans un dictionnaire.</p>
+<p>Il est possible de lemmatiser en utilisant l’outil <a href="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/">TreeTagger</a> (gratuit, mais propriétaire). Cet outil est utilisable dans R via le package <code>koRpus</code> <a href="https://cran.r-project.org/web/packages/koRpus/vignettes/koRpus_vignette.pdf">vignette ici</a></p>
+<p>Pour ma part, je lemmatise la plupart du temps en me basant sur une base de données lexicales libre, <a href="http://www.lexique.org/telLexique.php">Lexique</a> qui fait correspondre formes et lemmes de très nombreux mots en français. J’ai réalisé une simple jointure, sans considération <em>syntaxique</em>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="langage-naturel.html#cb15-1" aria-hidden="true" tabindex="-1"></a>lexique382<span class="ot">=</span>mixr<span class="sc">::</span><span class="fu">get_lexicon</span>(<span class="st">&quot;fr&quot;</span>)</span>
+<span id="cb15-2"><a href="langage-naturel.html#cb15-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">sample_n</span>(lexique382,<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 3
+##    word        lemma       type   
+##    &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;  
+##  1 automotrice automoteur  adj    
+##  2 castard     castard     nom    
+##  3 sous_jacent sous_jacent adj    
+##  4 traînasses  traînasser  ver    
+##  5 faux_fuyant faux_fuyant nom    
+##  6 raclais     racler      ver    
+##  7 gigot       gigot       nom    
+##  8 permanenter permanenter ver    
+##  9 trempai     tremper     ver    
+## 10 outres      outre       nom_sup</code></pre>
+<p>Dans ce cas on réalise une <strong>jointure</strong> pour récupérer le lemme de chaque mot dans notre table:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="langage-naturel.html#cb17-1" aria-hidden="true" tabindex="-1"></a>tib_mots_nonvides <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(tib_mots_nonvides,</span>
+<span id="cb17-2"><a href="langage-naturel.html#cb17-2" aria-hidden="true" tabindex="-1"></a>                                      lexique382,</span>
+<span id="cb17-3"><a href="langage-naturel.html#cb17-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;mot&quot;</span><span class="ot">=</span><span class="st">&quot;word&quot;</span>))</span>
+<span id="cb17-4"><a href="langage-naturel.html#cb17-4" aria-hidden="true" tabindex="-1"></a>tib_mots_nonvides <span class="sc">%&gt;%</span> </span>
+<span id="cb17-5"><a href="langage-naturel.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mot,lemma)</span></code></pre></div>
+<pre><code>## # A tibble: 88 × 2
+##    mot        lemma  
+##    &lt;chr&gt;      &lt;chr&gt;  
+##  1 poule      poule  
+##  2 mur        mur    
+##  3 picoterait &lt;NA&gt;   
+##  4 pain       pain   
+##  5 dur        dur    
+##  6 c&#39;est      &lt;NA&gt;   
+##  7 nourrir    nourrir
+##  8 petits     petit  
+##  9 cochons    cochon 
+## 10 qu&#39;en      &lt;NA&gt;   
+## # … with 78 more rows</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="strings.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="résumer-linformation-par-des-métriques.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/lvaudor/Descriptoire/edit/master/04-langnat.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
