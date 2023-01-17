@@ -74,10 +74,16 @@ tib_spec=read.csv2("data/tib_spec.csv")
 Nous allons ici repartir d'une table lexicale ne comprenant que les lemmes avec les plus hautes spécificités. Nous repartons pour cela de la table `tib_spec` calculée dans la partie \@ref(spec).
 
 ```{r tib_AFC}
-tib_spec=tib_spec %>% filter(spec>10)
-tib_spec_haute=tib_lemmes %>% 
-  filter(lemma %in% tib_spec$lemma )
-tib_lex=table(tib_spec_haute$lemma,tib_spec_haute$ministre)
+# lemmes hautement spécifiques d'une partie ou d'une autre
+lemmes_spec=tib_spec %>%
+  filter(spec>10) %>%
+  pull(lemma) %>%
+  unique()
+# table avec lemmes hautement spécifiques
+tib_hspec=tib_lemmes %>% 
+  filter(lemma %in% lemmes_spec)
+# table lexicale
+tib_lex=table(tib_hspec$lemma,tib_hspec$ministre)
 ```
 
 Nous allons utiliser le package `FactoMineR` pour réaliser l'analyse factorielle des correspondances et `factoextra` pour produire les graphiques associés.
@@ -97,6 +103,22 @@ fviz_screeplot(result_CA, addlabels = TRUE, ylim = c(0, 50))
 Ainsi en réduisant la dimensionalité à 2 axes on parvient tout de même à représenter 79% de l'information.
 
 
+```{r, fig.width=8,fig.height=8}
+fviz_ca_biplot(result_CA, repel=TRUE)
+```
+
+La lecture de ce graphique peut se faire de différentes manières:
+
+- en considérant l'**emplacement des termes et des parties par rapport aux axes**. L'axe des abscisses est le "plus structurant" dans le corpus (c'est celui qui explique la plus forte inertie du nuage de points), les termes et parties qui se projettent le plus loin sur l'axe sont ceux qui y contribuent le plus.
+
+- en considérant l'**emplacement des termes et parties les uns par rapport aux autres**: deux termes proches sont généralement corrélés l'un à l'autre, deux parties proches l'une de l'autre seront généralement plus proches du point de vue du vocabulaire employé, un terme sera généralement plus proche de la partie dont il est spécifique.
+
+Ainsi à l'examen du graphique ci-dessus, on peut avoir quelques indices quant au contenu des communiqués de presse les plus discriminants (en fonction du ministre en exercice). Probablement:
+
+- pour Barbara Pompili, des considérations en lien avec la problématique du logement ("loyer","locataire","bailleur","immobilier")
+- pour Nicolas Hulot, peut-être une préoccupation plus importante pour le transport notamment ferroviaire ("mobilité","cheminot") et une surreprésentation des bulletins automatiques Vigilance Crues
+- pour Elisabeth Borne, une mention plus fréquente des problématiques liées à l'énergie ("pétrolier","raffinerie","station","charbon") et peut-être un intérêt pour le problème de l'industrie textile et du phénomène de fast-fashion ("fashion").
+- pour François de Rugy, des préoccupations "à mi-chemin" entre celles de Nicolas Hulot et d'Elisabeth Borne
 
 ## Graphes
 
