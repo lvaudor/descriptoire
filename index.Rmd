@@ -31,6 +31,12 @@ library(mixr)
 
 # Introduction
 
+## Pourquoi travailler avec des textes sous R?
+
+La manipulation de **chaînes de caractère** sous R fait partie des opérations à mettre en oeuvre à des fins de **programmation**, par exemple pour **manipuler des noms de fichiers**, **nettoyer des données**, **récupérer de la donnée textuelle via du web-scraping**, etc.
+
+Quand il s'agit en plus de travailler sur des données textuelles correspondant à du langage naturel (langage parlé, oeuvres littéraires, tweets, articles de presse, documentation, etc.) certaines méthodes existent, qui permettent de mettre en forme et d'analyser des corpus de textes.
+
 ## Qu'est-ce que la textométrie?
 
 La **textométrie**, ou **analyse de données textuelles**, est une approche qui consiste à traiter un ensemble de textes (ou corpus) comme **un jeu de données que l'on peut analyser par des méthodes quantitatives**. Pour ce faire, elle utilise notamment des **modèles statistiques** qui permettent par exemple d'identifier des éléments du lexique particulièrement signifiants.

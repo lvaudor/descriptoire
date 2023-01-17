@@ -75,3 +75,5 @@ table-lexicale
 spécificités-spec
 afc
 spec
+pourquoi-travailler-avec-des-textes-sous-r
+analyse-factorielle-des-correspondances
