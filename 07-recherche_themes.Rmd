@@ -1,9 +1,29 @@
 # Rechercher des thèmes (topic modelling)
 
-```{r}
-knitr::opts_chunk$set(cache=TRUE)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 library(tidyverse)
+library(purrr)
+library(rvest)
 library(tidytext)
+library(proustr)
+library(stringr)
+library(widyr)
+library(mixr)
+freq_mots=readRDS("data/freq_mots.RDS")
+mots_cooc=readRDS("data/mots_cooc.RDS")
+tib_mots_nonvides=readRDS("data/tib_mots_nonvides.RDS")
+library(mixr)
+```
+
+
+```{r ministereco_data}
+freq_lemmes <- read.csv2("data/ministereco_freq_lemmes.csv")
+tib_lemmes <- read_csv2("data/ministereco_tib_lemmes.csv") %>% 
+  na.omit()
+tib_meta <- read_csv2("data/ministereco_tib_meta.csv")
+tib_lemmes <- left_join(tib_lemmes, tib_meta, by=c("doc"))
 ```
 
 La **recherche de thèmes** dans un corpus de textes (plus connu en tant que "topic modelling" en anglais) consiste à identifier un certain nombre de thématiques ou sujets sous-jacents, reflétés dans les textes par l'utilisation privilégiée de certains mots. En d'autres termes, les thèmes (ou topics) sont définis et désignés comme des **listes de mots**.
@@ -59,18 +79,6 @@ $$FREX_{k,v}=\left(\frac{w}{F}+\frac{1-w}{E}\right)^{-1}$$
     a. on l'associe à un thème $k$ en fonction de la distribution calculée à l'étape 1 
     b. en se basant sur ce thème $k$ on tire au hasard un mot à l'aide des valeurs $\beta_{k,v}$ 
 
-
-## Communiqués de presse du ministère de l'écologie
-
-Considérons la table suivante, qui résulte d'un travail de récupération, nettoyage, tokenisation, lemmatisation d'un ensemble de communiqués de presse du Ministère de la Transition écologique et de la Cohésion des territoires:
-
-```{r data_ministereco}
-tib_docs=readRDS("data/ministereco_tib_docs.RDS")
-tib_lemmes=readRDS("data/ministereco_tib_lemmes.RDS") %>% 
-  select(doc,date,lemma,ministre)
-
-head(tib_lemmes)
-```
 
 ### Mise en forme
 

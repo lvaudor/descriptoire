@@ -1,58 +1,109 @@
 # Résumer l'information par des graphiques
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+library(tidyverse)
+library(purrr)
+library(rvest)
+library(tidytext)
+library(proustr)
+library(stringr)
+library(widyr)
+library(mixr)
+freq_mots=readRDS("data/freq_mots.RDS")
+mots_cooc=readRDS("data/mots_cooc.RDS")
+tib_mots_nonvides=readRDS("data/tib_mots_nonvides.RDS")
+library(mixr)
+```
+
+```{r ministereco_data}
+freq_lemmes <- read.csv2("data/ministereco_freq_lemmes.csv")
+tib_lemmes <- read_csv2("data/ministereco_tib_lemmes.csv") %>% 
+  na.omit()
+tib_meta <- read_csv2("data/ministereco_tib_meta.csv")
+tib_lemmes <- left_join(tib_lemmes, tib_meta, by=c("doc"))
+```
+
 ## Nuage de mots
 
 Le **nuage de mots** constitue sans doute l'une des représentations les plus classiques pour ce genre de table lexicale...
 
-On le réalise ici avec le package `wordcloud` (et sa fonction `wordcloud()`)
+On le réalise ici avec le package `ggwordcloud` (et sa fonction `wordcloud()`)
 
-```{r}
-wordcloud::wordcloud(freq_mots$lemma,
-                     freq_mots$freq,
-                     min.freq=1)
+```{r ggwordcloud, fig.width=6, fig.heigh=4}
+freq_lemmes_top_100 <- freq_lemmes %>%
+  top_n(100,freq)
+
+library(ggwordcloud)
+ggplot(freq_lemmes_top_100, aes(label = lemma,size=freq, color=log10(freq))) +
+  geom_text_wordcloud() +
+  theme_minimal()+
+  scale_color_gradient(low = "red", high = "forestgreen")
 ```
 
 
 ## Diagramme en bâtons: occurrences, spécificités
 
 ```{r diag_batons, fig.width=5, fig.height=4}
-ggplot2::ggplot(dplyr::filter(freq_mots,freq>1),
+ggplot2::ggplot(dplyr::filter(freq_lemmes,freq>2000),
                 ggplot2::aes(x=forcats::fct_reorder(lemma,freq), y=freq)) +
   ggplot2::geom_bar(stat="identity", fill="skyblue")+
   ggplot2::coord_flip()
 ```
 
-```{r freq_mots}
-freq_mots <- tib_mots_nonvides %>%
-  dplyr::group_by(doc,lemma) %>% 
-  dplyr::summarise(freq=n()) %>% 
-  dplyr::arrange(desc(freq)) %>% 
-  na.omit()
-head(freq_mots)
-```
+
 
 ```{r plot_spec_1}
-df_spec <- mixr::tidy_specificities(tib_mots_nonvides,
-                                    lemma,
-                                    doc,
-                                    top_spec=10)
-mixr::plot_specificities(df_spec,lemma,doc)
+tib_top_spec <- mixr::tidy_specificities(tib_lemmes,
+                                         lemma,
+                                         ministre,
+                                         top_spec=10)
+mixr::plot_specificities(tib_top_spec,lemma,ministre)
 ```
 
-```{r plot_spec_2}
-df_spec <- mixr::tidy_specificities(tib_mots_nonvides,
-                                    lemma,
-                                    auteur,
-                                    top_spec=2)
-mixr::plot_specificities(df_spec,lemma,auteur)
+## Analyse factorielle des correspondances
+
+On peut tenter de **visualiser une table lexicale via une analyse factorielle des correspondances** (AFC).
+
+En effet, une table lexicale est assimilable à un **tableau des effectifs croisés de deux variables qualitatives**. L'AFC permet dans ce cas de figure d'obtenir une **représentation en quelques dimensions (idéalement, 2) d'un tableau qui en comprend $k$**. 
+
+```{r read_spec, echo=FALSE}
+tib_spec=read.csv2("data/tib_spec.csv")
 ```
+
+Nous allons ici repartir d'une table lexicale ne comprenant que les lemmes avec les plus hautes spécificités. Nous repartons pour cela de la table `tib_spec` calculée dans la partie \@ref(spec).
+
+```{r tib_AFC}
+tib_spec=tib_spec %>% filter(spec>10)
+tib_spec_haute=tib_lemmes %>% 
+  filter(lemma %in% tib_spec$lemma )
+tib_lex=table(tib_spec_haute$lemma,tib_spec_haute$ministre)
+```
+
+Nous allons utiliser le package `FactoMineR` pour réaliser l'analyse factorielle des correspondances et `factoextra` pour produire les graphiques associés.
+
+```{r AFC,fig.width=8, fig.height=8}
+library(FactoMineR)
+result_CA=CA(tib_lex, graph=FALSE)
+```
+
+Dans notre cas, on souhaite représenter 4 dimensions (le nombre de ministres) sur un graphique en 2D. Cette transformation correspond nécessairement à une perte d'information qui est quantifiée via les **eigenvalues** de l'AFC.
+
+```{r CA_eigen, fig.width=6, fig.height=5}
+library(factoextra)
+fviz_screeplot(result_CA, addlabels = TRUE, ylim = c(0, 50))
+```
+
+Ainsi en réduisant la dimensionalité à 2 axes on parvient tout de même à représenter 79% de l'information.
+
+
 
 ## Graphes
 
 On souhaite maintenant représenter les **relations entre les mots** par un graphe (le lien est défini par la **co-occurrence** des mots dans un même commentaire). On va pour ce faire créer un graphe à partir du tableau `mots_cooc`.
 
 ```{r table_to_graph}
-mots_graph <- igraph::graph_from_data_frame(mots_cooc)
+mots_graph <- igraph::graph_from_data_frame(mots_cooc %>% filter(correlation>0.2))
 class(mots_graph)
 ```
 

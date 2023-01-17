@@ -27,3 +27,26 @@ mots_cooc=readRDS("data/mots_cooc.RDS")
 tib_mots_nonvides=readRDS("data/tib_mots_nonvides.RDS")
 library(mixr)
 ```
+
+
+# Introduction
+
+## Qu'est-ce que la textométrie?
+
+La **textométrie**, ou **analyse de données textuelles**, est une approche qui consiste à traiter un ensemble de textes (ou corpus) comme **un jeu de données que l'on peut analyser par des méthodes quantitatives**. Pour ce faire, elle utilise notamment des **modèles statistiques** qui permettent par exemple d'identifier des éléments du lexique particulièrement signifiants.
+
+La textométrie est ainsi naturellement un outil privilégié des **sciences humaines et sociales** qui revêt dans ces disciplines une certaine originalité puisqu'elle regroupe notamment nombre de méthodologies et techniques **quantitatives**. 
+
+L'ancrage de la textométrie en sciences humaines et sociales **en France** est lié en partie à la force de l'école statistique française et à l'influence de certains chercheurs, précurseurs de ces méthodes comme [Jean-Paul Benzécri](https://fr.wikipedia.org/wiki/Jean-Paul_Benz%C3%A9cri). Le nombre et la richesse des **logiciels dédiés** développés par des laboratoires français (par exemple [Alceste](https://fr.wikipedia.org/wiki/Alceste_(logiciel)), [IRaMuTeQ](https://fr.wikipedia.org/wiki/Iramuteq_(logiciel)), [TXM](https://fr.wikipedia.org/wiki/TXM)),[AnalyseSHS](http://analyse.univ-paris1.fr/) témoigne de cet héritage. 
+
+## Pourquoi faire ses analyses textométriques sous R?
+
+R est un outil d'analyse de données extrêmement **polyvalent**. Il permet de réaliser des analyses statistiques, d'automatiser des traitements, de produire des graphiques, d'éditer des rapports et des présentations, etc. Il peut ainsi être intéressant de l'utiliser pour réaliser l'**ensemble des opérations d'analyse et valorisation de ses données** puisqu'en intégrant un maximum d'étapes de ce processus dans un même document de travail on permet une certaine **reproductibilité** des résultats. 
+
+Ainsi, pour des utilisateurs **familiarisés avec l'usage de R par lignes de commandes**, il peut être particulièrement intéressant de réaliser les analyses de texte **directement depuis R en passant par l'usage des lignes de commande**. En effet, les méthodes accessibles seront ainsi très variées et très flexibles, et l'analyse des textes pourra s'intégrer à des analyses de données d'une nature différente (par exemple données d'enquêtes, données physiques, cartes, etc.).
+
+Par ailleurs de nombreux logiciels de textométrie sont bâtis sur des méthodologies statistiques (qui constituent une des richesses du langage R): ils reposent de ce fait **pour tout ou partie sur le langage R**. IRaMuTeQ est ainsi une interface accessible depuis R, AnalyseSHS est une interface web produite à l'aide de R, TXM propose certaines analyses qui reposent sur le langage R, etc. Ils permettent ainsi à leurs utilisateurs de réaliser des analyses qui reposent sur le langage R sans avoir nécessairement à utiliser les **lignes de commande**.
+
+
+
+

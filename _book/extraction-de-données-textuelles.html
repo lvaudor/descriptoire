@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 2 Extraction de données textuelles | Le Descriptoire: Recueil et analyse de texte avec R </title>
+  <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 2 Extraction de données textuelles | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 2 Extraction de données textuelles | Le Descriptoire: Recueil et analyse de texte avec R " />
+  
+  <meta name="twitter:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+<meta name="author" content=" Lise Vaudor" />
+
+
+<meta name="date" content="2023-01-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="strings.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> le Descriptoire </a></li>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128646266-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128646266-2');
+  </script>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#quest-ce-que-la-textométrie"><i class="fa fa-check"></i><b>1.1</b> Qu’est-ce que la textométrie?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r"><i class="fa fa-check"></i><b>1.2</b> Pourquoi faire ses analyses textométriques sous R?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>2</b> Extraction de données textuelles</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping"><i class="fa fa-check"></i><b>2.1</b> Depuis des pages web: web-scraping</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#langage-html"><i class="fa fa-check"></i><b>2.1.1</b> Langage html</a></li>
+<li class="chapter" data-level="2.1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#lire-une-page-html"><i class="fa fa-check"></i><b>2.1.2</b> Lire une page html</a></li>
+<li class="chapter" data-level="2.1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html"><i class="fa fa-check"></i><b>2.1.3</b> Extraire certains éléments d’une page html</a></li>
+<li class="chapter" data-level="2.1.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction"><i class="fa fa-check"></i><b>2.1.4</b> Passage au format rectangulaire, et mise en fonction</a></li>
+<li class="chapter" data-level="2.1.5" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#itération"><i class="fa fa-check"></i><b>2.1.5</b> Itération</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation"><i class="fa fa-check"></i><b>2.2</b> Depuis des images ou des documents pdf: OCRisation</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract"><i class="fa fa-check"></i><b>2.2.1</b> Utilisation du package <code>tesseract</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf"><i class="fa fa-check"></i><b>2.2.2</b> Et pour OCRiser depuis un pdf??</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription"><i class="fa fa-check"></i><b>2.3</b> Depuis des enregistrements audio: transcription</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#présentation-de-lexemple"><i class="fa fa-check"></i><b>2.3.1</b> Présentation de l’exemple</a></li>
+<li class="chapter" data-level="2.3.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#prétraitements-éventuels"><i class="fa fa-check"></i><b>2.3.2</b> Prétraitements éventuels</a></li>
+<li class="chapter" data-level="2.3.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager"><i class="fa fa-check"></i><b>2.3.3</b> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
+<li class="chapter" data-level="2.3.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm"><i class="fa fa-check"></i><b>2.3.4</b> API Watson Speech-to-text d’IBM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>3</b> Manipuler des strings: package stringr</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>3.1</b> Strings</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>3.1.1</b> détection, remplacement</a></li>
+<li class="chapter" data-level="3.1.2" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>3.1.2</b> division, correspondance</a></li>
+<li class="chapter" data-level="3.1.3" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>3.1.3</b> extraction</a></li>
+<li class="chapter" data-level="3.1.4" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>3.1.4</b> comptage, subset</a></li>
+<li class="chapter" data-level="3.1.5" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>3.1.5</b> longueur, sous-partie</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>3.2</b> Expressions régulières</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="strings.html"><a href="strings.html#classes-de-caractères-et-groupes"><i class="fa fa-check"></i><b>3.2.1</b> classes de caractères et groupes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="strings.html"><a href="strings.html#caractères-spéciaux"><i class="fa fa-check"></i><b>3.2.2</b> caractères spéciaux</a></li>
+<li class="chapter" data-level="3.2.3" data-path="strings.html"><a href="strings.html#caractères-exclus-gammes-de-caractères"><i class="fa fa-check"></i><b>3.2.3</b> caractères exclus, gammes de caractères</a></li>
+<li class="chapter" data-level="3.2.4" data-path="strings.html"><a href="strings.html#classes-prédéfinies"><i class="fa fa-check"></i><b>3.2.4</b> classes prédéfinies</a></li>
+<li class="chapter" data-level="3.2.5" data-path="strings.html"><a href="strings.html#quelques-exemples-pour-bien-comprendre"><i class="fa fa-check"></i><b>3.2.5</b> quelques exemples pour bien comprendre</a></li>
+<li class="chapter" data-level="3.2.6" data-path="strings.html"><a href="strings.html#groupes-et-références-arrières"><i class="fa fa-check"></i><b>3.2.6</b> groupes et références arrières</a></li>
+<li class="chapter" data-level="3.2.7" data-path="strings.html"><a href="strings.html#quantificateurs"><i class="fa fa-check"></i><b>3.2.7</b> quantificateurs</a></li>
+<li class="chapter" data-level="3.2.8" data-path="strings.html"><a href="strings.html#ancres-et-assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.8</b> ancres et assertions avant-arrière</a></li>
+<li class="chapter" data-level="3.2.9" data-path="strings.html"><a href="strings.html#assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.9</b> assertions avant-arrière</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="langage-naturel.html"><a href="langage-naturel.html"><i class="fa fa-check"></i><b>4</b> Langage naturel</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="langage-naturel.html"><a href="langage-naturel.html#tokenization"><i class="fa fa-check"></i><b>4.1</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="langage-naturel.html"><a href="langage-naturel.html#principe"><i class="fa fa-check"></i><b>4.1.1</b> Principe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="langage-naturel.html"><a href="langage-naturel.html#mise-en-oeuvre"><i class="fa fa-check"></i><b>4.1.2</b> Mise en oeuvre</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table"><i class="fa fa-check"></i><b>4.2</b> Nettoyage de la table</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides"><i class="fa fa-check"></i><b>4.2.1</b> Nettoyage de la table par suppression des mots vides</a></li>
+<li class="chapter" data-level="4.2.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming"><i class="fa fa-check"></i><b>4.2.2</b> Nettoyage de la table par racinisation (stemming)</a></li>
+<li class="chapter" data-level="4.2.3" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation"><i class="fa fa-check"></i><b>4.2.3</b> Nettoyage de la table par lemmatisation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html"><i class="fa fa-check"></i><b>5</b> Résumer l’information par des métriques</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#corpus-ministereco"><i class="fa fa-check"></i><b>5.1</b> Corpus MinisterEco</a></li>
+<li class="chapter" data-level="5.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>5.2</b> Fréquences d’occurrence</a></li>
+<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>5.3</b> Co-occurrences, corrélations</a></li>
+<li class="chapter" data-level="5.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>5.4</b> TF-IDF</a></li>
+<li class="chapter" data-level="5.5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spécificités"><i class="fa fa-check"></i><b>5.5</b> Spécificités</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>6</b> Résumer l’information par des graphiques</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>6.1</b> Nuage de mots</a></li>
+<li class="chapter" data-level="6.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>6.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
+<li class="chapter" data-level="6.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>6.3</b> Graphes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Rechercher des thèmes (topic modelling)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations"><i class="fa fa-check"></i><b>7.1</b> Principe, notations</a></li>
+<li class="chapter" data-level="7.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta"><i class="fa fa-check"></i><b>7.2</b> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
+<li class="chapter" data-level="7.3" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#frex"><i class="fa fa-check"></i><b>7.3</b> FREX</a></li>
+<li class="chapter" data-level="7.4" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm"><i class="fa fa-check"></i><b>7.4</b> étapes du STM</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme"><i class="fa fa-check"></i><b>7.4.1</b> Mise en forme</a></li>
+<li class="chapter" data-level="7.4.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle"><i class="fa fa-check"></i><b>7.4.2</b> Calcul du modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents"><i class="fa fa-check"></i><b>7.5</b> Assignation d’un thème aux documents</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Le Descriptoire:
+Recueil et analyse de texte avec R </img></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="extraction-de-données-textuelles" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapitre 2</span> Extraction de données textuelles<a href="extraction-de-données-textuelles.html#extraction-de-données-textuelles" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="depuis-des-pages-web-web-scraping" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Depuis des pages web: web-scraping<a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Principe</strong>: récupérer la donnée (notamment textuelle) présente sur des pages web.</p>
+<p>Le plus souvent, il s’agit de récupérer des données sur une <strong>série de pages</strong> qui sont toutes organisées de la même manière (par exemple, données issues de pages de recette sur Marmiton, données issues de petites annonces sur Leboncoin, données correspondant à l’ensemble des équipes ou des joueurs sur un site sportif, etc.).</p>
+<p><img src="images/step1_process.png" /></p>
+<p>Utilisation du package <strong>rvest</strong>
+<img src="images/logo_rvest.jpg" alt="hexlogo_rvest" width="50" height="50"></p>
+<p>Pour <strong>récolter le contenu textuel d’une page web</strong>, il faut être en mesure de:</p>
+<ul>
+<li><strong>lire une page html</strong> dans R</li>
+<li><strong>repérer l’élément d’intérêt</strong> dans la page (connaissance basique du html, <a href="https://cran.r-project.org/web/packages/rvest/vignettes/selectorgadget.html">SelectorGadget</a>)</li>
+<li><strong>parcourir l’arborescence</strong> de la page</li>
+<li><strong>sélectionner un élément</strong> de la page</li>
+<li><strong>récupérer le contenu</strong> de l’élément</li>
+</ul>
+<div id="langage-html" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Langage html<a href="extraction-de-données-textuelles.html#langage-html" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le langage html est consitué de <strong>balises</strong> qui permettent de <strong>mettre en forme le contenu statique d’une page web</strong>.</p>
+<p>Considérons ainsi cette page web, toute simple (ici encapsulée dans ce document):</p>
+<iframe src="data/blog_de_ginette.htm" width="500" height="600">
+</iframe>
+<p>Le code html correspondant à cette page est le suivant:</p>
+<pre><code>&lt;html&gt;
+&lt;style&gt;
+h1 {background-color: powderblue;}
+.image {margin-left:50%;}
+.comment{border-style:solid; background-color:LemonChiffon;}
+.comment-author{font-style: italic;}
+&lt;/style&gt;
+&lt;h1&gt; MA VIE A LA FERME &lt;/h1&gt;
+&lt;div class=&quot;ingredients&quot;&gt;
+  &lt;b&gt; INGREDIENTS&lt;/b&gt;
+  &lt;ul&gt;
+    &lt;li&gt; &gt;1 cochon(s) &lt;/li&gt;
+    &lt;li&gt; &gt;1 légume(s) &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;right&quot;&gt;&lt;div class=&quot;image&quot;&gt;&lt;img src=&#39;images/cochon.png&#39;&gt;
+&lt;p&gt; Je fais de la bouillie pour mes petits cochons.&lt;/p&gt;
+&lt;p&gt; Pour un cochon, pour deux cochons, pour trois cochons, pour quatre, puis pour cinq, pour six, pour sept, pour huit, pour neuf, boeuf! &lt;/p&gt;
+&lt;b&gt;Commentaires&lt;/b&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;comment&quot;&gt;Et pour une poule sur un mur qui picoterait du pain dur?&lt;/div&gt;
+&lt;div class=&quot;comment-author&quot;&gt;Emma, 22 ans, Limoges&lt;/div&gt;
+&lt;div class=&quot;comment&quot;&gt;Je vois que vous êtes, telle la petite poule rousse, bien aimable. Avez-vous pu compter sur l&#39;aide du chat et du canard pour semer vos 5 grains de blé?&lt;/div&gt;
+&lt;div class=&quot;comment-author&quot;&gt;Michel, 56 ans, Rennes&lt;/div&gt;
+&lt;/html&gt;</code></pre>
+</div>
+<div id="lire-une-page-html" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Lire une page html<a href="extraction-de-données-textuelles.html#lire-une-page-html" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lire la page html dans R: on obtient</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="extraction-de-données-textuelles.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb2-2"><a href="extraction-de-données-textuelles.html#cb2-2" aria-hidden="true" tabindex="-1"></a>html<span class="ot">=</span>xml2<span class="sc">::</span><span class="fu">read_html</span>(<span class="st">&quot;data/blog_de_ginette.htm&quot;</span>, <span class="at">encoding=</span><span class="st">&quot;UTF-8&quot;</span>)</span>
+<span id="cb2-3"><a href="extraction-de-données-textuelles.html#cb2-3" aria-hidden="true" tabindex="-1"></a>html</span></code></pre></div>
+<pre><code>## {html_document}
+## &lt;html&gt;
+## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8 ...
+## [2] &lt;body&gt;\n&lt;h1&gt; MA VIE A LA FERME &lt;/h1&gt;\r\n&lt;div class=&quot;ingredients&quot;&gt;\r\n  &lt;b ...</code></pre>
+</div>
+<div id="extraire-certains-éléments-dune-page-html" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Extraire certains éléments d’une page html<a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Extraire</strong> certains éléments (des “nodes” ou “nodesets”):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="extraction-de-données-textuelles.html#cb4-1" aria-hidden="true" tabindex="-1"></a>rvest<span class="sc">::</span><span class="fu">html_nodes</span>(html,<span class="st">&quot;b&quot;</span>)</span></code></pre></div>
+<pre><code>## {xml_nodeset (2)}
+## [1] &lt;b&gt; INGREDIENTS&lt;/b&gt;
+## [2] &lt;b&gt;Commentaires&lt;/b&gt;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="extraction-de-données-textuelles.html#cb6-1" aria-hidden="true" tabindex="-1"></a>rvest<span class="sc">::</span><span class="fu">html_nodes</span>(html,<span class="st">&quot;.comment-author&quot;</span>) </span></code></pre></div>
+<pre><code>## {xml_nodeset (2)}
+## [1] &lt;div class=&quot;comment-author&quot;&gt;Emma, 22 ans, Limoges&lt;/div&gt;
+## [2] &lt;div class=&quot;comment-author&quot;&gt;Michel, 56 ans, Rennes&lt;/div&gt;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="extraction-de-données-textuelles.html#cb8-1" aria-hidden="true" tabindex="-1"></a>rvest<span class="sc">::</span><span class="fu">html_nodes</span>(html,<span class="st">&quot;.ingredients&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="extraction-de-données-textuelles.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_children</span>()</span></code></pre></div>
+<pre><code>## {xml_nodeset (2)}
+## [1] &lt;b&gt; INGREDIENTS&lt;/b&gt;
+## [2] &lt;ul&gt;\n&lt;li&gt; &amp;gt;1 cochon(s) &lt;/li&gt;\r\n    &lt;li&gt; &amp;gt;1 légume(s) &lt;/li&gt;\r\n  &lt; ...</code></pre>
+<div id="extraire-le-type-de-certains-éléments" class="section level4 hasAnchor" number="2.1.3.1">
+<h4><span class="header-section-number">2.1.3.1</span> Extraire le type de certains éléments<a href="extraction-de-données-textuelles.html#extraire-le-type-de-certains-éléments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="images/schema_rvest_nodes.png" /></p>
+<p><strong>Extraire le type</strong> des nodes ou nodesets:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="extraction-de-données-textuelles.html#cb10-1" aria-hidden="true" tabindex="-1"></a>rvest<span class="sc">::</span><span class="fu">html_nodes</span>(html,<span class="st">&quot;.image&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="extraction-de-données-textuelles.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_name</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;div&quot;</code></pre>
+</div>
+<div id="extraire-le-contenu-de-certains-éléments" class="section level4 hasAnchor" number="2.1.3.2">
+<h4><span class="header-section-number">2.1.3.2</span> Extraire le contenu de certains éléments<a href="extraction-de-données-textuelles.html#extraire-le-contenu-de-certains-éléments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="images/schema_rvest_nodes.png" /></p>
+<p><strong>Extraire le contenu</strong> des nodes ou nodesets:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="extraction-de-données-textuelles.html#cb12-1" aria-hidden="true" tabindex="-1"></a>rvest<span class="sc">::</span><span class="fu">html_nodes</span>(html,<span class="st">&quot;b&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="extraction-de-données-textuelles.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_text</span>() </span></code></pre></div>
+<pre><code>## [1] &quot; INGREDIENTS&quot; &quot;Commentaires&quot;</code></pre>
+</div>
+<div id="extraire-les-attributs-de-certains-éléments" class="section level4 hasAnchor" number="2.1.3.3">
+<h4><span class="header-section-number">2.1.3.3</span> Extraire les attributs de certains éléments<a href="extraction-de-données-textuelles.html#extraire-les-attributs-de-certains-éléments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="images/schema_rvest_nodes.png" /></p>
+<p><strong>Extraire les attributs</strong> des nodes ou nodesets:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="extraction-de-données-textuelles.html#cb14-1" aria-hidden="true" tabindex="-1"></a>rvest<span class="sc">::</span><span class="fu">html_nodes</span>(html,<span class="st">&quot;div&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="extraction-de-données-textuelles.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_attrs</span>()</span></code></pre></div>
+<pre><code>## [[1]]
+##         class 
+## &quot;ingredients&quot; 
+## 
+## [[2]]
+##   class 
+## &quot;right&quot; 
+## 
+## [[3]]
+##   class 
+## &quot;image&quot; 
+## 
+## [[4]]
+##     class 
+## &quot;comment&quot; 
+## 
+## [[5]]
+##            class 
+## &quot;comment-author&quot; 
+## 
+## [[6]]
+##     class 
+## &quot;comment&quot; 
+## 
+## [[7]]
+##            class 
+## &quot;comment-author&quot;</code></pre>
+</div>
+</div>
+<div id="passage-au-format-rectangulaire-et-mise-en-fonction" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Passage au format rectangulaire, et mise en fonction<a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="images/step2_process.png" /></p>
+<p>On extrait les données et on les met sous forme de table:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="extraction-de-données-textuelles.html#cb16-1" aria-hidden="true" tabindex="-1"></a>page <span class="ot">&lt;-</span> <span class="st">&quot;data/blog_de_ginette.htm&quot;</span></span>
+<span id="cb16-2"><a href="extraction-de-données-textuelles.html#cb16-2" aria-hidden="true" tabindex="-1"></a>html <span class="ot">&lt;-</span> xml2<span class="sc">::</span><span class="fu">read_html</span>(page, <span class="at">encoding=</span><span class="st">&quot;UTF-8&quot;</span>)</span>
+<span id="cb16-3"><a href="extraction-de-données-textuelles.html#cb16-3" aria-hidden="true" tabindex="-1"></a>texte <span class="ot">&lt;-</span> html <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="extraction-de-données-textuelles.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_nodes</span>(<span class="st">&quot;.comment&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="extraction-de-données-textuelles.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
+<span id="cb16-6"><a href="extraction-de-données-textuelles.html#cb16-6" aria-hidden="true" tabindex="-1"></a>auteur <span class="ot">&lt;-</span> html <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="extraction-de-données-textuelles.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_nodes</span>(<span class="st">&quot;.comment-author&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="extraction-de-données-textuelles.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
+<span id="cb16-9"><a href="extraction-de-données-textuelles.html#cb16-9" aria-hidden="true" tabindex="-1"></a>tib_commentaires <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(texte,auteur)</span>
+<span id="cb16-10"><a href="extraction-de-données-textuelles.html#cb16-10" aria-hidden="true" tabindex="-1"></a>tib_commentaires</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   texte                                                                   auteur
+##   &lt;chr&gt;                                                                   &lt;chr&gt; 
+## 1 Et pour une poule sur un mur qui picoterait du pain dur? c&#39;est bien be… Emma,…
+## 2 Je vois que vous êtes, telle la petite poule rousse, bien aimable. Ave… Miche…</code></pre>
+<p>On peut en fait écrire une fonction qui prendrait pour entrée l’url de la page considérée et nous renverrait ce même tableau en sortie:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="extraction-de-données-textuelles.html#cb18-1" aria-hidden="true" tabindex="-1"></a>extrait_commentaires <span class="ot">&lt;-</span> <span class="cf">function</span>(page){</span>
+<span id="cb18-2"><a href="extraction-de-données-textuelles.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  html <span class="ot">&lt;-</span> xml2<span class="sc">::</span><span class="fu">read_html</span>(page, <span class="at">encoding=</span><span class="st">&quot;UTF-8&quot;</span>)</span>
+<span id="cb18-3"><a href="extraction-de-données-textuelles.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  texte <span class="ot">&lt;-</span> html <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="extraction-de-données-textuelles.html#cb18-4" aria-hidden="true" tabindex="-1"></a>    rvest<span class="sc">::</span><span class="fu">html_nodes</span>(<span class="st">&quot;.comment&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="extraction-de-données-textuelles.html#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>()</span>
+<span id="cb18-6"><a href="extraction-de-données-textuelles.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  auteur <span class="ot">&lt;-</span> html <span class="sc">%&gt;%</span></span>
+<span id="cb18-7"><a href="extraction-de-données-textuelles.html#cb18-7" aria-hidden="true" tabindex="-1"></a>    rvest<span class="sc">::</span><span class="fu">html_nodes</span>(<span class="st">&quot;.comment-author&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-8"><a href="extraction-de-données-textuelles.html#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>()</span>
+<span id="cb18-9"><a href="extraction-de-données-textuelles.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  tib_commentaires <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">doc=</span><span class="fu">rep</span>(page,<span class="fu">length</span>(texte)),</span>
+<span id="cb18-10"><a href="extraction-de-données-textuelles.html#cb18-10" aria-hidden="true" tabindex="-1"></a>                                     texte,</span>
+<span id="cb18-11"><a href="extraction-de-données-textuelles.html#cb18-11" aria-hidden="true" tabindex="-1"></a>                                     auteur)</span>
+<span id="cb18-12"><a href="extraction-de-données-textuelles.html#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(tib_commentaires)</span>
+<span id="cb18-13"><a href="extraction-de-données-textuelles.html#cb18-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-14"><a href="extraction-de-données-textuelles.html#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="extraction-de-données-textuelles.html#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="fu">extrait_commentaires</span>(<span class="st">&quot;data/blog_de_ginette.htm&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   doc                      texte                                          auteur
+##   &lt;chr&gt;                    &lt;chr&gt;                                          &lt;chr&gt; 
+## 1 data/blog_de_ginette.htm Et pour une poule sur un mur qui picoterait d… Emma,…
+## 2 data/blog_de_ginette.htm Je vois que vous êtes, telle la petite poule … Miche…</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="extraction-de-données-textuelles.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">extrait_commentaires</span>(<span class="st">&quot;data/blog_de_jean-marc.htm&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   doc                        texte                                        auteur
+##   &lt;chr&gt;                      &lt;chr&gt;                                        &lt;chr&gt; 
+## 1 data/blog_de_jean-marc.htm Les thons, avec un t comme crocodile? ou le… &quot;Eddi…
+## 2 data/blog_de_jean-marc.htm Pourquoi ces thons ne préféraient-ils pas a… &quot;Yves…
+## 3 data/blog_de_jean-marc.htm Tout ça me fait penser au blog de Ginette s… &quot;Robe…
+## 4 data/blog_de_jean-marc.htm Je préfère la chanson qui parle de canards … &quot;Edua…
+## 5 data/blog_de_jean-marc.htm On ne comprend pas trop cette passion pour … &quot;Lise…
+## 6 data/blog_de_jean-marc.htm Et pendant ce temps-là, le roi des thons, a… &quot;Nadi…</code></pre>
+</div>
+<div id="itération" class="section level3 hasAnchor" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> Itération<a href="extraction-de-données-textuelles.html#itération" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="images/step2_process.png" /></p>
+<p>Imaginons maintenant qu’on ne traite pas seulement du blog de Ginette, mais aussi de tout un tas d’autres pages <strong>structurées de la même façon</strong>.</p>
+<p>Ici, on va supposer simplement qu’on a 3 pages structurées de la même manière:</p>
+<iframe src="data/blog_de_ginette.htm" width="500" height="600">
+</iframe>
+<iframe src="data/blog_de_jean-marc.htm" width="500" height="600">
+</iframe>
+<iframe src="data/blog_de_norbert.htm" width="500" height="600">
+</iframe>
+<p>On dispose maintenant de la fonction <code>extrait_commentaires()</code> qui prend pour entrée le nom de la page html, et renvoie en sortie un tableau relatif aux commentaires sur la page. On voudrait appliquer cette fonction, de manière <strong>itérative</strong> à l’ensemble des pages html qui nous intéressent.</p>
+<p>Le package <code>purrr</code> permet d’<strong>appliquer une fonction</strong> à différents éléments d’une liste ou d’un vecteur, de manière <strong>itérative</strong> (…il est évidemment possible de réaliser la même opération à l’aide d’une boucle <code>for</code>…).</p>
+<p><img src="images/schema_purrr.png" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="extraction-de-données-textuelles.html#cb22-1" aria-hidden="true" tabindex="-1"></a>pages<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;data/blog_de_ginette.htm&quot;</span>,</span>
+<span id="cb22-2"><a href="extraction-de-données-textuelles.html#cb22-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;data/blog_de_jean-marc.htm&quot;</span>,</span>
+<span id="cb22-3"><a href="extraction-de-données-textuelles.html#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;data/blog_de_norbert.htm&quot;</span>)</span>
+<span id="cb22-4"><a href="extraction-de-données-textuelles.html#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="extraction-de-données-textuelles.html#cb22-5" aria-hidden="true" tabindex="-1"></a>list_commentaires <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(pages, extrait_commentaires)</span>
+<span id="cb22-6"><a href="extraction-de-données-textuelles.html#cb22-6" aria-hidden="true" tabindex="-1"></a>list_commentaires</span></code></pre></div>
+<pre><code>## [[1]]
+## # A tibble: 2 × 3
+##   doc                      texte                                          auteur
+##   &lt;chr&gt;                    &lt;chr&gt;                                          &lt;chr&gt; 
+## 1 data/blog_de_ginette.htm Et pour une poule sur un mur qui picoterait d… Emma,…
+## 2 data/blog_de_ginette.htm Je vois que vous êtes, telle la petite poule … Miche…
+## 
+## [[2]]
+## # A tibble: 6 × 3
+##   doc                        texte                                        auteur
+##   &lt;chr&gt;                      &lt;chr&gt;                                        &lt;chr&gt; 
+## 1 data/blog_de_jean-marc.htm Les thons, avec un t comme crocodile? ou le… &quot;Eddi…
+## 2 data/blog_de_jean-marc.htm Pourquoi ces thons ne préféraient-ils pas a… &quot;Yves…
+## 3 data/blog_de_jean-marc.htm Tout ça me fait penser au blog de Ginette s… &quot;Robe…
+## 4 data/blog_de_jean-marc.htm Je préfère la chanson qui parle de canards … &quot;Edua…
+## 5 data/blog_de_jean-marc.htm On ne comprend pas trop cette passion pour … &quot;Lise…
+## 6 data/blog_de_jean-marc.htm Et pendant ce temps-là, le roi des thons, a… &quot;Nadi…
+## 
+## [[3]]
+## # A tibble: 4 × 3
+##   doc                      texte                                          auteur
+##   &lt;chr&gt;                    &lt;chr&gt;                                          &lt;chr&gt; 
+## 1 data/blog_de_norbert.htm A quel moment faut-il claquer du bec, si l&#39;on… Jonas…
+## 2 data/blog_de_norbert.htm Norbert, mon petit chat, ça fait bien longtem… Julie…
+## 3 data/blog_de_norbert.htm L&#39;ambiance doit être sympa quand les poules d… Micka…
+## 4 data/blog_de_norbert.htm Vous devez avoir un grain pour écrire des cho… Vivia…</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="extraction-de-données-textuelles.html#cb24-1" aria-hidden="true" tabindex="-1"></a>tibtot_commentaires <span class="ot">&lt;-</span> list_commentaires <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="extraction-de-données-textuelles.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">bind_rows</span>()</span>
+<span id="cb24-3"><a href="extraction-de-données-textuelles.html#cb24-3" aria-hidden="true" tabindex="-1"></a>tibtot_commentaires</span></code></pre></div>
+<pre><code>## # A tibble: 12 × 3
+##    doc                        texte                                       auteur
+##    &lt;chr&gt;                      &lt;chr&gt;                                       &lt;chr&gt; 
+##  1 data/blog_de_ginette.htm   Et pour une poule sur un mur qui picoterai… &quot;Emma…
+##  2 data/blog_de_ginette.htm   Je vois que vous êtes, telle la petite pou… &quot;Mich…
+##  3 data/blog_de_jean-marc.htm Les thons, avec un t comme crocodile? ou l… &quot;Eddi…
+##  4 data/blog_de_jean-marc.htm Pourquoi ces thons ne préféraient-ils pas … &quot;Yves…
+##  5 data/blog_de_jean-marc.htm Tout ça me fait penser au blog de Ginette … &quot;Robe…
+##  6 data/blog_de_jean-marc.htm Je préfère la chanson qui parle de canards… &quot;Edua…
+##  7 data/blog_de_jean-marc.htm On ne comprend pas trop cette passion pour… &quot;Lise…
+##  8 data/blog_de_jean-marc.htm Et pendant ce temps-là, le roi des thons, … &quot;Nadi…
+##  9 data/blog_de_norbert.htm   A quel moment faut-il claquer du bec, si l… &quot;Jona…
+## 10 data/blog_de_norbert.htm   Norbert, mon petit chat, ça fait bien long… &quot;Juli…
+## 11 data/blog_de_norbert.htm   L&#39;ambiance doit être sympa quand les poule… &quot;Mick…
+## 12 data/blog_de_norbert.htm   Vous devez avoir un grain pour écrire des … &quot;Vivi…</code></pre>
+</div>
+</div>
+<div id="depuis-des-images-ou-des-documents-pdf-ocrisation" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Depuis des images ou des documents pdf: OCRisation<a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>L’<strong>OCRisation</strong> (OCR pour <strong>O</strong>ptical <strong>C</strong>haracter <strong>R</strong>ecognition) consiste à <strong>appliquer des algorithmes de reconnaissance de caractères à des images afin d’en extraire du texte</strong>.</p>
+<p>Avec R, on peut réaliser l’OCRisation à l’aide du package <code>tesseract</code>, documenté <a href="https://cran.r-project.org/web/packages/tesseract/vignettes/intro.html">à cette adresse</a>. Ce package repose lui-même sur (je vous le donne en mille) le logiciel Tesseract.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="extraction-de-données-textuelles.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tesseract)</span></code></pre></div>
+<p>Outre l’installation “classique” du package R, donc (via <code>install.packages("tesseract")</code> il peut être nécessaire de procéder “à la main” à des installations supplémentaires sur votre machine (ce sera notamment le cas si vous travaillez sous Debian/Ubuntu). Dans ce cas, je vous invite à suivre les indications sur <a href="https://github.com/ropensci/tesseract">cette page</a>.</p>
+<p>En outre, pour une reconnaissance optimale des caractères, il est préférable de disposer d’un <strong>moteur d’OCR</strong> qui corresponde à la <strong>langue</strong> du texte que l’on cherche à reconnaître. Pour des langues autres que l’anglais (“eng”), il faudra donc compléter le package <code>tesseract</code> en téléchargeant le moteur adéquat. Il n’est nécessaire de réaliser ce téléchargement qu’<strong>une seule fois</strong>.</p>
+<p>Pour les <strong>utilisateurs de Windows/MacOS</strong>, il suffira vraisembablement de faire (ici pour le français):</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="extraction-de-données-textuelles.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tesseract_download</span>(<span class="st">&quot;fra&quot;</span>)</span></code></pre></div>
+<p>Pour les <strong>utilisateurs de Debian/Ubuntu</strong>, il peut être nécessaire au préalable pour procéder à ce téléchargement de renseigner (une seule fois!) une variable d’environnement globale TESSDATA_PREFIX en procédant comme suit:</p>
+<ul>
+<li>Ouvrir le fichier .Renviron</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="extraction-de-données-textuelles.html#cb28-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_environ</span>()</span></code></pre></div>
+<ul>
+<li>y renseigner le chemin vers le dossier tessdata. Chez moi, il s’agit du chemin “/usr/share/tesseract-ocr/4.00/tessdata/”, donc:</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="extraction-de-données-textuelles.html#cb29-1" aria-hidden="true" tabindex="-1"></a>TESSDATA_PREFIX<span class="ot">=</span><span class="st">&quot;/usr/share/tesseract-ocr/4.00/tessdata/&quot;</span></span></code></pre></div>
+<p>Puis:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="extraction-de-données-textuelles.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tesseract_download</span>(<span class="st">&quot;fra&quot;</span>,<span class="at">datapath=</span><span class="st">&quot;/usr/share/tesseract-ocr/4.00/tessdata/&quot;</span>)</span></code></pre></div>
+<div id="utilisation-du-package-tesseract" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Utilisation du package <code>tesseract</code><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Considérons par exemple l’image suivante (scannée depuis un numéro Hors-Série de Géo sur les chats du monde…):</p>
+<p><img src="images/chats_de_Paris.png" height='450'></p>
+<p>Réalisons maintenant l’OCRisation à l’aide de la fonction <code>ocr()</code>:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="extraction-de-données-textuelles.html#cb31-1" aria-hidden="true" tabindex="-1"></a>texte_brut <span class="ot">&lt;-</span> tesseract<span class="sc">::</span><span class="fu">ocr</span>(<span class="st">&quot;images/chats_de_Paris.png&quot;</span>,</span>
+<span id="cb31-2"><a href="extraction-de-données-textuelles.html#cb31-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">engine =</span> tesseract<span class="sc">::</span><span class="fu">tesseract</span>(<span class="st">&quot;fra&quot;</span>))</span>
+<span id="cb31-3"><a href="extraction-de-données-textuelles.html#cb31-3" aria-hidden="true" tabindex="-1"></a>texte_brut</span></code></pre></div>
+<pre><code>## [1] &quot;aris n’est pas à proprement par-\n\nler une ville à chats, comme\n\nRome ou Istanbul. Et pourtant,\n\nsi on y regarde de près, les ma-\n\ntous sont partout. Non pas dans\n\nla rue ou aux abords des monu-\n\nments anciens, même si on en\n\nvoit quelques-uns se balader au\n\nmilieu des pierres tombales sé-\n\nculaires du cimetière du Mont-\n\nparnasse ou du Père-Lachaise. Les chats du Paris\nd’aujourd’hui vivent surtout dans les cafés, les res-\ntaurants, les librairies, chez les fleuristes, les lu-\nthiers, les épiciers et dans les boutiques, régnant\nsur leur petit monde du haut d’un comptoir en zinc,\nalanguis sur une table recouverte de beaux livres\nou s’étirant nonchalamment sur le sol de marbre\nd’un grand hôtel chic. Quand Mickey, le chat atti-\ntré du célèbre café Le Select, dans le quartier de\nMontparnasse, est mort en août dernier à l’âge res-\npectable de 22 ans, tout le quartier s’est senti en\ndeuil. Accoudés au bar, les habitués désemparés\nse remémoraient des anecdotes à son sujet. L’his-\ntoire de ce chat tigré est à la fois unique et repré-\nsentative de la vie d’un félin à Paris. Le premier\nnom de Mickey était Oscar. Dans sa jeunesse,\nil vivait au café L&#39;Atelier, juste à côté. Pour d’obs-\ncures raisons, il migra au Select, où «l’on ne\ns’y connaissait pas trop en chats». explique Fré-\n&quot;</code></pre>
+<p>On obtient d’ores-et-déjà un résultat intéressant, malgré quelques petites choses à nettoyer (notamment les retours à la ligne et tirets associés). Pour réaliser ce nettoyage, on peut utiliser les fonctions du package <code>stringr</code> et les expressions régulières qui font l’objet du chapitre <a href="strings.html#strings">3</a></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="extraction-de-données-textuelles.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb33-2"><a href="extraction-de-données-textuelles.html#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="extraction-de-données-textuelles.html#cb33-3" aria-hidden="true" tabindex="-1"></a>txt<span class="ot">=</span>texte_brut <span class="sc">%&gt;%</span> </span>
+<span id="cb33-4"><a href="extraction-de-données-textuelles.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(<span class="st">&quot;-</span><span class="sc">\\</span><span class="st">n+&quot;</span>,<span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#tirets suivis de retours à la ligne simples ou multiples</span></span>
+<span id="cb33-5"><a href="extraction-de-données-textuelles.html#cb33-5" aria-hidden="true" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">n+&quot;</span>,<span class="st">&quot; &quot;</span>)     <span class="co">#retours à la ligne simples ou multiples</span></span>
+<span id="cb33-6"><a href="extraction-de-données-textuelles.html#cb33-6" aria-hidden="true" tabindex="-1"></a>txt</span></code></pre></div>
+<pre><code>## [1] &quot;aris n’est pas à proprement parler une ville à chats, comme Rome ou Istanbul. Et pourtant, si on y regarde de près, les matous sont partout. Non pas dans la rue ou aux abords des monuments anciens, même si on en voit quelques-uns se balader au milieu des pierres tombales séculaires du cimetière du Montparnasse ou du Père-Lachaise. Les chats du Paris d’aujourd’hui vivent surtout dans les cafés, les restaurants, les librairies, chez les fleuristes, les luthiers, les épiciers et dans les boutiques, régnant sur leur petit monde du haut d’un comptoir en zinc, alanguis sur une table recouverte de beaux livres ou s’étirant nonchalamment sur le sol de marbre d’un grand hôtel chic. Quand Mickey, le chat attitré du célèbre café Le Select, dans le quartier de Montparnasse, est mort en août dernier à l’âge respectable de 22 ans, tout le quartier s’est senti en deuil. Accoudés au bar, les habitués désemparés se remémoraient des anecdotes à son sujet. L’histoire de ce chat tigré est à la fois unique et représentative de la vie d’un félin à Paris. Le premier nom de Mickey était Oscar. Dans sa jeunesse, il vivait au café L&#39;Atelier, juste à côté. Pour d’obscures raisons, il migra au Select, où «l’on ne s’y connaissait pas trop en chats». explique Fré&quot;</code></pre>
+<p>Juste pour voir l’ensemble du texte sans avoir à scroller horizontalement:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="extraction-de-données-textuelles.html#cb35-1" aria-hidden="true" tabindex="-1"></a>tibtxt<span class="ot">=</span><span class="fu">tibble</span>(<span class="at">txt=</span>txt)</span>
+<span id="cb35-2"><a href="extraction-de-données-textuelles.html#cb35-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tibtxt)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">txt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">aris n’est pas à proprement parler une ville à chats, comme Rome ou Istanbul. Et pourtant, si on y regarde de près, les matous sont partout. Non pas dans la rue ou aux abords des monuments anciens, même si on en voit quelques-uns se balader au milieu des pierres tombales séculaires du cimetière du Montparnasse ou du Père-Lachaise. Les chats du Paris d’aujourd’hui vivent surtout dans les cafés, les restaurants, les librairies, chez les fleuristes, les luthiers, les épiciers et dans les boutiques, régnant sur leur petit monde du haut d’un comptoir en zinc, alanguis sur une table recouverte de beaux livres ou s’étirant nonchalamment sur le sol de marbre d’un grand hôtel chic. Quand Mickey, le chat attitré du célèbre café Le Select, dans le quartier de Montparnasse, est mort en août dernier à l’âge respectable de 22 ans, tout le quartier s’est senti en deuil. Accoudés au bar, les habitués désemparés se remémoraient des anecdotes à son sujet. L’histoire de ce chat tigré est à la fois unique et représentative de la vie d’un félin à Paris. Le premier nom de Mickey était Oscar. Dans sa jeunesse, il vivait au café L’Atelier, juste à côté. Pour d’obscures raisons, il migra au Select, où «l’on ne s’y connaissait pas trop en chats». explique Fré</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="et-pour-ocriser-depuis-un-pdf" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Et pour OCRiser depuis un pdf??<a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Si vous souhaitez OCRiser depuis un pdf, vous pouvez suivre peu ou prou la démarche expliqué ci-dessus, mais en commençant par convertir votre pdf en image via le package <code>pdftools</code>:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="extraction-de-données-textuelles.html#cb36-1" aria-hidden="true" tabindex="-1"></a>pngfile <span class="ot">&lt;-</span> pdftools<span class="sc">::</span><span class="fu">pdf_convert</span>(<span class="st">&#39;images/geo_chats.pdf&#39;</span>,</span>
+<span id="cb36-2"><a href="extraction-de-données-textuelles.html#cb36-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">filenames=</span><span class="fu">c</span>(<span class="st">&quot;docs/geo_chats.png&quot;</span>),</span>
+<span id="cb36-3"><a href="extraction-de-données-textuelles.html#cb36-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">dpi =</span> <span class="dv">600</span>)</span></code></pre></div>
+<pre><code>## Warning in sprintf(filenames, pages, format): 2 arguments sont inutilisés par le
+## format &#39;docs/geo_chats.png&#39;</code></pre>
+<pre><code>## Converting page 1 to docs/geo_chats.png... done!</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="extraction-de-données-textuelles.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pngfile)</span></code></pre></div>
+<pre><code>## [1] &quot;docs/geo_chats.png&quot;</code></pre>
+<p>La ligne de commande ci-dessus a ainsi créé une image “geo_chats_1.png”, enregistrée localement sur le PC dans le répertoire de travail, à partir du pdf.</p>
+</div>
+</div>
+<div id="depuis-des-enregistrements-audio-transcription" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Depuis des enregistrements audio: transcription<a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Il est également possible d’<strong>extraire automatiquement du texte depuis un enregistrement audio</strong>. On parle dans ce cas de <strong>transcription</strong> automatique.</p>
+<p>Nous allons utiliser deux APIs différentes pour réaliser la transcription:</p>
+<ul>
+<li>l’API <strong>Watson Speech-to-text d’IBM</strong></li>
+<li>l’API <strong>Cloud Speech-to-text de Google</strong></li>
+</ul>
+<p>L’API d’IBM permet de transcrire gratuitement <strong>jusqu’à 500 minutes d’audio par mois</strong> (environ 2 centimes par minute transcrite au-delà). Il est assez <strong>facile de commencer à l’utiliser</strong> (enregistrement et authentification simple). En revanche, son <strong>paramètrage n’est pas très facile</strong> et les résultats semblent <strong>moins encourageants</strong> que ceux obtenus par l’algorithme Google.</p>
+<p>L’API de Google permet de transcrire gratuitement jusqu’à <strong>60 minutes d’audio par mois</strong> (environ 2 centimes par minute transcrite au-delà). La <strong>“mise en place” est un peu plus complexe</strong> qu’avec l’API d’IBM (je décris la procédure plus bas). Par contre, il existe un package R (<code>googleLanguageR</code>) qui <strong>facilite son utilisation et le paramétrage ultérieur des requêtes</strong>. Les résultats de l’algorithme sont (pour ce que j’en ai vu) <strong>meilleurs</strong> que ceux de l’algorithme d’IBM.</p>
+<p>Pour résumer:</p>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="11%" />
+<col width="18%" />
+<col width="45%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">API</th>
+<th align="center">Gratuité</th>
+<th align="center">Mise en place</th>
+<th align="center">Paramétrage et envoi des requêtes</th>
+<th align="center">Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">IBM</td>
+<td align="center">😄</td>
+<td align="center">😄</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">Google</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">😄</td>
+<td align="center">😄</td>
+</tr>
+</tbody>
+</table>
+<div id="présentation-de-lexemple" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Présentation de l’exemple<a href="extraction-de-données-textuelles.html#présentation-de-lexemple" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Je vais faire tourner les APIs sur un enregistrement (à deux voix!) de la fable Le Corbeau et le Renard. L’enregistrement est disponible <a href="data/corbeau_et_renard.wav">ici</a>.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="extraction-de-données-textuelles.html#cb41-1" aria-hidden="true" tabindex="-1"></a>audiopath<span class="ot">=</span><span class="st">&quot;data/corbeau_et_renard.wav&quot;</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   path                       sampling_rate duration
+##   &lt;chr&gt;                              &lt;int&gt;    &lt;dbl&gt;
+## 1 data/corbeau_et_renard.wav         48000     45.3</code></pre>
+</div>
+<div id="prétraitements-éventuels" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Prétraitements éventuels<a href="extraction-de-données-textuelles.html#prétraitements-éventuels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il peut être nécessaire de réaliser quelques <strong>prétraitements sur les enregistrements audio</strong> avant de les soumettre au traitement des APIs.</p>
+<p>On peut réaliser ces traitements à l’aide des packages R <code>tuneR</code> et <code>seewave</code>.</p>
+<p>Pour utiliser l’API Google par exemple, il est nécessaire de passer en “Mono” si l’enregistrement original est en “Stereo”.</p>
+<p>La fonction <code>seewave::cutw()</code> permet par ailleurs de <strong>découper l’enregistrement audio initial</strong> en séquences plus courtes si nécessaire (par exemple pour tester les résultats renvoyés par l’API).</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="extraction-de-données-textuelles.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tuneR)</span>
+<span id="cb43-2"><a href="extraction-de-données-textuelles.html#cb43-2" aria-hidden="true" tabindex="-1"></a>wave_initial<span class="ot">=</span>tuneR<span class="sc">::</span><span class="fu">readWave</span>(audiopath)</span>
+<span id="cb43-3"><a href="extraction-de-données-textuelles.html#cb43-3" aria-hidden="true" tabindex="-1"></a>wave_short<span class="ot">=</span>seewave<span class="sc">::</span><span class="fu">cutw</span>(wave_initial,</span>
+<span id="cb43-4"><a href="extraction-de-données-textuelles.html#cb43-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">from=</span><span class="dv">0</span>,</span>
+<span id="cb43-5"><a href="extraction-de-données-textuelles.html#cb43-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">to=</span><span class="dv">15</span>,</span>
+<span id="cb43-6"><a href="extraction-de-données-textuelles.html#cb43-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">output=</span><span class="st">&quot;Wave&quot;</span>)</span>
+<span id="cb43-7"><a href="extraction-de-données-textuelles.html#cb43-7" aria-hidden="true" tabindex="-1"></a>wavmono<span class="ot">=</span>tuneR<span class="sc">::</span><span class="fu">mono</span>(wave_short,</span>
+<span id="cb43-8"><a href="extraction-de-données-textuelles.html#cb43-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">which=</span><span class="fu">c</span>(<span class="st">&quot;left&quot;</span>,<span class="st">&quot;right&quot;</span>,<span class="st">&quot;both&quot;</span>))</span>
+<span id="cb43-9"><a href="extraction-de-données-textuelles.html#cb43-9" aria-hidden="true" tabindex="-1"></a>tuneR<span class="sc">::</span><span class="fu">writeWave</span>(wavmono,</span>
+<span id="cb43-10"><a href="extraction-de-données-textuelles.html#cb43-10" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;data/corbeau_et_renard_mono.wav&quot;</span>)</span>
+<span id="cb43-11"><a href="extraction-de-données-textuelles.html#cb43-11" aria-hidden="true" tabindex="-1"></a>tuneR<span class="sc">::</span><span class="fu">writeWave</span>(wavmono, <span class="st">&quot;data/corbeau_et_renard.csv&quot;</span>,<span class="at">extensible=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="api-speech-to-text-google-package-googlelanguager" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> API Speech-to-text Google: <code>package googleLanguageR</code><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="enregistrement-mise-en-place" class="section level4 hasAnchor" number="2.3.3.1">
+<h4><span class="header-section-number">2.3.3.1</span> Enregistrement, mise en place<a href="extraction-de-données-textuelles.html#enregistrement-mise-en-place" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Pour utiliser ce service il faut disposer d’un <strong>compte google</strong> et avoir fourni un numéro de carte bleue. Le recours à l’API Speech-to-text de Google est gratuit à hauteur de 60 minutes de transcription par mois. Au delà, le service coûte environ 2 centimes par minute transcrite.</p>
+<p>Pour récupérer le <strong>fichier d’identification</strong> nécessaire à l’utilisation de l’API, il faut</p>
+<ul>
+<li><p>avoir un <strong>compte Google</strong></p></li>
+<li><p>se rendre sur l’interface <a href="https://console.cloud.google.com/">Google Cloud Platform</a>,</p></li>
+<li><p>associer un <strong>compte de facturation</strong> à votre compte Google (si ce n’est pas déjà fait) et notamment avoir une CB associée.</p></li>
+<li><p>créer un <strong>projet</strong> Google Cloud</p></li>
+<li><p><strong>activer l’API</strong> qui vous intéresse pour ce projet (parmi les nombreuses que compte Google): ici <strong>Cloud Speech-to-Text</strong></p></li>
+<li><p>créer un <strong>compte de service</strong> et récupérer le fichier JSON contenant la clé privée pour le compte de service. Il faut pour cela aller (toujours sur l’interface Google Cloud Platform) dans le menu IAM et admin =&gt; Comptes de Service. Sélectionner le compte de service concerné, et dans les Actions (3 petits points à droite du tableau) sélectionner Créer une clé =&gt; JSON).</p></li>
+<li><p><strong>Enregistrer ce fichier JSON</strong> (de préférence à la racine de votre ordinateur), et enregistrer ce chemin comme variable d’environnement R <code>GL_AUTH</code>. Pour cela il faut</p></li>
+<li><p>Ouvrir le fichier .Renviron</p></li>
+</ul>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="extraction-de-données-textuelles.html#cb44-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_environ</span>()</span></code></pre></div>
+<ul>
+<li>y renseigner le chemin vers le fichier JSON. Chez moi, il s’agit du chemin “/home/lvaudor/google_service_authentication.json”“, donc:</li>
+</ul>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="extraction-de-données-textuelles.html#cb45-1" aria-hidden="true" tabindex="-1"></a>GL_AUTH<span class="ot">=</span><span class="st">&quot;/home/lvaudor/google_service_authentication.json&quot;</span></span></code></pre></div>
+<p>Dès que GL_AUTH est définie correctement (et le fichier .json au bon endroit!), on peut charger le package <code>googleLanguageR</code> que nous allons utiliser pour envoyer des requêtes à l’API Cloud Speech-to-text de Google. L’authentification se fait automatiquement au chargement du package:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="extraction-de-données-textuelles.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googleLanguageR)</span></code></pre></div>
+</div>
+<div id="envoi-des-requêtes-à-lapi" class="section level4 hasAnchor" number="2.3.3.2">
+<h4><span class="header-section-number">2.3.3.2</span> Envoi des requêtes à l’API<a href="extraction-de-données-textuelles.html#envoi-des-requêtes-à-lapi" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>On peut <strong>configurer les options de l’API</strong> en prévision l’envoi de la requête en lui passant une liste de paramètres, par exemple:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="extraction-de-données-textuelles.html#cb47-1" aria-hidden="true" tabindex="-1"></a>my_config <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">diarizationConfig=</span><span class="fu">list</span>(<span class="at">enableSpeakerDiarization=</span><span class="cn">TRUE</span>),</span>
+<span id="cb47-2"><a href="extraction-de-données-textuelles.html#cb47-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">enableWordConfidence=</span><span class="cn">TRUE</span>,</span>
+<span id="cb47-3"><a href="extraction-de-données-textuelles.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">enableAutomaticPunctuation =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Ci-dessus, je précise que je veux que</p>
+<ul>
+<li>l’algorithme <strong>tente de reconnaître plusieurs locuteurs</strong>,</li>
+<li>que chaque mot soit assorti d’un <strong>estimateur de confiance</strong>,</li>
+<li>qu’il y ait <strong>reconnaissance automatique de la ponctuation</strong>.</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="extraction-de-données-textuelles.html#cb48-1" aria-hidden="true" tabindex="-1"></a>cr<span class="ot">=</span>tuneR<span class="sc">::</span><span class="fu">readMP3</span>(<span class="st">&quot;docs/audio_samples/corbeau_et_renard.mp3&quot;</span>)</span>
+<span id="cb48-2"><a href="extraction-de-données-textuelles.html#cb48-2" aria-hidden="true" tabindex="-1"></a>tuneR<span class="sc">::</span><span class="fu">writeWave</span>(cr,<span class="st">&quot;docs/audio_samples/corbeau_et_renard.wav&quot;</span>, <span class="at">extensible=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Passons maintenant la requête elle-même.</p>
+<div id="enregistrement-court" class="section level5 hasAnchor" number="2.3.3.2.1">
+<h5><span class="header-section-number">2.3.3.2.1</span> Enregistrement court<a href="extraction-de-données-textuelles.html#enregistrement-court" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Pour un <strong>enregistrement relativement court</strong> (&lt;1 min, ce qui est le cas ici), on peut procéder de la manière suivante:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="extraction-de-données-textuelles.html#cb49-1" aria-hidden="true" tabindex="-1"></a>result_gl<span class="ot">=</span><span class="fu">gl_speech</span>(<span class="st">&quot;data/corbeau_et_renard.wav&quot;</span>,</span>
+<span id="cb49-2"><a href="extraction-de-données-textuelles.html#cb49-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">languageCode=</span><span class="st">&quot;fr-FR&quot;</span>,</span>
+<span id="cb49-3"><a href="extraction-de-données-textuelles.html#cb49-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sampleRateHertz=</span><span class="dv">48000</span>,</span>
+<span id="cb49-4"><a href="extraction-de-données-textuelles.html#cb49-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">customConfig=</span>my_config)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="extraction-de-données-textuelles.html#cb50-1" aria-hidden="true" tabindex="-1"></a>resultat<span class="ot">=</span>result_gl<span class="sc">$</span>timings[[<span class="dv">2</span>]]</span>
+<span id="cb50-2"><a href="extraction-de-données-textuelles.html#cb50-2" aria-hidden="true" tabindex="-1"></a>resultat</span></code></pre></div>
+<p>On peut mettre en forme les résultats pour obtenir la transcription suivante (elle prend ici en compte les changements de locuteur:)</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="extraction-de-données-textuelles.html#cb51-1" aria-hidden="true" tabindex="-1"></a>transcript_Google<span class="ot">=</span></span>
+<span id="cb51-2"><a href="extraction-de-données-textuelles.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  resultat <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="extraction-de-données-textuelles.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">speakerChange=</span><span class="fu">abs</span>(speakerTag<span class="sc">-</span><span class="fu">lag</span>(speakerTag,<span class="dv">1</span>, <span class="at">default=</span><span class="dv">1</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-4"><a href="extraction-de-données-textuelles.html#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">speakerTurn=</span><span class="fu">cumsum</span>(speakerChange)) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-5"><a href="extraction-de-données-textuelles.html#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(speakerTurn) <span class="sc">%&gt;%</span></span>
+<span id="cb51-6"><a href="extraction-de-données-textuelles.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">word=</span><span class="fu">paste0</span>(word,<span class="at">collapse=</span><span class="st">&quot; &quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-7"><a href="extraction-de-données-textuelles.html#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="extraction-de-données-textuelles.html#cb52-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(transcript_Google)</span></code></pre></div>
+</div>
+<div id="enregistrement-long" class="section level5 hasAnchor" number="2.3.3.2.2">
+<h5><span class="header-section-number">2.3.3.2.2</span> Enregistrement long<a href="extraction-de-données-textuelles.html#enregistrement-long" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Pour un enregistrement d’une <strong>durée supérieure à 1 minute</strong>, il est nécessaire de procéder d’une manière légèrement différente.</p>
+<p>Il est nécessaire d’<strong>uploader</strong> le fichier dans un <strong>Google Storage Bucket</strong> (en faisant bien attention que le compte de service qui détient l’accès à l’API Speech-to-text soit défini comme <strong>propriétaire</strong> du bucket en question) puis de préciser dans la requête (parmi les paramètres de la fonction <code>gl_speech()</code>) l’option <code>asynch=TRUE</code>.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="extraction-de-données-textuelles.html#cb53-1" aria-hidden="true" tabindex="-1"></a>result_gl_asynch<span class="ot">=</span><span class="fu">gl_speech</span>(<span class="st">&quot;gs://lise_audio_samples/corbeau_et_renard.wav&quot;</span>,</span>
+<span id="cb53-2"><a href="extraction-de-données-textuelles.html#cb53-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">languageCode=</span><span class="st">&quot;fr-FR&quot;</span>,</span>
+<span id="cb53-3"><a href="extraction-de-données-textuelles.html#cb53-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sampleRateHertz=</span><span class="dv">48000</span>,</span>
+<span id="cb53-4"><a href="extraction-de-données-textuelles.html#cb53-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">asynch=</span><span class="cn">TRUE</span>,</span>
+<span id="cb53-5"><a href="extraction-de-données-textuelles.html#cb53-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">customConfig=</span>my_config)</span>
+<span id="cb53-6"><a href="extraction-de-données-textuelles.html#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gl_speech_op</span>(result_gl_asynch)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="api-watson-speech-to-text-dibm" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> API Watson Speech-to-text d’IBM<a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="enregistrement-mise-en-place-1" class="section level4 hasAnchor" number="2.3.4.1">
+<h4><span class="header-section-number">2.3.4.1</span> Enregistrement, mise en place<a href="extraction-de-données-textuelles.html#enregistrement-mise-en-place-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Ci-après je vous montre comment réaliser la transcription à partir d’une API, <strong>Speech-to-Text Watson d’IBM</strong>. La documentation relative à cette API compte entre autre:</p>
+<ul>
+<li>un document renseignant notamment les paramètres de cette API <a href="https://cloud.ibm.com/apidocs/speech-to-text">ici</a></li>
+<li>un tutoriel pour commencer <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-gettingStarted">ici</a></li>
+<li>un guide avec des requêtes dans différents langages <a href="https://cloud.ibm.com/apidocs/speech-to-text#recognize-audio">ici</a></li>
+</ul>
+<p>Pour être en mesure de s’authentifier la démarche est relativement simple. Il faut</p>
+<ul>
+<li>se créer un compte IBM (fournir son adresse mail)</li>
+<li>une fois enregistré, activer l’API Speech-to-text</li>
+<li>Sur le site d’IBM, aller dans Gérer =&gt; ID de service %&gt;% Créer, et copier la clé d’API ainsi créée.</li>
+</ul>
+<p>La clé d’API ressemble à quelque chose de ce genre:</p>
+<pre><code>&quot;AosL3344P0xzxIhVm2Lj6rJkIB54-672Gc4PsORRtcQQF&quot;</code></pre>
+<p>(cette clé est une fausse clé, ne cherchez pas à la réutiliser ;-) )</p>
+<p>Pour pouvoir utiliser cette clé facilement sans la révéler à vos collaborateurs, je conseille de l’enregistrer en tant que variable d’environnement dans R. Pour ce faire, il suffit d’</p>
+<ul>
+<li>ouvrir le fichier .Renviron</li>
+</ul>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="extraction-de-données-textuelles.html#cb55-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_environ</span>()</span></code></pre></div>
+<ul>
+<li>et y renseigner l’objet “APIKEY_IBM”:</li>
+</ul>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="extraction-de-données-textuelles.html#cb56-1" aria-hidden="true" tabindex="-1"></a>APIKEY_IBM<span class="ot">=</span><span class="st">&quot;AosL3344P0xzxIhVm2Lj6rJkIB54-672Gc4PsORRtcQQF&quot;</span></span></code></pre></div>
+</div>
+<div id="modèles-linguistiques" class="section level4 hasAnchor" number="2.3.4.2">
+<h4><span class="header-section-number">2.3.4.2</span> Modèles linguistiques<a href="extraction-de-données-textuelles.html#modèles-linguistiques" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Pour envoyer des requêtes à l’API nous aurons besoin des packages <code>httr</code> et <code>curl</code>.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="extraction-de-données-textuelles.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<p>Voici les modèles linguistiques disponibles:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="extraction-de-données-textuelles.html#cb58-1" aria-hidden="true" tabindex="-1"></a>tib_models</span></code></pre></div>
+</div>
+<div id="envoi-des-requêtes" class="section level4 hasAnchor" number="2.3.4.3">
+<h4><span class="header-section-number">2.3.4.3</span> Envoi des requêtes<a href="extraction-de-données-textuelles.html#envoi-des-requêtes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>J’ai écrit ci-dessous une fonction <code>IBM_query()</code> qui permet de simplifier l’envoi de requêtes à l’API IBM depuis R.</p>
+<p>(Cette fonction ne fait pas appel aux packages <code>httr</code> et <code>curl</code> car j’ai pour l’instant des difficultés à paramétrer mes requêtes de cette manière!!)</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="extraction-de-données-textuelles.html#cb59-1" aria-hidden="true" tabindex="-1"></a>IBM_query<span class="ot">=</span><span class="cf">function</span>(audio_path,</span>
+<span id="cb59-2"><a href="extraction-de-données-textuelles.html#cb59-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">language_model=</span><span class="st">&quot;fr-FR_BroadbandModel&quot;</span>,</span>
+<span id="cb59-3"><a href="extraction-de-données-textuelles.html#cb59-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">keywords=</span><span class="cn">NA</span>){</span>
+<span id="cb59-4"><a href="extraction-de-données-textuelles.html#cb59-4" aria-hidden="true" tabindex="-1"></a>    audio_path_complete<span class="ot">=</span><span class="fu">paste0</span>(<span class="fu">getwd</span>(),<span class="st">&quot;/&quot;</span>,audio_path)</span>
+<span id="cb59-5"><a href="extraction-de-données-textuelles.html#cb59-5" aria-hidden="true" tabindex="-1"></a>    output_path<span class="ot">=</span><span class="st">&quot;output_IBM_speechtotext.json&quot;</span></span>
+<span id="cb59-6"><a href="extraction-de-données-textuelles.html#cb59-6" aria-hidden="true" tabindex="-1"></a>    query<span class="ot">=</span><span class="fu">paste0</span>(<span class="st">&#39;curl -X POST -u &quot;apikey:wk7XCWYBKloXIaxWRVq8GdFh_hJL1cdLPONR-IRLaYwJ&quot; &#39;</span>,</span>
+<span id="cb59-7"><a href="extraction-de-données-textuelles.html#cb59-7" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;--output &quot;&#39;</span>,</span>
+<span id="cb59-8"><a href="extraction-de-données-textuelles.html#cb59-8" aria-hidden="true" tabindex="-1"></a>                 output_path,</span>
+<span id="cb59-9"><a href="extraction-de-données-textuelles.html#cb59-9" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;&quot; --header &quot;Content-Type: application/octet-stream&quot; &#39;</span>,</span>
+<span id="cb59-10"><a href="extraction-de-données-textuelles.html#cb59-10" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;--data-binary @&#39;</span>,</span>
+<span id="cb59-11"><a href="extraction-de-données-textuelles.html#cb59-11" aria-hidden="true" tabindex="-1"></a>                 audio_path_complete,<span class="st">&quot; &quot;</span>,</span>
+<span id="cb59-12"><a href="extraction-de-données-textuelles.html#cb59-12" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;&quot;https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/v1/recognize&#39;</span>,</span>
+<span id="cb59-13"><a href="extraction-de-données-textuelles.html#cb59-13" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;?model=&#39;</span>,</span>
+<span id="cb59-14"><a href="extraction-de-données-textuelles.html#cb59-14" aria-hidden="true" tabindex="-1"></a>                 language_model,</span>
+<span id="cb59-15"><a href="extraction-de-données-textuelles.html#cb59-15" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;&amp;word_alternatives_threshold=0.5&quot;</span>)</span>
+<span id="cb59-16"><a href="extraction-de-données-textuelles.html#cb59-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.na</span>(keywords)){</span>
+<span id="cb59-17"><a href="extraction-de-données-textuelles.html#cb59-17" aria-hidden="true" tabindex="-1"></a>      query<span class="ot">=</span><span class="fu">paste0</span>(query,</span>
+<span id="cb59-18"><a href="extraction-de-données-textuelles.html#cb59-18" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;&amp;keywords=&quot;</span>,</span>
+<span id="cb59-19"><a href="extraction-de-données-textuelles.html#cb59-19" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">paste0</span>(keywords, <span class="at">collapse=</span><span class="st">&quot;%2C&quot;</span>),</span>
+<span id="cb59-20"><a href="extraction-de-données-textuelles.html#cb59-20" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;&amp;keywords_threshold=0.5&quot;</span></span>
+<span id="cb59-21"><a href="extraction-de-données-textuelles.html#cb59-21" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb59-22"><a href="extraction-de-données-textuelles.html#cb59-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb59-23"><a href="extraction-de-données-textuelles.html#cb59-23" aria-hidden="true" tabindex="-1"></a>    query<span class="ot">=</span><span class="fu">paste0</span>(query,</span>
+<span id="cb59-24"><a href="extraction-de-données-textuelles.html#cb59-24" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;&quot;&#39;</span>)</span>
+<span id="cb59-25"><a href="extraction-de-données-textuelles.html#cb59-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">system</span>(query)</span>
+<span id="cb59-26"><a href="extraction-de-données-textuelles.html#cb59-26" aria-hidden="true" tabindex="-1"></a>    result<span class="ot">=</span>jsonlite<span class="sc">::</span><span class="fu">read_json</span>(output_path)</span>
+<span id="cb59-27"><a href="extraction-de-données-textuelles.html#cb59-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlink</span>(output_path)</span>
+<span id="cb59-28"><a href="extraction-de-données-textuelles.html#cb59-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(result)</span>
+<span id="cb59-29"><a href="extraction-de-données-textuelles.html#cb59-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Cette fonction a deux arguments principaux:</p>
+<ul>
+<li>Le chemin vers l’enregistrement audio (<code>audio_path</code>)</li>
+<li>le modèle retenu (<code>language_model</code>, ici “fr-FR-BroadbandModel”)</li>
+</ul>
+<p>Je fais tourner cette fonction sur l’enregistrement “corbeau_et_renard.wav”.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="extraction-de-données-textuelles.html#cb60-1" aria-hidden="true" tabindex="-1"></a>result_IBM<span class="ot">=</span><span class="fu">IBM_query</span>(<span class="at">audio_path=</span><span class="st">&quot;data/corbeau_et_renard.wav&quot;</span>,</span>
+<span id="cb60-2"><a href="extraction-de-données-textuelles.html#cb60-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">language_model=</span><span class="st">&quot;fr-FR_BroadbandModel&quot;</span>)</span></code></pre></div>
+<p>Il faut mettre un peu en forme le résultat pour obtenir la transcription:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="extraction-de-données-textuelles.html#cb61-1" aria-hidden="true" tabindex="-1"></a>transcript_IBM<span class="ot">=</span>result_IBM<span class="sc">$</span>results <span class="sc">%&gt;%</span> </span>
+<span id="cb61-2"><a href="extraction-de-données-textuelles.html#cb61-2" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map</span>(<span class="st">&quot;alternatives&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb61-3"><a href="extraction-de-données-textuelles.html#cb61-3" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb61-4"><a href="extraction-de-données-textuelles.html#cb61-4" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map</span>(<span class="st">&quot;transcript&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb61-5"><a href="extraction-de-données-textuelles.html#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="at">collapse=</span><span class="st">&quot;. &quot;</span>)</span></code></pre></div>
+<p>Juste pour voir l’ensemble du texte sans avoir à scroller horizontalement:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="extraction-de-données-textuelles.html#cb62-1" aria-hidden="true" tabindex="-1"></a>tibtxt<span class="ot">=</span><span class="fu">tibble</span>(<span class="at">txt=</span>transcript_IBM)</span>
+<span id="cb62-2"><a href="extraction-de-données-textuelles.html#cb62-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tibtxt)</span></code></pre></div>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="strings.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/lvaudor/Descriptoire/edit/master/02-extraction.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

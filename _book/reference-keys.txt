@@ -65,3 +65,13 @@ section
 mise-en-forme
 calcul-du-modèle
 assignation-dun-thème-aux-documents
+principe
+mise-en-oeuvre
+corpus-ministereco
+introduction
+quest-ce-que-la-textométrie
+pourquoi-faire-ses-analyses-textométriques-sous-r
+table-lexicale
+spécificités-spec
+afc
+spec

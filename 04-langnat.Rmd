@@ -1,6 +1,23 @@
 # Langage naturel
 
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+library(tidyverse)
+library(purrr)
+library(rvest)
+library(tidytext)
+library(proustr)
+library(stringr)
+library(widyr)
+library(mixr)
+freq_mots=readRDS("data/freq_mots.RDS")
+mots_cooc=readRDS("data/mots_cooc.RDS")
+tib_mots_nonvides=readRDS("data/tib_mots_nonvides.RDS")
+library(mixr)
+```
+
+
 Reprenons pour cette partie la **table des commentaires** du blog fictif "Ma vie à la ferme" (présenté dans le chapitre 2). Cette table est accessible depuis [cette adresse](https://perso.ens-lyon.fr/lise.vaudor/Descriptoire/data/tibtot_commentaires.csv).
 
 
@@ -10,6 +27,8 @@ tibtot_commentaires
 ```
 
 ## Tokenization
+
+### Principe
 
 ![](images/step3_process.png)
 
@@ -23,6 +42,8 @@ Par exemple, on peut décider que l'unité d'analyse (l'individu) pour nos analy
 - le **n-gram** 
 - le **mot**
 - etc.
+
+### Mise en oeuvre
 
 Pour réaliser cette tokenisation nous allons utiliser le package `tidytext`
 <img src='images/logo_tidytext.png' width='50'> et notamment sa fonction `unnest_tokens()`.
@@ -90,7 +111,7 @@ proustr::pr_stem_words(tib_mots_nonvides,mot)
 
 ### Nettoyage de la table par lemmatisation
 
-La **lemmatisation** consiste faire correspondre à un mot (ou **forme**) la forme neutre (ou **lemme**) que ce mot aurait par exemple par défaut dans un dictionnaire.
+La **lemmatisation** consiste faire correspondre à un mot (ou **forme**) la forme neutre (ou **lemme**) que ce mot aurait par exemple par défaut dans un dictionnaire. Pour un nom, cela serait la forme au **masculin** **singulier** par exemple; pour un verbe conjugué, ce serait l'**infinitif**.
 
 Il est possible de lemmatiser en utilisant l'outil [TreeTagger](http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/) (gratuit, mais propriétaire). Cet outil est utilisable dans R via le package `koRpus` [vignette ici](https://cran.r-project.org/web/packages/koRpus/vignettes/koRpus_vignette.pdf)
 

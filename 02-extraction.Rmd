@@ -20,8 +20,6 @@ Pour **récolter le contenu textuel d'une page web**, il faut être en mesure de
 - **sélectionner un élément** de la page
 - **récupérer le contenu** de l'élément
 
-
-
 ### Langage html
 
 Le langage html est consitué de **balises** qui permettent de **mettre en forme le contenu statique d'une page web**.
@@ -403,14 +401,14 @@ GL_AUTH="/home/lvaudor/google_service_authentication.json"
 
 Dès que GL_AUTH est définie correctement (et le fichier .json au bon endroit!), on peut charger le package `googleLanguageR` que nous allons utiliser pour envoyer des requêtes à l'API Cloud Speech-to-text de Google. L'authentification se fait automatiquement au chargement du package:
 
-```{r}
+```{r, eval=FALSE}
 library(googleLanguageR)
 ```
 
 
 #### Envoi des requêtes à l'API
 
-```{r, include=FALSE}
+```{r, include=FALSE, eval=FALSE}
 # result_int=gl_speech("gs://lise_audio_samples/test.csv",
 #                   languageCode="fr-FR",
 #                   asynch=TRUE,
@@ -427,7 +425,7 @@ library(googleLanguageR)
 
 On peut **configurer les options de l'API** en prévision l'envoi de la requête en lui passant une liste de paramètres, par exemple:
 
-```{r Google_API_speech_config}
+```{r Google_API_speech_config, eval=FALSE}
 my_config <- list(diarizationConfig=list(enableSpeakerDiarization=TRUE),
                   enableWordConfidence=TRUE,
                   enableAutomaticPunctuation = TRUE)
@@ -451,21 +449,21 @@ Passons maintenant la requête elle-même.
 
 Pour un **enregistrement relativement court** (<1 min, ce qui est le cas ici), on peut procéder de la manière suivante:
 
-```{r envoi_corbeau_renard_google, cache=TRUE}
+```{r envoi_corbeau_renard_google, cache=TRUE, eval=FALSE}
 result_gl=gl_speech("data/corbeau_et_renard.wav",
                     languageCode="fr-FR",
                     sampleRateHertz=48000,
                     customConfig=my_config)
 ```
 
-```{r resultat_Google_corbeau_renard}
+```{r resultat_Google_corbeau_renard, eval=FALSE}
 resultat=result_gl$timings[[2]]
 resultat
 ```
 
 On peut mettre en forme les résultats pour obtenir la transcription suivante (elle prend ici en compte les changements de locuteur:)
 
-```{r}
+```{r, eval=FALSE}
 transcript_Google=
   resultat %>%
   mutate(speakerChange=abs(speakerTag-lag(speakerTag,1, default=1))) %>% 
@@ -476,7 +474,7 @@ transcript_Google=
 ```
 
 
-```{r show_transcript_google}
+```{r show_transcript_google, eval=FALSE}
 knitr::kable(transcript_Google)
 ```
 
@@ -486,7 +484,7 @@ Pour un enregistrement d'une **durée supérieure à 1 minute**, il est nécessa
 
 Il est nécessaire d'**uploader** le fichier dans un **Google Storage Bucket** (en faisant bien attention que le compte de service qui détient l'accès à l'API Speech-to-text soit défini comme **propriétaire** du bucket en question) puis de préciser dans la requête (parmi les paramètres de la fonction `gl_speech()`) l'option `asynch=TRUE`.
 
-```{r envoi_corbeau_renard_google_bucket}
+```{r envoi_corbeau_renard_google_bucket, eval=FALSE}
 result_gl_asynch=gl_speech("gs://lise_audio_samples/corbeau_et_renard.wav",
                            languageCode="fr-FR",
                            sampleRateHertz=48000,
@@ -538,13 +536,13 @@ APIKEY_IBM="AosL3344P0xzxIhVm2Lj6rJkIB54-672Gc4PsORRtcQQF"
 
 Pour envoyer des requêtes à l'API nous aurons besoin des packages `httr` et `curl`.
 
-```{r load_libraries_for_transcription, message=FALSE, warning=FALSE}
+```{r load_libraries_for_transcription, message=FALSE, warning=FALSE, eval=FALSE}
 library(dplyr)
 ```
 
 Voici les modèles linguistiques disponibles:
 
-```{r get_tibmodels, echo=FALSE, warning=FALSE, message=FALSE}
+```{r get_tibmodels, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
 library(httr)
 library(curl)
 authorization=paste0("Basic ",
@@ -559,7 +557,7 @@ tib_models=content(models) %>%
   as_tibble()
 ```
 
-```{r show_tibmodels}
+```{r show_tibmodels, eval=FALSE}
 tib_models
 ```
 
@@ -570,7 +568,7 @@ J'ai écrit ci-dessous une fonction `IBM_query()` qui permet de simplifier l'env
 
 (Cette fonction ne fait pas appel aux packages `httr` et `curl` car j'ai pour l'instant des difficultés à paramétrer mes requêtes de cette manière!!)
 
-```{r}
+```{r, eval=FALSE}
 IBM_query=function(audio_path,
                    language_model="fr-FR_BroadbandModel",
                    keywords=NA){
@@ -609,14 +607,14 @@ Cette fonction a deux arguments principaux:
 
 Je fais tourner cette fonction sur l'enregistrement "corbeau_et_renard.wav".
 
-```{r IBM_corbeau_renard, cache=TRUE}
+```{r IBM_corbeau_renard, cache=TRUE, eval=FALSE}
 result_IBM=IBM_query(audio_path="data/corbeau_et_renard.wav",
                      language_model="fr-FR_BroadbandModel")
 ```
 
 Il faut mettre un peu en forme le résultat pour obtenir la transcription:
 
-```{r transform_result_IBM_into_transcript}
+```{r transform_result_IBM_into_transcript, eval=FALSE}
 transcript_IBM=result_IBM$results %>% 
   purrr::map("alternatives") %>% 
   purrr::map(1) %>% 
@@ -626,7 +624,7 @@ transcript_IBM=result_IBM$results %>%
 
 Juste pour voir l’ensemble du texte sans avoir à scroller horizontalement:
 
-```{r show_transcript_IBM}
+```{r show_transcript_IBM, eval=FALSE}
 tibtxt=tibble(txt=transcript_IBM)
 knitr::kable(tibtxt)
 ```

@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 3 Langage naturel | Le Descriptoire: Recueil et analyse de texte avec R </title>
+  <title>Chapitre 4 Langage naturel | Le Descriptoire: Recueil et analyse de texte avec R </title>
   <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 3 Langage naturel | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta property="og:title" content="Chapitre 4 Langage naturel | Le Descriptoire: Recueil et analyse de texte avec R " />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 3 Langage naturel | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta name="twitter:title" content="Chapitre 4 Langage naturel | Le Descriptoire: Recueil et analyse de texte avec R " />
   
   <meta name="twitter:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
   
@@ -24,7 +23,7 @@
 <meta name="author" content=" Lise Vaudor" />
 
 
-<meta name="date" content="2022-12-19" />
+<meta name="date" content="2023-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="strings.html"/>
 <link rel="next" href="résumer-linformation-par-des-métriques.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -146,87 +145,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </script>
 
 <li class="divider"></li>
-<li><a href="extraction-de-données-textuelles.html#extraction-de-données-textuelles" id="toc-extraction-de-données-textuelles"><span class="toc-section-number">1</span> Extraction de données textuelles</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping" id="toc-depuis-des-pages-web-web-scraping"><span class="toc-section-number">1.1</span> Depuis des pages web: web-scraping</a>
-<ul>
-<li><a href="extraction-de-données-textuelles.html#langage-html" id="toc-langage-html"><span class="toc-section-number">1.1.1</span> Langage html</a></li>
-<li><a href="extraction-de-données-textuelles.html#lire-une-page-html" id="toc-lire-une-page-html"><span class="toc-section-number">1.1.2</span> Lire une page html</a></li>
-<li><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html" id="toc-extraire-certains-éléments-dune-page-html"><span class="toc-section-number">1.1.3</span> Extraire certains éléments d’une page html</a></li>
-<li><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction" id="toc-passage-au-format-rectangulaire-et-mise-en-fonction"><span class="toc-section-number">1.1.4</span> Passage au format rectangulaire, et mise en fonction</a></li>
-<li><a href="extraction-de-données-textuelles.html#itération" id="toc-itération"><span class="toc-section-number">1.1.5</span> Itération</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#quest-ce-que-la-textométrie"><i class="fa fa-check"></i><b>1.1</b> Qu’est-ce que la textométrie?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r"><i class="fa fa-check"></i><b>1.2</b> Pourquoi faire ses analyses textométriques sous R?</a></li>
 </ul></li>
-<li><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation" id="toc-depuis-des-images-ou-des-documents-pdf-ocrisation"><span class="toc-section-number">1.2</span> Depuis des images ou des documents pdf: OCRisation</a>
+<li class="chapter" data-level="2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>2</b> Extraction de données textuelles</a>
 <ul>
-<li><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract" id="toc-utilisation-du-package-tesseract"><span class="toc-section-number">1.2.1</span> Utilisation du package <code>tesseract</code></a></li>
-<li><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf" id="toc-et-pour-ocriser-depuis-un-pdf"><span class="toc-section-number">1.2.2</span> Et pour OCRiser depuis un pdf??</a></li>
+<li class="chapter" data-level="2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping"><i class="fa fa-check"></i><b>2.1</b> Depuis des pages web: web-scraping</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#langage-html"><i class="fa fa-check"></i><b>2.1.1</b> Langage html</a></li>
+<li class="chapter" data-level="2.1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#lire-une-page-html"><i class="fa fa-check"></i><b>2.1.2</b> Lire une page html</a></li>
+<li class="chapter" data-level="2.1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html"><i class="fa fa-check"></i><b>2.1.3</b> Extraire certains éléments d’une page html</a></li>
+<li class="chapter" data-level="2.1.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction"><i class="fa fa-check"></i><b>2.1.4</b> Passage au format rectangulaire, et mise en fonction</a></li>
+<li class="chapter" data-level="2.1.5" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#itération"><i class="fa fa-check"></i><b>2.1.5</b> Itération</a></li>
 </ul></li>
-<li><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription" id="toc-depuis-des-enregistrements-audio-transcription"><span class="toc-section-number">1.3</span> Depuis des enregistrements audio: transcription</a>
+<li class="chapter" data-level="2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation"><i class="fa fa-check"></i><b>2.2</b> Depuis des images ou des documents pdf: OCRisation</a>
 <ul>
-<li><a href="extraction-de-données-textuelles.html#présentation-de-lexemple" id="toc-présentation-de-lexemple"><span class="toc-section-number">1.3.1</span> Présentation de l’exemple</a></li>
-<li><a href="extraction-de-données-textuelles.html#prétraitements-éventuels" id="toc-prétraitements-éventuels"><span class="toc-section-number">1.3.2</span> Prétraitements éventuels</a></li>
-<li><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager" id="toc-api-speech-to-text-google-package-googlelanguager"><span class="toc-section-number">1.3.3</span> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
-<li><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm" id="toc-api-watson-speech-to-text-dibm"><span class="toc-section-number">1.3.4</span> API Watson Speech-to-text d’IBM</a></li>
+<li class="chapter" data-level="2.2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract"><i class="fa fa-check"></i><b>2.2.1</b> Utilisation du package <code>tesseract</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf"><i class="fa fa-check"></i><b>2.2.2</b> Et pour OCRiser depuis un pdf??</a></li>
 </ul></li>
-</ul></li>
-<li><a href="strings.html#strings" id="toc-strings"><span class="toc-section-number">2</span> Manipuler des strings: package stringr</a>
+<li class="chapter" data-level="2.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription"><i class="fa fa-check"></i><b>2.3</b> Depuis des enregistrements audio: transcription</a>
 <ul>
-<li><a href="strings.html#strings-1" id="toc-strings-1"><span class="toc-section-number">2.1</span> Strings</a>
-<ul>
-<li><a href="strings.html#détection-remplacement" id="toc-détection-remplacement"><span class="toc-section-number">2.1.1</span> détection, remplacement</a></li>
-<li><a href="strings.html#division-correspondance" id="toc-division-correspondance"><span class="toc-section-number">2.1.2</span> division, correspondance</a></li>
-<li><a href="strings.html#extraction" id="toc-extraction"><span class="toc-section-number">2.1.3</span> extraction</a></li>
-<li><a href="strings.html#comptage-subset" id="toc-comptage-subset"><span class="toc-section-number">2.1.4</span> comptage, subset</a></li>
-<li><a href="strings.html#longueur-sous-partie" id="toc-longueur-sous-partie"><span class="toc-section-number">2.1.5</span> longueur, sous-partie</a></li>
-</ul></li>
-<li><a href="strings.html#expressions-régulières" id="toc-expressions-régulières"><span class="toc-section-number">2.2</span> Expressions régulières</a>
-<ul>
-<li><a href="strings.html#classes-de-caractères-et-groupes" id="toc-classes-de-caractères-et-groupes"><span class="toc-section-number">2.2.1</span> classes de caractères et groupes</a></li>
-<li><a href="strings.html#caractères-spéciaux" id="toc-caractères-spéciaux"><span class="toc-section-number">2.2.2</span> caractères spéciaux</a></li>
-<li><a href="strings.html#caractères-exclus-gammes-de-caractères" id="toc-caractères-exclus-gammes-de-caractères"><span class="toc-section-number">2.2.3</span> caractères exclus, gammes de caractères</a></li>
-<li><a href="strings.html#classes-prédéfinies" id="toc-classes-prédéfinies"><span class="toc-section-number">2.2.4</span> classes prédéfinies</a></li>
-<li><a href="strings.html#quelques-exemples-pour-bien-comprendre" id="toc-quelques-exemples-pour-bien-comprendre"><span class="toc-section-number">2.2.5</span> quelques exemples pour bien comprendre</a></li>
-<li><a href="strings.html#groupes-et-références-arrières" id="toc-groupes-et-références-arrières"><span class="toc-section-number">2.2.6</span> groupes et références arrières</a></li>
-<li><a href="strings.html#quantificateurs" id="toc-quantificateurs"><span class="toc-section-number">2.2.7</span> quantificateurs</a></li>
-<li><a href="strings.html#ancres-et-assertions-avant-arrière" id="toc-ancres-et-assertions-avant-arrière"><span class="toc-section-number">2.2.8</span> ancres et assertions avant-arrière</a></li>
-<li><a href="strings.html#assertions-avant-arrière" id="toc-assertions-avant-arrière"><span class="toc-section-number">2.2.9</span> assertions avant-arrière</a></li>
+<li class="chapter" data-level="2.3.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#présentation-de-lexemple"><i class="fa fa-check"></i><b>2.3.1</b> Présentation de l’exemple</a></li>
+<li class="chapter" data-level="2.3.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#prétraitements-éventuels"><i class="fa fa-check"></i><b>2.3.2</b> Prétraitements éventuels</a></li>
+<li class="chapter" data-level="2.3.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager"><i class="fa fa-check"></i><b>2.3.3</b> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
+<li class="chapter" data-level="2.3.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm"><i class="fa fa-check"></i><b>2.3.4</b> API Watson Speech-to-text d’IBM</a></li>
 </ul></li>
 </ul></li>
-<li><a href="langage-naturel.html#langage-naturel" id="toc-langage-naturel"><span class="toc-section-number">3</span> Langage naturel</a>
+<li class="chapter" data-level="3" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>3</b> Manipuler des strings: package stringr</a>
 <ul>
-<li><a href="langage-naturel.html#tokenization" id="toc-tokenization"><span class="toc-section-number">3.1</span> Tokenization</a></li>
-<li><a href="langage-naturel.html#nettoyage-de-la-table" id="toc-nettoyage-de-la-table"><span class="toc-section-number">3.2</span> Nettoyage de la table</a>
+<li class="chapter" data-level="3.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>3.1</b> Strings</a>
 <ul>
-<li><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides" id="toc-nettoyage-de-la-table-par-suppression-des-mots-vides"><span class="toc-section-number">3.2.1</span> Nettoyage de la table par suppression des mots vides</a></li>
-<li><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming" id="toc-nettoyage-de-la-table-par-racinisation-stemming"><span class="toc-section-number">3.2.2</span> Nettoyage de la table par racinisation (stemming)</a></li>
-<li><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation" id="toc-nettoyage-de-la-table-par-lemmatisation"><span class="toc-section-number">3.2.3</span> Nettoyage de la table par lemmatisation</a></li>
+<li class="chapter" data-level="3.1.1" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>3.1.1</b> détection, remplacement</a></li>
+<li class="chapter" data-level="3.1.2" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>3.1.2</b> division, correspondance</a></li>
+<li class="chapter" data-level="3.1.3" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>3.1.3</b> extraction</a></li>
+<li class="chapter" data-level="3.1.4" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>3.1.4</b> comptage, subset</a></li>
+<li class="chapter" data-level="3.1.5" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>3.1.5</b> longueur, sous-partie</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>3.2</b> Expressions régulières</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="strings.html"><a href="strings.html#classes-de-caractères-et-groupes"><i class="fa fa-check"></i><b>3.2.1</b> classes de caractères et groupes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="strings.html"><a href="strings.html#caractères-spéciaux"><i class="fa fa-check"></i><b>3.2.2</b> caractères spéciaux</a></li>
+<li class="chapter" data-level="3.2.3" data-path="strings.html"><a href="strings.html#caractères-exclus-gammes-de-caractères"><i class="fa fa-check"></i><b>3.2.3</b> caractères exclus, gammes de caractères</a></li>
+<li class="chapter" data-level="3.2.4" data-path="strings.html"><a href="strings.html#classes-prédéfinies"><i class="fa fa-check"></i><b>3.2.4</b> classes prédéfinies</a></li>
+<li class="chapter" data-level="3.2.5" data-path="strings.html"><a href="strings.html#quelques-exemples-pour-bien-comprendre"><i class="fa fa-check"></i><b>3.2.5</b> quelques exemples pour bien comprendre</a></li>
+<li class="chapter" data-level="3.2.6" data-path="strings.html"><a href="strings.html#groupes-et-références-arrières"><i class="fa fa-check"></i><b>3.2.6</b> groupes et références arrières</a></li>
+<li class="chapter" data-level="3.2.7" data-path="strings.html"><a href="strings.html#quantificateurs"><i class="fa fa-check"></i><b>3.2.7</b> quantificateurs</a></li>
+<li class="chapter" data-level="3.2.8" data-path="strings.html"><a href="strings.html#ancres-et-assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.8</b> ancres et assertions avant-arrière</a></li>
+<li class="chapter" data-level="3.2.9" data-path="strings.html"><a href="strings.html#assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.9</b> assertions avant-arrière</a></li>
 </ul></li>
 </ul></li>
-<li><a href="résumer-linformation-par-des-métriques.html#résumer-linformation-par-des-métriques" id="toc-résumer-linformation-par-des-métriques"><span class="toc-section-number">4</span> Résumer l’information par des métriques</a>
+<li class="chapter" data-level="4" data-path="langage-naturel.html"><a href="langage-naturel.html"><i class="fa fa-check"></i><b>4</b> Langage naturel</a>
 <ul>
-<li><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence" id="toc-fréquences-doccurrence"><span class="toc-section-number">4.1</span> Fréquences d’occurrence</a></li>
-<li><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations" id="toc-co-occurrences-corrélations"><span class="toc-section-number">4.2</span> Co-occurrences, corrélations</a></li>
-<li><a href="résumer-linformation-par-des-métriques.html#tf-idf" id="toc-tf-idf"><span class="toc-section-number">4.3</span> TF-IDF</a></li>
-<li><a href="résumer-linformation-par-des-métriques.html#spécificités" id="toc-spécificités"><span class="toc-section-number">4.4</span> Spécificités</a></li>
+<li class="chapter" data-level="4.1" data-path="langage-naturel.html"><a href="langage-naturel.html#tokenization"><i class="fa fa-check"></i><b>4.1</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="langage-naturel.html"><a href="langage-naturel.html#principe"><i class="fa fa-check"></i><b>4.1.1</b> Principe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="langage-naturel.html"><a href="langage-naturel.html#mise-en-oeuvre"><i class="fa fa-check"></i><b>4.1.2</b> Mise en oeuvre</a></li>
 </ul></li>
-<li><a href="résumer-linformation-par-des-graphiques.html#résumer-linformation-par-des-graphiques" id="toc-résumer-linformation-par-des-graphiques"><span class="toc-section-number">5</span> Résumer l’information par des graphiques</a>
+<li class="chapter" data-level="4.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table"><i class="fa fa-check"></i><b>4.2</b> Nettoyage de la table</a>
 <ul>
-<li><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots" id="toc-nuage-de-mots"><span class="toc-section-number">5.1</span> Nuage de mots</a></li>
-<li><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités" id="toc-diagramme-en-bâtons-occurrences-spécificités"><span class="toc-section-number">5.2</span> Diagramme en bâtons: occurrences, spécificités</a></li>
-<li><a href="résumer-linformation-par-des-graphiques.html#graphes" id="toc-graphes"><span class="toc-section-number">5.3</span> Graphes</a></li>
+<li class="chapter" data-level="4.2.1" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides"><i class="fa fa-check"></i><b>4.2.1</b> Nettoyage de la table par suppression des mots vides</a></li>
+<li class="chapter" data-level="4.2.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming"><i class="fa fa-check"></i><b>4.2.2</b> Nettoyage de la table par racinisation (stemming)</a></li>
+<li class="chapter" data-level="4.2.3" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation"><i class="fa fa-check"></i><b>4.2.3</b> Nettoyage de la table par lemmatisation</a></li>
 </ul></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#rechercher-des-thèmes-topic-modelling" id="toc-rechercher-des-thèmes-topic-modelling"><span class="toc-section-number">6</span> Rechercher des thèmes (topic modelling)</a>
-<ul>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations" id="toc-principe-notations"><span class="toc-section-number">6.1</span> Principe, notations</a></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta" id="toc-scores-beta-beta"><span class="toc-section-number">6.2</span> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#frex" id="toc-frex"><span class="toc-section-number">6.3</span> FREX</a></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm" id="toc-étapes-du-stm"><span class="toc-section-number">6.4</span> étapes du STM</a></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#communiqués-de-presse-du-ministère-de-lécologie" id="toc-communiqués-de-presse-du-ministère-de-lécologie"><span class="toc-section-number">6.5</span> Communiqués de presse du ministère de l’écologie</a>
-<ul>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme" id="toc-mise-en-forme"><span class="toc-section-number">6.5.1</span> Mise en forme</a></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle" id="toc-calcul-du-modèle"><span class="toc-section-number">6.5.2</span> Calcul du modèle</a></li>
 </ul></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents" id="toc-assignation-dun-thème-aux-documents"><span class="toc-section-number">6.6</span> Assignation d’un thème aux documents</a></li>
+<li class="chapter" data-level="5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html"><i class="fa fa-check"></i><b>5</b> Résumer l’information par des métriques</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#corpus-ministereco"><i class="fa fa-check"></i><b>5.1</b> Corpus MinisterEco</a></li>
+<li class="chapter" data-level="5.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>5.2</b> Fréquences d’occurrence</a></li>
+<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>5.3</b> Co-occurrences, corrélations</a></li>
+<li class="chapter" data-level="5.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>5.4</b> TF-IDF</a></li>
+<li class="chapter" data-level="5.5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spécificités"><i class="fa fa-check"></i><b>5.5</b> Spécificités</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>6</b> Résumer l’information par des graphiques</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>6.1</b> Nuage de mots</a></li>
+<li class="chapter" data-level="6.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>6.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
+<li class="chapter" data-level="6.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>6.3</b> Graphes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Rechercher des thèmes (topic modelling)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations"><i class="fa fa-check"></i><b>7.1</b> Principe, notations</a></li>
+<li class="chapter" data-level="7.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta"><i class="fa fa-check"></i><b>7.2</b> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
+<li class="chapter" data-level="7.3" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#frex"><i class="fa fa-check"></i><b>7.3</b> FREX</a></li>
+<li class="chapter" data-level="7.4" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm"><i class="fa fa-check"></i><b>7.4</b> étapes du STM</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme"><i class="fa fa-check"></i><b>7.4.1</b> Mise en forme</a></li>
+<li class="chapter" data-level="7.4.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle"><i class="fa fa-check"></i><b>7.4.2</b> Calcul du modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents"><i class="fa fa-check"></i><b>7.5</b> Assignation d’un thème aux documents</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -249,8 +257,8 @@ Recueil et analyse de texte avec R </img></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="langage-naturel" class="section level1" number="3">
-<h1><span class="header-section-number">Chapitre 3</span> Langage naturel</h1>
+<div id="langage-naturel" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapitre 4</span> Langage naturel<a href="langage-naturel.html#langage-naturel" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Reprenons pour cette partie la <strong>table des commentaires</strong> du blog fictif “Ma vie à la ferme” (présenté dans le chapitre 2). Cette table est accessible depuis <a href="https://perso.ens-lyon.fr/lise.vaudor/Descriptoire/data/tibtot_commentaires.csv">cette adresse</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="langage-naturel.html#cb1-1" aria-hidden="true" tabindex="-1"></a>tibtot_commentaires <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;data/tibtot_commentaires.csv&quot;</span>)</span>
 <span id="cb1-2"><a href="langage-naturel.html#cb1-2" aria-hidden="true" tabindex="-1"></a>tibtot_commentaires</span></code></pre></div>
@@ -269,8 +277,10 @@ Recueil et analyse de texte avec R </img></a>
 ## 10 data/blog_de_norbert.htm   Norbert, mon petit chat, ça fait bien long… Julie…
 ## 11 data/blog_de_norbert.htm   L&#39;ambiance doit être sympa quand les poule… Micka…
 ## 12 data/blog_de_norbert.htm   Vous devez avoir un grain pour écrire des … Vivia…</code></pre>
-<div id="tokenization" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Tokenization</h2>
+<div id="tokenization" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Tokenization<a href="langage-naturel.html#tokenization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="principe" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Principe<a href="langage-naturel.html#principe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="images/step3_process.png" /></p>
 <p>On va maintenant passer à l’étape de <strong>tokenisation</strong> de nos textes.</p>
 <p>Tokeniser, ça revient à définir de quelle manière on <strong>découpe nos textes</strong> pour les analyses ultérieures.</p>
@@ -281,6 +291,9 @@ Recueil et analyse de texte avec R </img></a>
 <li>le <strong>mot</strong></li>
 <li>etc.</li>
 </ul>
+</div>
+<div id="mise-en-oeuvre" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Mise en oeuvre<a href="langage-naturel.html#mise-en-oeuvre" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Pour réaliser cette tokenisation nous allons utiliser le package <code>tidytext</code>
 <img src='images/logo_tidytext.png' width='50'> et notamment sa fonction <code>unnest_tokens()</code>.</p>
 <p><img src="images/step3_process.png" /></p>
@@ -323,8 +336,9 @@ Recueil et analyse de texte avec R </img></a>
 ## 10 data/blog_de_ginette.htm Emma, 22 ans, Limoges du        
 ## # … with 209 more rows</code></pre>
 </div>
-<div id="nettoyage-de-la-table" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Nettoyage de la table</h2>
+</div>
+<div id="nettoyage-de-la-table" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Nettoyage de la table<a href="langage-naturel.html#nettoyage-de-la-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="images/step4_process.png" /></p>
 <ul>
 <li>retirer les <strong>mots vides</strong></li>
@@ -335,8 +349,8 @@ Recueil et analyse de texte avec R </img></a>
 <li>retirer les liens, les “hashtags”, les emojis, etc.</li>
 <li>etc.</li>
 </ul>
-<div id="nettoyage-de-la-table-par-suppression-des-mots-vides" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Nettoyage de la table par suppression des mots vides</h3>
+<div id="nettoyage-de-la-table-par-suppression-des-mots-vides" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Nettoyage de la table par suppression des mots vides<a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Pour des textes en anglais, <code>tidytext</code> comprend une liste de <strong>mots vides</strong> (“stopwords”)</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="langage-naturel.html#cb7-1" aria-hidden="true" tabindex="-1"></a>tidytext<span class="sc">::</span>stop_words</span></code></pre></div>
 <pre><code>## # A tibble: 1,149 × 2
@@ -388,8 +402,8 @@ Recueil et analyse de texte avec R </img></a>
 ## 10 data/blog_de_ginette.htm Emma, 22 ans, Limoges qu&#39;en     
 ## # … with 78 more rows</code></pre>
 </div>
-<div id="nettoyage-de-la-table-par-racinisation-stemming" class="section level3" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Nettoyage de la table par racinisation (stemming)</h3>
+<div id="nettoyage-de-la-table-par-racinisation-stemming" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Nettoyage de la table par racinisation (stemming)<a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La <strong>racinisation</strong> (ou désuffixation, ou stemming en anglais) consiste (comme son nom l’indique) à extraire la racine d’un mot. Souvent, cette racine ne correspond pas à un “vrai mot”…</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="langage-naturel.html#cb13-1" aria-hidden="true" tabindex="-1"></a>proustr<span class="sc">::</span><span class="fu">pr_stem_words</span>(tib_mots_nonvides,mot)</span></code></pre></div>
 <pre><code>## # A tibble: 88 × 3
@@ -407,26 +421,26 @@ Recueil et analyse de texte avec R </img></a>
 ## 10 data/blog_de_ginette.htm Emma, 22 ans, Limoges qu&#39;en 
 ## # … with 78 more rows</code></pre>
 </div>
-<div id="nettoyage-de-la-table-par-lemmatisation" class="section level3" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> Nettoyage de la table par lemmatisation</h3>
-<p>La <strong>lemmatisation</strong> consiste faire correspondre à un mot (ou <strong>forme</strong>) la forme neutre (ou <strong>lemme</strong>) que ce mot aurait par exemple par défaut dans un dictionnaire.</p>
+<div id="nettoyage-de-la-table-par-lemmatisation" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Nettoyage de la table par lemmatisation<a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La <strong>lemmatisation</strong> consiste faire correspondre à un mot (ou <strong>forme</strong>) la forme neutre (ou <strong>lemme</strong>) que ce mot aurait par exemple par défaut dans un dictionnaire. Pour un nom, cela serait la forme au <strong>masculin</strong> <strong>singulier</strong> par exemple; pour un verbe conjugué, ce serait l’<strong>infinitif</strong>.</p>
 <p>Il est possible de lemmatiser en utilisant l’outil <a href="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/">TreeTagger</a> (gratuit, mais propriétaire). Cet outil est utilisable dans R via le package <code>koRpus</code> <a href="https://cran.r-project.org/web/packages/koRpus/vignettes/koRpus_vignette.pdf">vignette ici</a></p>
 <p>Pour ma part, je lemmatise la plupart du temps en me basant sur une base de données lexicales libre, <a href="http://www.lexique.org/telLexique.php">Lexique</a> qui fait correspondre formes et lemmes de très nombreux mots en français. J’ai réalisé une simple jointure, sans considération <em>syntaxique</em>.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="langage-naturel.html#cb15-1" aria-hidden="true" tabindex="-1"></a>lexique382<span class="ot">=</span>mixr<span class="sc">::</span><span class="fu">get_lexicon</span>(<span class="st">&quot;fr&quot;</span>)</span>
 <span id="cb15-2"><a href="langage-naturel.html#cb15-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">sample_n</span>(lexique382,<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 3
-##    word        lemma       type   
-##    &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;  
-##  1 automotrice automoteur  adj    
-##  2 castard     castard     nom    
-##  3 sous_jacent sous_jacent adj    
-##  4 traînasses  traînasser  ver    
-##  5 faux_fuyant faux_fuyant nom    
-##  6 raclais     racler      ver    
-##  7 gigot       gigot       nom    
-##  8 permanenter permanenter ver    
-##  9 trempai     tremper     ver    
-## 10 outres      outre       nom_sup</code></pre>
+##    word           lemma        type 
+##    &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;
+##  1 détournait     détourner    ver  
+##  2 happy_end      happy_end    nom  
+##  3 rembourrés     rembourrer   ver  
+##  4 pestilentielle pestilentiel adj  
+##  5 glanée         glaner       ver  
+##  6 scoutisme      scoutisme    nom  
+##  7 khalife        khalife      nom  
+##  8 malmenés       malmener     ver  
+##  9 chopaient      choper       ver  
+## 10 réconfortés    réconforter  ver</code></pre>
 <p>Dans ce cas on réalise une <strong>jointure</strong> pour récupérer le lemme de chaque mot dans notre table:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="langage-naturel.html#cb17-1" aria-hidden="true" tabindex="-1"></a>tib_mots_nonvides <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(tib_mots_nonvides,</span>
 <span id="cb17-2"><a href="langage-naturel.html#cb17-2" aria-hidden="true" tabindex="-1"></a>                                      lexique382,</span>
@@ -517,7 +531,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

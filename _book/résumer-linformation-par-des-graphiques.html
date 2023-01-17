@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 6 Résumer l’information par des graphiques | Le Descriptoire: Recueil et analyse de texte avec R </title>
+  <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 6 Résumer l’information par des graphiques | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 6 Résumer l’information par des graphiques | Le Descriptoire: Recueil et analyse de texte avec R " />
+  
+  <meta name="twitter:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+<meta name="author" content=" Lise Vaudor" />
+
+
+<meta name="date" content="2023-01-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="résumer-linformation-par-des-métriques.html"/>
+<link rel="next" href="rechercher-des-thèmes-topic-modelling.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> le Descriptoire </a></li>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128646266-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128646266-2');
+  </script>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#quest-ce-que-la-textométrie"><i class="fa fa-check"></i><b>1.1</b> Qu’est-ce que la textométrie?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r"><i class="fa fa-check"></i><b>1.2</b> Pourquoi faire ses analyses textométriques sous R?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>2</b> Extraction de données textuelles</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping"><i class="fa fa-check"></i><b>2.1</b> Depuis des pages web: web-scraping</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#langage-html"><i class="fa fa-check"></i><b>2.1.1</b> Langage html</a></li>
+<li class="chapter" data-level="2.1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#lire-une-page-html"><i class="fa fa-check"></i><b>2.1.2</b> Lire une page html</a></li>
+<li class="chapter" data-level="2.1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html"><i class="fa fa-check"></i><b>2.1.3</b> Extraire certains éléments d’une page html</a></li>
+<li class="chapter" data-level="2.1.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction"><i class="fa fa-check"></i><b>2.1.4</b> Passage au format rectangulaire, et mise en fonction</a></li>
+<li class="chapter" data-level="2.1.5" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#itération"><i class="fa fa-check"></i><b>2.1.5</b> Itération</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation"><i class="fa fa-check"></i><b>2.2</b> Depuis des images ou des documents pdf: OCRisation</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract"><i class="fa fa-check"></i><b>2.2.1</b> Utilisation du package <code>tesseract</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf"><i class="fa fa-check"></i><b>2.2.2</b> Et pour OCRiser depuis un pdf??</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription"><i class="fa fa-check"></i><b>2.3</b> Depuis des enregistrements audio: transcription</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#présentation-de-lexemple"><i class="fa fa-check"></i><b>2.3.1</b> Présentation de l’exemple</a></li>
+<li class="chapter" data-level="2.3.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#prétraitements-éventuels"><i class="fa fa-check"></i><b>2.3.2</b> Prétraitements éventuels</a></li>
+<li class="chapter" data-level="2.3.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager"><i class="fa fa-check"></i><b>2.3.3</b> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
+<li class="chapter" data-level="2.3.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm"><i class="fa fa-check"></i><b>2.3.4</b> API Watson Speech-to-text d’IBM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>3</b> Manipuler des strings: package stringr</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>3.1</b> Strings</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>3.1.1</b> détection, remplacement</a></li>
+<li class="chapter" data-level="3.1.2" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>3.1.2</b> division, correspondance</a></li>
+<li class="chapter" data-level="3.1.3" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>3.1.3</b> extraction</a></li>
+<li class="chapter" data-level="3.1.4" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>3.1.4</b> comptage, subset</a></li>
+<li class="chapter" data-level="3.1.5" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>3.1.5</b> longueur, sous-partie</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>3.2</b> Expressions régulières</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="strings.html"><a href="strings.html#classes-de-caractères-et-groupes"><i class="fa fa-check"></i><b>3.2.1</b> classes de caractères et groupes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="strings.html"><a href="strings.html#caractères-spéciaux"><i class="fa fa-check"></i><b>3.2.2</b> caractères spéciaux</a></li>
+<li class="chapter" data-level="3.2.3" data-path="strings.html"><a href="strings.html#caractères-exclus-gammes-de-caractères"><i class="fa fa-check"></i><b>3.2.3</b> caractères exclus, gammes de caractères</a></li>
+<li class="chapter" data-level="3.2.4" data-path="strings.html"><a href="strings.html#classes-prédéfinies"><i class="fa fa-check"></i><b>3.2.4</b> classes prédéfinies</a></li>
+<li class="chapter" data-level="3.2.5" data-path="strings.html"><a href="strings.html#quelques-exemples-pour-bien-comprendre"><i class="fa fa-check"></i><b>3.2.5</b> quelques exemples pour bien comprendre</a></li>
+<li class="chapter" data-level="3.2.6" data-path="strings.html"><a href="strings.html#groupes-et-références-arrières"><i class="fa fa-check"></i><b>3.2.6</b> groupes et références arrières</a></li>
+<li class="chapter" data-level="3.2.7" data-path="strings.html"><a href="strings.html#quantificateurs"><i class="fa fa-check"></i><b>3.2.7</b> quantificateurs</a></li>
+<li class="chapter" data-level="3.2.8" data-path="strings.html"><a href="strings.html#ancres-et-assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.8</b> ancres et assertions avant-arrière</a></li>
+<li class="chapter" data-level="3.2.9" data-path="strings.html"><a href="strings.html#assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.9</b> assertions avant-arrière</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="langage-naturel.html"><a href="langage-naturel.html"><i class="fa fa-check"></i><b>4</b> Langage naturel</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="langage-naturel.html"><a href="langage-naturel.html#tokenization"><i class="fa fa-check"></i><b>4.1</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="langage-naturel.html"><a href="langage-naturel.html#principe"><i class="fa fa-check"></i><b>4.1.1</b> Principe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="langage-naturel.html"><a href="langage-naturel.html#mise-en-oeuvre"><i class="fa fa-check"></i><b>4.1.2</b> Mise en oeuvre</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table"><i class="fa fa-check"></i><b>4.2</b> Nettoyage de la table</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides"><i class="fa fa-check"></i><b>4.2.1</b> Nettoyage de la table par suppression des mots vides</a></li>
+<li class="chapter" data-level="4.2.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming"><i class="fa fa-check"></i><b>4.2.2</b> Nettoyage de la table par racinisation (stemming)</a></li>
+<li class="chapter" data-level="4.2.3" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation"><i class="fa fa-check"></i><b>4.2.3</b> Nettoyage de la table par lemmatisation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html"><i class="fa fa-check"></i><b>5</b> Résumer l’information par des métriques</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#corpus-ministereco"><i class="fa fa-check"></i><b>5.1</b> Corpus MinisterEco</a></li>
+<li class="chapter" data-level="5.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>5.2</b> Fréquences d’occurrence</a></li>
+<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#table-lexicale"><i class="fa fa-check"></i><b>5.3</b> Table lexicale</a></li>
+<li class="chapter" data-level="5.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>5.4</b> Co-occurrences, corrélations</a></li>
+<li class="chapter" data-level="5.5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>5.5</b> TF-IDF</a></li>
+<li class="chapter" data-level="5.6" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spec"><i class="fa fa-check"></i><b>5.6</b> Spécificités</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>6</b> Résumer l’information par des graphiques</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>6.1</b> Nuage de mots</a></li>
+<li class="chapter" data-level="6.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>6.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
+<li class="chapter" data-level="6.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#afc"><i class="fa fa-check"></i><b>6.3</b> AFC</a></li>
+<li class="chapter" data-level="6.4" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>6.4</b> Graphes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Rechercher des thèmes (topic modelling)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations"><i class="fa fa-check"></i><b>7.1</b> Principe, notations</a></li>
+<li class="chapter" data-level="7.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta"><i class="fa fa-check"></i><b>7.2</b> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
+<li class="chapter" data-level="7.3" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#frex"><i class="fa fa-check"></i><b>7.3</b> FREX</a></li>
+<li class="chapter" data-level="7.4" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm"><i class="fa fa-check"></i><b>7.4</b> étapes du STM</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme"><i class="fa fa-check"></i><b>7.4.1</b> Mise en forme</a></li>
+<li class="chapter" data-level="7.4.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle"><i class="fa fa-check"></i><b>7.4.2</b> Calcul du modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents"><i class="fa fa-check"></i><b>7.5</b> Assignation d’un thème aux documents</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Le Descriptoire:
+Recueil et analyse de texte avec R </img></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="résumer-linformation-par-des-graphiques" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapitre 6</span> Résumer l’information par des graphiques<a href="résumer-linformation-par-des-graphiques.html#résumer-linformation-par-des-graphiques" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="résumer-linformation-par-des-graphiques.html#cb1-1" aria-hidden="true" tabindex="-1"></a>freq_lemmes <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;data/ministereco_freq_lemmes.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="résumer-linformation-par-des-graphiques.html#cb1-2" aria-hidden="true" tabindex="-1"></a>tib_lemmes <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">&quot;data/ministereco_tib_lemmes.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="résumer-linformation-par-des-graphiques.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb1-4"><a href="résumer-linformation-par-des-graphiques.html#cb1-4" aria-hidden="true" tabindex="-1"></a>tib_meta <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">&quot;data/ministereco_tib_meta.csv&quot;</span>)</span>
+<span id="cb1-5"><a href="résumer-linformation-par-des-graphiques.html#cb1-5" aria-hidden="true" tabindex="-1"></a>tib_lemmes <span class="ot">&lt;-</span> <span class="fu">left_join</span>(tib_lemmes, tib_meta, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;doc&quot;</span>))</span></code></pre></div>
+<div id="nuage-de-mots" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Nuage de mots<a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le <strong>nuage de mots</strong> constitue sans doute l’une des représentations les plus classiques pour ce genre de table lexicale…</p>
+<p>On le réalise ici avec le package <code>ggwordcloud</code> (et sa fonction <code>wordcloud()</code>)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="résumer-linformation-par-des-graphiques.html#cb2-1" aria-hidden="true" tabindex="-1"></a>freq_lemmes_top_100 <span class="ot">&lt;-</span> freq_lemmes <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="résumer-linformation-par-des-graphiques.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">100</span>,freq)</span>
+<span id="cb2-3"><a href="résumer-linformation-par-des-graphiques.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="résumer-linformation-par-des-graphiques.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggwordcloud)</span>
+<span id="cb2-5"><a href="résumer-linformation-par-des-graphiques.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(freq_lemmes_top_100, <span class="fu">aes</span>(<span class="at">label =</span> lemma,<span class="at">size=</span>freq, <span class="at">color=</span><span class="fu">log10</span>(freq))) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="résumer-linformation-par-des-graphiques.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_wordcloud</span>() <span class="sc">+</span></span>
+<span id="cb2-7"><a href="résumer-linformation-par-des-graphiques.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb2-8"><a href="résumer-linformation-par-des-graphiques.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">&quot;red&quot;</span>, <span class="at">high =</span> <span class="st">&quot;forestgreen&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/ggwordcloud-1.png" width="576" /></p>
+</div>
+<div id="diagramme-en-bâtons-occurrences-spécificités" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Diagramme en bâtons: occurrences, spécificités<a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="résumer-linformation-par-des-graphiques.html#cb3-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dplyr<span class="sc">::</span><span class="fu">filter</span>(freq_lemmes,freq<span class="sc">&gt;</span><span class="dv">2000</span>),</span>
+<span id="cb3-2"><a href="résumer-linformation-par-des-graphiques.html#cb3-2" aria-hidden="true" tabindex="-1"></a>                ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x=</span>forcats<span class="sc">::</span><span class="fu">fct_reorder</span>(lemma,freq), <span class="at">y=</span>freq)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="résumer-linformation-par-des-graphiques.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">fill=</span><span class="st">&quot;skyblue&quot;</span>)<span class="sc">+</span></span>
+<span id="cb3-4"><a href="résumer-linformation-par-des-graphiques.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/diag_batons-1.png" width="480" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="résumer-linformation-par-des-graphiques.html#cb4-1" aria-hidden="true" tabindex="-1"></a>tib_top_spec <span class="ot">&lt;-</span> mixr<span class="sc">::</span><span class="fu">tidy_specificities</span>(tib_lemmes,</span>
+<span id="cb4-2"><a href="résumer-linformation-par-des-graphiques.html#cb4-2" aria-hidden="true" tabindex="-1"></a>                                         lemma,</span>
+<span id="cb4-3"><a href="résumer-linformation-par-des-graphiques.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                                         ministre,</span>
+<span id="cb4-4"><a href="résumer-linformation-par-des-graphiques.html#cb4-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">top_spec=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 33,812 × 4
+##    cat1       cat2              spec     n
+##    &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt; &lt;int&gt;
+##  1 aa         Barbara Pompili -0.201    NA
+##  2 abaissant  Barbara Pompili  0.862     2
+##  3 abaisser   Barbara Pompili  0.288     3
+##  4 abandon    Barbara Pompili  0.431     1
+##  5 abandonner Barbara Pompili -0.536     2
+##  6 abattement Barbara Pompili  1.29      3
+##  7 abattoir   Barbara Pompili  0.862     2
+##  8 abattre    Barbara Pompili  0.862     2
+##  9 abbaye     Barbara Pompili -0.201    NA
+## 10 abbé       Barbara Pompili  1.72      4
+## # … with 33,802 more rows</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="résumer-linformation-par-des-graphiques.html#cb6-1" aria-hidden="true" tabindex="-1"></a>mixr<span class="sc">::</span><span class="fu">plot_specificities</span>(tib_top_spec,lemma,ministre)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/plot_spec_1-1.png" width="672" /></p>
+</div>
+<div id="afc" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> AFC<a href="résumer-linformation-par-des-graphiques.html#afc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On peut tenter de <strong>visualiser une table lexicale via une analyse factorielle des correspondance</strong> (AFC) qui permet d’obtenir une <strong>représentation en quelques dimensions (idéalement, 2) d’un tableau qui en comprend <span class="math inline">\(k\)</span></strong>.</p>
+<p>Nous allons ici représenter les lemmes avec les plus hautes spécificités. Nous repartons pour cela de la table <code>tib_spec</code> calculée dans la partie <a href="résumer-linformation-par-des-métriques.html#spec">5.6</a>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="résumer-linformation-par-des-graphiques.html#cb7-1" aria-hidden="true" tabindex="-1"></a>tib_spec<span class="ot">=</span>tib_spec <span class="sc">%&gt;%</span> <span class="fu">filter</span>(spec<span class="sc">&gt;</span><span class="dv">10</span>)</span>
+<span id="cb7-2"><a href="résumer-linformation-par-des-graphiques.html#cb7-2" aria-hidden="true" tabindex="-1"></a>tib_spec_haute<span class="ot">=</span>tib_lemmes <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="résumer-linformation-par-des-graphiques.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lemma <span class="sc">%in%</span> tib_spec<span class="sc">$</span>lemma )</span>
+<span id="cb7-4"><a href="résumer-linformation-par-des-graphiques.html#cb7-4" aria-hidden="true" tabindex="-1"></a>tib_lex<span class="ot">=</span><span class="fu">table</span>(tib_spec_haute<span class="sc">$</span>lemma,tib_spec_haute<span class="sc">$</span>ministre)</span></code></pre></div>
+<p>Dans notre cas, on souhaite représenter 4 dimensions (le nombre de ministres) sur un graphique en 2D. Cette transformation correspond nécessairement à une perte d’information qui est quantifiée via les <strong>eigenvalues</strong> de l’AFC.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="résumer-linformation-par-des-graphiques.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
+<span id="cb8-2"><a href="résumer-linformation-par-des-graphiques.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">CA</span>(tib_lex)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/AFC-1.png" width="1152" /></p>
+<pre><code>## **Results of the Correspondence Analysis (CA)**
+## The row variable has  129  categories; the column variable has 4 categories
+## The chi square of independence between the two variables is equal to 19822.32 (p-value =  0 ).
+## *The results are available in the following objects:
+## 
+##    name              description                   
+## 1  &quot;$eig&quot;            &quot;eigenvalues&quot;                 
+## 2  &quot;$col&quot;            &quot;results for the columns&quot;     
+## 3  &quot;$col$coord&quot;      &quot;coord. for the columns&quot;      
+## 4  &quot;$col$cos2&quot;       &quot;cos2 for the columns&quot;        
+## 5  &quot;$col$contrib&quot;    &quot;contributions of the columns&quot;
+## 6  &quot;$row&quot;            &quot;results for the rows&quot;        
+## 7  &quot;$row$coord&quot;      &quot;coord. for the rows&quot;         
+## 8  &quot;$row$cos2&quot;       &quot;cos2 for the rows&quot;           
+## 9  &quot;$row$contrib&quot;    &quot;contributions of the rows&quot;   
+## 10 &quot;$call&quot;           &quot;summary called parameters&quot;   
+## 11 &quot;$call$marge.col&quot; &quot;weights of the columns&quot;      
+## 12 &quot;$call$marge.row&quot; &quot;weights of the rows&quot;</code></pre>
+</div>
+<div id="graphes" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Graphes<a href="résumer-linformation-par-des-graphiques.html#graphes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On souhaite maintenant représenter les <strong>relations entre les mots</strong> par un graphe (le lien est défini par la <strong>co-occurrence</strong> des mots dans un même commentaire). On va pour ce faire créer un graphe à partir du tableau <code>mots_cooc</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="résumer-linformation-par-des-graphiques.html#cb10-1" aria-hidden="true" tabindex="-1"></a>mots_graph <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">graph_from_data_frame</span>(mots_cooc <span class="sc">%&gt;%</span> <span class="fu">filter</span>(correlation<span class="sc">&gt;</span><span class="fl">0.2</span>))</span>
+<span id="cb10-2"><a href="résumer-linformation-par-des-graphiques.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mots_graph)</span></code></pre></div>
+<pre><code>## [1] &quot;igraph&quot;</code></pre>
+<p>Un graphe se caractérise par</p>
+<ul>
+<li>des <strong>noeuds</strong> (dans notre cas les lemmes)</li>
+<li>des <strong>liens</strong> (dans notre cas la cooccurence de deux lemmes dans un même commentaire)</li>
+<li>des <strong>attributs</strong> (par exemple dans notre cas la fréquence de cooccurrence n et la corrélation cor font partie des attributs qui permettent de décrire les liens)</li>
+</ul>
+<p>Maintenant que l’objet de classe “graph” est créé, on va le représenter. Il faut pour cela calculer un “layout” des différents noeuds du graphe puis spécifier ce qu’on veut faire apparaître graphiquement à travers les commandes du package <code>ggraph</code> dont la logique est proche de celle de <code>ggplot2</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="résumer-linformation-par-des-graphiques.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
+<span id="cb12-2"><a href="résumer-linformation-par-des-graphiques.html#cb12-2" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> mots_graph <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="résumer-linformation-par-des-graphiques.html#cb12-3" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="résumer-linformation-par-des-graphiques.html#cb12-4" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">geom_edge_link</span>(<span class="at">edge_colour=</span><span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="résumer-linformation-par-des-graphiques.html#cb12-5" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">geom_node_point</span>(<span class="at">color =</span> <span class="st">&quot;khaki1&quot;</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="résumer-linformation-par-des-graphiques.html#cb12-6" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="résumer-linformation-par-des-graphiques.html#cb12-7" aria-hidden="true" tabindex="-1"></a>   ggplot2<span class="sc">::</span><span class="fu">theme_void</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="résumer-linformation-par-des-graphiques.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_graph)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-2-1.png" width="576" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="résumer-linformation-par-des-métriques.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rechercher-des-thèmes-topic-modelling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/lvaudor/Descriptoire/edit/master/06-analyse_graphiques.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

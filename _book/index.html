@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Le Descriptoire: Recueil et analyse de texte avec R </title>
+  <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Le Descriptoire: Recueil et analyse de texte avec R " />
+  
+  <meta name="twitter:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
+  
+
+<meta name="author" content=" Lise Vaudor" />
+
+
+<meta name="date" content="2023-01-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="extraction-de-données-textuelles.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> le Descriptoire </a></li>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128646266-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128646266-2');
+  </script>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#quest-ce-que-la-textométrie"><i class="fa fa-check"></i><b>1.1</b> Qu’est-ce que la textométrie?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r"><i class="fa fa-check"></i><b>1.2</b> Pourquoi faire ses analyses textométriques sous R?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>2</b> Extraction de données textuelles</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping"><i class="fa fa-check"></i><b>2.1</b> Depuis des pages web: web-scraping</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#langage-html"><i class="fa fa-check"></i><b>2.1.1</b> Langage html</a></li>
+<li class="chapter" data-level="2.1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#lire-une-page-html"><i class="fa fa-check"></i><b>2.1.2</b> Lire une page html</a></li>
+<li class="chapter" data-level="2.1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html"><i class="fa fa-check"></i><b>2.1.3</b> Extraire certains éléments d’une page html</a></li>
+<li class="chapter" data-level="2.1.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction"><i class="fa fa-check"></i><b>2.1.4</b> Passage au format rectangulaire, et mise en fonction</a></li>
+<li class="chapter" data-level="2.1.5" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#itération"><i class="fa fa-check"></i><b>2.1.5</b> Itération</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation"><i class="fa fa-check"></i><b>2.2</b> Depuis des images ou des documents pdf: OCRisation</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract"><i class="fa fa-check"></i><b>2.2.1</b> Utilisation du package <code>tesseract</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf"><i class="fa fa-check"></i><b>2.2.2</b> Et pour OCRiser depuis un pdf??</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription"><i class="fa fa-check"></i><b>2.3</b> Depuis des enregistrements audio: transcription</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#présentation-de-lexemple"><i class="fa fa-check"></i><b>2.3.1</b> Présentation de l’exemple</a></li>
+<li class="chapter" data-level="2.3.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#prétraitements-éventuels"><i class="fa fa-check"></i><b>2.3.2</b> Prétraitements éventuels</a></li>
+<li class="chapter" data-level="2.3.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager"><i class="fa fa-check"></i><b>2.3.3</b> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
+<li class="chapter" data-level="2.3.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm"><i class="fa fa-check"></i><b>2.3.4</b> API Watson Speech-to-text d’IBM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>3</b> Manipuler des strings: package stringr</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>3.1</b> Strings</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>3.1.1</b> détection, remplacement</a></li>
+<li class="chapter" data-level="3.1.2" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>3.1.2</b> division, correspondance</a></li>
+<li class="chapter" data-level="3.1.3" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>3.1.3</b> extraction</a></li>
+<li class="chapter" data-level="3.1.4" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>3.1.4</b> comptage, subset</a></li>
+<li class="chapter" data-level="3.1.5" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>3.1.5</b> longueur, sous-partie</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>3.2</b> Expressions régulières</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="strings.html"><a href="strings.html#classes-de-caractères-et-groupes"><i class="fa fa-check"></i><b>3.2.1</b> classes de caractères et groupes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="strings.html"><a href="strings.html#caractères-spéciaux"><i class="fa fa-check"></i><b>3.2.2</b> caractères spéciaux</a></li>
+<li class="chapter" data-level="3.2.3" data-path="strings.html"><a href="strings.html#caractères-exclus-gammes-de-caractères"><i class="fa fa-check"></i><b>3.2.3</b> caractères exclus, gammes de caractères</a></li>
+<li class="chapter" data-level="3.2.4" data-path="strings.html"><a href="strings.html#classes-prédéfinies"><i class="fa fa-check"></i><b>3.2.4</b> classes prédéfinies</a></li>
+<li class="chapter" data-level="3.2.5" data-path="strings.html"><a href="strings.html#quelques-exemples-pour-bien-comprendre"><i class="fa fa-check"></i><b>3.2.5</b> quelques exemples pour bien comprendre</a></li>
+<li class="chapter" data-level="3.2.6" data-path="strings.html"><a href="strings.html#groupes-et-références-arrières"><i class="fa fa-check"></i><b>3.2.6</b> groupes et références arrières</a></li>
+<li class="chapter" data-level="3.2.7" data-path="strings.html"><a href="strings.html#quantificateurs"><i class="fa fa-check"></i><b>3.2.7</b> quantificateurs</a></li>
+<li class="chapter" data-level="3.2.8" data-path="strings.html"><a href="strings.html#ancres-et-assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.8</b> ancres et assertions avant-arrière</a></li>
+<li class="chapter" data-level="3.2.9" data-path="strings.html"><a href="strings.html#assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.9</b> assertions avant-arrière</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="langage-naturel.html"><a href="langage-naturel.html"><i class="fa fa-check"></i><b>4</b> Langage naturel</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="langage-naturel.html"><a href="langage-naturel.html#tokenization"><i class="fa fa-check"></i><b>4.1</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="langage-naturel.html"><a href="langage-naturel.html#principe"><i class="fa fa-check"></i><b>4.1.1</b> Principe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="langage-naturel.html"><a href="langage-naturel.html#mise-en-oeuvre"><i class="fa fa-check"></i><b>4.1.2</b> Mise en oeuvre</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table"><i class="fa fa-check"></i><b>4.2</b> Nettoyage de la table</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides"><i class="fa fa-check"></i><b>4.2.1</b> Nettoyage de la table par suppression des mots vides</a></li>
+<li class="chapter" data-level="4.2.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming"><i class="fa fa-check"></i><b>4.2.2</b> Nettoyage de la table par racinisation (stemming)</a></li>
+<li class="chapter" data-level="4.2.3" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation"><i class="fa fa-check"></i><b>4.2.3</b> Nettoyage de la table par lemmatisation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html"><i class="fa fa-check"></i><b>5</b> Résumer l’information par des métriques</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#corpus-ministereco"><i class="fa fa-check"></i><b>5.1</b> Corpus MinisterEco</a></li>
+<li class="chapter" data-level="5.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>5.2</b> Fréquences d’occurrence</a></li>
+<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>5.3</b> Co-occurrences, corrélations</a></li>
+<li class="chapter" data-level="5.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>5.4</b> TF-IDF</a></li>
+<li class="chapter" data-level="5.5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spécificités"><i class="fa fa-check"></i><b>5.5</b> Spécificités</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>6</b> Résumer l’information par des graphiques</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>6.1</b> Nuage de mots</a></li>
+<li class="chapter" data-level="6.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>6.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
+<li class="chapter" data-level="6.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>6.3</b> Graphes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Rechercher des thèmes (topic modelling)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations"><i class="fa fa-check"></i><b>7.1</b> Principe, notations</a></li>
+<li class="chapter" data-level="7.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta"><i class="fa fa-check"></i><b>7.2</b> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
+<li class="chapter" data-level="7.3" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#frex"><i class="fa fa-check"></i><b>7.3</b> FREX</a></li>
+<li class="chapter" data-level="7.4" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm"><i class="fa fa-check"></i><b>7.4</b> étapes du STM</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme"><i class="fa fa-check"></i><b>7.4.1</b> Mise en forme</a></li>
+<li class="chapter" data-level="7.4.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle"><i class="fa fa-check"></i><b>7.4.2</b> Calcul du modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents"><i class="fa fa-check"></i><b>7.5</b> Assignation d’un thème aux documents</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Le Descriptoire:
+Recueil et analyse de texte avec R </img></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Le Descriptoire:
+Recueil et analyse de texte avec R </img></h1>
+<p class="author"><em><img src='images/moulin.png'>
+Lise Vaudor</em></p>
+<p class="date"><em>2023-01-04</em></p>
+</div>
+<div id="introduction" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapitre 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="quest-ce-que-la-textométrie" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Qu’est-ce que la textométrie?<a href="index.html#quest-ce-que-la-textométrie" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La <strong>textométrie</strong>, ou <strong>analyse de données textuelles</strong>, est une approche qui consiste à traiter un ensemble de textes (ou corpus) comme <strong>un jeu de données que l’on peut analyser par des méthodes quantitatives</strong>. Pour ce faire, elle utilise notamment des <strong>modèles statistiques</strong> qui permettent par exemple d’identifier des éléments du lexique particulièrement signifiants.</p>
+<p>La textométrie est ainsi naturellement un outil privilégié des <strong>sciences humaines et sociales</strong> qui revêt dans ces disciplines une certaine originalité puisqu’elle regroupe notamment nombre de méthodologies et techniques <strong>quantitatives</strong>.</p>
+<p>L’ancrage de la textométrie en sciences humaines et sociales <strong>en France</strong> est lié en partie à la force de l’école statistique française et à l’influence de certains chercheurs, précurseurs de ces méthodes comme <a href="https://fr.wikipedia.org/wiki/Jean-Paul_Benz%C3%A9cri">Jean-Paul Benzécri</a>. Le nombre et la richesse des <strong>logiciels dédiés</strong> développés par des laboratoires français (par exemple <a href="https://fr.wikipedia.org/wiki/Alceste_(logiciel)">Alceste</a>, <a href="https://fr.wikipedia.org/wiki/Iramuteq_(logiciel)">IRaMuTeQ</a>, <a href="https://fr.wikipedia.org/wiki/TXM">TXM</a>),<a href="http://analyse.univ-paris1.fr/">AnalyseSHS</a> témoigne de cet héritage.</p>
+</div>
+<div id="pourquoi-faire-ses-analyses-textométriques-sous-r" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Pourquoi faire ses analyses textométriques sous R?<a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R est un outil d’analyse de données extrêmement <strong>polyvalent</strong>. Il permet de réaliser des analyses statistiques, d’automatiser des traitements, de produire des graphiques, d’éditer des rapports et des présentations, etc. Il peut ainsi être intéressant de l’utiliser pour réaliser l’<strong>ensemble des opérations d’analyse et valorisation de ses données</strong> puisqu’en intégrant un maximum d’étapes de ce processus dans un même document de travail on permet une certaine <strong>reproductibilité</strong> des résultats.</p>
+<p>Ainsi, pour des utilisateurs <strong>familiarisés avec l’usage de R par lignes de commandes</strong>, il peut être particulièrement intéressant de réaliser les analyses de texte <strong>directement depuis R en passant par l’usage des lignes de commande</strong>. En effet, les méthodes accessibles seront ainsi très variées et très flexibles, et l’analyse des textes pourra s’intégrer à des analyses de données d’une nature différente (par exemple données d’enquêtes, données physiques, cartes, etc.).</p>
+<p>Par ailleurs de nombreux logiciels de textométrie sont bâtis sur des méthodologies statistiques (qui constituent une des richesses du langage R): ils reposent de ce fait <strong>pour tout ou partie sur le langage R</strong>. IRaMuTeQ est ainsi une interface accessible depuis R, AnalyseSHS est une interface web produite à l’aide de R, TXM propose certaines analyses qui reposent sur le langage R, etc. Ils permettent ainsi à leurs utilisateurs de réaliser des analyses qui reposent sur le langage R sans avoir nécessairement à utiliser les <strong>lignes de commande</strong>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="extraction-de-données-textuelles.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/lvaudor/Descriptoire/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
