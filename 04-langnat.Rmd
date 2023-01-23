@@ -45,7 +45,7 @@ Par exemple, on peut décider que l'unité d'analyse (l'individu) pour nos analy
 
 ### Mise en oeuvre
 
-Pour réaliser cette tokenisation nous allons utiliser le package `tidytext`
+Pour réaliser cette tokenisation nous allons utiliser le package `tidytext` [@tidytext]
 <img src='images/logo_tidytext.png' width='50'> et notamment sa fonction `unnest_tokens()`.
 
 ![](images/step3_process.png)

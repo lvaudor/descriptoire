@@ -57,21 +57,12 @@ freq_lemmes <- tib_lemmes %>%
 head(freq_lemmes)
 ```
 
-Je pourrais filtrer les données de `tib_lemmes` pour ne garder qu'une fréquence minimale, ou ne garder que les $n$ mots les plus fréquents...
+Bon. La version ci-dessus est la "version longue", faite pour remobiliser les verbes de base de `dplyr`. Full disclosure: il existe une version raccourcie:
 
-```{r top_freq_lemmes}
-tib_lemmes_light <- tib_lemmes %>%
-  group_by(lemma) %>% 
-  mutate(n=n()) %>% 
-  filter(n>1000) %>% 
-  ungroup()
-head(tib_lemmes_light)
-```
-
-Pour faciliter ce processus que l'on est amené à réaliser fréquemment pour analyser des données textuelles, j'ai créé une fonction `tidy_frequencies()` (package `mixr`) qui regroupe l'ensemble des étapes: 
-
-```{r tidy_frequencies}
-mixr::tidy_frequencies(tib_lemmes,lemma,top_freq=10)
+```{r}
+freq_lemmes=tib_lemmes %>% 
+  count(lemma, sort=TRUE)
+head(freq_lemmes)
 ```
 
 ## Table lexicale
@@ -114,6 +105,20 @@ Considérons une paire de mots: `motA` et `motB`.
 
 
 La **fréquence de cooccurrence** d'une paire mots correspond ainsi au **nombre de fois où ces deux mots apparaissent dans une même entité** (ci-dessous, le "doc"). En se référant au tableau ci-dessus, il s'agirait de $N_{TT}$
+
+
+Pour calculer les cooccurences et corrélations (un processus assez calculatoire) je vais d'abord filtrer `tib_lemmes` pour ne garder que les mots ayant une fréquence d'occurrence haute...
+
+```{r top_freq_lemmes}
+tib_lemmes_light <- tib_lemmes %>%
+  group_by(lemma) %>% 
+  mutate(n=n()) %>% 
+  filter(n>1000) %>% 
+  ungroup()
+head(tib_lemmes_light)
+```
+
+On utilise le package `widyr` [@widyr] pour calculer les effectifs croisés:
 
 ```{r coocurrences}
 library(widyr)
@@ -172,7 +177,7 @@ head(tib_tfidf, n=15)
 
 ## Spécificités{#spec}
 
-Le package `textometry` (réalisé par l'équipe TXM) comprend une fonction qui permet de calculer des scores de spécificité. Le but de ce score est (comme pour le TF-IDF) d'**identifier les termes spécifiques à une partie du corpus**.
+Le package `textometry` [@txm] comprend une fonction qui permet de calculer des scores de spécificité [@specificite]. Le but de ce score est (comme pour le TF-IDF) d'**identifier les termes spécifiques à une partie du corpus**.
 
 Le modèle probabiliste associé à cet indice est expliqué [ici]
 (https://txm.sourceforge.net/doc/manual/0.7.9/fr/manual59.xhtml). On peut expliquer ce modèle à travers l'image de boules et d'urnes (oui oui, comme quand on fait des probabilités au lycée...).

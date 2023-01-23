@@ -95,7 +95,7 @@ result_CA=CA(tib_lex, graph=FALSE)
 
 Dans notre cas, on souhaite représenter 4 dimensions (le nombre de ministres) sur un graphique en 2D. Cette transformation correspond nécessairement à une perte d'information qui est quantifiée via les **eigenvalues** de l'AFC.
 
-```{r CA_eigen, fig.width=6, fig.height=5}
+```{r CA_eigen, fig.width=5, fig.height=4}
 library(factoextra)
 fviz_screeplot(result_CA, addlabels = TRUE, ylim = c(0, 50))
 ```
@@ -103,7 +103,7 @@ fviz_screeplot(result_CA, addlabels = TRUE, ylim = c(0, 50))
 Ainsi en réduisant la dimensionalité à 2 axes on parvient tout de même à représenter 79% de l'information.
 
 
-```{r, fig.width=8,fig.height=8}
+```{r CA_biplot, fig.width=8,fig.height=8}
 fviz_ca_biplot(result_CA, repel=TRUE)
 ```
 
