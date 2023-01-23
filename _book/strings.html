@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 2 Manipuler des strings: package stringr | Le Descriptoire: Recueil et analyse de texte avec R </title>
+  <title>Chapitre 3 Manipuler des strings: package stringr | Le Descriptoire: Recueil et analyse de texte avec R </title>
   <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 2 Manipuler des strings: package stringr | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta property="og:title" content="Chapitre 3 Manipuler des strings: package stringr | Le Descriptoire: Recueil et analyse de texte avec R " />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 2 Manipuler des strings: package stringr | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta name="twitter:title" content="Chapitre 3 Manipuler des strings: package stringr | Le Descriptoire: Recueil et analyse de texte avec R " />
   
   <meta name="twitter:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
   
@@ -24,7 +23,7 @@
 <meta name="author" content=" Lise Vaudor" />
 
 
-<meta name="date" content="2022-12-19" />
+<meta name="date" content="2023-01-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="extraction-de-données-textuelles.html"/>
 <link rel="next" href="langage-naturel.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -120,6 +119,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -146,87 +167,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </script>
 
 <li class="divider"></li>
-<li><a href="extraction-de-données-textuelles.html#extraction-de-données-textuelles" id="toc-extraction-de-données-textuelles"><span class="toc-section-number">1</span> Extraction de données textuelles</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping" id="toc-depuis-des-pages-web-web-scraping"><span class="toc-section-number">1.1</span> Depuis des pages web: web-scraping</a>
-<ul>
-<li><a href="extraction-de-données-textuelles.html#langage-html" id="toc-langage-html"><span class="toc-section-number">1.1.1</span> Langage html</a></li>
-<li><a href="extraction-de-données-textuelles.html#lire-une-page-html" id="toc-lire-une-page-html"><span class="toc-section-number">1.1.2</span> Lire une page html</a></li>
-<li><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html" id="toc-extraire-certains-éléments-dune-page-html"><span class="toc-section-number">1.1.3</span> Extraire certains éléments d’une page html</a></li>
-<li><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction" id="toc-passage-au-format-rectangulaire-et-mise-en-fonction"><span class="toc-section-number">1.1.4</span> Passage au format rectangulaire, et mise en fonction</a></li>
-<li><a href="extraction-de-données-textuelles.html#itération" id="toc-itération"><span class="toc-section-number">1.1.5</span> Itération</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#pourquoi-travailler-avec-des-textes-sous-r"><i class="fa fa-check"></i><b>1.1</b> Pourquoi travailler avec des textes sous R?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#quest-ce-que-la-textométrie"><i class="fa fa-check"></i><b>1.2</b> Qu’est-ce que la textométrie?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r"><i class="fa fa-check"></i><b>1.3</b> Pourquoi faire ses analyses textométriques sous R?</a></li>
 </ul></li>
-<li><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation" id="toc-depuis-des-images-ou-des-documents-pdf-ocrisation"><span class="toc-section-number">1.2</span> Depuis des images ou des documents pdf: OCRisation</a>
+<li class="chapter" data-level="2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>2</b> Extraction de données textuelles</a>
 <ul>
-<li><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract" id="toc-utilisation-du-package-tesseract"><span class="toc-section-number">1.2.1</span> Utilisation du package <code>tesseract</code></a></li>
-<li><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf" id="toc-et-pour-ocriser-depuis-un-pdf"><span class="toc-section-number">1.2.2</span> Et pour OCRiser depuis un pdf??</a></li>
+<li class="chapter" data-level="2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping"><i class="fa fa-check"></i><b>2.1</b> Depuis des pages web: web-scraping</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#langage-html"><i class="fa fa-check"></i><b>2.1.1</b> Langage html</a></li>
+<li class="chapter" data-level="2.1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#lire-une-page-html"><i class="fa fa-check"></i><b>2.1.2</b> Lire une page html</a></li>
+<li class="chapter" data-level="2.1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html"><i class="fa fa-check"></i><b>2.1.3</b> Extraire certains éléments d’une page html</a></li>
+<li class="chapter" data-level="2.1.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction"><i class="fa fa-check"></i><b>2.1.4</b> Passage au format rectangulaire, et mise en fonction</a></li>
+<li class="chapter" data-level="2.1.5" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#itération"><i class="fa fa-check"></i><b>2.1.5</b> Itération</a></li>
 </ul></li>
-<li><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription" id="toc-depuis-des-enregistrements-audio-transcription"><span class="toc-section-number">1.3</span> Depuis des enregistrements audio: transcription</a>
+<li class="chapter" data-level="2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation"><i class="fa fa-check"></i><b>2.2</b> Depuis des images ou des documents pdf: OCRisation</a>
 <ul>
-<li><a href="extraction-de-données-textuelles.html#présentation-de-lexemple" id="toc-présentation-de-lexemple"><span class="toc-section-number">1.3.1</span> Présentation de l’exemple</a></li>
-<li><a href="extraction-de-données-textuelles.html#prétraitements-éventuels" id="toc-prétraitements-éventuels"><span class="toc-section-number">1.3.2</span> Prétraitements éventuels</a></li>
-<li><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager" id="toc-api-speech-to-text-google-package-googlelanguager"><span class="toc-section-number">1.3.3</span> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
-<li><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm" id="toc-api-watson-speech-to-text-dibm"><span class="toc-section-number">1.3.4</span> API Watson Speech-to-text d’IBM</a></li>
+<li class="chapter" data-level="2.2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract"><i class="fa fa-check"></i><b>2.2.1</b> Utilisation du package <code>tesseract</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf"><i class="fa fa-check"></i><b>2.2.2</b> Et pour OCRiser depuis un pdf??</a></li>
 </ul></li>
-</ul></li>
-<li><a href="strings.html#strings" id="toc-strings"><span class="toc-section-number">2</span> Manipuler des strings: package stringr</a>
+<li class="chapter" data-level="2.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription"><i class="fa fa-check"></i><b>2.3</b> Depuis des enregistrements audio: transcription</a>
 <ul>
-<li><a href="strings.html#strings-1" id="toc-strings-1"><span class="toc-section-number">2.1</span> Strings</a>
-<ul>
-<li><a href="strings.html#détection-remplacement" id="toc-détection-remplacement"><span class="toc-section-number">2.1.1</span> détection, remplacement</a></li>
-<li><a href="strings.html#division-correspondance" id="toc-division-correspondance"><span class="toc-section-number">2.1.2</span> division, correspondance</a></li>
-<li><a href="strings.html#extraction" id="toc-extraction"><span class="toc-section-number">2.1.3</span> extraction</a></li>
-<li><a href="strings.html#comptage-subset" id="toc-comptage-subset"><span class="toc-section-number">2.1.4</span> comptage, subset</a></li>
-<li><a href="strings.html#longueur-sous-partie" id="toc-longueur-sous-partie"><span class="toc-section-number">2.1.5</span> longueur, sous-partie</a></li>
-</ul></li>
-<li><a href="strings.html#expressions-régulières" id="toc-expressions-régulières"><span class="toc-section-number">2.2</span> Expressions régulières</a>
-<ul>
-<li><a href="strings.html#classes-de-caractères-et-groupes" id="toc-classes-de-caractères-et-groupes"><span class="toc-section-number">2.2.1</span> classes de caractères et groupes</a></li>
-<li><a href="strings.html#caractères-spéciaux" id="toc-caractères-spéciaux"><span class="toc-section-number">2.2.2</span> caractères spéciaux</a></li>
-<li><a href="strings.html#caractères-exclus-gammes-de-caractères" id="toc-caractères-exclus-gammes-de-caractères"><span class="toc-section-number">2.2.3</span> caractères exclus, gammes de caractères</a></li>
-<li><a href="strings.html#classes-prédéfinies" id="toc-classes-prédéfinies"><span class="toc-section-number">2.2.4</span> classes prédéfinies</a></li>
-<li><a href="strings.html#quelques-exemples-pour-bien-comprendre" id="toc-quelques-exemples-pour-bien-comprendre"><span class="toc-section-number">2.2.5</span> quelques exemples pour bien comprendre</a></li>
-<li><a href="strings.html#groupes-et-références-arrières" id="toc-groupes-et-références-arrières"><span class="toc-section-number">2.2.6</span> groupes et références arrières</a></li>
-<li><a href="strings.html#quantificateurs" id="toc-quantificateurs"><span class="toc-section-number">2.2.7</span> quantificateurs</a></li>
-<li><a href="strings.html#ancres-et-assertions-avant-arrière" id="toc-ancres-et-assertions-avant-arrière"><span class="toc-section-number">2.2.8</span> ancres et assertions avant-arrière</a></li>
-<li><a href="strings.html#assertions-avant-arrière" id="toc-assertions-avant-arrière"><span class="toc-section-number">2.2.9</span> assertions avant-arrière</a></li>
+<li class="chapter" data-level="2.3.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#présentation-de-lexemple"><i class="fa fa-check"></i><b>2.3.1</b> Présentation de l’exemple</a></li>
+<li class="chapter" data-level="2.3.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#prétraitements-éventuels"><i class="fa fa-check"></i><b>2.3.2</b> Prétraitements éventuels</a></li>
+<li class="chapter" data-level="2.3.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager"><i class="fa fa-check"></i><b>2.3.3</b> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
+<li class="chapter" data-level="2.3.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm"><i class="fa fa-check"></i><b>2.3.4</b> API Watson Speech-to-text d’IBM</a></li>
 </ul></li>
 </ul></li>
-<li><a href="langage-naturel.html#langage-naturel" id="toc-langage-naturel"><span class="toc-section-number">3</span> Langage naturel</a>
+<li class="chapter" data-level="3" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>3</b> Manipuler des strings: package stringr</a>
 <ul>
-<li><a href="langage-naturel.html#tokenization" id="toc-tokenization"><span class="toc-section-number">3.1</span> Tokenization</a></li>
-<li><a href="langage-naturel.html#nettoyage-de-la-table" id="toc-nettoyage-de-la-table"><span class="toc-section-number">3.2</span> Nettoyage de la table</a>
+<li class="chapter" data-level="3.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>3.1</b> Strings</a>
 <ul>
-<li><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides" id="toc-nettoyage-de-la-table-par-suppression-des-mots-vides"><span class="toc-section-number">3.2.1</span> Nettoyage de la table par suppression des mots vides</a></li>
-<li><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming" id="toc-nettoyage-de-la-table-par-racinisation-stemming"><span class="toc-section-number">3.2.2</span> Nettoyage de la table par racinisation (stemming)</a></li>
-<li><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation" id="toc-nettoyage-de-la-table-par-lemmatisation"><span class="toc-section-number">3.2.3</span> Nettoyage de la table par lemmatisation</a></li>
+<li class="chapter" data-level="3.1.1" data-path="strings.html"><a href="strings.html#concaténation"><i class="fa fa-check"></i><b>3.1.1</b> concaténation</a></li>
+<li class="chapter" data-level="3.1.2" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>3.1.2</b> détection, remplacement</a></li>
+<li class="chapter" data-level="3.1.3" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>3.1.3</b> division, correspondance</a></li>
+<li class="chapter" data-level="3.1.4" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>3.1.4</b> extraction</a></li>
+<li class="chapter" data-level="3.1.5" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>3.1.5</b> comptage, subset</a></li>
+<li class="chapter" data-level="3.1.6" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>3.1.6</b> longueur, sous-partie</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>3.2</b> Expressions régulières</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="strings.html"><a href="strings.html#classes-de-caractères-et-groupes"><i class="fa fa-check"></i><b>3.2.1</b> classes de caractères et groupes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="strings.html"><a href="strings.html#caractères-spéciaux"><i class="fa fa-check"></i><b>3.2.2</b> caractères spéciaux</a></li>
+<li class="chapter" data-level="3.2.3" data-path="strings.html"><a href="strings.html#caractères-exclus-gammes-de-caractères"><i class="fa fa-check"></i><b>3.2.3</b> caractères exclus, gammes de caractères</a></li>
+<li class="chapter" data-level="3.2.4" data-path="strings.html"><a href="strings.html#classes-prédéfinies"><i class="fa fa-check"></i><b>3.2.4</b> classes prédéfinies</a></li>
+<li class="chapter" data-level="3.2.5" data-path="strings.html"><a href="strings.html#quelques-exemples-pour-bien-comprendre"><i class="fa fa-check"></i><b>3.2.5</b> quelques exemples pour bien comprendre</a></li>
+<li class="chapter" data-level="3.2.6" data-path="strings.html"><a href="strings.html#groupes-et-références-arrières"><i class="fa fa-check"></i><b>3.2.6</b> groupes et références arrières</a></li>
+<li class="chapter" data-level="3.2.7" data-path="strings.html"><a href="strings.html#quantificateurs"><i class="fa fa-check"></i><b>3.2.7</b> quantificateurs</a></li>
+<li class="chapter" data-level="3.2.8" data-path="strings.html"><a href="strings.html#ancres-et-assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.8</b> ancres et assertions avant-arrière</a></li>
+<li class="chapter" data-level="3.2.9" data-path="strings.html"><a href="strings.html#assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.9</b> assertions avant-arrière</a></li>
 </ul></li>
 </ul></li>
-<li><a href="résumer-linformation-par-des-métriques.html#résumer-linformation-par-des-métriques" id="toc-résumer-linformation-par-des-métriques"><span class="toc-section-number">4</span> Résumer l’information par des métriques</a>
+<li class="chapter" data-level="4" data-path="langage-naturel.html"><a href="langage-naturel.html"><i class="fa fa-check"></i><b>4</b> Langage naturel</a>
 <ul>
-<li><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence" id="toc-fréquences-doccurrence"><span class="toc-section-number">4.1</span> Fréquences d’occurrence</a></li>
-<li><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations" id="toc-co-occurrences-corrélations"><span class="toc-section-number">4.2</span> Co-occurrences, corrélations</a></li>
-<li><a href="résumer-linformation-par-des-métriques.html#tf-idf" id="toc-tf-idf"><span class="toc-section-number">4.3</span> TF-IDF</a></li>
-<li><a href="résumer-linformation-par-des-métriques.html#spécificités" id="toc-spécificités"><span class="toc-section-number">4.4</span> Spécificités</a></li>
+<li class="chapter" data-level="4.1" data-path="langage-naturel.html"><a href="langage-naturel.html#tokenization"><i class="fa fa-check"></i><b>4.1</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="langage-naturel.html"><a href="langage-naturel.html#principe"><i class="fa fa-check"></i><b>4.1.1</b> Principe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="langage-naturel.html"><a href="langage-naturel.html#mise-en-oeuvre"><i class="fa fa-check"></i><b>4.1.2</b> Mise en oeuvre</a></li>
 </ul></li>
-<li><a href="résumer-linformation-par-des-graphiques.html#résumer-linformation-par-des-graphiques" id="toc-résumer-linformation-par-des-graphiques"><span class="toc-section-number">5</span> Résumer l’information par des graphiques</a>
+<li class="chapter" data-level="4.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table"><i class="fa fa-check"></i><b>4.2</b> Nettoyage de la table</a>
 <ul>
-<li><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots" id="toc-nuage-de-mots"><span class="toc-section-number">5.1</span> Nuage de mots</a></li>
-<li><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités" id="toc-diagramme-en-bâtons-occurrences-spécificités"><span class="toc-section-number">5.2</span> Diagramme en bâtons: occurrences, spécificités</a></li>
-<li><a href="résumer-linformation-par-des-graphiques.html#graphes" id="toc-graphes"><span class="toc-section-number">5.3</span> Graphes</a></li>
+<li class="chapter" data-level="4.2.1" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides"><i class="fa fa-check"></i><b>4.2.1</b> Nettoyage de la table par suppression des mots vides</a></li>
+<li class="chapter" data-level="4.2.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming"><i class="fa fa-check"></i><b>4.2.2</b> Nettoyage de la table par racinisation (stemming)</a></li>
+<li class="chapter" data-level="4.2.3" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation"><i class="fa fa-check"></i><b>4.2.3</b> Nettoyage de la table par lemmatisation</a></li>
 </ul></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#rechercher-des-thèmes-topic-modelling" id="toc-rechercher-des-thèmes-topic-modelling"><span class="toc-section-number">6</span> Rechercher des thèmes (topic modelling)</a>
-<ul>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations" id="toc-principe-notations"><span class="toc-section-number">6.1</span> Principe, notations</a></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta" id="toc-scores-beta-beta"><span class="toc-section-number">6.2</span> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#frex" id="toc-frex"><span class="toc-section-number">6.3</span> FREX</a></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm" id="toc-étapes-du-stm"><span class="toc-section-number">6.4</span> étapes du STM</a></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#communiqués-de-presse-du-ministère-de-lécologie" id="toc-communiqués-de-presse-du-ministère-de-lécologie"><span class="toc-section-number">6.5</span> Communiqués de presse du ministère de l’écologie</a>
-<ul>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme" id="toc-mise-en-forme"><span class="toc-section-number">6.5.1</span> Mise en forme</a></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle" id="toc-calcul-du-modèle"><span class="toc-section-number">6.5.2</span> Calcul du modèle</a></li>
 </ul></li>
-<li><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents" id="toc-assignation-dun-thème-aux-documents"><span class="toc-section-number">6.6</span> Assignation d’un thème aux documents</a></li>
+<li class="chapter" data-level="5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html"><i class="fa fa-check"></i><b>5</b> Résumer l’information par des métriques</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#corpus-ministereco"><i class="fa fa-check"></i><b>5.1</b> Corpus MinisterEco</a></li>
+<li class="chapter" data-level="5.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>5.2</b> Fréquences d’occurrence</a></li>
+<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#table-lexicale"><i class="fa fa-check"></i><b>5.3</b> Table lexicale</a></li>
+<li class="chapter" data-level="5.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>5.4</b> Co-occurrences, corrélations</a></li>
+<li class="chapter" data-level="5.5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>5.5</b> TF-IDF</a></li>
+<li class="chapter" data-level="5.6" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spec"><i class="fa fa-check"></i><b>5.6</b> Spécificités</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>6</b> Résumer l’information par des graphiques</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>6.1</b> Nuage de mots</a></li>
+<li class="chapter" data-level="6.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>6.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
+<li class="chapter" data-level="6.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#analyse-factorielle-des-correspondances"><i class="fa fa-check"></i><b>6.3</b> Analyse factorielle des correspondances</a></li>
+<li class="chapter" data-level="6.4" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>6.4</b> Graphes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Rechercher des thèmes (topic modelling)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations"><i class="fa fa-check"></i><b>7.1</b> Principe, notations</a></li>
+<li class="chapter" data-level="7.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta"><i class="fa fa-check"></i><b>7.2</b> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
+<li class="chapter" data-level="7.3" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#frex"><i class="fa fa-check"></i><b>7.3</b> FREX</a></li>
+<li class="chapter" data-level="7.4" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm"><i class="fa fa-check"></i><b>7.4</b> étapes du STM</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme"><i class="fa fa-check"></i><b>7.4.1</b> Mise en forme</a></li>
+<li class="chapter" data-level="7.4.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle"><i class="fa fa-check"></i><b>7.4.2</b> Calcul du modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents"><i class="fa fa-check"></i><b>7.5</b> Assignation d’un thème aux documents</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -249,21 +283,25 @@ Recueil et analyse de texte avec R </img></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="strings" class="section level1" number="2">
-<h1><span class="header-section-number">Chapitre 2</span> Manipuler des strings: package stringr</h1>
-<p>Par exemple, à l’aide du package <strong>stringr</strong><img src='images/logo_stringr.png' width='50'></p>
+<div id="strings" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapitre 3</span> Manipuler des strings: package stringr<a href="strings.html#strings" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Par exemple, à l’aide du package <strong>stringr</strong> <span class="citation">(<a href="#ref-stringr" role="doc-biblioref">Wickham 2022</a>)</span>
+<img src='images/logo_stringr.png' width='50'></p>
 <p><img src='images/schema_stringr.png' height='400'></p>
-<p>Billet de blog <a href="http://perso.ens-lyon.fr/lise.vaudor/manipuler-des-strings-avec-r/">ici</a>.
-<strong>str_c()</strong> pour combiner des strings</p>
+<p>Billet de blog <a href="http://perso.ens-lyon.fr/lise.vaudor/manipuler-des-strings-avec-r/">ici</a>.</p>
+<div id="strings-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Strings<a href="strings.html#strings-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="concaténation" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> concaténation<a href="strings.html#concaténation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>str_c()</strong> pour combiner des strings</p>
 <p><img src="images/str_c.png" /></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="strings.html#cb1-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_c</span>(<span class="st">&quot;abra&quot;</span>,<span class="st">&quot;ca&quot;</span>,<span class="st">&quot;dabra&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;abracadabra&quot;</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="strings.html#cb3-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_c</span>(<span class="st">&quot;Les jeux&quot;</span>,<span class="st">&quot;de mots laids&quot;</span>,<span class="st">&quot;sont pour&quot;</span>,<span class="st">&quot;les gens bêtes&quot;</span>, <span class="at">sep=</span><span class="st">&quot; &quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Les jeux de mots laids sont pour les gens bêtes&quot;</code></pre>
-<div id="strings-1" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Strings</h2>
-<div id="détection-remplacement" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> détection, remplacement</h3>
+</div>
+<div id="détection-remplacement" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> détection, remplacement<a href="strings.html#détection-remplacement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>str_detect()</strong> détecte un pattern</p>
 <p><img src="images/str_detect.png" /></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="strings.html#cb5-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_detect</span>(<span class="fu">c</span>(<span class="st">&quot;Quarante&quot;</span>,<span class="st">&quot;carottes&quot;</span>,<span class="st">&quot;crues&quot;</span>,</span>
@@ -283,8 +321,8 @@ Recueil et analyse de texte avec R </img></a>
 <pre><code>## [1] &quot;All we hear is Radio ga ga Radio ga ga Radio ga ga&quot;</code></pre>
 <p>Là encore, notez la différence entre str_replace() et str_replace_all()!!</p>
 </div>
-<div id="division-correspondance" class="section level3" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> division, correspondance</h3>
+<div id="division-correspondance" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> division, correspondance<a href="strings.html#division-correspondance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>str_split()</strong> découpe les strings partout où un pattern (ou motif) est présent</p>
 <p><img src="images/str_split.png" /></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="strings.html#cb11-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_split</span>(<span class="fu">c</span>(<span class="st">&quot;beau_gros_chat&quot;</span>,</span>
@@ -312,8 +350,8 @@ Recueil et analyse de texte avec R </img></a>
 ## [3,] &quot;vilain&quot; &quot;petit&quot; &quot;canard&quot;</code></pre>
 <p>Cette opération est un peu similaire à celle que réalise la fonction <strong>str_match()</strong>, que l’on abordera un peu plus tard…</p>
 </div>
-<div id="extraction" class="section level3" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> extraction</h3>
+<div id="extraction" class="section level3 hasAnchor" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> extraction<a href="strings.html#extraction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>str_extract()</strong> extrait le pattern (là où il est présent)</p>
 <p><img src="images/str_extract.png" /></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="strings.html#cb15-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_extract</span>(<span class="fu">c</span>(<span class="st">&quot;L&#39;âne&quot;</span>,<span class="st">&quot;Trotro&quot;</span>,<span class="st">&quot;trotte&quot;</span>,<span class="st">&quot;à une allure&quot;</span>,</span>
@@ -343,8 +381,8 @@ Recueil et analyse de texte avec R </img></a>
 ## [1] &quot;tr&quot;</code></pre>
 <p>Si un pattern est présent plusieurs fois dans un des éléments du vecteur en input, alors il correspondra à plusieurs éléments dans l’output (ainsi l’output correspond non pas à un vecteur de même taille que l’input, mais à une liste).</p>
 </div>
-<div id="comptage-subset" class="section level3" number="2.1.4">
-<h3><span class="header-section-number">2.1.4</span> comptage, subset</h3>
+<div id="comptage-subset" class="section level3 hasAnchor" number="3.1.5">
+<h3><span class="header-section-number">3.1.5</span> comptage, subset<a href="strings.html#comptage-subset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>str_count()</strong> compte les occurrences d’un pattern</p>
 <p><img src="images/str_count.png" /></p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="strings.html#cb19-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_count</span>(<span class="fu">c</span>(<span class="st">&quot;L&#39;âne&quot;</span>,<span class="st">&quot;Trotro&quot;</span>,<span class="st">&quot;trotte&quot;</span>,<span class="st">&quot;à une allure&quot;</span>,<span class="st">&quot;traitreusement&quot;</span>,<span class="st">&quot;tranquille&quot;</span>),</span>
@@ -358,8 +396,8 @@ Recueil et analyse de texte avec R </img></a>
 <span id="cb21-4"><a href="strings.html#cb21-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">pattern=</span><span class="st">&quot;cr&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;crues&quot;    &quot;croient&quot;  &quot;croquer&quot;  &quot;crée&quot;     &quot;crampes.&quot;</code></pre>
 </div>
-<div id="longueur-sous-partie" class="section level3" number="2.1.5">
-<h3><span class="header-section-number">2.1.5</span> longueur, sous-partie</h3>
+<div id="longueur-sous-partie" class="section level3 hasAnchor" number="3.1.6">
+<h3><span class="header-section-number">3.1.6</span> longueur, sous-partie<a href="strings.html#longueur-sous-partie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>str_length()</strong> compte le nombre de caractères dans un string</p>
 <p><img src="images/str_length.png" /></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="strings.html#cb23-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_length</span>(<span class="st">&quot;anticonstitutionnellement&quot;</span>)</span></code></pre></div>
@@ -374,67 +412,69 @@ Recueil et analyse de texte avec R </img></a>
 <pre><code>## [1] &quot;piyaya&quot;</code></pre>
 </div>
 </div>
-<div id="expressions-régulières" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Expressions régulières</h2>
+<div id="expressions-régulières" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Expressions régulières<a href="strings.html#expressions-régulières" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Les expressions régulières servent à effectuer des recherches de <strong>patterns</strong> dans les strings en définissant les <strong>règles</strong> qui régissent ces patterns.<a href="http://stringr.tidyverse.org/articles/regular-expressions.html">Un tuto ici</a></p>
 <p><img src="images/regexp.png" />.</p>
-<div id="classes-de-caractères-et-groupes" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> classes de caractères et groupes</h3>
+<div id="classes-de-caractères-et-groupes" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> classes de caractères et groupes<a href="strings.html#classes-de-caractères-et-groupes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="images/regexp_character_classes.png" /></p>
 <p>On peut rechercher une <strong>classe de caractères</strong> en utilisant la notation <code>[...]</code>.</p>
 <p>Par exemple, si je veux rechercher toutes les voyelles dans mon string:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="strings.html#cb31-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;youp la boum&quot;</span>,</span>
 <span id="cb31-2"><a href="strings.html#cb31-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[aeiou]&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: `str_view()` was deprecated in stringr 1.5.0.
+## ℹ Please use `str_view_all()` instead.</code></pre>
 <pre><code>## [1] │ y&lt;o&gt;&lt;u&gt;p l&lt;a&gt; b&lt;o&gt;&lt;u&gt;m</code></pre>
 <p>Remarquez bien la différence:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="strings.html#cb33-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;A132-f445-e34-C308-M2244-Z449-E18&quot;</span>,</span>
-<span id="cb33-2"><a href="strings.html#cb33-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[308]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="strings.html#cb34-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;A132-f445-e34-C308-M2244-Z449-E18&quot;</span>,</span>
+<span id="cb34-2"><a href="strings.html#cb34-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[308]&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ A1&lt;3&gt;2-f445-e&lt;3&gt;4-C&lt;3&gt;&lt;0&gt;&lt;8&gt;-M2244-Z449-E1&lt;8&gt;</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="strings.html#cb35-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;A132-f445-e34-C308-M2244-Z449-E18&quot;</span>,</span>
-<span id="cb35-2"><a href="strings.html#cb35-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;308&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="strings.html#cb36-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;A132-f445-e34-C308-M2244-Z449-E18&quot;</span>,</span>
+<span id="cb36-2"><a href="strings.html#cb36-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;308&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ A132-f445-e34-C&lt;308&gt;-M2244-Z449-E18</code></pre>
 <p>Si l’on veut désigner un caractère quelconque, alors on peut utiliser la notation <code>.</code>.</p>
 <p>Par exemple, si l’on souhaite rechercher n’importe quel caractère (excepté le retour à la ligne) suivi d’une lettre minuscule:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="strings.html#cb37-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;32a-B44-552-98eEf&quot;</span>,</span>
-<span id="cb37-2"><a href="strings.html#cb37-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;.[a-z]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="strings.html#cb38-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;32a-B44-552-98eEf&quot;</span>,</span>
+<span id="cb38-2"><a href="strings.html#cb38-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;.[a-z]&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ 3&lt;2a&gt;-B44-552-9&lt;8e&gt;&lt;Ef&gt;</code></pre>
 </div>
-<div id="caractères-spéciaux" class="section level3" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> caractères spéciaux</h3>
+<div id="caractères-spéciaux" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> caractères spéciaux<a href="strings.html#caractères-spéciaux" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="images/regexp_backslashes.png" /></p>
 <p>Si je veux trouver tous les points, points d’interrogation ou points d’exclamation:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="strings.html#cb39-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;Allô, John-John? Ici Joe la frite. Surprise!&quot;</span>),</span>
-<span id="cb39-2"><a href="strings.html#cb39-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;[</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">?</span><span class="sc">\\</span><span class="st">!]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="strings.html#cb40-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;Allô, John-John? Ici Joe la frite. Surprise!&quot;</span>),</span>
+<span id="cb40-2"><a href="strings.html#cb40-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;[</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">?</span><span class="sc">\\</span><span class="st">!]&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ Allô, John-John&lt;?&gt; Ici Joe la frite&lt;.&gt; Surprise&lt;!&gt;</code></pre>
 <p>Remarquez qu’on ne cherche pas le pattern <code>"[.?!]"</code>, mais le pattern <code>"[\\.\\?\\!]"</code>.</p>
 <p><code>.</code> (comme nous l’avons vu précédemment), mais aussi <code>?</code> et <code>!</code> sont des <strong>caractères spéciaux</strong> dans le cadre des expressions régulières. Donc, pour dire qu’on parle d’un “vrai” point, point d’interrogation ou point d’exclamation, on utilise l’escape character <code>\</code>. L’expression régulière est donc <code>[\.\?\!]</code>…</p>
 <p>Mais on ne s’arrête pas là… En effet, ce n’est pas <em>directement</em> une expression régulière que l’on passe à la fonction, mais plutôt une chaîne de caractères qui est elle-même “transformée” en expression régulière… Il faut donc utiliser l’escape character <code>\</code> devant les <code>\</code>. Et voilà comment on se retrouve à passer le pattern <code>"[\\.\\?\\!]"</code>.</p>
 </div>
-<div id="caractères-exclus-gammes-de-caractères" class="section level3" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> caractères exclus, gammes de caractères</h3>
+<div id="caractères-exclus-gammes-de-caractères" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> caractères exclus, gammes de caractères<a href="strings.html#caractères-exclus-gammes-de-caractères" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>On peut définir une classe de caractères en listant les caractères qu’elle inclut, mais également en listant <strong>l’ensemble des caractères exclus</strong> en utilisant la notation <code>[^...]</code>:</p>
 <p>Par exemple, pour trouver tous les caractères qui ne sont ni une voyelle ni un espace:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="strings.html#cb41-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;turlututu chapeau pointu&quot;</span>,</span>
-<span id="cb41-2"><a href="strings.html#cb41-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[^aeiou ]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="strings.html#cb42-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;turlututu chapeau pointu&quot;</span>,</span>
+<span id="cb42-2"><a href="strings.html#cb42-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[^aeiou ]&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;t&gt;u&lt;r&gt;&lt;l&gt;u&lt;t&gt;u&lt;t&gt;u &lt;c&gt;&lt;h&gt;a&lt;p&gt;eau &lt;p&gt;oi&lt;n&gt;&lt;t&gt;u</code></pre>
 <p>Enfin, on peut définir des classes de caractères correspondant à des gammes de valeurs en utilisant la notation <code>[...-...]</code></p>
 <p>Par exemple, pour trouver tous les chiffres entre 1 et 5:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="strings.html#cb43-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;3 petits cochons&quot;</span>, <span class="st">&quot;101 dalmations&quot;</span>, <span class="st">&quot;7 nains&quot;</span>),</span>
-<span id="cb43-2"><a href="strings.html#cb43-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[1-5]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="strings.html#cb44-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;3 petits cochons&quot;</span>, <span class="st">&quot;101 dalmations&quot;</span>, <span class="st">&quot;7 nains&quot;</span>),</span>
+<span id="cb44-2"><a href="strings.html#cb44-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[1-5]&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;3&gt; petits cochons
 ## [2] │ &lt;1&gt;0&lt;1&gt; dalmations
 ## [3] │ 7 nains</code></pre>
 <p>Pour trouver toutes les lettres entre A et F:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="strings.html#cb45-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;A132-f445-e34-C308-M2244-Z449-E18&quot;</span>,</span>
-<span id="cb45-2"><a href="strings.html#cb45-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[A-F]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="strings.html#cb46-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;A132-f445-e34-C308-M2244-Z449-E18&quot;</span>,</span>
+<span id="cb46-2"><a href="strings.html#cb46-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[A-F]&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;A&gt;132-f445-e34-&lt;C&gt;308-M2244-Z449-&lt;E&gt;18</code></pre>
 <p>Pour trouver toutes les lettres entre A et F et a et e:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="strings.html#cb47-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;A132-f445-e34-C308-M2244-Z449-E18&quot;</span>,</span>
-<span id="cb47-2"><a href="strings.html#cb47-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[A-Fa-e]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="strings.html#cb48-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;A132-f445-e34-C308-M2244-Z449-E18&quot;</span>,</span>
+<span id="cb48-2"><a href="strings.html#cb48-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[A-Fa-e]&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;A&gt;132-f445-&lt;e&gt;34-&lt;C&gt;308-M2244-Z449-&lt;E&gt;18</code></pre>
 </div>
-<div id="classes-prédéfinies" class="section level3" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> classes prédéfinies</h3>
+<div id="classes-prédéfinies" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> classes prédéfinies<a href="strings.html#classes-prédéfinies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Notez qu’il existe des classes de caractères prédéfinies</p>
 <p><img src="images/regexp_predefined_classes.png" /></p>
 <ul>
@@ -449,11 +489,11 @@ Recueil et analyse de texte avec R </img></a>
 <li><code>[:blank:]</code>: un “blanc” (espace simple ou tabulation)</li>
 </ul>
 </div>
-<div id="quelques-exemples-pour-bien-comprendre" class="section level3" number="2.2.5">
-<h3><span class="header-section-number">2.2.5</span> quelques exemples pour bien comprendre</h3>
+<div id="quelques-exemples-pour-bien-comprendre" class="section level3 hasAnchor" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> quelques exemples pour bien comprendre<a href="strings.html#quelques-exemples-pour-bien-comprendre" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Une lettre entre A and E, puis un chiffre entre 1 et 6, puis un point, puis “txt”:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="strings.html#cb49-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;A2.txt&quot;</span>,<span class="st">&quot;B5.png&quot;</span>,<span class="st">&quot;C3.txt&quot;</span>,<span class="st">&quot;E6.txt&quot;</span>,<span class="st">&quot;E9.txt&quot;</span>,<span class="st">&quot;F4.txt&quot;</span>), </span>
-<span id="cb49-2"><a href="strings.html#cb49-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[A-E][1-6]</span><span class="sc">\\</span><span class="st">.txt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="strings.html#cb50-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;A2.txt&quot;</span>,<span class="st">&quot;B5.png&quot;</span>,<span class="st">&quot;C3.txt&quot;</span>,<span class="st">&quot;E6.txt&quot;</span>,<span class="st">&quot;E9.txt&quot;</span>,<span class="st">&quot;F4.txt&quot;</span>), </span>
+<span id="cb50-2"><a href="strings.html#cb50-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[A-E][1-6]</span><span class="sc">\\</span><span class="st">.txt&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;A2.txt&gt;
 ## [2] │ B5.png
 ## [3] │ &lt;C3.txt&gt;
@@ -461,27 +501,27 @@ Recueil et analyse de texte avec R </img></a>
 ## [5] │ E9.txt
 ## [6] │ F4.txt</code></pre>
 <p>Un chiffre suivi d’un espace:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="strings.html#cb51-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;7 nains&quot;</span>,<span class="st">&quot;3 petits cochons&quot;</span>,<span class="st">&quot;101 dalmatiens&quot;</span>), </span>
-<span id="cb51-2"><a href="strings.html#cb51-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[0-9] &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="strings.html#cb52-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;7 nains&quot;</span>,<span class="st">&quot;3 petits cochons&quot;</span>,<span class="st">&quot;101 dalmatiens&quot;</span>), </span>
+<span id="cb52-2"><a href="strings.html#cb52-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[0-9] &quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;7 &gt;nains
 ## [2] │ &lt;3 &gt;petits cochons
 ## [3] │ 10&lt;1 &gt;dalmatiens</code></pre>
 <p>Un caractère suivi d’un chiffre suivi d’un point:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="strings.html#cb53-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;/pouet3.kebop4.kekepwek.kwak&quot;</span>),</span>
-<span id="cb53-2"><a href="strings.html#cb53-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;.[0-9]</span><span class="sc">\\</span><span class="st">.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="strings.html#cb54-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;/pouet3.kebop4.kekepwek.kwak&quot;</span>),</span>
+<span id="cb54-2"><a href="strings.html#cb54-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;.[0-9]</span><span class="sc">\\</span><span class="st">.&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ /poue&lt;t3.&gt;kebo&lt;p4.&gt;kekepwek.kwak</code></pre>
 <p>Un caractère de ponctuation suivi d’un espace simple et d’une lettre en majuscule:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="strings.html#cb55-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;Allô? c&#39;est John John. Tu as 5 minutes?&quot;</span>),</span>
-<span id="cb55-2"><a href="strings.html#cb55-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[:punct:] [:upper:]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="strings.html#cb56-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;Allô? c&#39;est John John. Tu as 5 minutes?&quot;</span>),</span>
+<span id="cb56-2"><a href="strings.html#cb56-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;[:punct:] [:upper:]&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ Allô? c&#39;est John John&lt;. T&gt;u as 5 minutes?</code></pre>
 </div>
-<div id="groupes-et-références-arrières" class="section level3" number="2.2.6">
-<h3><span class="header-section-number">2.2.6</span> groupes et références arrières</h3>
+<div id="groupes-et-références-arrières" class="section level3 hasAnchor" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> groupes et références arrières<a href="strings.html#groupes-et-références-arrières" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Il est possible de créer des groupes au sein des expressions régulières, à l’aide de la notation <code>(...)</code></p>
 <p>Par exemple, je peux créer un premier groupe défini par une consonne suivie d’une voyelle à travers l’expression régulière <code>([^aeiou ][aeiou])</code>, et un deuxième groupe défini de la même manière.</p>
 <p>Utilisées avec la fonction <code>str_match_all()</code>, l’usage des parenthèses permet d’isoler différentes parties du pattern:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="strings.html#cb57-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_match_all</span>(<span class="fu">c</span>(<span class="st">&quot;tili tili woup lala tutu pop&quot;</span>),</span>
-<span id="cb57-2"><a href="strings.html#cb57-2" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;([^aeiou ][aeiou])([^aeiou ][aeiou])&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="strings.html#cb58-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_match_all</span>(<span class="fu">c</span>(<span class="st">&quot;tili tili woup lala tutu pop&quot;</span>),</span>
+<span id="cb58-2"><a href="strings.html#cb58-2" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;([^aeiou ][aeiou])([^aeiou ][aeiou])&quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]
 ##      [,1]   [,2] [,3]
 ## [1,] &quot;tili&quot; &quot;ti&quot; &quot;li&quot;
@@ -490,62 +530,62 @@ Recueil et analyse de texte avec R </img></a>
 ## [4,] &quot;tutu&quot; &quot;tu&quot; &quot;tu&quot;</code></pre>
 <p>L’usage conjoint des <strong>groupes</strong> et des <strong>références arrières</strong> permet par ailleurs de rechercher des <strong>répétitions de motifs</strong> dans les patterns.</p>
 <p>Ainsi, pour chercher un pattern composé d’une consonne suivi d’une voyelle, répété deux fois, on peut utiliser une référence arrière <code>\1</code>, <code>\2</code>, etc. (Comme d’habitude, pour passer l’expression régulière à la fonction on utilise un string, donc on double le <code>\</code>):</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="strings.html#cb59-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;turlututu tralala&quot;</span>),</span>
-<span id="cb59-2"><a href="strings.html#cb59-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;([^aeiou ][aeiou])</span><span class="sc">\\</span><span class="st">1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="strings.html#cb60-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;turlututu tralala&quot;</span>),</span>
+<span id="cb60-2"><a href="strings.html#cb60-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;([^aeiou ][aeiou])</span><span class="sc">\\</span><span class="st">1&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ turlu&lt;tutu&gt; tra&lt;lala&gt;</code></pre>
 <p>Ici on recherche un motif (il n’y en a qu’un, donc il est numéroté “1”), répété immédiatement après sa première occurrence.</p>
 </div>
-<div id="quantificateurs" class="section level3" number="2.2.7">
-<h3><span class="header-section-number">2.2.7</span> quantificateurs</h3>
+<div id="quantificateurs" class="section level3 hasAnchor" number="3.2.7">
+<h3><span class="header-section-number">3.2.7</span> quantificateurs<a href="strings.html#quantificateurs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Les quantificateurs permettent de préciser le <strong>nombre d’occurrences consécutives</strong> d’une classe de caractères ou d’un groupe.</p>
 <p><img src="images/regexp_quantifiers.png" /></p>
 <p><strong>zéro ou un</strong>: On utilise la notation <code>?</code> à la suite du caractère ou motif recherché.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="strings.html#cb61-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;file1990-fileB1990-file2005-fileAbis2005-fileA2005&quot;</span>),</span>
-<span id="cb61-2"><a href="strings.html#cb61-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;file[:alpha:]?</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">d&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="strings.html#cb62-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;file1990-fileB1990-file2005-fileAbis2005-fileA2005&quot;</span>),</span>
+<span id="cb62-2"><a href="strings.html#cb62-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;file[:alpha:]?</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">d&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;file1990&gt;-&lt;fileB1990&gt;-&lt;file2005&gt;-fileAbis2005-&lt;fileA2005&gt;</code></pre>
 <p><strong>zéro ou plus</strong>: On utilise la notation <code>*</code> à la suite du caractère ou motif recherché.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="strings.html#cb63-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;fileA088-fileA-fileB-fileA862&quot;</span>),</span>
-<span id="cb63-2"><a href="strings.html#cb63-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;fileA</span><span class="sc">\\</span><span class="st">d*&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="strings.html#cb64-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;fileA088-fileA-fileB-fileA862&quot;</span>),</span>
+<span id="cb64-2"><a href="strings.html#cb64-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;fileA</span><span class="sc">\\</span><span class="st">d*&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;fileA088&gt;-&lt;fileA&gt;-fileB-&lt;fileA862&gt;</code></pre>
 <p><strong>un ou plus</strong> : On utilise la notation <code>+</code> à la suite du caractère ou motif recherché.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="strings.html#cb65-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;fileA0885-fileA-fileB-fileA862&quot;</span>),</span>
-<span id="cb65-2"><a href="strings.html#cb65-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;fileA</span><span class="sc">\\</span><span class="st">d+&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="strings.html#cb66-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;fileA0885-fileA-fileB-fileA862&quot;</span>),</span>
+<span id="cb66-2"><a href="strings.html#cb66-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;fileA</span><span class="sc">\\</span><span class="st">d+&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;fileA0885&gt;-fileA-fileB-&lt;fileA862&gt;</code></pre>
 <p><strong>exactement n fois</strong>: On utilise la notation <code>{n}</code> à la suite du caractère ou motif recherché.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="strings.html#cb67-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;fileA885.txt-fileA1506.txt-fileA1.txt-fileA862.txt&quot;</span>),</span>
-<span id="cb67-2"><a href="strings.html#cb67-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;fileA</span><span class="sc">\\</span><span class="st">d{4}</span><span class="sc">\\</span><span class="st">.txt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="strings.html#cb68-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;fileA885.txt-fileA1506.txt-fileA1.txt-fileA862.txt&quot;</span>),</span>
+<span id="cb68-2"><a href="strings.html#cb68-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;fileA</span><span class="sc">\\</span><span class="st">d{4}</span><span class="sc">\\</span><span class="st">.txt&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ fileA885.txt-&lt;fileA1506.txt&gt;-fileA1.txt-fileA862.txt</code></pre>
 <p><strong>de n à m fois</strong></p>
 <p>On utilise la notation <code>{n,m}</code> à la suite du caractère ou motif recherché.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="strings.html#cb69-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;fileA885.txt-fileA1506.txt-fileA1.txt-fileA862.txt&quot;</span>,</span>
-<span id="cb69-2"><a href="strings.html#cb69-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;fileA</span><span class="sc">\\</span><span class="st">d{2,4}</span><span class="sc">\\</span><span class="st">.txt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="strings.html#cb70-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;fileA885.txt-fileA1506.txt-fileA1.txt-fileA862.txt&quot;</span>,</span>
+<span id="cb70-2"><a href="strings.html#cb70-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;fileA</span><span class="sc">\\</span><span class="st">d{2,4}</span><span class="sc">\\</span><span class="st">.txt&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;fileA885.txt&gt;-&lt;fileA1506.txt&gt;-fileA1.txt-&lt;fileA862.txt&gt;</code></pre>
 </div>
-<div id="ancres-et-assertions-avant-arrière" class="section level3" number="2.2.8">
-<h3><span class="header-section-number">2.2.8</span> ancres et assertions avant-arrière</h3>
+<div id="ancres-et-assertions-avant-arrière" class="section level3 hasAnchor" number="3.2.8">
+<h3><span class="header-section-number">3.2.8</span> ancres et assertions avant-arrière<a href="strings.html#ancres-et-assertions-avant-arrière" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Les ancres permettent de <strong>spécifier l’emplacement du motif</strong> par rapport à un mot ou à un string.</p>
 <p><img src="images/regexp_anchors.png" /></p>
 <p>L’ancre <code>^</code> fait référence au <strong>début</strong> d’un string.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="strings.html#cb71-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;Ah! C&#39;est toi John-John?&quot;</span>,<span class="st">&quot;Ben ça alors, Joe la Frite!&quot;</span>),</span>
-<span id="cb71-2"><a href="strings.html#cb71-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;^[:upper:]&quot;</span>) <span class="co"># on cherche une majuscule en début de string:</span></span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="strings.html#cb72-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;Ah! C&#39;est toi John-John?&quot;</span>,<span class="st">&quot;Ben ça alors, Joe la Frite!&quot;</span>),</span>
+<span id="cb72-2"><a href="strings.html#cb72-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;^[:upper:]&quot;</span>) <span class="co"># on cherche une majuscule en début de string:</span></span></code></pre></div>
 <pre><code>## [1] │ &lt;A&gt;h! C&#39;est toi John-John?
 ## [2] │ &lt;B&gt;en ça alors, Joe la Frite!</code></pre>
 <p>L’ancre <code>$</code> fait référence à la <strong>fin</strong> d’un string.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="strings.html#cb73-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;Allô? John-John?&quot;</span>),</span>
-<span id="cb73-2"><a href="strings.html#cb73-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;</span><span class="sc">\\</span><span class="st">?$&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="strings.html#cb74-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;Allô? John-John?&quot;</span>),</span>
+<span id="cb74-2"><a href="strings.html#cb74-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;</span><span class="sc">\\</span><span class="st">?$&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ Allô? John-John&lt;?&gt;</code></pre>
 <p>L’ancre <code>\\b</code> fait référence au <strong>début ou à la fin d’un mot</strong>.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="strings.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tous les mots se terminant par &quot;a&quot;:</span></span>
-<span id="cb75-2"><a href="strings.html#cb75-2" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;Carla Lea Armelle Marie Lisa Alexia Nina&quot;</span>),</span>
-<span id="cb75-3"><a href="strings.html#cb75-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;a</span><span class="sc">\\</span><span class="st">b&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="strings.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tous les mots se terminant par &quot;a&quot;:</span></span>
+<span id="cb76-2"><a href="strings.html#cb76-2" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;Carla Lea Armelle Marie Lisa Alexia Nina&quot;</span>),</span>
+<span id="cb76-3"><a href="strings.html#cb76-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;a</span><span class="sc">\\</span><span class="st">b&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ Carl&lt;a&gt; Le&lt;a&gt; Armelle Marie Lis&lt;a&gt; Alexi&lt;a&gt; Nin&lt;a&gt;</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="strings.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tous les mots commençant par une majuscule:</span></span>
-<span id="cb77-2"><a href="strings.html#cb77-2" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;hey Bertrand, aLLeZ vIeNs, il y aura Magda et John-John!&quot;</span>),</span>
-<span id="cb77-3"><a href="strings.html#cb77-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;</span><span class="sc">\\</span><span class="st">b[:upper:]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="strings.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tous les mots commençant par une majuscule:</span></span>
+<span id="cb78-2"><a href="strings.html#cb78-2" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;hey Bertrand, aLLeZ vIeNs, il y aura Magda et John-John!&quot;</span>),</span>
+<span id="cb78-3"><a href="strings.html#cb78-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;</span><span class="sc">\\</span><span class="st">b[:upper:]&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ hey &lt;B&gt;ertrand, aLLeZ vIeNs, il y aura &lt;M&gt;agda et &lt;J&gt;ohn-&lt;J&gt;ohn!</code></pre>
 </div>
-<div id="assertions-avant-arrière" class="section level3" number="2.2.9">
-<h3><span class="header-section-number">2.2.9</span> assertions avant-arrière</h3>
+<div id="assertions-avant-arrière" class="section level3 hasAnchor" number="3.2.9">
+<h3><span class="header-section-number">3.2.9</span> assertions avant-arrière<a href="strings.html#assertions-avant-arrière" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Ces assertions servent à <strong>vérifier si un motif existe dans un pattern, sans inclure ce motif dans le résultat</strong>.</p>
 <p><img src="images/regexp_lookarounds.png" /></p>
 <ul>
@@ -555,23 +595,29 @@ Recueil et analyse de texte avec R </img></a>
 <li><code>(?&lt;!...)</code>: Assertion arrière négative</li>
 </ul>
 <p>Exemple d’<strong>assertion avant</strong>: on cherche les nombres (<code>\b\d+\b</code>) qui sont suivis de ” dalmatiens”</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="strings.html#cb79-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;12 labradors, 101 dalmatiens et 4 loulous&quot;</span>),</span>
-<span id="cb79-2"><a href="strings.html#cb79-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">b(?= dalmatiens)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="strings.html#cb80-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="fu">c</span>(<span class="st">&quot;12 labradors, 101 dalmatiens et 4 loulous&quot;</span>),</span>
+<span id="cb80-2"><a href="strings.html#cb80-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">b(?= dalmatiens)&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ 12 labradors, &lt;101&gt; dalmatiens et 4 loulous</code></pre>
 <p>Exemple d’<strong>assertion avant négative</strong>: on cherche les nombres (<code>\b\d+\b</code>) qui ne sont pas suivi de ” dalmatiens”</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="strings.html#cb81-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;12 labradors, 101 dalmatiens et 4 loulous&quot;</span>,</span>
-<span id="cb81-2"><a href="strings.html#cb81-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">b(?! dalmatiens)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="strings.html#cb82-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;12 labradors, 101 dalmatiens et 4 loulous&quot;</span>,</span>
+<span id="cb82-2"><a href="strings.html#cb82-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">b(?! dalmatiens)&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ &lt;12&gt; labradors, 101 dalmatiens et &lt;4&gt; loulous</code></pre>
 <p>Exemple d’<strong>assertion arrière</strong>: on cherche les mots commençant par une majuscule (<code>[:upper:][:lower:]*</code>) précédés de “Mr”:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="strings.html#cb83-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;Mr X, Mr Robot, James Bond et Jon Snow&quot;</span>,</span>
-<span id="cb83-2"><a href="strings.html#cb83-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;(?&lt;=Mr )[:upper:][:lower:]*&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="strings.html#cb84-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;Mr X, Mr Robot, James Bond et Jon Snow&quot;</span>,</span>
+<span id="cb84-2"><a href="strings.html#cb84-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;(?&lt;=Mr )[:upper:][:lower:]*&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ Mr &lt;X&gt;, Mr &lt;Robot&gt;, James Bond et Jon Snow</code></pre>
 <p>Exemple d’<strong>assertion arrière négative</strong>: on cherche tous les mots commençant par une majuscule et finissant les strings (<code>[:upper:][:lower:]*$</code>) précédés par autre chose que “Mr”:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="strings.html#cb85-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;Mr X, Mr Robot, James Bond et Jon Snow&quot;</span>,</span>
-<span id="cb85-2"><a href="strings.html#cb85-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;(?&lt;!Mr )[:upper:][:lower:]*$&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="strings.html#cb86-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_view_all</span>(<span class="st">&quot;Mr X, Mr Robot, James Bond et Jon Snow&quot;</span>,</span>
+<span id="cb86-2"><a href="strings.html#cb86-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;(?&lt;!Mr )[:upper:][:lower:]*$&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ Mr X, Mr Robot, James Bond et Jon &lt;Snow&gt;</code></pre>
 
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-stringr" class="csl-entry">
+Wickham, Hadley. 2022. <em>Stringr: Simple, Consistent Wrappers for Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr">https://CRAN.R-project.org/package=stringr</a>.
 </div>
 </div>
             </section>
@@ -640,7 +686,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

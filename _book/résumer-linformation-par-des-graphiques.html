@@ -23,7 +23,7 @@
 <meta name="author" content=" Lise Vaudor" />
 
 
-<meta name="date" content="2023-01-17" />
+<meta name="date" content="2023-01-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,8 +147,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#quest-ce-que-la-textométrie"><i class="fa fa-check"></i><b>1.1</b> Qu’est-ce que la textométrie?</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r"><i class="fa fa-check"></i><b>1.2</b> Pourquoi faire ses analyses textométriques sous R?</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#pourquoi-travailler-avec-des-textes-sous-r"><i class="fa fa-check"></i><b>1.1</b> Pourquoi travailler avec des textes sous R?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#quest-ce-que-la-textométrie"><i class="fa fa-check"></i><b>1.2</b> Qu’est-ce que la textométrie?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r"><i class="fa fa-check"></i><b>1.3</b> Pourquoi faire ses analyses textométriques sous R?</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>2</b> Extraction de données textuelles</a>
 <ul>
@@ -223,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>6.1</b> Nuage de mots</a></li>
 <li class="chapter" data-level="6.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>6.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
-<li class="chapter" data-level="6.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#afc"><i class="fa fa-check"></i><b>6.3</b> AFC</a></li>
+<li class="chapter" data-level="6.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#analyse-factorielle-des-correspondances"><i class="fa fa-check"></i><b>6.3</b> Analyse factorielle des correspondances</a></li>
 <li class="chapter" data-level="6.4" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>6.4</b> Graphes</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Rechercher des thèmes (topic modelling)</a>
@@ -290,60 +291,53 @@ Recueil et analyse de texte avec R </img></a>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="résumer-linformation-par-des-graphiques.html#cb4-1" aria-hidden="true" tabindex="-1"></a>tib_top_spec <span class="ot">&lt;-</span> mixr<span class="sc">::</span><span class="fu">tidy_specificities</span>(tib_lemmes,</span>
 <span id="cb4-2"><a href="résumer-linformation-par-des-graphiques.html#cb4-2" aria-hidden="true" tabindex="-1"></a>                                         lemma,</span>
 <span id="cb4-3"><a href="résumer-linformation-par-des-graphiques.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                                         ministre,</span>
-<span id="cb4-4"><a href="résumer-linformation-par-des-graphiques.html#cb4-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">top_spec=</span><span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 33,812 × 4
-##    cat1       cat2              spec     n
-##    &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt; &lt;int&gt;
-##  1 aa         Barbara Pompili -0.201    NA
-##  2 abaissant  Barbara Pompili  0.862     2
-##  3 abaisser   Barbara Pompili  0.288     3
-##  4 abandon    Barbara Pompili  0.431     1
-##  5 abandonner Barbara Pompili -0.536     2
-##  6 abattement Barbara Pompili  1.29      3
-##  7 abattoir   Barbara Pompili  0.862     2
-##  8 abattre    Barbara Pompili  0.862     2
-##  9 abbaye     Barbara Pompili -0.201    NA
-## 10 abbé       Barbara Pompili  1.72      4
-## # … with 33,802 more rows</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="résumer-linformation-par-des-graphiques.html#cb6-1" aria-hidden="true" tabindex="-1"></a>mixr<span class="sc">::</span><span class="fu">plot_specificities</span>(tib_top_spec,lemma,ministre)</span></code></pre></div>
+<span id="cb4-4"><a href="résumer-linformation-par-des-graphiques.html#cb4-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">top_spec=</span><span class="dv">10</span>)</span>
+<span id="cb4-5"><a href="résumer-linformation-par-des-graphiques.html#cb4-5" aria-hidden="true" tabindex="-1"></a>mixr<span class="sc">::</span><span class="fu">plot_specificities</span>(tib_top_spec,lemma,ministre)</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/plot_spec_1-1.png" width="672" /></p>
 </div>
-<div id="afc" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> AFC<a href="résumer-linformation-par-des-graphiques.html#afc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>On peut tenter de <strong>visualiser une table lexicale via une analyse factorielle des correspondance</strong> (AFC) qui permet d’obtenir une <strong>représentation en quelques dimensions (idéalement, 2) d’un tableau qui en comprend <span class="math inline">\(k\)</span></strong>.</p>
-<p>Nous allons ici représenter les lemmes avec les plus hautes spécificités. Nous repartons pour cela de la table <code>tib_spec</code> calculée dans la partie <a href="résumer-linformation-par-des-métriques.html#spec">5.6</a>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="résumer-linformation-par-des-graphiques.html#cb7-1" aria-hidden="true" tabindex="-1"></a>tib_spec<span class="ot">=</span>tib_spec <span class="sc">%&gt;%</span> <span class="fu">filter</span>(spec<span class="sc">&gt;</span><span class="dv">10</span>)</span>
-<span id="cb7-2"><a href="résumer-linformation-par-des-graphiques.html#cb7-2" aria-hidden="true" tabindex="-1"></a>tib_spec_haute<span class="ot">=</span>tib_lemmes <span class="sc">%&gt;%</span> </span>
-<span id="cb7-3"><a href="résumer-linformation-par-des-graphiques.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lemma <span class="sc">%in%</span> tib_spec<span class="sc">$</span>lemma )</span>
-<span id="cb7-4"><a href="résumer-linformation-par-des-graphiques.html#cb7-4" aria-hidden="true" tabindex="-1"></a>tib_lex<span class="ot">=</span><span class="fu">table</span>(tib_spec_haute<span class="sc">$</span>lemma,tib_spec_haute<span class="sc">$</span>ministre)</span></code></pre></div>
+<div id="analyse-factorielle-des-correspondances" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Analyse factorielle des correspondances<a href="résumer-linformation-par-des-graphiques.html#analyse-factorielle-des-correspondances" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On peut tenter de <strong>visualiser une table lexicale via une analyse factorielle des correspondances</strong> (AFC).</p>
+<p>En effet, une table lexicale est assimilable à un <strong>tableau des effectifs croisés de deux variables qualitatives</strong>. L’AFC permet dans ce cas de figure d’obtenir une <strong>représentation en quelques dimensions (idéalement, 2) d’un tableau qui en comprend <span class="math inline">\(k\)</span></strong>.</p>
+<p>Nous allons ici repartir d’une table lexicale ne comprenant que les lemmes avec les plus hautes spécificités. Nous repartons pour cela de la table <code>tib_spec</code> calculée dans la partie <a href="résumer-linformation-par-des-métriques.html#spec">5.6</a>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="résumer-linformation-par-des-graphiques.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lemmes hautement spécifiques d&#39;une partie ou d&#39;une autre</span></span>
+<span id="cb5-2"><a href="résumer-linformation-par-des-graphiques.html#cb5-2" aria-hidden="true" tabindex="-1"></a>lemmes_spec<span class="ot">=</span>tib_spec <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="résumer-linformation-par-des-graphiques.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(spec<span class="sc">&gt;</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="résumer-linformation-par-des-graphiques.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(lemma) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="résumer-linformation-par-des-graphiques.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb5-6"><a href="résumer-linformation-par-des-graphiques.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># table avec lemmes hautement spécifiques</span></span>
+<span id="cb5-7"><a href="résumer-linformation-par-des-graphiques.html#cb5-7" aria-hidden="true" tabindex="-1"></a>tib_hspec<span class="ot">=</span>tib_lemmes <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="résumer-linformation-par-des-graphiques.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lemma <span class="sc">%in%</span> lemmes_spec)</span>
+<span id="cb5-9"><a href="résumer-linformation-par-des-graphiques.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># table lexicale</span></span>
+<span id="cb5-10"><a href="résumer-linformation-par-des-graphiques.html#cb5-10" aria-hidden="true" tabindex="-1"></a>tib_lex<span class="ot">=</span><span class="fu">table</span>(tib_hspec<span class="sc">$</span>lemma,tib_hspec<span class="sc">$</span>ministre)</span></code></pre></div>
+<p>Nous allons utiliser le package <code>FactoMineR</code> pour réaliser l’analyse factorielle des correspondances et <code>factoextra</code> pour produire les graphiques associés.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="résumer-linformation-par-des-graphiques.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
+<span id="cb6-2"><a href="résumer-linformation-par-des-graphiques.html#cb6-2" aria-hidden="true" tabindex="-1"></a>result_CA<span class="ot">=</span><span class="fu">CA</span>(tib_lex, <span class="at">graph=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Dans notre cas, on souhaite représenter 4 dimensions (le nombre de ministres) sur un graphique en 2D. Cette transformation correspond nécessairement à une perte d’information qui est quantifiée via les <strong>eigenvalues</strong> de l’AFC.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="résumer-linformation-par-des-graphiques.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
-<span id="cb8-2"><a href="résumer-linformation-par-des-graphiques.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">CA</span>(tib_lex)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/AFC-1.png" width="1152" /></p>
-<pre><code>## **Results of the Correspondence Analysis (CA)**
-## The row variable has  129  categories; the column variable has 4 categories
-## The chi square of independence between the two variables is equal to 19822.32 (p-value =  0 ).
-## *The results are available in the following objects:
-## 
-##    name              description                   
-## 1  &quot;$eig&quot;            &quot;eigenvalues&quot;                 
-## 2  &quot;$col&quot;            &quot;results for the columns&quot;     
-## 3  &quot;$col$coord&quot;      &quot;coord. for the columns&quot;      
-## 4  &quot;$col$cos2&quot;       &quot;cos2 for the columns&quot;        
-## 5  &quot;$col$contrib&quot;    &quot;contributions of the columns&quot;
-## 6  &quot;$row&quot;            &quot;results for the rows&quot;        
-## 7  &quot;$row$coord&quot;      &quot;coord. for the rows&quot;         
-## 8  &quot;$row$cos2&quot;       &quot;cos2 for the rows&quot;           
-## 9  &quot;$row$contrib&quot;    &quot;contributions of the rows&quot;   
-## 10 &quot;$call&quot;           &quot;summary called parameters&quot;   
-## 11 &quot;$call$marge.col&quot; &quot;weights of the columns&quot;      
-## 12 &quot;$call$marge.row&quot; &quot;weights of the rows&quot;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="résumer-linformation-par-des-graphiques.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb7-2"><a href="résumer-linformation-par-des-graphiques.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(result_CA, <span class="at">addlabels =</span> <span class="cn">TRUE</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/CA_eigen-1.png" width="480" /></p>
+<p>Ainsi en réduisant la dimensionalité à 2 axes on parvient tout de même à représenter 79% de l’information.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="résumer-linformation-par-des-graphiques.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_ca_biplot</span>(result_CA, <span class="at">repel=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/CA_biplot-1.png" width="768" /></p>
+<p>La lecture de ce graphique peut se faire de différentes manières:</p>
+<ul>
+<li><p>en considérant l’<strong>emplacement des termes et des parties par rapport aux axes</strong>. L’axe des abscisses est le “plus structurant” dans le corpus (c’est celui qui explique la plus forte inertie du nuage de points), les termes et parties qui se projettent le plus loin sur l’axe sont ceux qui y contribuent le plus.</p></li>
+<li><p>en considérant l’<strong>emplacement des termes et parties les uns par rapport aux autres</strong>: deux termes proches sont généralement corrélés l’un à l’autre, deux parties proches l’une de l’autre seront généralement plus proches du point de vue du vocabulaire employé, un terme sera généralement plus proche de la partie dont il est spécifique.</p></li>
+</ul>
+<p>Ainsi à l’examen du graphique ci-dessus, on peut avoir quelques indices quant au contenu des communiqués de presse les plus discriminants (en fonction du ministre en exercice). Probablement:</p>
+<ul>
+<li>pour Barbara Pompili, des considérations en lien avec la problématique du logement (“loyer”,“locataire”,“bailleur”,“immobilier”)</li>
+<li>pour Nicolas Hulot, peut-être une préoccupation plus importante pour le transport notamment ferroviaire (“mobilité”,“cheminot”) et une surreprésentation des bulletins automatiques Vigilance Crues</li>
+<li>pour Elisabeth Borne, une mention plus fréquente des problématiques liées à l’énergie (“pétrolier”,“raffinerie”,“station”,“charbon”) et peut-être un intérêt pour le problème de l’industrie textile et du phénomène de fast-fashion (“fashion”).</li>
+<li>pour François de Rugy, des préoccupations “à mi-chemin” entre celles de Nicolas Hulot et d’Elisabeth Borne</li>
+</ul>
 </div>
 <div id="graphes" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Graphes<a href="résumer-linformation-par-des-graphiques.html#graphes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>On souhaite maintenant représenter les <strong>relations entre les mots</strong> par un graphe (le lien est défini par la <strong>co-occurrence</strong> des mots dans un même commentaire). On va pour ce faire créer un graphe à partir du tableau <code>mots_cooc</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="résumer-linformation-par-des-graphiques.html#cb10-1" aria-hidden="true" tabindex="-1"></a>mots_graph <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">graph_from_data_frame</span>(mots_cooc <span class="sc">%&gt;%</span> <span class="fu">filter</span>(correlation<span class="sc">&gt;</span><span class="fl">0.2</span>))</span>
-<span id="cb10-2"><a href="résumer-linformation-par-des-graphiques.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mots_graph)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="résumer-linformation-par-des-graphiques.html#cb9-1" aria-hidden="true" tabindex="-1"></a>mots_graph <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">graph_from_data_frame</span>(mots_cooc <span class="sc">%&gt;%</span> <span class="fu">filter</span>(correlation<span class="sc">&gt;</span><span class="fl">0.2</span>))</span>
+<span id="cb9-2"><a href="résumer-linformation-par-des-graphiques.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mots_graph)</span></code></pre></div>
 <pre><code>## [1] &quot;igraph&quot;</code></pre>
 <p>Un graphe se caractérise par</p>
 <ul>
@@ -352,14 +346,14 @@ Recueil et analyse de texte avec R </img></a>
 <li>des <strong>attributs</strong> (par exemple dans notre cas la fréquence de cooccurrence n et la corrélation cor font partie des attributs qui permettent de décrire les liens)</li>
 </ul>
 <p>Maintenant que l’objet de classe “graph” est créé, on va le représenter. Il faut pour cela calculer un “layout” des différents noeuds du graphe puis spécifier ce qu’on veut faire apparaître graphiquement à travers les commandes du package <code>ggraph</code> dont la logique est proche de celle de <code>ggplot2</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="résumer-linformation-par-des-graphiques.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
-<span id="cb12-2"><a href="résumer-linformation-par-des-graphiques.html#cb12-2" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> mots_graph <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="résumer-linformation-par-des-graphiques.html#cb12-3" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="résumer-linformation-par-des-graphiques.html#cb12-4" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">geom_edge_link</span>(<span class="at">edge_colour=</span><span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb12-5"><a href="résumer-linformation-par-des-graphiques.html#cb12-5" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">geom_node_point</span>(<span class="at">color =</span> <span class="st">&quot;khaki1&quot;</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="résumer-linformation-par-des-graphiques.html#cb12-6" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb12-7"><a href="résumer-linformation-par-des-graphiques.html#cb12-7" aria-hidden="true" tabindex="-1"></a>   ggplot2<span class="sc">::</span><span class="fu">theme_void</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="résumer-linformation-par-des-graphiques.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_graph)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="résumer-linformation-par-des-graphiques.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
+<span id="cb11-2"><a href="résumer-linformation-par-des-graphiques.html#cb11-2" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> mots_graph <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="résumer-linformation-par-des-graphiques.html#cb11-3" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="résumer-linformation-par-des-graphiques.html#cb11-4" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">geom_edge_link</span>(<span class="at">edge_colour=</span><span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="résumer-linformation-par-des-graphiques.html#cb11-5" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">geom_node_point</span>(<span class="at">color =</span> <span class="st">&quot;khaki1&quot;</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="résumer-linformation-par-des-graphiques.html#cb11-6" aria-hidden="true" tabindex="-1"></a>   ggraph<span class="sc">::</span><span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="résumer-linformation-par-des-graphiques.html#cb11-7" aria-hidden="true" tabindex="-1"></a>   ggplot2<span class="sc">::</span><span class="fu">theme_void</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="résumer-linformation-par-des-graphiques.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_graph)</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-2-1.png" width="576" /></p>
 
 </div>

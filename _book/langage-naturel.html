@@ -23,7 +23,7 @@
 <meta name="author" content=" Lise Vaudor" />
 
 
-<meta name="date" content="2023-01-11" />
+<meta name="date" content="2023-01-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -147,8 +169,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#quest-ce-que-la-textométrie"><i class="fa fa-check"></i><b>1.1</b> Qu’est-ce que la textométrie?</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r"><i class="fa fa-check"></i><b>1.2</b> Pourquoi faire ses analyses textométriques sous R?</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#pourquoi-travailler-avec-des-textes-sous-r"><i class="fa fa-check"></i><b>1.1</b> Pourquoi travailler avec des textes sous R?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#quest-ce-que-la-textométrie"><i class="fa fa-check"></i><b>1.2</b> Qu’est-ce que la textométrie?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r"><i class="fa fa-check"></i><b>1.3</b> Pourquoi faire ses analyses textométriques sous R?</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>2</b> Extraction de données textuelles</a>
 <ul>
@@ -177,11 +200,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>3.1</b> Strings</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>3.1.1</b> détection, remplacement</a></li>
-<li class="chapter" data-level="3.1.2" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>3.1.2</b> division, correspondance</a></li>
-<li class="chapter" data-level="3.1.3" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>3.1.3</b> extraction</a></li>
-<li class="chapter" data-level="3.1.4" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>3.1.4</b> comptage, subset</a></li>
-<li class="chapter" data-level="3.1.5" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>3.1.5</b> longueur, sous-partie</a></li>
+<li class="chapter" data-level="3.1.1" data-path="strings.html"><a href="strings.html#concaténation"><i class="fa fa-check"></i><b>3.1.1</b> concaténation</a></li>
+<li class="chapter" data-level="3.1.2" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>3.1.2</b> détection, remplacement</a></li>
+<li class="chapter" data-level="3.1.3" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>3.1.3</b> division, correspondance</a></li>
+<li class="chapter" data-level="3.1.4" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>3.1.4</b> extraction</a></li>
+<li class="chapter" data-level="3.1.5" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>3.1.5</b> comptage, subset</a></li>
+<li class="chapter" data-level="3.1.6" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>3.1.6</b> longueur, sous-partie</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>3.2</b> Expressions régulières</a>
 <ul>
@@ -214,15 +238,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#corpus-ministereco"><i class="fa fa-check"></i><b>5.1</b> Corpus MinisterEco</a></li>
 <li class="chapter" data-level="5.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>5.2</b> Fréquences d’occurrence</a></li>
-<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>5.3</b> Co-occurrences, corrélations</a></li>
-<li class="chapter" data-level="5.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>5.4</b> TF-IDF</a></li>
-<li class="chapter" data-level="5.5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spécificités"><i class="fa fa-check"></i><b>5.5</b> Spécificités</a></li>
+<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#table-lexicale"><i class="fa fa-check"></i><b>5.3</b> Table lexicale</a></li>
+<li class="chapter" data-level="5.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>5.4</b> Co-occurrences, corrélations</a></li>
+<li class="chapter" data-level="5.5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>5.5</b> TF-IDF</a></li>
+<li class="chapter" data-level="5.6" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spec"><i class="fa fa-check"></i><b>5.6</b> Spécificités</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>6</b> Résumer l’information par des graphiques</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>6.1</b> Nuage de mots</a></li>
 <li class="chapter" data-level="6.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>6.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
-<li class="chapter" data-level="6.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>6.3</b> Graphes</a></li>
+<li class="chapter" data-level="6.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#analyse-factorielle-des-correspondances"><i class="fa fa-check"></i><b>6.3</b> Analyse factorielle des correspondances</a></li>
+<li class="chapter" data-level="6.4" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>6.4</b> Graphes</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Rechercher des thèmes (topic modelling)</a>
 <ul>
@@ -294,7 +320,7 @@ Recueil et analyse de texte avec R </img></a>
 </div>
 <div id="mise-en-oeuvre" class="section level3 hasAnchor" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Mise en oeuvre<a href="langage-naturel.html#mise-en-oeuvre" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Pour réaliser cette tokenisation nous allons utiliser le package <code>tidytext</code>
+<p>Pour réaliser cette tokenisation nous allons utiliser le package <code>tidytext</code> <span class="citation">(<a href="#ref-tidytext" role="doc-biblioref">Silge and Robinson 2016</a>)</span>
 <img src='images/logo_tidytext.png' width='50'> et notamment sa fonction <code>unnest_tokens()</code>.</p>
 <p><img src="images/step3_process.png" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="langage-naturel.html#cb3-1" aria-hidden="true" tabindex="-1"></a>tibtot_commentaires <span class="sc">%&gt;%</span> </span>
@@ -429,18 +455,18 @@ Recueil et analyse de texte avec R </img></a>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="langage-naturel.html#cb15-1" aria-hidden="true" tabindex="-1"></a>lexique382<span class="ot">=</span>mixr<span class="sc">::</span><span class="fu">get_lexicon</span>(<span class="st">&quot;fr&quot;</span>)</span>
 <span id="cb15-2"><a href="langage-naturel.html#cb15-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">sample_n</span>(lexique382,<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 3
-##    word           lemma        type 
-##    &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;
-##  1 détournait     détourner    ver  
-##  2 happy_end      happy_end    nom  
-##  3 rembourrés     rembourrer   ver  
-##  4 pestilentielle pestilentiel adj  
-##  5 glanée         glaner       ver  
-##  6 scoutisme      scoutisme    nom  
-##  7 khalife        khalife      nom  
-##  8 malmenés       malmener     ver  
-##  9 chopaient      choper       ver  
-## 10 réconfortés    réconforter  ver</code></pre>
+##    word           lemma          type 
+##    &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;
+##  1 étroite        étroit         adj  
+##  2 étriqua        étriquer       ver  
+##  3 assurassent    assurer        ver  
+##  4 à_mon_encontre à_mon_encontre adv  
+##  5 baliverne      baliverne      nom  
+##  6 produiraient   produire       ver  
+##  7 engouffraient  engouffrer     ver  
+##  8 suiffés        suiffer        ver  
+##  9 embobine       embobiner      ver  
+## 10 prêtait        prêter         ver</code></pre>
 <p>Dans ce cas on réalise une <strong>jointure</strong> pour récupérer le lemme de chaque mot dans notre table:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="langage-naturel.html#cb17-1" aria-hidden="true" tabindex="-1"></a>tib_mots_nonvides <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(tib_mots_nonvides,</span>
 <span id="cb17-2"><a href="langage-naturel.html#cb17-2" aria-hidden="true" tabindex="-1"></a>                                      lexique382,</span>
@@ -463,6 +489,12 @@ Recueil et analyse de texte avec R </img></a>
 ## # … with 78 more rows</code></pre>
 
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-tidytext" class="csl-entry">
+Silge, Julia, and David Robinson. 2016. <span>“Tidytext: Text Mining and Analysis Using Tidy Data Principles in r.”</span> <em>JOSS</em> 1 (3). <a href="https://doi.org/10.21105/joss.00037">https://doi.org/10.21105/joss.00037</a>.
 </div>
 </div>
             </section>

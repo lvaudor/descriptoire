@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 6 Rechercher des thèmes (topic modelling) | Le Descriptoire: Recueil et analyse de texte avec R </title>
+  <title>Chapitre 7 Rechercher des thèmes (topic modelling) | Le Descriptoire: Recueil et analyse de texte avec R </title>
   <meta name="description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 6 Rechercher des thèmes (topic modelling) | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta property="og:title" content="Chapitre 7 Rechercher des thèmes (topic modelling) | Le Descriptoire: Recueil et analyse de texte avec R " />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 6 Rechercher des thèmes (topic modelling) | Le Descriptoire: Recueil et analyse de texte avec R " />
+  <meta name="twitter:title" content="Chapitre 7 Rechercher des thèmes (topic modelling) | Le Descriptoire: Recueil et analyse de texte avec R " />
   
   <meta name="twitter:description" content="Un manuel R et tidyverse-friendly pour l’analyse de textes." />
   
@@ -24,7 +23,7 @@
 <meta name="author" content=" Lise Vaudor" />
 
 
-<meta name="date" content="2022-12-01" />
+<meta name="date" content="2023-01-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="résumer-linformation-par-des-graphiques.html"/>
 
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -120,6 +119,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -146,87 +167,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </script>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>1</b> Extraction de données textuelles</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping"><i class="fa fa-check"></i><b>1.1</b> Depuis des pages web: web-scraping</a>
-<ul>
-<li class="chapter" data-level="1.1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#langage-html"><i class="fa fa-check"></i><b>1.1.1</b> Langage html</a></li>
-<li class="chapter" data-level="1.1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#lire-une-page-html"><i class="fa fa-check"></i><b>1.1.2</b> Lire une page html</a></li>
-<li class="chapter" data-level="1.1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html"><i class="fa fa-check"></i><b>1.1.3</b> Extraire certains éléments d’une page html</a></li>
-<li class="chapter" data-level="1.1.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction"><i class="fa fa-check"></i><b>1.1.4</b> Passage au format rectangulaire, et mise en fonction</a></li>
-<li class="chapter" data-level="1.1.5" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#itération"><i class="fa fa-check"></i><b>1.1.5</b> Itération</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#pourquoi-travailler-avec-des-textes-sous-r"><i class="fa fa-check"></i><b>1.1</b> Pourquoi travailler avec des textes sous R?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#quest-ce-que-la-textométrie"><i class="fa fa-check"></i><b>1.2</b> Qu’est-ce que la textométrie?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#pourquoi-faire-ses-analyses-textométriques-sous-r"><i class="fa fa-check"></i><b>1.3</b> Pourquoi faire ses analyses textométriques sous R?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation"><i class="fa fa-check"></i><b>1.2</b> Depuis des images ou des documents pdf: OCRisation</a>
+<li class="chapter" data-level="2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>2</b> Extraction de données textuelles</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract"><i class="fa fa-check"></i><b>1.2.1</b> Utilisation du package <code>tesseract</code></a></li>
-<li class="chapter" data-level="1.2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf"><i class="fa fa-check"></i><b>1.2.2</b> Et pour OCRiser depuis un pdf??</a></li>
+<li class="chapter" data-level="2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-pages-web-web-scraping"><i class="fa fa-check"></i><b>2.1</b> Depuis des pages web: web-scraping</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#langage-html"><i class="fa fa-check"></i><b>2.1.1</b> Langage html</a></li>
+<li class="chapter" data-level="2.1.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#lire-une-page-html"><i class="fa fa-check"></i><b>2.1.2</b> Lire une page html</a></li>
+<li class="chapter" data-level="2.1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#extraire-certains-éléments-dune-page-html"><i class="fa fa-check"></i><b>2.1.3</b> Extraire certains éléments d’une page html</a></li>
+<li class="chapter" data-level="2.1.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#passage-au-format-rectangulaire-et-mise-en-fonction"><i class="fa fa-check"></i><b>2.1.4</b> Passage au format rectangulaire, et mise en fonction</a></li>
+<li class="chapter" data-level="2.1.5" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#itération"><i class="fa fa-check"></i><b>2.1.5</b> Itération</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription"><i class="fa fa-check"></i><b>1.3</b> Depuis des enregistrements audio: transcription</a>
+<li class="chapter" data-level="2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-images-ou-des-documents-pdf-ocrisation"><i class="fa fa-check"></i><b>2.2</b> Depuis des images ou des documents pdf: OCRisation</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#présentation-de-lexemple"><i class="fa fa-check"></i><b>1.3.1</b> Présentation de l’exemple</a></li>
-<li class="chapter" data-level="1.3.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#prétraitements-éventuels"><i class="fa fa-check"></i><b>1.3.2</b> Prétraitements éventuels</a></li>
-<li class="chapter" data-level="1.3.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager"><i class="fa fa-check"></i><b>1.3.3</b> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
-<li class="chapter" data-level="1.3.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm"><i class="fa fa-check"></i><b>1.3.4</b> API Watson Speech-to-text d’IBM</a></li>
+<li class="chapter" data-level="2.2.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#utilisation-du-package-tesseract"><i class="fa fa-check"></i><b>2.2.1</b> Utilisation du package <code>tesseract</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#et-pour-ocriser-depuis-un-pdf"><i class="fa fa-check"></i><b>2.2.2</b> Et pour OCRiser depuis un pdf??</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>2</b> Manipuler des strings: package stringr</a>
+<li class="chapter" data-level="2.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#depuis-des-enregistrements-audio-transcription"><i class="fa fa-check"></i><b>2.3</b> Depuis des enregistrements audio: transcription</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>2.1</b> Strings</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>2.1.1</b> détection, remplacement</a></li>
-<li class="chapter" data-level="2.1.2" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>2.1.2</b> division, correspondance</a></li>
-<li class="chapter" data-level="2.1.3" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>2.1.3</b> extraction</a></li>
-<li class="chapter" data-level="2.1.4" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>2.1.4</b> comptage, subset</a></li>
-<li class="chapter" data-level="2.1.5" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>2.1.5</b> longueur, sous-partie</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>2.2</b> Expressions régulières</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="strings.html"><a href="strings.html#classes-de-caractères-et-groupes"><i class="fa fa-check"></i><b>2.2.1</b> classes de caractères et groupes</a></li>
-<li class="chapter" data-level="2.2.2" data-path="strings.html"><a href="strings.html#caractères-spéciaux"><i class="fa fa-check"></i><b>2.2.2</b> caractères spéciaux</a></li>
-<li class="chapter" data-level="2.2.3" data-path="strings.html"><a href="strings.html#caractères-exclus-gammes-de-caractères"><i class="fa fa-check"></i><b>2.2.3</b> caractères exclus, gammes de caractères</a></li>
-<li class="chapter" data-level="2.2.4" data-path="strings.html"><a href="strings.html#classes-prédéfinies"><i class="fa fa-check"></i><b>2.2.4</b> classes prédéfinies</a></li>
-<li class="chapter" data-level="2.2.5" data-path="strings.html"><a href="strings.html#quelques-exemples-pour-bien-comprendre"><i class="fa fa-check"></i><b>2.2.5</b> quelques exemples pour bien comprendre</a></li>
-<li class="chapter" data-level="2.2.6" data-path="strings.html"><a href="strings.html#groupes-et-références-arrières"><i class="fa fa-check"></i><b>2.2.6</b> groupes et références arrières</a></li>
-<li class="chapter" data-level="2.2.7" data-path="strings.html"><a href="strings.html#quantificateurs"><i class="fa fa-check"></i><b>2.2.7</b> quantificateurs</a></li>
-<li class="chapter" data-level="2.2.8" data-path="strings.html"><a href="strings.html#ancres-et-assertions-avant-arrière"><i class="fa fa-check"></i><b>2.2.8</b> ancres et assertions avant-arrière</a></li>
-<li class="chapter" data-level="2.2.9" data-path="strings.html"><a href="strings.html#assertions-avant-arrière"><i class="fa fa-check"></i><b>2.2.9</b> assertions avant-arrière</a></li>
+<li class="chapter" data-level="2.3.1" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#présentation-de-lexemple"><i class="fa fa-check"></i><b>2.3.1</b> Présentation de l’exemple</a></li>
+<li class="chapter" data-level="2.3.2" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#prétraitements-éventuels"><i class="fa fa-check"></i><b>2.3.2</b> Prétraitements éventuels</a></li>
+<li class="chapter" data-level="2.3.3" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-speech-to-text-google-package-googlelanguager"><i class="fa fa-check"></i><b>2.3.3</b> API Speech-to-text Google: <code>package googleLanguageR</code></a></li>
+<li class="chapter" data-level="2.3.4" data-path="extraction-de-données-textuelles.html"><a href="extraction-de-données-textuelles.html#api-watson-speech-to-text-dibm"><i class="fa fa-check"></i><b>2.3.4</b> API Watson Speech-to-text d’IBM</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="langage-naturel.html"><a href="langage-naturel.html"><i class="fa fa-check"></i><b>3</b> Langage naturel</a>
+<li class="chapter" data-level="3" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>3</b> Manipuler des strings: package stringr</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="langage-naturel.html"><a href="langage-naturel.html#tokenization"><i class="fa fa-check"></i><b>3.1</b> Tokenization</a></li>
-<li class="chapter" data-level="3.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table"><i class="fa fa-check"></i><b>3.2</b> Nettoyage de la table</a>
+<li class="chapter" data-level="3.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>3.1</b> Strings</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides"><i class="fa fa-check"></i><b>3.2.1</b> Nettoyage de la table par suppression des mots vides</a></li>
-<li class="chapter" data-level="3.2.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming"><i class="fa fa-check"></i><b>3.2.2</b> Nettoyage de la table par racinisation (stemming)</a></li>
-<li class="chapter" data-level="3.2.3" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation"><i class="fa fa-check"></i><b>3.2.3</b> Nettoyage de la table par lemmatisation</a></li>
+<li class="chapter" data-level="3.1.1" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>3.1.1</b> détection, remplacement</a></li>
+<li class="chapter" data-level="3.1.2" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>3.1.2</b> division, correspondance</a></li>
+<li class="chapter" data-level="3.1.3" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>3.1.3</b> extraction</a></li>
+<li class="chapter" data-level="3.1.4" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>3.1.4</b> comptage, subset</a></li>
+<li class="chapter" data-level="3.1.5" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>3.1.5</b> longueur, sous-partie</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>3.2</b> Expressions régulières</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="strings.html"><a href="strings.html#classes-de-caractères-et-groupes"><i class="fa fa-check"></i><b>3.2.1</b> classes de caractères et groupes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="strings.html"><a href="strings.html#caractères-spéciaux"><i class="fa fa-check"></i><b>3.2.2</b> caractères spéciaux</a></li>
+<li class="chapter" data-level="3.2.3" data-path="strings.html"><a href="strings.html#caractères-exclus-gammes-de-caractères"><i class="fa fa-check"></i><b>3.2.3</b> caractères exclus, gammes de caractères</a></li>
+<li class="chapter" data-level="3.2.4" data-path="strings.html"><a href="strings.html#classes-prédéfinies"><i class="fa fa-check"></i><b>3.2.4</b> classes prédéfinies</a></li>
+<li class="chapter" data-level="3.2.5" data-path="strings.html"><a href="strings.html#quelques-exemples-pour-bien-comprendre"><i class="fa fa-check"></i><b>3.2.5</b> quelques exemples pour bien comprendre</a></li>
+<li class="chapter" data-level="3.2.6" data-path="strings.html"><a href="strings.html#groupes-et-références-arrières"><i class="fa fa-check"></i><b>3.2.6</b> groupes et références arrières</a></li>
+<li class="chapter" data-level="3.2.7" data-path="strings.html"><a href="strings.html#quantificateurs"><i class="fa fa-check"></i><b>3.2.7</b> quantificateurs</a></li>
+<li class="chapter" data-level="3.2.8" data-path="strings.html"><a href="strings.html#ancres-et-assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.8</b> ancres et assertions avant-arrière</a></li>
+<li class="chapter" data-level="3.2.9" data-path="strings.html"><a href="strings.html#assertions-avant-arrière"><i class="fa fa-check"></i><b>3.2.9</b> assertions avant-arrière</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html"><i class="fa fa-check"></i><b>4</b> Résumer l’information par des métriques</a>
+<li class="chapter" data-level="4" data-path="langage-naturel.html"><a href="langage-naturel.html"><i class="fa fa-check"></i><b>4</b> Langage naturel</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>4.1</b> Fréquences d’occurrence</a></li>
-<li class="chapter" data-level="4.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>4.2</b> Co-occurrences, corrélations</a></li>
-<li class="chapter" data-level="4.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>4.3</b> TF-IDF</a></li>
-<li class="chapter" data-level="4.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spécificités"><i class="fa fa-check"></i><b>4.4</b> Spécificités</a></li>
+<li class="chapter" data-level="4.1" data-path="langage-naturel.html"><a href="langage-naturel.html#tokenization"><i class="fa fa-check"></i><b>4.1</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="langage-naturel.html"><a href="langage-naturel.html#principe"><i class="fa fa-check"></i><b>4.1.1</b> Principe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="langage-naturel.html"><a href="langage-naturel.html#mise-en-oeuvre"><i class="fa fa-check"></i><b>4.1.2</b> Mise en oeuvre</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>5</b> Résumer l’information par des graphiques</a>
+<li class="chapter" data-level="4.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table"><i class="fa fa-check"></i><b>4.2</b> Nettoyage de la table</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>5.1</b> Nuage de mots</a></li>
-<li class="chapter" data-level="5.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>5.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
-<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>5.3</b> Graphes</a></li>
+<li class="chapter" data-level="4.2.1" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-suppression-des-mots-vides"><i class="fa fa-check"></i><b>4.2.1</b> Nettoyage de la table par suppression des mots vides</a></li>
+<li class="chapter" data-level="4.2.2" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-racinisation-stemming"><i class="fa fa-check"></i><b>4.2.2</b> Nettoyage de la table par racinisation (stemming)</a></li>
+<li class="chapter" data-level="4.2.3" data-path="langage-naturel.html"><a href="langage-naturel.html#nettoyage-de-la-table-par-lemmatisation"><i class="fa fa-check"></i><b>4.2.3</b> Nettoyage de la table par lemmatisation</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>6</b> Rechercher des thèmes (topic modelling)</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations"><i class="fa fa-check"></i><b>6.1</b> Principe, notations</a></li>
-<li class="chapter" data-level="6.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta"><i class="fa fa-check"></i><b>6.2</b> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
-<li class="chapter" data-level="6.3" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#frex"><i class="fa fa-check"></i><b>6.3</b> FREX</a></li>
-<li class="chapter" data-level="6.4" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm"><i class="fa fa-check"></i><b>6.4</b> étapes du STM</a></li>
-<li class="chapter" data-level="6.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#communiqués-de-presse-du-ministère-de-lécologie"><i class="fa fa-check"></i><b>6.5</b> Communiqués de presse du ministère de l’écologie</a>
-<ul>
-<li class="chapter" data-level="6.5.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme"><i class="fa fa-check"></i><b>6.5.1</b> Mise en forme</a></li>
-<li class="chapter" data-level="6.5.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle"><i class="fa fa-check"></i><b>6.5.2</b> Calcul du modèle</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents"><i class="fa fa-check"></i><b>6.6</b> Assignation d’un thème aux documents</a></li>
+<li class="chapter" data-level="5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html"><i class="fa fa-check"></i><b>5</b> Résumer l’information par des métriques</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#corpus-ministereco"><i class="fa fa-check"></i><b>5.1</b> Corpus MinisterEco</a></li>
+<li class="chapter" data-level="5.2" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#fréquences-doccurrence"><i class="fa fa-check"></i><b>5.2</b> Fréquences d’occurrence</a></li>
+<li class="chapter" data-level="5.3" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#table-lexicale"><i class="fa fa-check"></i><b>5.3</b> Table lexicale</a></li>
+<li class="chapter" data-level="5.4" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#co-occurrences-corrélations"><i class="fa fa-check"></i><b>5.4</b> Co-occurrences, corrélations</a></li>
+<li class="chapter" data-level="5.5" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#tf-idf"><i class="fa fa-check"></i><b>5.5</b> TF-IDF</a></li>
+<li class="chapter" data-level="5.6" data-path="résumer-linformation-par-des-métriques.html"><a href="résumer-linformation-par-des-métriques.html#spec"><i class="fa fa-check"></i><b>5.6</b> Spécificités</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html"><i class="fa fa-check"></i><b>6</b> Résumer l’information par des graphiques</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#nuage-de-mots"><i class="fa fa-check"></i><b>6.1</b> Nuage de mots</a></li>
+<li class="chapter" data-level="6.2" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#diagramme-en-bâtons-occurrences-spécificités"><i class="fa fa-check"></i><b>6.2</b> Diagramme en bâtons: occurrences, spécificités</a></li>
+<li class="chapter" data-level="6.3" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#analyse-factorielle-des-correspondances"><i class="fa fa-check"></i><b>6.3</b> Analyse factorielle des correspondances</a></li>
+<li class="chapter" data-level="6.4" data-path="résumer-linformation-par-des-graphiques.html"><a href="résumer-linformation-par-des-graphiques.html#graphes"><i class="fa fa-check"></i><b>6.4</b> Graphes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Rechercher des thèmes (topic modelling)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#principe-notations"><i class="fa fa-check"></i><b>7.1</b> Principe, notations</a></li>
+<li class="chapter" data-level="7.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta"><i class="fa fa-check"></i><b>7.2</b> scores <span class="math inline">\(\beta\)</span> (beta)</a></li>
+<li class="chapter" data-level="7.3" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#frex"><i class="fa fa-check"></i><b>7.3</b> FREX</a></li>
+<li class="chapter" data-level="7.4" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm"><i class="fa fa-check"></i><b>7.4</b> étapes du STM</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme"><i class="fa fa-check"></i><b>7.4.1</b> Mise en forme</a></li>
+<li class="chapter" data-level="7.4.2" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle"><i class="fa fa-check"></i><b>7.4.2</b> Calcul du modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="rechercher-des-thèmes-topic-modelling.html"><a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents"><i class="fa fa-check"></i><b>7.5</b> Assignation d’un thème aux documents</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -249,16 +282,20 @@ Recueil et analyse de texte avec R </img></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rechercher-des-thèmes-topic-modelling" class="section level1" number="6">
-<h1><span class="header-section-number">Chapitre 6</span> Rechercher des thèmes (topic modelling)</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span></code></pre></div>
+<div id="rechercher-des-thèmes-topic-modelling" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapitre 7</span> Rechercher des thèmes (topic modelling)<a href="rechercher-des-thèmes-topic-modelling.html#rechercher-des-thèmes-topic-modelling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-1" aria-hidden="true" tabindex="-1"></a>freq_lemmes <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;data/ministereco_freq_lemmes.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-2" aria-hidden="true" tabindex="-1"></a>tib_lemmes <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">&quot;data/ministereco_tib_lemmes.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb1-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-4" aria-hidden="true" tabindex="-1"></a>tib_meta <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">&quot;data/ministereco_tib_meta.csv&quot;</span>)</span>
+<span id="cb1-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-5" aria-hidden="true" tabindex="-1"></a>tib_lemmes <span class="ot">&lt;-</span> <span class="fu">left_join</span>(tib_lemmes, tib_meta, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;doc&quot;</span>))</span>
+<span id="cb1-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb1-6" aria-hidden="true" tabindex="-1"></a>tib_docs <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;data/ministereco_tib_docs.csv&quot;</span>)</span></code></pre></div>
 <p>La <strong>recherche de thèmes</strong> dans un corpus de textes (plus connu en tant que “topic modelling” en anglais) consiste à identifier un certain nombre de thématiques ou sujets sous-jacents, reflétés dans les textes par l’utilisation privilégiée de certains mots. En d’autres termes, les thèmes (ou topics) sont définis et désignés comme des <strong>listes de mots</strong>.</p>
-<p>Il existe plusieurs méthodes et plusieurs algorithmes pour réaliser une recherche de thèmes, mais dans cette partie je me focaliserai sur le <em>Structural Topic Modelling</em> (STM) et sur sa mise en oeuvre à l’aide du package R {stm}.</p>
-<p>La vignette de ce package, qui détaille la méthode (algorithme) et sa mise en oeuvre sous R peut être consultée <a href="https://cran.r-project.org/web/packages/stm/vignettes/stmVignette.pdf">ici</a></p>
-<div id="principe-notations" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> Principe, notations</h2>
+<p>Il existe plusieurs méthodes et plusieurs algorithmes pour réaliser une recherche de thèmes, mais dans cette partie je me focaliserai sur le <em>Structural Topic Modelling</em> (STM) et sur sa mise en oeuvre à l’aide du package R <code>stm</code> <span class="citation">(<a href="#ref-stm" role="doc-biblioref">Roberts, Stewart, and Tingley 2019</a>)</span>.</p>
+<p>La vignette de ce package, qui détaille la méthode (algorithme) et sa mise en oeuvre sous R peut être consultée <a href="https://cran.r-project.org/web/packages/stm/vignettes/stmVignette.pdf">ici</a>.</p>
+<p>Les explications de Julia Silge, <a href="https://juliasilge.com/blog/sherlock-holmes-stm/">ici</a> et <a href="https://juliasilge.com/blog/evaluating-stm/">là</a> sur la méthode et sa mise en oeuvre dans le cadre du <code>tidyverse</code> et de <code>tidytext</code> peuvent également servir…</p>
+<div id="principe-notations" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Principe, notations<a href="rechercher-des-thèmes-topic-modelling.html#principe-notations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>On note</p>
 <ul>
 <li><span class="math inline">\(K\)</span> le nombre total de thèmes</li>
@@ -266,8 +303,8 @@ Recueil et analyse de texte avec R </img></a>
 <li><span class="math inline">\(N\)</span> le nombre total de documents</li>
 </ul>
 </div>
-<div id="scores-beta-beta" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> scores <span class="math inline">\(\beta\)</span> (beta)</h2>
+<div id="scores-beta-beta" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> scores <span class="math inline">\(\beta\)</span> (beta)<a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>On note <span class="math inline">\(\beta_{k,v}\)</span> la probabilité conditionnelle d’un mot <span class="math inline">\(v\)</span> pour un thème <span class="math inline">\(k\)</span></p>
 <p>On peut ainsi représenter les scores <span class="math inline">\(\beta_{k,v}\)</span> comme une matrice (ou un tableau) <span class="math inline">\(K*p\)</span> (thèmes x mots distincts dans le corpus).</p>
 <p>Ainsi, pour faire simple, on peut noter ces coefficients <span class="math inline">\(\beta_{k,v}\)</span>, mais si vous voulez “visualiser” ces coefficients pour comprendre la suite gardez à l’esprit qu’ils se présentent en fait comme suit:</p>
@@ -326,19 +363,19 @@ Recueil et analyse de texte avec R </img></a>
 </tbody>
 </table>
 </div>
-<div id="frex" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> FREX</h2>
+<div id="frex" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> FREX<a href="rechercher-des-thèmes-topic-modelling.html#frex" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><span class="math inline">\(FREX\)</span> FRequence and Exclusivité</p>
 <p>Le score <span class="math inline">\(FREX_{k,v}\)</span> d’un mot <span class="math inline">\(v\)</span> pour un thème <span class="math inline">\(k\)</span> est:</p>
 <p><span class="math display">\[FREX_{k,v}=\left(\frac{w}{F}+\frac{1-w}{E}\right)^{-1}\]</span></p>
 <ul>
 <li><span class="math inline">\(w\)</span> est un poids (choisi entre 0 et 1) qui détermine la part du score <span class="math inline">\(FREX\)</span> qui correspond à la fréquence (<span class="math inline">\(F\)</span>) et la part correspondant à l’exclusivité (<span class="math inline">\(E\)</span>)</li>
 <li><span class="math inline">\(F\)</span> est le score correspondant à la <strong>fréquence</strong>, et correspond à la fonction de distribution empirique du mot conditionnellement au thème <span class="math inline">\(k\)</span></li>
-<li><span class="math inline">\(E\)</span> est le score correspondant à l’<strong>exclusivité</strong> et est obtenu ********</li>
+<li><span class="math inline">\(E\)</span> est le score correspondant à l’<strong>exclusivité</strong></li>
 </ul>
 </div>
-<div id="étapes-du-stm" class="section level2" number="6.4">
-<h2><span class="header-section-number">6.4</span> étapes du STM</h2>
+<div id="étapes-du-stm" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> étapes du STM<a href="rechercher-des-thèmes-topic-modelling.html#étapes-du-stm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li>on tire au hasard une distribution des thèmes pour chaque document, autour d’une moyenne liée à la valeur des métadonnées pour le document <span class="math inline">\(X_d\gamma\)</span></li>
 <li>on calcule pour chaque document les valeurs <span class="math inline">\(\beta_{k,v}\)</span> (donc on a N matrices à calculer)</li>
@@ -348,49 +385,32 @@ Recueil et analyse de texte avec R </img></a>
 <li>en se basant sur ce thème <span class="math inline">\(k\)</span> on tire au hasard un mot à l’aide des valeurs <span class="math inline">\(\beta_{k,v}\)</span></li>
 </ol></li>
 </ol>
-</div>
-<div id="communiqués-de-presse-du-ministère-de-lécologie" class="section level2" number="6.5">
-<h2><span class="header-section-number">6.5</span> Communiqués de presse du ministère de l’écologie</h2>
-<p>Considérons la table suivante, qui résulte d’un travail de récupération, nettoyage, tokenisation, lemmatisation d’un ensemble de communiqués de presse du Ministère de la Transition écologique et de la Cohésion des territoires:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-1" aria-hidden="true" tabindex="-1"></a>tib_docs<span class="ot">=</span><span class="fu">readRDS</span>(<span class="st">&quot;data/tib_docs_ministereco.RDS&quot;</span>)</span>
-<span id="cb2-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-2" aria-hidden="true" tabindex="-1"></a>tib_lemmes<span class="ot">=</span><span class="fu">readRDS</span>(<span class="st">&quot;data/tib_lemmes_ministereco.RDS&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(doc,date,lemma,ministre)</span>
-<span id="cb2-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tib_lemmes)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 4
-##   doc   date       lemma    ministre       
-##   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;          
-## 1 doc1  2022-01-14 amont    Barbara Pompili
-## 2 doc1  2022-01-14 réunion  Barbara Pompili
-## 3 doc1  2022-01-14 informel Barbara Pompili
-## 4 doc1  2022-01-14 ministre Barbara Pompili
-## 5 doc1  2022-01-14 tenir    Barbara Pompili
-## 6 doc1  2022-01-14 janvier  Barbara Pompili</code></pre>
-<div id="mise-en-forme" class="section level3" number="6.5.1">
-<h3><span class="header-section-number">6.5.1</span> Mise en forme</h3>
-<p>Considérons une autre manière de représenter l’information textuelle contenue par la table <code>tib_lemmes</code>. Nous allons compter <strong>le nombre d’occurences de chaque lemme (<code>lemma</code>) dans chaque document (<code>doc</code>)</strong> et mettre cette information sous forme de matrice <span class="math inline">\(N*p\)</span> (le nombre de documents * le nombre total de lemmes distincts). Nous allons néanmoins exercer un tri préliminaire en retirant les mots qui sont rares à l’échelle du corpus (ici, on ne garde que ceux pour lesquels n&gt;20).</p>
+<div id="mise-en-forme" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Mise en forme<a href="rechercher-des-thèmes-topic-modelling.html#mise-en-forme" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Considérons une autre manière de représenter l’information textuelle contenue par la table <code>tib_lemmes</code>. Nous allons compter <strong>le nombre d’occurences de chaque lemme (<code>lemma</code>) dans chaque document (<code>doc</code>)</strong> et mettre cette information sous forme de matrice <span class="math inline">\(N*p\)</span> (le nombre de documents * le nombre total de lemmes distincts). Nous allons néanmoins exercer un tri préliminaire en retirant les mots qui sont rares à l’échelle du corpus (ici, on ne garde que ceux pour lesquels la fréquence&gt;20).</p>
 <p>La matrice résultante est dite <strong>“sparse”</strong> car beaucoup de ses cases ont pour valeur 0 (i.e. beaucoup de mots ne se trouvent que dans quelques documents).</p>
 <p>La fonction <code>cast_sparse()</code> du package <code>tidytext</code> permet d’effectuer ce reformatage très facilement:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-1" aria-hidden="true" tabindex="-1"></a>tib_sparse<span class="ot">=</span>tib_lemmes <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lemma) <span class="sc">%&gt;%</span> <span class="co"># compte pour chaque lemme...</span></span>
-<span id="cb4-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># ...son nombre d&#39;occurrences puis</span></span>
-<span id="cb4-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">20</span>) <span class="sc">%&gt;%</span>  <span class="co"># retire ceux représentés moins de 20 fois dans le corpus</span></span>
-<span id="cb4-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cast_sparse</span>(<span class="at">row=</span>doc, <span class="at">column=</span>lemma, <span class="at">value=</span>n)</span>
-<span id="cb4-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tib_sparse)</span></code></pre></div>
-<pre><code>## [1] 2868 2496</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-1" aria-hidden="true" tabindex="-1"></a>tib_sparse<span class="ot">=</span>tib_lemmes <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lemma) <span class="sc">%&gt;%</span> <span class="co"># compte pour chaque lemme...</span></span>
+<span id="cb2-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># ...son nombre d&#39;occurrences puis</span></span>
+<span id="cb2-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">20</span>) <span class="sc">%&gt;%</span>  <span class="co"># retire ceux représentés moins de 20 fois dans le corpus</span></span>
+<span id="cb2-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cast_sparse</span>(<span class="at">row=</span>doc, <span class="at">column=</span>lemma, <span class="at">value=</span>n)</span>
+<span id="cb2-7"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="rechercher-des-thèmes-topic-modelling.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tib_sparse)</span></code></pre></div>
+<pre><code>## [1] 2868 2415</code></pre>
 <p><code>tib_sparse</code> est bien une matrice de N=2868 lignes (le nombre de documents) et de p=2496 colonnes (le nombre de lemmes dont la fréquence dans le corpus est &gt;20)</p>
 </div>
-<div id="calcul-du-modèle" class="section level3" number="6.5.2">
-<h3><span class="header-section-number">6.5.2</span> Calcul du modèle</h3>
+<div id="calcul-du-modèle" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Calcul du modèle<a href="rechercher-des-thèmes-topic-modelling.html#calcul-du-modèle" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Chargeons le package <code>stm</code> et faisons tourner l’algorithme STM sur notre table, en demandant une quinzaine de thèmes distincts (cela peut sembler beaucoup mais les thèmes abordés par notre corpus sont de fait assez divers):</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stm)</span>
-<span id="cb6-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb6-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb6-4" aria-hidden="true" tabindex="-1"></a>topic_model<span class="ot">&lt;-</span><span class="fu">stm</span>(tib_sparse,<span class="at">K=</span><span class="dv">15</span>, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stm)</span>
+<span id="cb4-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb4-4" aria-hidden="true" tabindex="-1"></a>topic_model<span class="ot">&lt;-</span><span class="fu">stm</span>(tib_sparse,<span class="at">K=</span><span class="dv">15</span>, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Le calcul du STM se fait de manière <strong>itérative</strong>. Ici, il a fallu un certain nombre d’itérations (ici une centaine) pour que <strong>le modèle converge</strong>. Pour donner un ordre de grandeur, il a fallu quelques minutes sur ma machine pour obtenir le résultat.</p>
 <p>Les objets <code>stm</code> sont associés à une méthode <code>summary()</code> qui permet de visualiser les thèmes identifiés:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(topic_model)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(topic_model)</span></code></pre></div>
 <pre><code>## A topic model with 15 topics, 2868 documents and a 2496 word dictionary.</code></pre>
 <pre><code>## Topic 1 Top Words:
 ##       Highest Prob: faire, grand, service, territoire, pouvoir, objectif, acteur 
@@ -467,66 +487,165 @@ Recueil et analyse de texte avec R </img></a>
 ##       FREX: transport, baptiste, charger, mobilité, ferroviaire, jean, délégué 
 ##       Lift: cheminot, baptiste, automatiser, détachement, métro, jean, transport 
 ##       Score: ministre, transport, charger, baptiste, mobilité, délégué, ferroviaire</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-1" aria-hidden="true" tabindex="-1"></a>td_topicterms<span class="ot">=</span><span class="fu">tidy</span>(topic_model, <span class="at">matrix=</span><span class="st">&quot;beta&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(beta,<span class="at">n=</span><span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic,<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank=</span><span class="fu">row_number</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb10-7"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>beta) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-8"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span><span class="st">&quot;topic&quot;</span>,</span>
-<span id="cb10-9"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from=</span><span class="st">&quot;term&quot;</span>)</span>
-<span id="cb10-10"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-10" aria-hidden="true" tabindex="-1"></a>td_topicterms</span></code></pre></div>
-<pre><code>## # A tibble: 15 × 16
-##     rank `1`   `2`   `3`   `4`   `5`   `6`   `7`   `8`   `9`   `10`  `11`  `12` 
-##    &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
-##  1     1 faire trav… pres… nati… faire éner… écol… proj… terr… mini… entr… loi  
-##  2     2 grand publ… accr… plan  cond… tran… terr… terr… perm… écol… déve… mett…
-##  3     3 serv… perm… rend… acti… sani… obje… mett… mett… publ… soli… tran… écon…
-##  4     4 terr… euro… aupr… publ… char… éner… biod… perm… euro  aupr… acte… mesu…
-##  5     5 pouv… cadre carte nive… rais… clim… acti… appel mill… secr… acti… perm…
-##  6     6 obje… nive… cadre prés… occa… mett… eau   déve… trav… tran… dura… obje…
-##  7     7 acte… pren… prog… ense… rend… perm… clim… local coll… rend… écon… déch…
-##  8     8 publ… fran… comm… trav… resp… émis… obje… coll… loge… mini… écon… prod…
-##  9     9 an    obje… indi… acte… règle déve… soli… serv… local occa… enga… an   
-## 10    10 solu… égal… acte… stra… cadre fran… mini… égal… éner… cadre fili… circ…
-## 11    11 venir prés… numé… cadre geste écol… grand lanc… cadre prés… obje… place
-## 12    12 ense… pouv… dépl… poli… évén… clim… prot… place obje… prés… ense… année
-## 13    13 plan  envi… secr… rapp… égal… nive… envi… cadre réno… juil… enga… pren…
-## 14    14 année mati… serv… proc… plan  carb… mer   site  aupr… nove… soci… grand
-## 15    15 enga… enga… place année exce… égal… année ense… acco… solu… sect… prév…
-## # … with 3 more variables: `13` &lt;chr&gt;, `14` &lt;chr&gt;, `15` &lt;chr&gt;</code></pre>
+<p><strong>Chacun des thèmes est identifié par des termes privilégiés</strong> (selon plusieurs métriques différentes: Highest probability i.e. <span class="math inline">\(beta\)</span>, FREX, lift, score)…</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb8-1" aria-hidden="true" tabindex="-1"></a>termes_thematiques<span class="ot">=</span><span class="fu">tidy</span>(topic_model, <span class="at">matrix=</span><span class="st">&quot;beta&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(beta,<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic,<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank=</span><span class="fu">row_number</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic=</span><span class="fu">as.factor</span>(topic))</span>
+<span id="cb8-7"><a href="rechercher-des-thèmes-topic-modelling.html#cb8-7" aria-hidden="true" tabindex="-1"></a>termes_thematiques</span></code></pre></div>
+<pre><code>## # A tibble: 150 × 4
+## # Groups:   topic [15]
+##    topic term         beta  rank
+##    &lt;fct&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;
+##  1 1     faire      0.0304     1
+##  2 1     grand      0.0265     2
+##  3 1     service    0.0227     3
+##  4 1     territoire 0.0225     4
+##  5 1     pouvoir    0.0175     5
+##  6 1     objectif   0.0163     6
+##  7 1     acteur     0.0130     7
+##  8 1     public     0.0124     8
+##  9 1     an         0.0119     9
+## 10 1     solution   0.0118    10
+## # … with 140 more rows</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(termes_thematiques, <span class="fu">aes</span>(<span class="at">x=</span>beta,<span class="at">y=</span><span class="fu">fct_reorder</span>(term,beta), <span class="at">fill=</span>topic))<span class="sc">+</span></span>
+<span id="cb10-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
+<span id="cb10-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="at">facets=</span><span class="fu">vars</span>(topic), <span class="at">scales=</span><span class="st">&quot;free&quot;</span>)<span class="sc">+</span></span>
+<span id="cb10-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/plot_termes_thematiques-1.png" width="768" /></p>
 </div>
 </div>
-<div id="assignation-dun-thème-aux-documents" class="section level2" number="6.6">
-<h2><span class="header-section-number">6.6</span> Assignation d’un thème aux documents</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb12-1" aria-hidden="true" tabindex="-1"></a>tib_gamma <span class="ot">&lt;-</span> <span class="fu">tidy</span>(topic_model, <span class="at">matrix =</span> <span class="st">&quot;gamma&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(document) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">n=</span><span class="dv">1</span>,gamma) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">doc=</span><span class="fu">paste0</span>(<span class="st">&quot;doc&quot;</span>,document)) <span class="sc">%&gt;%</span></span>
-<span id="cb12-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>document)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-1" aria-hidden="true" tabindex="-1"></a>tib_docs<span class="ot">=</span>tib_docs <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tib_gamma)</span>
-<span id="cb13-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-4" aria-hidden="true" tabindex="-1"></a>tib_docs <span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>doc,<span class="sc">-</span>document,<span class="sc">-</span>lien) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-7"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-8"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n=</span><span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 10 × 7
-##    titre                        date       texte month      ministre topic gamma
-##    &lt;chr&gt;                        &lt;date&gt;     &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
-##  1 &quot;Déplacement de _Barbara_Po… 2020-08-10 &quot; Da… 2020-08-01 Barbara…     3 0.427
-##  2 &quot;Réunion des _Ministres_ de… 2017-12-04 &quot; Ro… 2017-12-01 Nicolas…     7 0.291
-##  3 &quot;Varenne agricole de l’eau … 2021-10-22 &quot; A … 2021-10-01 Barbara…     7 0.236
-##  4 &quot;Lutte contre le gaspillage… 2021-12-10 &quot; Ba… 2021-12-01 Barbara…    12 0.424
-##  5 &quot;Note aux rédactions : _Emm… 2020-06-30 &quot; Em… 2020-06-01 Élisabe…    13 0.583
-##  6 &quot;Sortie du confinement : le… 2020-04-30 &quot; Da… 2020-04-01 Élisabe…    13 0.448
-##  7 &quot;Brune _Poirson_ participer… 2019-03-27 &quot; Br… 2019-03-01 Françoi…    14 0.965
-##  8 &quot;Lancement des expérimentat… 2018-02-21 &quot; Ni… 2018-02-01 Nicolas…    14 0.217
-##  9 &quot;REMISE _DU_PROGRAMME_DE_TR… 2018-03-15 &quot;  _… 2018-03-01 Nicolas…    14 0.956
-## 10 &quot;Conseil européen des minis… 2019-10-04 &quot; Br… 2019-10-01 Élisabe…    15 0.362</code></pre>
+<div id="assignation-dun-thème-aux-documents" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Assignation d’un thème aux documents<a href="rechercher-des-thèmes-topic-modelling.html#assignation-dun-thème-aux-documents" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Si la matrice “beta” correspond à la probabilité d’un terme dans un thème, on s’intéresse également à la <strong>probabilité qu’un document s’inscrive dans un thème</strong>. Cette probabilité est donnée par la matrice gamma:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb11-1" aria-hidden="true" tabindex="-1"></a>tib_gamma <span class="ot">&lt;-</span> <span class="fu">tidy</span>(topic_model, <span class="at">matrix =</span> <span class="st">&quot;gamma&quot;</span>) </span>
+<span id="cb11-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tib_gamma)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   document topic      gamma
+##      &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;
+## 1        1     1 0.00000381
+## 2        2     1 0.0000173 
+## 3        3     1 0.0000476 
+## 4        4     1 0.0108    
+## 5        5     1 0.0000134 
+## 6        6     1 0.0786</code></pre>
+<p>Considérons par exemple le sujet 2 qui correspond vraisemblablement à une thématique autour de la mobilité d’après les termes affichés par <code>summary()</code></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-1" aria-hidden="true" tabindex="-1"></a>tib_gamma <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">n=</span><span class="dv">3</span>,gamma) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(topic<span class="sc">==</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+## # Groups:   topic [1]
+##   document topic gamma
+##      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+## 1     2211     2 1.00 
+## 2     2822     2 0.889
+## 3     2500     2 0.834</code></pre>
+<p>Parmi les documents qui s’inscrivent le mieux dans cette thématique, on a le document 2832. Vérifions le contenu textuel de ce document:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb15-1" aria-hidden="true" tabindex="-1"></a>tib_docs <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(doc<span class="sc">==</span><span class="st">&quot;doc2832&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(texte)</span></code></pre></div>
+<pre><code>## [1] &quot;A la suite de la remise le 27 juillet dernier du rapport de Michel Delebarre sur le désenclavement du Limousin et des territoires limitrophes, Elisabeth Borne, Ministre chargée des Transports, a reçu jeudi 28 septembre les élus locaux concernés, comme elle s’y était engagée.  Ce rapport, qui fait suite à l’annulation le 15 avril 2016 de la déclaration d’utilité publique sur le projet de ligne à grande vitesse Poitiers-Limoges, préconise des solutions alternatives pour améliorer l’accessibilité de ces territoires. Il préconise notamment à court terme la poursuite de la modernisation de la ligne ferroviaire Paris-Orléans-Limoges-Toulouse (POLT) et à moyen terme le raccordement de Limoges à la ligne à grande vitesse Tours – Bordeaux (LGV SEA) grâce à la mise à niveau de la ligne existante Poitiers – Limoges. Cette réunion a permis d’échanger collectivement sur ces conclusions, en présence des élus de l&#39;ensemble des territoires concernés, des services de l’Etat (préfets, administration) et des représentants de la SNCF. Elisabeth Borne a réaffirmé sa détermination à améliorer la qualité de la desserte et de l’accessibilité de cette région. A ce titre, elle a confirmé les travaux de modernisation de la ligne POLT, avec un programme de plus de 1 Md€ engagé sur 2015-2025. Elle a demandé à SNCF Réseau de présenter un programme de modernisation de la ligne existante entre Poitiers et Limoges ainsi que les gains qui en résulteraient en matière d’accessibilité et de temps de parcours. Elle s’est engagée à étudier les modalités d’une desserte aérienne adaptée aux besoins des territoires, et notamment de Limoges. Un point sera fait au printemps 2018 sur l’ensemble de ces sujets, et notamment sur le schéma directeur de la ligne POLT en cours de préparation, ainsi que sur le programme qui pourrait être mis en œuvre pour la mise à niveau de la ligne existante afin d’accéder à la LGV SEA via Poitiers.&quot;</code></pre>
+<p>Pour cet exemple, c’est plutôt convaincant!</p>
+<p>Attribuons maintenant une thématique à chacun des documents en se basant sur la probabilité <code>gamma</code>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-1" aria-hidden="true" tabindex="-1"></a>tib_gamma_max<span class="ot">=</span>tib_gamma <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(document) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">n=</span><span class="dv">1</span>,gamma) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">doc=</span><span class="fu">paste0</span>(<span class="st">&quot;doc&quot;</span>,document)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>document) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic=</span><span class="fu">as.factor</span>(topic)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-7"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb17-8"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-9" aria-hidden="true" tabindex="-1"></a>tib_docs_thematiques <span class="ot">=</span>tib_docs <span class="sc">%&gt;%</span> </span>
+<span id="cb17-10"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tib_gamma_max, <span class="at">by=</span><span class="st">&quot;doc&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-11"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month=</span>lubridate<span class="sc">::</span><span class="fu">ymd</span>(date))</span>
+<span id="cb17-12"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="rechercher-des-thèmes-topic-modelling.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tib_docs_thematiques)</span></code></pre></div>
+<pre><code>##                                                                                                                                lien
+## 1 https://www.ecologie.gouv.fr//pfue-reunions-informelles-des-ministres-lenvironnement-et-lenergie-amiens-du-20-au-22-janvier-brief
+## 2                                        https://www.ecologie.gouv.fr//deplacement-berangere-abba-dans-vosges-lundi-17-janvier-2022
+## 3  https://www.ecologie.gouv.fr//lutte-contre-precarite-des-femmes-elisabeth-moreno-et-emmanuelle-wargon-se-rendront-cite-des-dames
+## 4   https://www.ecologie.gouv.fr//gouvernement-engage-des-mesures-exceptionnelles-proteger-pouvoir-dachat-des-francais-et-preserver
+## 5  https://www.ecologie.gouv.fr//deplacement-jean-baptiste-djebbari-dans-pays-baltes-lettonie-lituanie-et-estonie-lundi-10-mardi-11
+## 6       https://www.ecologie.gouv.fr//barbara-pompili-participera-ceremonie-dinauguration-grenoble-capitale-verte-samedi-15-janvier
+##                                                                                                                                                                                                                           titre
+## 1                                                                                  PFUE - Réunions informelles des ministres de l&#39;Environnement et de l&#39;Energie à Amiens du 20 au 22 janvier : brief presse le mardi 18 janvier
+## 2                                                                                                                                                           Déplacement de Bérangère Abba dans les Vosges lundi 17 janvier 2022
+## 3                                                                           Lutte contre la précarité des femmes : Élisabeth Moreno et Emmanuelle Wargon se rendront à la Cité des dames (Paris-13) ce vendredi 14 janvier 2022
+## 4 Le Gouvernement engage des mesures exceptionnelles pour protéger le pouvoir d’achat des français et préserver la compétitivité de l’approvisionnement électrique des entreprises face à la forte hausse des prix de l’énergie
+## 5                                                                                Déplacement de Jean-Baptiste Djebbari dans les pays baltes (Lettonie, Lituanie et Estonie), les lundi 10, mardi 11 et mercredi 12 janvier 2022
+## 6                                                                                                                     Barbara Pompili participera à la cérémonie d&#39;inauguration de Grenoble capitale verte le samedi 15 janvier
+##         date
+## 1 2022-01-14
+## 2 2022-01-14
+## 3 2022-01-14
+## 4 2022-01-13
+## 5 2022-01-13
+## 6 2022-01-13
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      texte
+## 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    En amont des réunions informelles des ministres de l’Environnement et de l’Energie qui se tiendront du 20 au 22 janvier à Amiens dans le cadre de la Présidence française du Conseil de l’Union européenne, un briefing presse est organisé le mardi 18 janvier à 15h30 au ministère de la Transition écologique.  Merci de vous accréditer jusqu’à 12h00 le 18/01/2022 à l’adresse suivante : secretariat.communication@ecologie.gouv.fr Le brief se fera en présentiel au ministère de la Transition écologique, 244 boulevard Saint Germain - 75007 Paris. Un pass sanitaire sera demandé. Il est également possible de suivre le brief à distance : un lien de visioconférence vous sera adressé.
+## 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Bérangère Abba, Secrétaire d’Etat chargée de la Biodiversité, remettra le Prix « Transition écologique » de la 3e édition des Prix «Choose France 2021» à Norske Skog, entreprise norvégienne qui a investi 250 M€ dans sa papeterie, à Golbey, en région Grand Est, pour la conversion d&#39;une de ses lignes de production de papier journal à du carton d’emballage 100% recyclé.  En 2021, Business France avait choisi de mettre à l’honneur cinq projets contribuant de manière significative au plan «France Relance» et de récompenser ainsi la contribution des investisseurs internationaux à la relance française. Après un échange en préfecture sur le thème des espèces emblématiques et des grands prédateurs, Bérangère Abba se rendra à la présentation du plan d’action et de restauration de cours d’eau de la communauté d&#39;agglomération de Saint-Dié-des-Vosges à la Chapelle-devant-Bruyères. Ce plan vise notamment à sauver l’espèce de la mulette perlière, espèce classée en danger par l’UICN, qui est en voie de disparition dans cette zone. La communauté d&#39;agglomération de Saint-Dié-des-Vosges et l’Etat via l’Agence de l’eau Rhin-Meuse se sont fortement mobilisés pour restaurer le bassin versant du Neuné, affluent de la Vologne. 11H00-12H00 Visite de l’entreprise NORSKE SKOG et remise du Prix « Choose France 2021 » décerné par Business FranceToute presse accréditée – point presse à l’issue de la visiteGolbey 12H15-13H30 Échange sur le thème de la protection des espèces emblématiques et des grands prédateurs dans le département (notamment Grand Tétras, Lynx, Loups) Hors presse 14H00-14H45 Présentation du plan de restauration de cours d’eau par la communauté d&#39;agglomération de Saint-Dié-des-Vosges et par l’Agence de l’eau Rhin-Meuse et du plan de conservation de la mulette perlière par la Société d’histoire naturelle de ColmarToute presse accréditée – point presse à l’issue de la présentationLa Chapelle-devant-Bruyères 14H50-15H10 Visite sur site – ruisseau Le Neuné Toute presse accréditée Chemin du Moulin (accès par la route devant le cours) – Les Poulières Merci de vous accréditer auprès de la préfecture des Vosges jusqu’à 12h00 le 16/01/2022 à l’adresse suivante : pref-communication@vosges.gouv.fr En raison des conditions sanitaires exceptionnelles, cet événement se fera dans le plus strict respect des règles de distanciation physique et des gestes barrières.
+## 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   Élisabeth MORENO, ministre déléguée auprès du Premier ministre chargée de l’Égalité entre les femmes et les hommes, de la Diversité et de l’Égalité des chances, et Emmanuelle WARGON, ministre déléguée auprès de la ministre de la Transition écologique, chargée du Logement, visiteront la Cité des Dames (39 rue du Chevaleret – Paris 13ème) le vendredi 14 janvier 2022 de 16h30 à 17h30. Mme Élisabeth MORENO, ministre déléguée auprès du Premier ministre, chargée de l’Égalité entre les femmes et les hommes, de la Diversité et de l’Égalité des Chances et Mme Emmanuelle WARGON, ministre déléguée auprès de la ministre de la Transition écologique, chargée du Logement se rendront à la Cité des dames dans le 13ème arrondissement de Paris. Il s’agit d’un centre d’hébergement qui accueille des femmes sans domicile fixe. Ce déplacement s’inscrit dans les actions du Ministère du Logement pour accueillir, héberger, accompagner les femmes qui ont connu des parcours de rue, et dans une séquence, plus large, dédiée à la lutte contre la précarité des femmes. Au préalable et dans ce même cadre, Mme MORENO s’est rendue au CIDFF 91 ce jeudi 13 janvier pour annoncer des montants financiers supplémentaires pour l’insertion des femmes éloignées de l’emploi et le jeudi après-midi au Salon Joséphine, qui accompagne également les femmes en situation de précarité à retrouver confiance en elles. 16h30 Arrivée de Mme Elisabeth MORENO et Mme Emmanuelle WARGON et accueil républicain 16h35 Visite des locaux 16h45 Echange avec les bénéficiaires et les équipes 17h20 Micro tenduToute presse accréditée Merci de vous accréditer à l’adresse suivante : presse-efh@pm.gouv.fr En raison du contexte sanitaire, port du masque obligatoire
+## 4 Face à la hausse sans précédent des prix de l’électricité ces dernières semaines, dans un contexte de tensions sur la disponibilité des installations de production françaises et sur l’approvisionnement gazier de l’Europe, le Gouvernement a décidé de prendre des mesures exceptionnelles pour préserver le pouvoir d’achat des Français et la compétitivité de l’approvisionnement des entreprises. En complément des mesures déjà engagées, le Gouvernement a décidé d’augmenter à titre exceptionnel de 20 TWh le volume d’ARENH qui sera livré en 2022, afin que l’ensemble des consommateurs bénéficie de la compétitivité du parc électronucléaire français. Ces volumes seront accessibles à tous les consommateurs, particuliers, collectivités comme professionnels, via leur fournisseur selon des modalités qui seront précisées très prochainement. Les fournisseurs répercuteront intégralement l’avantage retiré au bénéfice des consommateurs. Ce point fera l’objet d’une surveillance étroite, en lien avec la Commission de régulation de l’énergie. Dans le même temps, afin d’assurer une juste rémunération de l’outil de production qui contribue à la protection de l’ensemble des consommateurs français face à cette hausse de prix, le prix de ces volumes additionnels d’ARENH sera révisé à 46,2€/MWh. Les autorités européennes ont été informées de cette décision qui s’inscrit dans le cadre des mesures exceptionnelles d’adaptation à la situation de crise des prix de l’énergie qui touche l’ensemble des pays européens. Ce relèvement du plafond de l’ARENH s’ajoute à la baisse pour un an de la taxe portant sur l’électricité (TICFE) à son niveau minimum prévu par le droit européen à compter du 1er février prochain. Cette baisse représente un coût budgétaire pour l’Etat de 8 milliards d’euros. Combinée au relèvement du plafond de l’ARENH, elle apportera un soutien massif au pouvoir d’achat de tous les consommateurs. Ces mesures permettront de sécuriser la mise en œuvre du bouclier tarifaire pour l’électricité annoncé par le Premier ministre et inscrite dans la loi de finances pour 2022. En effet, comme il s’y était engagé, le Gouvernement bloquera la hausse des tarifs réglementés de vente de l’électricité à 4% TTC au 1er février pour les consommateurs résidentiels alors que, sans intervention de sa part, la hausse aurait atteint 35%. Compte tenu de la situation exceptionnelle, le Gouvernement a également décidé d’étendre le bouclier tarifaire en limitant la hausse des tarifs réglementés de vente d’électricité à 4% pour les petits consommateurs professionnels qui en bénéficient en métropole, ainsi que pour l’ensemble des consommateurs professionnels des territoires ultramarins et de la Corse (zones non interconnectées) qui bénéficient de ces tarifs. Ces mesures viennent en complément de l’action résolue du Gouvernement depuis plusieurs mois pour atténuer les conséquences de la hausse des prix des énergies pour l’ensemble des consommateurs, et notamment les plus modestes, qui s’est traduite par des mesures d’accompagnement fortes : Le Gouvernement continuera à suivre avec la plus grande attention l’évolution de la situation des marchés de l’énergie au cours des prochaines semaines et veillera à ce que les mesures prises aujourd’hui soient pleinement répercutées par les fournisseurs à leurs clients. Nous restons mobilisés, comme nous le sommes depuis le début de la crise, pour protéger tous les consommateurs face à la hausse exceptionnelle des prix de l’énergie et sécuriser notre tissu économique et industriel. Cette situation nous rappelle l’importance d’investir dans les économies d’énergie, comme nous le faisons notamment grâce 2 milliards d’euros prévus en 2022 pour les aides à la rénovation énergétique des logements. Dans le même temps, nous préparons l’avenir et sommes engagés pour faire évoluer au niveau européen les marchés de l’énergie vers un fonctionnement qui soutienne une transition énergétique juste. Ces mesures complémentaires et massives traduisent l’engagement total de ce Gouvernement en faveur du pouvoir d’achat des ménages et de la compétitivité des entreprises. Elles sont rendues possibles par la compétitivité du parc nucléaire français, qui permet de bénéficier d’une énergie peu chère et totalement décarbonée.
+## 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Jean-Baptiste Djebbari, ministre délégué chargé des Transports, s’est rendu dans les Pays Baltes (Lettonie, Lituanie et Estonie), les lundi 10, mardi 11 et mercredi 12 janvier 2022.  10h00 Visite du chantier de la nouvelle gare ferroviaire de Riga en présence des dirigeants d’EDzL (société gestionnaire des infrastructures ferroviaires lettones) et de Rail Baltica. 11h00 Entretien avec M. Talis Linkaits, ministre des transports de la République de Lettonie 12h20 Interview pour la télévision nationale lettone Latvijas Sabiedriskie Mediji : Plus de détails ici 13h00 Déjeuner en présence de représentants de Systra, Egis, EDzL et Rail Baltica 15h00 Entretien avec M. Viesturs Zeps, président du conseil d’administration du port libre de Riga 10h00 Visite de la filiale du groupe Vinci Eurovia Lietuva 11h00 Visite de la filiale lituanienne de l’entreprise DPD, groupe La Poste 12h30 Déjeuner de travail avec M. Marius Skuodis, ministre des Transports et des Communications 15h00 Entretien avec Mme Daiva Garbaliauskaitė, vice-ministre de l’Energie, en charge de l’Infrastructure des bornes de recharge privées et de la Stratégie de l’hydrogène 16h00 Entretien avec M. Gediminas Žiemelis, président-directeur général d’Avia Solutions Group suivi de la visite du nouveau centre d’affaires « Aerocity » 8h30 Petit-déjeuner à la résidence avec M. Indrek Õnnik, Directeur des Affaires globales et Mme Yana Laurand, Conseillère au département des affaires européennes au Ministère des Affaires économiques 9h45 Visite de l’entreprise de transport autonome Auvetech 10h00 Entretien avec M. Andres Sütt, ministre de l’Entrepreneuriat et des Technologies de l’Information 11h00 Entretien avec M. Taavi Aas, ministre des Affaires économiques en charge des Transports 12h15 Visite de la start up spécialisée en production de batteries Skeleton
+## 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Depuis plusieurs années, en partenariat avec l’Etat, Grenoble et les collectivités réunies au sein de la métropole ont mobilisé les différents leviers à leur disposition et ont su porter des politiques publiques écologiques et innovantes.  Cette exemplarité a conduit l’Union européenne à faire de Grenoble sa Capitale Verte 2022. En octobre dernier, Barbara Pompili avait annoncé un financement de 4 millions d’euros pour accompagner le portage du label sur l’ensemble de l’année 2022. Alors que la Présidence française du Conseil de l’Union européenne a débuté il y a deux semaines, cet évènement rappelle le rôle moteur de la France en matière de transition écologique au sein de l’Union et distingue l’une de ses villes. M. Virginijus Sinkevičius, Commissaire européen à l’Environnement, à la Pêche et aux Océans, participera également à cette cérémonie. 16h55 Cérémonie officielle Musée d’histoire naturelle de Grenoble – 1 rue Dolomieu, 38000 Grenoble (accès par l’angle rue Haxo – rue Dolomieu) Allocutions de : Toute presse accréditée - La cérémonie pourra également être suivie en ligne (https://greengrenoble2022.eu/112-direct-ceremonie-15janv.htm) Merci de vous accréditer avant le 14 janvier à 18h00 à l’adresse suivante : pref-communication@isere.gouv.fr En raison des conditions sanitaires, cet événement se fera dans le plus strict respect des règles de distanciation physique et des gestes barrières. Le port du masque est obligatoire.
+##    doc      month        ministre document topic     gamma
+## 1 doc1 2022-01-14 Barbara Pompili        1    10 0.3803329
+## 2 doc2 2022-01-14 Barbara Pompili        2     7 0.3298059
+## 3 doc3 2022-01-14 Barbara Pompili        3     3 0.2679520
+## 4 doc4 2022-01-13 Barbara Pompili        4    13 0.2865068
+## 5 doc5 2022-01-13 Barbara Pompili        5    15 0.6730209
+## 6 doc6 2022-01-13 Barbara Pompili        6     5 0.2118066</code></pre>
+<p>Pour analyser l’information relative aux thématiques à l’échelle du document, il peut également être utile de “ré-étiqueter” les thèmes non pas en topic 1, 2, 3, etc. mais en utilisant les termes qui leurs sont spécifiques:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb19-1" aria-hidden="true" tabindex="-1"></a>thematiques<span class="ot">=</span>termes_thematiques <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()<span class="sc">%&gt;%</span>  </span>
+<span id="cb19-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">topic_terms=</span><span class="fu">map</span>(data, <span class="sc">~</span><span class="fu">paste</span>(.<span class="sc">$</span>term,<span class="at">collapse=</span><span class="st">&quot;, &quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()</span>
+<span id="cb19-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb19-6" aria-hidden="true" tabindex="-1"></a>thematiques</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 2
+##    topic topic_terms                                                            
+##    &lt;fct&gt; &lt;chr&gt;                                                                  
+##  1 1     faire, grand, service, territoire, pouvoir, objectif, acteur, public, …
+##  2 2     travail, public, permettre, européen, cadre, niveau, prendre, français…
+##  3 3     presse, accréditer, rendre, auprès, carte, cadre, programme, communica…
+##  4 4     national, plan, action, public, niveau, présenter, ensemble, travail, …
+##  5 5     faire, condition, sanitaire, charger, raison, occasion, rendre, respec…
+##  6 6     énergie, transition, objectif, énergétique, climatique, mettre, permet…
+##  7 7     écologique, territoire, mettre, biodiversité, action, eau, climatique,…
+##  8 8     projet, territoire, mettre, permettre, appel, développement, local, co…
+##  9 9     territoire, permettre, public, euro, million, travail, collectivité, l…
+## 10 10    ministre, écologique, solidaire, auprès, secrétaire, transition, rendr…
+## 11 11    entreprise, développement, transition, acteur, action, durable, économ…
+## 12 12    loi, mettre, économie, mesure, permettre, objectif, déchet, produit, a…
+## 13 13    mettre, mesure, permettre, service, place, ensemble, prendre, pouvoir,…
+## 14 14    grand, national, niveau, route, ensemble, mettre, circulation, pays, s…
+## 15 15    ministre, charger, transport, travail, mobilité, entreprise, secteur, …</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="rechercher-des-thèmes-topic-modelling.html#cb21-1" aria-hidden="true" tabindex="-1"></a>truc<span class="ot">=</span>tib_docs_thematiques <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="rechercher-des-thèmes-topic-modelling.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(thematiques,<span class="at">by=</span><span class="st">&quot;topic&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="rechercher-des-thèmes-topic-modelling.html#cb21-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">group_by</span>(month,topic,topic_terms) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="rechercher-des-thèmes-topic-modelling.html#cb21-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">summarise</span>(<span class="at">ntopic=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="rechercher-des-thèmes-topic-modelling.html#cb21-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb21-6"><a href="rechercher-des-thèmes-topic-modelling.html#cb21-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">na.omit</span>()</span>
+<span id="cb21-7"><a href="rechercher-des-thèmes-topic-modelling.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(truc,</span>
+<span id="cb21-8"><a href="rechercher-des-thèmes-topic-modelling.html#cb21-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span>month,<span class="at">y=</span>ntopic,<span class="at">col=</span>topic_terms))<span class="sc">+</span></span>
+<span id="cb21-9"><a href="rechercher-des-thèmes-topic-modelling.html#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>()<span class="sc">+</span></span>
+<span id="cb21-10"><a href="rechercher-des-thèmes-topic-modelling.html#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets=</span><span class="fu">vars</span>(topic))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/show_topics_through_time-1.png" width="768" /></p>
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Roberts, Margaret E., Brandon M. Stewart, and Dustin Tingley. 2019. <span>“<span class="nocase">stm</span>: An <span>R</span> Package for Structural Topic Models.”</span> <em>Journal of Statistical Software</em> 91 (2): 1–40. <a href="https://doi.org/10.18637/jss.v091.i02">https://doi.org/10.18637/jss.v091.i02</a>.
+</div>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-stm" class="csl-entry">
+Roberts, Margaret E., Brandon M. Stewart, and Dustin Tingley. 2019. <span>“<span class="nocase">stm</span>: An <span>R</span> Package for Structural Topic Models.”</span> <em>Journal of Statistical Software</em> 91 (2): 1–40. <a href="https://doi.org/10.18637/jss.v091.i02">https://doi.org/10.18637/jss.v091.i02</a>.
 </div>
 </div>
             </section>
@@ -595,7 +714,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
