@@ -39,24 +39,24 @@ Les explications de Julia Silge, [ici](https://juliasilge.com/blog/sherlock-holm
 
 On note 
 
-- $K$ le nombre total de thèmes
-- $p$ le nombre total de mots
-- $N$ le nombre total de documents
+- $K$ le **nombre total de thèmes**
+- $P$ le **nombre total de mots**
+- $N$ le **nombre total de documents**
 
 ## scores $\beta$ (beta)
 
-On note $\beta_{k,v}$ la probabilité conditionnelle d'un mot $v$ pour un thème $k$
+On note **$\beta_{k,p}$** la probabilité conditionnelle d'un mot $p$ pour un thème $k$
 
-On peut ainsi représenter les scores $\beta_{k,v}$ comme une matrice (ou un tableau) $K*p$ (thèmes x mots distincts dans le corpus).
+On peut ainsi représenter les scores $\beta_{k,p}$ comme une matrice (ou un tableau) $K*P$ (thèmes x mots distincts dans le corpus).
 
-Ainsi, pour faire simple, on peut noter ces coefficients $\beta_{k,v}$, mais si vous voulez "visualiser" ces coefficients pour comprendre la suite gardez à l'esprit qu'ils se présentent en fait comme suit:
+Ainsi, pour faire simple, on peut noter ces coefficients $\beta_{k,p}$, mais si vous voulez "visualiser" ces coefficients pour comprendre la suite gardez à l'esprit qu'ils se présentent en fait comme suit:
 
 
-|     |$w_1$|...  |$w_v$        |...  |$w_p$|
+|     |$w_1$|...  |$w_p$        |...  |$w_P$|
 |----:|:---:|:---:|:-----------:|:---:|:---:|
 |$T_1$|...  |...  |...          |...  |...  |
 |...  |...  |...  |...          |...  |...  |
-|$T_k$|...  |...  |$\beta_{k,v}$|...  |...  |
+|$T_k$|...  |...  |$\beta_{k,p}$|...  |...  |
 |...  |...  |...  |...          |...  |...  |
 |$T_K$|...  |...  |...          |...  |...  |
 
@@ -65,23 +65,27 @@ Ainsi, pour faire simple, on peut noter ces coefficients $\beta_{k,v}$, mais si 
 
 $FREX$ FRequence and Exclusivité
 
-Le score $FREX_{k,v}$ d'un mot $v$ pour un thème $k$ est: 
+Le score $FREX_{k,p}$ d'un mot $p$ pour un thème $k$ est: 
 
-$$FREX_{k,v}=\left(\frac{w}{F}+\frac{1-w}{E}\right)^{-1}$$
+$$FREX_{k,p}=\left(\frac{w}{F}+\frac{1-w}{E}\right)^{-1}$$
 
 - $w$ est un poids (choisi entre 0 et 1) qui détermine la part du score $FREX$ qui correspond à la fréquence ($F$) et la part correspondant à l'exclusivité ($E$)
-- $F$ est le score correspondant à la **fréquence**, et correspond à la fonction de distribution empirique du mot conditionnellement au thème $k$
-- $E$ est le score correspondant à l'**exclusivité** 
-
+- $F$ est le score correspondant à la **fréquence**, et reflète la **probabilité du mot conditionnellement au thème**.
+- $E$ est le score correspondant à l'**exclusivité** , et reflète la **probabilité du thème conditionnellement au mot**.
 
 ## étapes du STM
 
-1. on tire au hasard une distribution des thèmes pour chaque document, autour d'une moyenne liée à la valeur des métadonnées pour le document $X_d\gamma$
-2. on calcule pour chaque document les valeurs $\beta_{k,v}$ (donc on a N matrices à calculer)
-3. pour chaque mot dans chaque document, 
-    a. on l'associe à un thème $k$ en fonction de la distribution calculée à l'étape 1 
-    b. en se basant sur ce thème $k$ on tire au hasard un mot à l'aide des valeurs $\beta_{k,v}$ 
+**A compléter**
 
+Le STM repose sur la génération de documents selon le modèle suivant:
+
+1. on tire au hasard une distribution des thèmes pour chaque document $\theta_k$. On peut si on le souhaite, utiliser les métadonnées pour effectuer un tirage autour de moyennes liées à ces métadonnées (i.e. on considère que les métadonnées orientent plutôt vers tel ou tel thème).
+2. on calcule pour chaque document les valeurs $\beta_{k,p}$ (donc on a N matrices à calculer, une pour chaque document)
+3. pour chaque mot dans chaque document, 
+    a.  on tire un thème $k$ en fonction de la distribution calculée à l'étape 1 
+    b. en se basant sur ce thème $k$ on tire au hasard un mot à l'aide des valeurs $\beta_{k,p}$ 
+
+Ainsi, partant de $\theta_k$ et de $K$ documents, on génère $K$ nouveau documents. 
 
 ### Mise en forme
 
@@ -129,15 +133,17 @@ summary(topic_model)
 ```{r get_topicterms}
 termes_thematiques=tidy(topic_model, matrix="beta") %>% 
   group_by(topic) %>% 
-  slice_max(beta,n=10) %>% 
-  arrange(topic,desc(beta)) %>% 
+  slice_max(beta,n=10) %>%  
   mutate(rank=row_number()) %>% 
-  mutate(topic=as.factor(topic))
+  arrange(topic,desc(beta))
 termes_thematiques
 ```
 
 ```{r plot_termes_thematiques, fig.width=8, fig.height=8}
-ggplot(termes_thematiques, aes(x=beta,y=fct_reorder(term,beta), fill=topic))+
+ggplot(termes_thematiques %>% 
+         mutate(topic=as.factor(topic)) %>% 
+         mutate(term=reorder_within(term,beta,topic)),
+       aes(x=beta,y=term, fill=topic))+
   geom_bar(stat="identity")+
     facet_wrap(facets=vars(topic), scales="free")+
     theme(legend.position="none")
@@ -149,8 +155,9 @@ ggplot(termes_thematiques, aes(x=beta,y=fct_reorder(term,beta), fill=topic))+
 Si la matrice "beta" correspond à la probabilité d'un terme dans un thème, on s'intéresse également à la **probabilité qu'un document s'inscrive dans un thème**. Cette probabilité est donnée par la matrice gamma:
 
 ```{r tib_gamma}
-tib_gamma <- tidy(topic_model, matrix = "gamma") 
-head(tib_gamma)
+tib_gamma <- tidy(topic_model, matrix = "gamma") %>% 
+  arrange(document,desc(gamma))
+head(tib_gamma, n=15)
 ```
 
 Considérons par exemple le sujet 2 qui correspond vraisemblablement à une thématique autour de la mobilité d'après les termes affichés par `summary()`
@@ -158,7 +165,7 @@ Considérons par exemple le sujet 2 qui correspond vraisemblablement à une thé
 ```{r show_tib_gamma}
 tib_gamma %>% 
   group_by(topic) %>% 
-  slice_max(n=3,gamma) %>% 
+  slice_max(n=10,gamma) %>% 
   filter(topic==2)
 ```
 
@@ -172,25 +179,25 @@ tib_docs %>%
 
 Pour cet exemple, c'est plutôt convaincant!
 
-Attribuons maintenant une thématique à chacun des documents en se basant sur la probabilité `gamma`:
+<!-- Attribuons maintenant une thématique à chacun des documents en se basant sur la probabilité `gamma`: -->
 
-```{r tib_docs_topics}
-tib_gamma_max=tib_gamma %>% 
-  group_by(document) %>% 
-  slice_max(n=1,gamma) %>% 
-  mutate(doc=paste0("doc",document)) %>% 
-  select(-document) %>% 
-  mutate(topic=as.factor(topic)) %>% 
-  ungroup()
+<!-- ```{r tib_docs_topics} -->
+<!-- tib_gamma_max=tib_gamma %>%  -->
+<!--   group_by(document) %>%  -->
+<!--   slice_max(n=1,gamma) %>%  -->
+<!--   mutate(doc=paste0("doc",document)) %>%  -->
+<!--   select(-document) %>%  -->
+<!--   mutate(topic=as.factor(topic)) %>%  -->
+<!--   ungroup() -->
 
-tib_docs_thematiques =tib_docs %>% 
-  left_join(tib_gamma_max, by="doc") %>% 
-  mutate(month=lubridate::ymd(date))
+<!-- tib_docs_thematiques =tib_docs %>%  -->
+<!--   left_join(tib_gamma_max, by="doc") %>%  -->
+<!--   mutate(month=lubridate::ymd(date)) -->
 
-head(tib_docs_thematiques)
-```
+<!-- head(tib_docs_thematiques) -->
+<!-- ``` -->
 
-Pour analyser l'information relative aux thématiques à l'échelle du document, il peut également être utile de "ré-étiqueter" les thèmes non pas en topic 1, 2, 3, etc. mais en utilisant les termes qui leurs sont spécifiques:
+Pour analyser l'information relative aux thématiques à l'échelle du document, il peut être utile de "ré-étiqueter" les thèmes non pas en topic 1, 2, 3, etc. mais en utilisant les termes qui leurs sont spécifiques:
 
 ```{r relabel_topics}
 thematiques=termes_thematiques %>% 
@@ -200,10 +207,12 @@ thematiques=termes_thematiques %>%
 
 thematiques
 ```
-
+Dès lors, on peut essayer d'analyser l'occurrence de ces thématiques en fonction d'une ou plusieurs covariables issues des métadonnées
 
 ```{r show_topics_through_time, fig.width=8, fig.height=6}
-truc=tib_docs_thematiques %>% 
+tib_meta_thematiques=tib_meta %>% 
+  mutate(month=lubridate::ymd(date)) %>%
+  left_join(mutate(tib_gamma, doc=paste0("doc",document))) %>% 
   left_join(thematiques,by="topic") %>% 
          group_by(month,topic,topic_terms) %>% 
          summarise(ntopic=n()) %>% 

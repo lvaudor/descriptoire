@@ -200,11 +200,12 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.1" data-path="strings.html"><a href="strings.html#strings-1"><i class="fa fa-check"></i><b>3.1</b> Strings</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>3.1.1</b> détection, remplacement</a></li>
-<li class="chapter" data-level="3.1.2" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>3.1.2</b> division, correspondance</a></li>
-<li class="chapter" data-level="3.1.3" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>3.1.3</b> extraction</a></li>
-<li class="chapter" data-level="3.1.4" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>3.1.4</b> comptage, subset</a></li>
-<li class="chapter" data-level="3.1.5" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>3.1.5</b> longueur, sous-partie</a></li>
+<li class="chapter" data-level="3.1.1" data-path="strings.html"><a href="strings.html#concaténation"><i class="fa fa-check"></i><b>3.1.1</b> concaténation</a></li>
+<li class="chapter" data-level="3.1.2" data-path="strings.html"><a href="strings.html#détection-remplacement"><i class="fa fa-check"></i><b>3.1.2</b> détection, remplacement</a></li>
+<li class="chapter" data-level="3.1.3" data-path="strings.html"><a href="strings.html#division-correspondance"><i class="fa fa-check"></i><b>3.1.3</b> division, correspondance</a></li>
+<li class="chapter" data-level="3.1.4" data-path="strings.html"><a href="strings.html#extraction"><i class="fa fa-check"></i><b>3.1.4</b> extraction</a></li>
+<li class="chapter" data-level="3.1.5" data-path="strings.html"><a href="strings.html#comptage-subset"><i class="fa fa-check"></i><b>3.1.5</b> comptage, subset</a></li>
+<li class="chapter" data-level="3.1.6" data-path="strings.html"><a href="strings.html#longueur-sous-partie"><i class="fa fa-check"></i><b>3.1.6</b> longueur, sous-partie</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="strings.html"><a href="strings.html#expressions-régulières"><i class="fa fa-check"></i><b>3.2</b> Expressions régulières</a>
 <ul>
@@ -298,14 +299,14 @@ Recueil et analyse de texte avec R </img></a>
 <h2><span class="header-section-number">7.1</span> Principe, notations<a href="rechercher-des-thèmes-topic-modelling.html#principe-notations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>On note</p>
 <ul>
-<li><span class="math inline">\(K\)</span> le nombre total de thèmes</li>
-<li><span class="math inline">\(p\)</span> le nombre total de mots</li>
-<li><span class="math inline">\(N\)</span> le nombre total de documents</li>
+<li><span class="math inline">\(K\)</span> le <strong>nombre total de thèmes</strong></li>
+<li><span class="math inline">\(p\)</span> le <strong>nombre total de mots</strong></li>
+<li><span class="math inline">\(N\)</span> le <strong>nombre total de documents</strong></li>
 </ul>
 </div>
 <div id="scores-beta-beta" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> scores <span class="math inline">\(\beta\)</span> (beta)<a href="rechercher-des-thèmes-topic-modelling.html#scores-beta-beta" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>On note <span class="math inline">\(\beta_{k,v}\)</span> la probabilité conditionnelle d’un mot <span class="math inline">\(v\)</span> pour un thème <span class="math inline">\(k\)</span></p>
+<p>On note <strong><span class="math inline">\(\beta_{k,v}\)</span></strong> la probabilité conditionnelle d’un mot <span class="math inline">\(v\)</span> pour un thème <span class="math inline">\(k\)</span></p>
 <p>On peut ainsi représenter les scores <span class="math inline">\(\beta_{k,v}\)</span> comme une matrice (ou un tableau) <span class="math inline">\(K*p\)</span> (thèmes x mots distincts dans le corpus).</p>
 <p>Ainsi, pour faire simple, on peut noter ces coefficients <span class="math inline">\(\beta_{k,v}\)</span>, mais si vous voulez “visualiser” ces coefficients pour comprendre la suite gardez à l’esprit qu’ils se présentent en fait comme suit:</p>
 <table>
